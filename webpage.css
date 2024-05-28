@@ -1,0 +1,78 @@
+
+body {
+    background-image: url(graphics/whitepills2.png);
+    background-color: #a5d5e0;
+    background-attachment: fixed; 
+    background-size: 100% 100%;
+}
+
+#title {
+  position: absolute; left: 530px; top: 60px;
+  font-family: "Varela Round", sans-serif;
+  color: darkblue;
+  font-size: 40px;
+}
+
+p {
+  font-family: "Poppins", sans-serif;
+  color: white;
+}
+
+.transbox {
+  position: absolute; left: 460px; top: 200px;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 1px solid black;
+}
+.transbox p {
+  margin: 2%;
+  font-weight: bold;
+}
+.sub {
+  color: hsl(196, 100%, 78%);
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  text-align: center;
+  font-size: 15px;
+}
+
+  h2 {
+    color: black;
+    font-family: "Indie Flower", cursive;
+    font-size: 35px;
+  }
+
+  #handrib {
+    position: absolute; left: 0px; top: 0px;
+  }
+
+  .symp {
+    position: absolute; left: 100px; top: 290px;
+  }
+
+  .symp a:hover {
+    color: yellow;
+  }
+
+  #handtest {
+    position: absolute; right: 0px; top: 0px;
+  }
+
+  .causes {
+    position: absolute; right: 100px; top: 290px;
+  }
+
+  .causes a:hover {
+    color: yellow;
+  }
+
+  #handpen {
+    position: absolute; left: 500px; bottom: 0px;
+  }
+
+  .treat {
+    position: absolute; left: 500px; bottom: 290px;
+  }
+
+  .treat a:hover {
+    color: yellow;
+  }
