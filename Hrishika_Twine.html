@@ -32,10 +32,10 @@ body {
 
 img {
 width: 200px;
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="home" tags="" position="400,200" size="100,100">What&#39;s your name?
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="home" tags="" position="500,200" size="100,100">What&#39;s your name?
 (input: &quot;Name&quot;)
 (link: &quot;Click here once you&#39;ve written your name.&quot;)[Hi! Click [[here]] to get started!]
-</tw-passagedata><tw-passagedata pid="2" name="here" tags="" position="400,325" size="100,100">It&#39;s been a long day of classes, but your day isn&#39;t over just yet. You have just one last meeting in a few hours. You decide that&#39;s plenty of time to take a nap until then.
+</tw-passagedata><tw-passagedata pid="2" name="here" tags="" position="500,325" size="100,100">It&#39;s been a long day of classes, but your day isn&#39;t over just yet. You have just one last meeting in a few hours. You decide that&#39;s plenty of time to take a nap until then.
 
 Your alarm goes off 30 min before the meeting.
 
@@ -44,7 +44,7 @@ Your alarm goes off 30 min before the meeting.
 You&#39;ve snoozed $snooze times.
 [[Wake up|wake]] or
 [[&lt;img src=&quot;https://hris28.github.io/graphics/snooze.jpeg&quot;&gt;|here]]
-</tw-passagedata><tw-passagedata pid="3" name="wake" tags="" position="400,450" size="100,100">{
+</tw-passagedata><tw-passagedata pid="3" name="wake" tags="" position="500,475" size="100,100">{
 (if: $snooze &gt; 3)[ [[You&#39;re late! Run to see if you can still make it.|lost]]
  [[
  You&#39;re not going to make it anyways, just email your advisor something came up and skip.|skip]]]
@@ -54,22 +54,22 @@ You&#39;ve snoozed $snooze times.
 }
 
 
-</tw-passagedata><tw-passagedata pid="4" name="lost" tags="" position="337.5,575" size="100,100">You&#39;re about to leave the room when you realize you don&#39;t have your keys. You thought you left them on your desk but you can&#39;t see them. Where do you look?
+</tw-passagedata><tw-passagedata pid="4" name="lost" tags="" position="500,625" size="100,100">You&#39;re about to leave the room when you realize you don&#39;t have your keys. You thought you left them on your desk but you can&#39;t see them. Where do you look?
 
-[&lt;img src=&quot;https://hris28.github.io/graphics/desk.jpeg&quot;&gt;]&lt;desk|(click: ?desk)[You checked the desk again but still can&#39;t find it. [Check again?]&lt;deskagain|(click: ?deskagain)[You triple-checked the desk and somehow you instantly see it. You wonder how you could be so blind or if a magic fairy stole it for a few moments just to spite you.
+Just skip, it&#39;ll take you too long to search for it, you can email her about it. [[skip]]
+
+[&lt;img src=&quot;https://hris28.github.io/graphics/desk.jpeg&quot;&gt;]&lt;desk|(click: ?desk)[You checked the desk again but still can&#39;t find it. [Check again?]&lt;deskagain|(click: ?deskagain)[ You triple-checked the desk and somehow you instantly see it. You wonder how you could be so blind or if a magic fairy stole it for a few moments just to spite you.
 You finally are able to leave the room.
 [[Leave|leave]]]]
  
-[&lt;img src=&quot;https://hris28.github.io/graphics/bed.jpeg&quot;&gt;]&lt;bed|(click: ?bed)[You lifted the blanket and pillows but the keys are nowehere to be found.[Check again?]&lt;bedagain|(click: ?bedagain)[Still lost to the ether.]]
+[&lt;img src=&quot;https://hris28.github.io/graphics/bed.jpeg&quot;&gt;]&lt;bed|(click: ?bed)[You lifted the blanket and pillows but the keys are nowehere to be found.[Check again?]&lt;bedagain|(click: ?bedagain)[ Still lost to the ether.]]
 
-[&lt;img src=&quot;https://hris28.github.io/graphics/backpack.jpg&quot;&gt;]&lt;bp|(click: ?bp)[You rumage inside your backpack but can&#39;t feel it.[Check again?]&lt;bpagain|(click: ?bpagain)[You take things out of your backpack one by one to make sure it&#39;s really not in there but lo and behold, it&#39;s still missing. You found some candy you forgot you had stashed in there though!]]
+[&lt;img src=&quot;https://hris28.github.io/graphics/backpack.jpg&quot;&gt;]&lt;bp|(click: ?bp)[You rumage inside your backpack but can&#39;t feel it.[Check again?]&lt;bpagain|(click: ?bpagain)[ You take things out of your backpack one by one to make sure it&#39;s really not in there but lo and behold, it&#39;s still missing. You found some candy you forgot you had stashed in there though!]]
 
-[&lt;img src=&quot;https://hris28.github.io/graphics/door.jpeg&quot;&gt;]&lt;door|(click: ?door)[You think you maybe forgot to take it out of the keyhole so you check the door but you find it devoid of the keys. [Check again?]&lt;dooragain|(click: ?dooragain)[Maybe you hallucinated not seeing the keys so you check one more time to make sure but alas, perhaps it walked away on its own?]
-
-Just skip, it&#39;ll take you too long to search for it, you can email her about it. [[skip]]</tw-passagedata><tw-passagedata pid="5" name="skip" tags="" position="462.5,575" size="100,100">You decide to skip. You&#39;re kinda hungry and remember you don&#39;t have much food back home. There&#39;s some restaurants nearby though.
+[&lt;img src=&quot;https://hris28.github.io/graphics/door.jpeg&quot;&gt;]&lt;door|(click: ?door)[You think you maybe forgot to take it out of the keyhole so you check the door but you find it devoid of the keys. [Check again?]&lt;dooragain|(click: ?dooragain)[ Maybe you hallucinated not seeing the keys so you check one more time to make sure but alas, perhaps it walked away on its own?]]</tw-passagedata><tw-passagedata pid="5" name="skip" tags="" position="350,725" size="100,100">You decide to skip. You&#39;re kinda hungry and remember you don&#39;t have much food back home. There&#39;s some restaurants nearby though.
 
 [[Go get some food|money]]
-[[Cope with the snacks and stay home|back]]</tw-passagedata><tw-passagedata pid="6" name="leave" tags="" position="337.5,700" size="100,100">As you take the elevator down your dorm building, you realize in your haste to get to class after spending so much time searching for your keys that you left your wallet in your room.
+[[Cope with the snacks and stay home|back]]</tw-passagedata><tw-passagedata pid="6" name="leave" tags="" position="500,750" size="100,100">As you take the elevator down your dorm building, you realize in your haste to get to class after spending so much time searching for your keys that you left your wallet in your room.
 
  [[Go back to your room and skip the meet, you can&#39;t leave without your wallet and you&#39;re already too late.|skip]]
 
@@ -77,28 +77,28 @@ Just skip, it&#39;ll take you too long to search for it, you can email her about
 
 [[Just keep going to meet, you&#39;re already almost late and it&#39;s only one class, you probably won&#39;t need it.|meet]]
 
-</tw-passagedata><tw-passagedata pid="7" name="late" tags="" position="275,825" size="100,100">(set: $late to 2)
+</tw-passagedata><tw-passagedata pid="7" name="late" tags="" position="700,800" size="100,100">(set: $late to 2)
 You&#39;re late, what excuse do you give?
 
 [[I overslept.|meet]]
 [[My dog ate my homework.|meet]]
 [[A UFO kidnapped me.|meet]]
-[[Umm.....|meet]]</tw-passagedata><tw-passagedata pid="8" name="meet" tags="" position="400,825" size="100,100">{
-(if: $late = 2)[She accepts your excuse.]
-(else:)[You make it on time.]
+[[Umm.....|meet]]</tw-passagedata><tw-passagedata pid="8" name="meet" tags="" position="500,875" size="100,100">{
+(if: $late is 2)[She accepts your excuse.]
+(elseif: $late is not 2)[You make it on time.]
 }
 After the meeting though you&#39;re incredibly tired and hungry and remember you don&#39;t have much food back home. There&#39;s some restaurants nearby though.
 
 [[Go get some food|money]]
 [[Cope with the snacks and go home|back]]
-</tw-passagedata><tw-passagedata pid="9" name="back" tags="" position="200,975" size="100,100">It&#39;s been a long day. You decide you&#39;re done for the day.
+</tw-passagedata><tw-passagedata pid="9" name="back" tags="" position="175,850" size="100,100">It&#39;s been a long day. You decide you&#39;re done for the day.
 
-[[Time to start the new day.|here]]</tw-passagedata><tw-passagedata pid="10" name="money" tags="" position="400,950" size="100,100">
+[[Time to start the new day.|here]]</tw-passagedata><tw-passagedata pid="10" name="money" tags="" position="450,1000" size="100,100">
 [You see something...](mouseover: &quot;something&quot;)[You found money on the way there! &lt;img src=&quot;https://hris28.github.io/graphics/money.jpeg&quot;&gt;]
 
 [[Go to Supdogs|supdogs]]
 [[Go to Hibachi|hibachi]]
-[[Go back home|back]]</tw-passagedata><tw-passagedata pid="11" name="supdogs" tags="" position="375,1125" size="100,100">Make a hotdog!
+[[Go back home|back]]</tw-passagedata><tw-passagedata pid="11" name="supdogs" tags="" position="375,1150" size="100,100">Make a hotdog!
 &lt;img src=&quot;https://hris28.github.io/graphics/hotdog.webp&quot;&gt;
 
 What do you want on your hotdog:
@@ -119,12 +119,12 @@ or (link: &quot;Mayo&quot;)[
 While you eat, you decide to play some games on your phone.
 
 [[Play Floppybird.|bird]]
-[[Gamble|dice]]
-[[Drink some water.|water]]</tw-passagedata><tw-passagedata pid="12" name="hibachi" tags="" position="625,1125" size="100,100">While you wait for your hibachi to be made, you...
+[[Roll a dice.|dice]]
+[[Drink some water.|water]]</tw-passagedata><tw-passagedata pid="12" name="hibachi" tags="" position="525,1150" size="100,100">While you wait for your hibachi to be made, you...
 
 [[Drink some water|water]]
 [[Play floppy bird|bird]]
-[[Roll a dice|dice]]</tw-passagedata><tw-passagedata pid="13" name="bird" tags="" position="425,1300" size="100,100">
+[[Roll a dice|dice]]</tw-passagedata><tw-passagedata pid="13" name="bird" tags="" position="325,1300" size="100,100">
 [
 
 
@@ -132,13 +132,13 @@ While you eat, you decide to play some games on your phone.
 (mouseover: &quot;blank space&quot;)[You did it! [[Try again?|bird]]]
 [[To subdogs|supdogs]]
 [[To hibachi|hibachi]]
-[[Go back home|back]]</tw-passagedata><tw-passagedata pid="14" name="water" tags="" position="700,1300" size="100,100">
+[[Go back home|back]]</tw-passagedata><tw-passagedata pid="14" name="water" tags="" position="525,1300" size="100,100">
 (link: &quot;Grab the water.&quot;)[Yummy.
 &lt;img src=&quot;https://hris28.github.io/graphics/water.jpeg&quot;&gt;]
 
 [[To subdogs|supdogs]]
 [[To hibachi|hibachi]]
-[[Go back home|back]]</tw-passagedata><tw-passagedata pid="15" name="dice" tags="" position="100,1275" size="100,100">(set: $number to (random: 1,6))
+[[Go back home|back]]</tw-passagedata><tw-passagedata pid="15" name="dice" tags="" position="100,1300" size="100,100">(set: $number to (random: 1,6))
 
 [Your rolled a $number. [[Roll again?|dice]]]
 
