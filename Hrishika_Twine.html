@@ -18,8 +18,7 @@ tw-passage {
 }
 
 tw-story {
-  width: 900px;
-  height: 600px;
+  width: 1500px;
   padding: 10px;
   border-style: solid;
   border-width: 3px;
@@ -39,13 +38,15 @@ Your alarm goes off 30 min before the meeting.
 (set: $snooze to $snooze + 1)
 
 You&#39;ve snoozed $snooze times.
-
+[[Wake up|wake]] or
 [[&lt;img src=&quot;https://hris28.github.io/graphics/snooze.jpeg&quot;&gt;|here]]
-[[Wake up|wake]]</tw-passagedata><tw-passagedata pid="3" name="wake" tags="" position="400,450" size="100,100">{
+</tw-passagedata><tw-passagedata pid="3" name="wake" tags="" position="400,450" size="100,100">{
 (if: $snooze &gt; 3)[ [[You&#39;re late! Run to see if you can still make it.|lost]]
- [[You&#39;re not going to make it anyways, just email your advisor something came up and skip.|skip]]]
+ [[
+ You&#39;re not going to make it anyways, just email your advisor something came up and skip.|skip]]]
 (else-if: $snoove &lt;= 3)[ [[You&#39;re in a rush, pack up and get ready to leave.|lost]]
- [[You still have time but you&#39;re feeling really tired still, just skip.|skip]]]
+ [[
+ You still have time but you&#39;re feeling really tired still, just skip.|skip]]]
 }
 
 
