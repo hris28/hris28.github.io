@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+        <title> Hrishika Roychoudhury </title>
+        <meta name="description" content="resume website for Hrishika">
+        <meta name="keywords" content="information literacy, information tools, information, tasks, hard coding">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
+
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&amp;display=swap" rel="stylesheet">
+        <!-- W3.CSS 4.15 December 2020 by Jan Egil and Borge Refsnes -->
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <!-- Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
+        License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License) -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <!-- CryptoJS Library - NOT USED -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+
+        <!-- SmtpJS package using MailSlurp Server -->
+        <script src="https://smtpjs.com/v3/smtp.js"></script>
+        
+        <!-- import the webpage's javascript file(s) -->
+        <script src="nav.js"></script>
+
+   </head>
+
+   <body>
+
+    <!-- Navbar (sit on top) -->
+    <div class="w3-top">
+      <div class="w3-bar w3-card w3-animate-top w3-white" id="myNavbar">
+        <a class="w3-bar-item w3-button w3-hover-black w3-right" onclick="toggleFunction()" title="Toggle Navigation Instructions">
+          <i class="fa fa-eye"></i>
+        </a>
+        <a href="index.html" class="w3-bar-item w3-button">HOME</a>
+        <a href="about.html" class="w3-bar-item w3-button"><i class="fa fa-pencil"></i> ABOUT</a>
+        <div class="dropdown">
+        <a href="classes.html" class="w3-bar-item w3-button" id="navDrop"><i class="fa fa-th"></i> CLASSES <i class="fa fa-caret-down"></i></a>
+        <ul id="dropContent" class="dropdown-content w3-hide">
+        <br>
+          <li class="dropdown-submenu"><a id="dropTwo" href="inls161.html">INLS 161 <i class="fa fa-caret-down"></i></a>
+            <ul id="contTwo" class="dropdown-content w3-hide">
+              <li><a href="https://uncch.instructure.com/courses/32480">Canvas</a></li>
+              <li><a href="https://ils.unc.edu/courses/2023_fall/inls161_001/index.html#first">Main Site</a></li>
+            </ul>
+          </li><li class="dropthree-submenu"><a id="dropThree" href="inls201.html">INLS 201 <i class="fa fa-caret-down"></i></a>
+            <ul id="contThree" class="dropdown-content w3-hide">
+              <li><a href="https://uncch.instructure.com/courses/32510">Canvas</a></li>
+              <li><a href="https://aeshin.org/teaching/inls-201/2023/fa/">Main Site</a></li>
+            </ul>
+          </li><li><a href="https://uncch.instructure.com/courses/35694">MATH 381</a></li>
+          <li><a href="https://uncch.instructure.com/courses/38366">NSCI 221</a></li>
+          <li><a href="https://uncch.instructure.com/courses/32668">CHEM 241</a></li>
+          </ul>
+        </div>
+
+        <script>
+          document.getElementById("navDrop").onmouseover = function() {mouseOver()};
+          document.getElementById("navDrop").onmouseout = function() {mouseOut()};
+          
+          document.getElementById("dropContent").onmouseover = function() {mouseOver()};
+          document.getElementById("dropContent").onmouseout = function() {mouseOut()};
+
+          function mouseOver() {
+            var s = document.getElementById("dropContent");
+            if (s.className.indexOf("w3-show") == -1) {
+              s.className = s.className.replace(" w3-hide", " w3-show");
+            }
+          }
+
+          function mouseOut() {
+            var h = document.getElementById("dropContent");
+            if (h.className.indexOf("w3-hide") == -1) {
+              h.className = h.className.replace(" w3-show", " w3-hide");
+            }
+          }
+
+          document.getElementById("dropTwo").onmouseover = function() {twoOver()};
+          document.getElementById("dropTwo").onmouseout = function() {twoOut()};
+          
+          document.getElementById("contTwo").onmouseover = function() {twoOver()};
+          document.getElementById("contTwo").onmouseout = function() {twoOut()};
+
+          function twoOver() {
+            var s = document.getElementById("contTwo");
+            if (s.className.indexOf("w3-show") == -1) {
+              s.className = s.className.replace(" w3-hide", " w3-show");
+            }
+          }
+
+          function twoOut() {
+            var h = document.getElementById("contTwo");
+            if (h.className.indexOf("w3-hide") == -1) {
+              h.className = h.className.replace(" w3-show", " w3-hide");
+            }
+          }
+
+          document.getElementById("dropThree").onmouseover = function() {threeOver()};
+          document.getElementById("dropThree").onmouseout = function() {threeOut()};
+          
+          document.getElementById("contThree").onmouseover = function() {threeOver()};
+          document.getElementById("contThree").onmouseout = function() {threeOut()};
+
+          function threeOver() {
+            var s = document.getElementById("contTwo");
+            if (s.className.indexOf("w3-show") == -1) {
+              s.className = s.className.replace(" w3-hide", " w3-show");
+            }
+          }
+
+          function threeOut() {
+            var h = document.getElementById("contTwo");
+            if (h.className.indexOf("w3-hide") == -1) {
+              h.className = h.className.replace(" w3-show", " w3-hide");
+            }
+          }
+        </script>
+        
+        <a href="interests.html" class="w3-bar-item w3-button"><i class="fa fa-code"></i> INTERESTS</a>
+      </div>
+
+      <div id="navDemo" class="w3-bar-block w3-white w3-hide" onclick="toggleFunction()">
+        <p class="w3-bar-item" onclick="toggleFunction()">
+          <b><em>Just a toggle function</em></b>
+          <br>
+          <small>:)</small>
+        </p>
+      </div>
+    </div>
+
+    <!-- this is the start of content -->
+
+    <div class="img-abt">
+        <div class="abtflex-container">
+            <div class="heading-home">
+              ABOUT ME
+            </div>
+        <div class="preamble">
+            <div class="toc-container">
+                <div class="toc">
+                    <h3>Contents:</h3>
+                    <ol>
+                        <li>
+                            <a href="#intro">Introduction</a> 
+                        </li>
+                        <li>
+                            <a href="#vnp"> Values &amp; Passions</a>
+                        </li><li>
+                            <a href="#aaa">Activities &amp; Accolades</a>
+                        </li>
+                        <li>
+                            <a href="#res">Résumé</a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+<br>  
+        <div class="text-section">
+            <h1>
+              Hrishika Roychoudhury
+            </h1>
+        <br>
+            <h2 id="intro">Introduction</h2>
+      
+            <div class="element-row">
+              <img class="profile-pic" src="images/abt_pic.png">
+
+        
+        <p>Hello! I am Hrishika Roychoudhury, an undergraduate student at the University of North Carolina at Chapel Hill. I am currently double majoring in Computer Science and Neuroscience with a minor in Education. With passions in many various careers and activities, I strive to take an interdisciplinary approach to whatever I commit myself to, and as a result have gained experiences in numerous diverse fields.</p>
+</div>
+</div>
+
+<div class="text-section">
+        <h2 id="vnp">Values and Passions</h2>
+        <p>
+            I love science and I am always excited to learn new things. As a
+            child, I've always wondered how things work, how birds fly, how plants
+            grow, how people become sick, how the animals communicate and would
+            always ask my parents and teachers all these questions. In school,
+            I've found science to have these answers. This began my interest in
+            science. I started taking part in science fairs and working on science
+            projects. I always love to try out new things and do hands- on
+            projects that involve using readily available materials to use for
+            solving the common problems we all face.
+          </p>
+          <p>
+            Deeply passionate about STEM education, I am the founder of a
+            non-profit StemmedHelp that works on building STEM awareness and
+            organizing STEM programs. I believe that information is the key to
+            everything. People all over the world are constantly affected by many
+            issues, however advocating against them are practically impossible
+            when people are not properly educated enough on them. Despite being in
+            the era of information, so many unfortunately live in ignorance.
+            However I believe that given the right resources and proper research,
+            we can create a more informed society and in turn are able to better
+            solve problems. After all, the first step to activism is education!
+          </p>
+          <p>
+            Outside of STEM, I'm extremely passionate about music and theatre! I'm
+            frequently found in my room playing around with my piano or trying to
+            sing to some kareoke. Taking inspiration from everything around me, I
+            love to compose music and write lyrics when I can. Sometimes I can
+            even by found practicing or choreographing dances! Having been trained
+            in classical Indian dances such as Bharatnatyam for over 8 years and
+            learning multiple other dance forms such as hip-hop, my passion for
+            dance is ingrained into my very bones and you can catch me tapping my
+            feet or moving my hands to nearly anything and everything! I've also
+            taken up a deep interest in acting as I participate in Shakespeare or
+            Speech and Debate competitions, and I hope to continue this hobby into
+            the future!
+          </p>
+
+        <h2 id="aaa">Activities and Accolades</h2>
+        <p>Pursuing science research for over 7 years, I have completed and presented 
+            my research on Biotechnology and Nanoparticles at many national and international 
+            conferences such as the International Science and Engineering Fair (ISEF-2019), 
+            American Junior Academy of Science (AJAS 2020, 2021), and International BioGENEius 
+            Challenge (2020) as a finalist. I am a student entrepreneur and co-founder of SkyeLabs 
+            Innovation Inc. pioneering EcoGel, a novel environmentally sustainable and mechanically 
+            superior biopolymer aerogel used in high-performance apparel, Aerospace Industry, and 
+            Space Exploration. We won the top honor, Pete Conrad Scholar, in the International Conrad 
+            Spirit of Innovation Challenge 2021 and also have also been selected as a Top 10 Finalist 
+            across the nation, receiving an Honorable Mention as the youngest and first-ever high school 
+            team to have presented our NASA award-winning technology in the 2021 NASA iTech Cycle 1 
+            initiative, an industry-level entrepreneurial competition meant to identify technological 
+            advancements that solve problems on Earth with the potential to aid NASA missions. I also 
+            worked as one of the Chief Editors of NCSSM's official journal of student STEM research, 
+            the Broad Street Scientific, and as a Biology Teaching Assistant.</p>
+
+            <h2 id="res"><a href="images/HrishikaResume.pdf">Résumé</a></h2>
+            <p>Click above to be navigated to my résumé pdf in another tab!</p>
+            <object data="images/HrishikaResume.pdf" type="application/pdf" width="100%" height="1000px">
+                <p>Unable to display PDF file. <a href="images/HrishikaResume.pdf">Download</a> instead.</p>
+              </object>
+            </div>
+
+            <footer>
+
+              <div class="bottom">
+                <h2><script type="text/javascript">
+                  /*<![CDATA[*/
+      
+                  /***********************************************
+                  * Encrypt Email script- Please keep notice intact
+                  * Tool URL: http://www.dynamicdrive.com/emailriddler/
+                  * **********************************************/
+                  // Encrypted version of: hrishikarc [at] *****.*** 
+      
+                  var emailriddlerarray=[104,114,105,115,104,105,107,97,114,99,64,103,109,97,105,108,46,99,111,109]
+                  var encryptedemail_id82='' //variable to contain encrypted email 
+                  for (var i=0; i<emailriddlerarray.length; i++)
+                  encryptedemail_id82+=String.fromCharCode(emailriddlerarray[i])
+      
+                  document.write('<a href="mailto:'+encryptedemail_id82+'">Contact Me</a>')
+                </script><a href="mailto:hrishikarc@gmail.com">Contact Me</a>
+                </h2>
+                <div class="socials">
+                  <a href="https://www.instagram.com/hrcdream/" class="fa fa-instagram"></a>
+                  <a href="https://www.linkedin.com/in/hrishika-roychoudhury-466672186/" class="fa fa-linkedin"></a>
+                  <a href="https://www.facebook.com/hrishika.roychoudhury/" class="fa fa-facebook-square"></a>
+                </div>
+      
+              <br>
+              <em style="color:grey;">Page Last Updated: <script type="text/javascript">
+                var days = new Array(8);
+                  days[1] = "Sunday";
+                  days[2] = "Monday";
+                  days[3] = "Tuesday";
+                  days[4] = "Wednesday";
+                  days[5] = "Thursday";
+                  days[6] = "Friday";
+                  days[7] = "Saturday";
+                var months = new Array(13);
+                  months[1] = "January";
+                  months[2] = "February";
+                  months[3] = "March";
+                  months[4] = "April";
+                  months[5] = "May";
+                  months[6] = "June";
+                  months[7] = "July";
+                  months[8] = "August";
+                  months[9] = "September";
+                  months[10] = "October";
+                  months[11] = "November";
+                  months[12] = "December";
+                var dateObj = new Date(document.lastModified)
+                var wday = days[dateObj.getDay() + 1]
+                var lmonth = months[dateObj.getMonth() + 1]
+                var date = dateObj.getDate()
+                var fyear = dateObj.getYear()
+                if (fyear < 2000) fyear = fyear + 1900
+                document.write("" + wday + ", " + date + " " + lmonth + " " + fyear)
+                /* var year = new Date();
+                document.write(year.getFullYear()); */
+              </script>Tuesday, 12 December 2023 </em>
+              </div>
+            </footer>
+         
+      
+      </body></html>
