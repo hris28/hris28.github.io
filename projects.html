@@ -12,13 +12,25 @@
 <body>
 
 <!-- Main site navbar -->
-<div class="w3-top">
-  <div class="w3-bar w3-white w3-card">
-    <a href="index.html" class="w3-bar-item w3-button">HOME</a>
-    <a href="about.html" class="w3-bar-item w3-button">ABOUT</a>
-    <a href="projects.html" class="w3-bar-item w3-button w3-grey">PROJECTS</a>
-  </div>
-</div>
+    <div class="w3-top">
+      <div class="w3-bar w3-card w3-animate-top w3-white" id="myNavbar">
+        <a class="w3-bar-item w3-button w3-hover-black w3-right" onclick="toggleFunction()" title="Toggle Navigation Instructions">
+          <i class="fa fa-eye"></i>
+        </a>
+        <a href="index.html" class="w3-bar-item w3-button">HOME</a>
+        <a href="about.html" class="w3-bar-item w3-button"><i class="fa fa-pencil"></i> ABOUT</a>
+        <a href="projects.html" class="w3-bar-item w3-button"><i class="fa fa-code"></i> PROJECTS</a>
+        <a href="interests.html" class="w3-bar-item w3-button"><i class="fa fa-th"></i> INTERESTS</a>
+      </div>
+
+      <div id="navDemo" class="w3-bar-block w3-white w3-hide" onclick="toggleFunction()">
+        <p class="w3-bar-item" onclick="toggleFunction()">
+          <b><em>Just a toggle function</em></b>
+          <br>
+          <small>:)</small>
+        </p>
+      </div>
+    </div>
 <!-- background -->
   <div class="main-message">
     <div class="flex-container">
