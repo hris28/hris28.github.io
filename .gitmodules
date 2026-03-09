@@ -1,3 +1,6 @@
 [submodule "FHIR-HealthApp"]
 	path = FHIR-HealthApp
 	url = https://github.com/hris28/FHIR-HealthApp.git
+[submodule "Avar"]
+	path = Avar
+	url = https://github.com/hris28/Avar.git
