@@ -1,0 +1,23 @@
+[
+  {
+    "slug": "welcome",
+    "title": "Welcome to the garden",
+    "desc": "What this space is, and what it will become.",
+    "tags": ["META"],
+    "date": "Apr 2026"
+  },
+  {
+    "slug": "osint-intro",
+    "title": "OSINT, an orientation",
+    "desc": "Starting notes on open source intelligence. What it is, what it is not, and where to begin.",
+    "tags": ["OSINT", "SECURITY"],
+    "date": "Apr 2026"
+  },
+  {
+    "slug": "hci-eye-tracking",
+    "title": "What eye tracking actually tells you",
+    "desc": "Working notes from the AI assisted search study. Fixation, saccade, pupil dilation.",
+    "tags": ["HCI", "RESEARCH"],
+    "date": "Mar 2026"
+  }
+]

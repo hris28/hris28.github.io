@@ -1,0 +1,39 @@
+Portfolio nav change — add a "Notes" tab
+========================================
+
+This is the ONLY change to the portfolio repo. It's a single line
+added to the `<nav class="primary">` block on each of the five pages.
+
+Find this line in each file (the exact last link varies per page —
+the one with `aria-current="page"` will be different):
+
+    <a href="interests.html">Interests</a>
+
+And add a new link right after it:
+
+    <a href="/notes/">Notes</a>
+
+Full block on, e.g. index.html — line to add is marked with ▸:
+
+    <nav class="primary" aria-label="Primary">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="resume.html">Résumé</a>
+      <a href="interests.html">Interests</a>
+  ▸   <a href="/notes/">Notes</a>
+    </nav>
+
+Files to edit (5 total):
+
+    index.html
+    about.html
+    projects.html
+    resume.html
+    interests.html
+
+Note on the path:
+  `/notes/` is an absolute path from the domain root. It resolves to
+  hris28.github.io/notes/ regardless of which portfolio page you're on,
+  which is what we want — the notes site is a separate repo published
+  under the same user-pages domain.

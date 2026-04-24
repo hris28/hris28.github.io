@@ -3,19 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projects · Hrishika Roychoudhury</title>
+  <title>Not found · Hrishika Roychoudhury</title>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
   <script src="js/main.js" defer></script>
-  <script src="js/projects.js" defer></script>
 </head>
 <body>
 
   <nav class="nav">
     <a href="index.html" class="nav-brand">Hrishika Roychoudhury<span class="dot">•</span></a>
-    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-    </button>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
@@ -23,33 +19,22 @@
       <li><a href="resume.html">Résumé</a></li>
       <li><a href="garden.html">Garden</a></li>
       <li><a href="interests.html">Interests</a></li>
-      <li>
-        <button class="theme-btn" aria-label="Toggle theme" onclick="toggleTheme()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-        </button>
-      </li>
     </ul>
   </nav>
 
-  <div class="page-header wrap-narrow">
-    <p class="eyebrow">Selected work</p>
-    <h1 class="display">Projects</h1>
-    <p class="lede" style="margin-top: 1rem;">
-      A running timeline of research, code, hardware, and hackathon work,
-      from eye tracking AI studies to published wastewater research, sorted newest first.
-    </p>
-  </div>
-
-  <!-- Timeline root. Populated by projects.js. -->
-  <section style="padding-top: 2rem;">
-    <div class="wrap">
-      <div id="projects-root" class="timeline"></div>
+  <section style="min-height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center;">
+    <div class="wrap-narrow">
+      <p class="eyebrow">404</p>
+      <h1 class="display">This page wandered off</h1>
+      <p class="lede" style="margin: 1rem 0 2rem;">
+        Not every link stays where you left it. Let's head back somewhere useful.
+      </p>
+      <div class="btn-group" style="justify-content: center;">
+        <a class="btn btn-primary" href="index.html">Home</a>
+        <a class="btn" href="projects.html">Projects</a>
+        <a class="btn" href="garden.html">Garden</a>
+      </div>
     </div>
-  </section>
-
-  <section class="contact-strip">
-    <h2>Have a project in mind?</h2>
-    <a class="mailto" href="mailto:hris@unc.edu">hris@unc.edu</a>
   </section>
 
   <footer>
@@ -62,6 +47,5 @@
       </div>
     </div>
   </footer>
-
 </body>
 </html>

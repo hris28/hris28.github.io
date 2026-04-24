@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projects — Hrishika Roychoudhury</title>
+  <meta name="description" content="A timeline of research, code, hardware, and hackathon projects by Hrishika Roychoudhury." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a href="index.html" class="wordmark">
+        Hrishika Roychoudhury <span class="dot" aria-hidden="true"></span>
+      </a>
+      <nav class="primary" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html" aria-current="page">Projects</a>
+        <a href="resume.html">Résumé</a>
+        <a href="interests.html">Interests</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-head wrap reveal">
+      <span class="eyebrow">Selected work</span>
+      <h1>Projects.</h1>
+      <p class="projects-intro">
+        A running timeline of research, code, hardware, and hackathon work —
+        from eye-tracking AI studies to published wastewater research, sorted
+        newest first.
+      </p>
+    </section>
+
+    <section class="wrap">
+      <div class="timeline" data-timeline>
+        <div class="tl-progress" data-progress aria-hidden="true"></div>
+        <!-- Timeline is rendered here from js/projects.js -->
+      </div>
+      <p class="tl-empty" data-empty hidden>
+        No projects to show yet — check back soon.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <div class="wrap">
+      <span>© <span id="yr"></span> Hrishika Roychoudhury</span>
+      <div class="socials">
+        <a href="mailto:hris@unc.edu">hris@unc.edu</a>
+        <a href="https://linkedin.com/in/hrishikarc" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/hris28" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/projects.js"></script>
+  <script>
+    /* ──────────────────────────────────────────────────────────────
+       Render timeline from window.__projects and wire up behaviours.
+       ────────────────────────────────────────────────────────────── */
+    (function () {
+      const timeline = document.querySelector('[data-timeline]');
+      const empty    = document.querySelector('[data-empty]');
+      const items    = window.__projects || [];
+
+      if (!items.length) {
+        timeline.hidden = true;
+        empty.hidden = false;
+        return;
+      }
+
+      /* ─ Helpers ─ */
+      const esc = (s) => String(s ?? '')
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+
+      const typeLabel = {
+        research: 'Research', code: 'Code', hardware: 'Hardware',
+        hackathon: 'Hackathon', startup: 'Startup'
+      };
+      const statusLabel = {
+        complete: 'Complete', progress: 'In progress', archived: 'Archived'
+      };
+
+      // Sort newest first. Ongoing (end = null) ranks highest.
+      const sortKey = (p) => p.end || '9999-99';
+      const sorted = [...items].sort((a, b) => sortKey(b).localeCompare(sortKey(a)));
+
+      // Group by year — ongoing uses the current year.
+      const currentYear = new Date().getFullYear().toString();
+      const groups = new Map();
+      for (const p of sorted) {
+        const year = p.end ? p.end.slice(0, 4) : currentYear;
+        if (!groups.has(year)) groups.set(year, []);
+        groups.get(year).push(p);
+      }
+
+      /* ─ Render ─ */
+      const cardHTML = (p) => {
+        const links = [
+          p.repo && `<a href="${esc(p.repo)}" target="_blank" rel="noopener">Code</a>`,
+          p.live && `<a href="${esc(p.live)}" target="_blank" rel="noopener">Live</a>`,
+        ].filter(Boolean).join('');
+
+        const meta = [
+          p.type   && `<span class="type">${esc(typeLabel[p.type] || p.type)}</span>`,
+          p.dateLabel && `<span class="date">${esc(p.dateLabel)}</span>`,
+          p.status && statusLabel[p.status]
+            && `<span class="status ${esc(p.status)}">${statusLabel[p.status]}</span>`,
+        ].filter(Boolean).join('');
+
+        const tags = (p.tags || []).map(t => `<span class="tl-tag">${esc(t)}</span>`).join('');
+
+        return `
+          <article class="tl-item" data-status="${esc(p.status || '')}">
+            <div class="tl-dot" aria-hidden="true"></div>
+            <div class="tl-card">
+              ${meta ? `<div class="tl-meta">${meta}</div>` : ''}
+              <h3>${esc(p.title)}</h3>
+              ${p.subtitle ? `<div class="subtitle">${esc(p.subtitle)}</div>` : ''}
+              ${p.team     ? `<div class="team">${esc(p.team)}</div>`         : ''}
+              ${p.description ? `<p class="desc">${esc(p.description)}</p>`  : ''}
+              ${p.award    ? `<div class="award">${esc(p.award)}</div>`      : ''}
+              ${tags       ? `<div class="tl-tags">${tags}</div>`            : ''}
+              ${links      ? `<div class="tl-links">${links}</div>`          : ''}
+            </div>
+          </article>
+        `;
+      };
+
+      const html = [...groups.entries()].map(([year, projects]) => {
+        const now = (year === currentYear) ? '<span class="is-now">Now</span>' : '';
+        return `
+          <h2 class="tl-year">${esc(year)}${now}</h2>
+          ${projects.map(cardHTML).join('')}
+        `;
+      }).join('');
+
+      // Insert after the progress element so it stays first.
+      const progress = timeline.querySelector('[data-progress]');
+      progress.insertAdjacentHTML('afterend', html);
+
+      /* ─ Reveal on scroll ─ */
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              e.target.classList.add('in');
+              io.unobserve(e.target);
+            }
+          }
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+        timeline.querySelectorAll('.tl-item').forEach(el => io.observe(el));
+      } else {
+        timeline.querySelectorAll('.tl-item').forEach(el => el.classList.add('in'));
+      }
+
+      /* ─ Scroll-linked progress fill along the spine ─ */
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let rafId = null;
+
+      function updateProgress() {
+        const rect = timeline.getBoundingClientRect();
+        const ref = window.innerHeight * 0.55;           // reference line in viewport
+        const passed = ref - rect.top;                   // px of timeline above reference
+        const frac = Math.max(0, Math.min(1, passed / rect.height));
+        progress.style.height = (frac * rect.height) + 'px';
+      }
+
+      function onScroll() {
+        if (rafId) return;
+        rafId = requestAnimationFrame(() => {
+          updateProgress();
+          rafId = null;
+        });
+      }
+
+      if (!reduceMotion) {
+        updateProgress();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll);
+      } else {
+        progress.style.display = 'none';
+      }
+    })();
+
+    document.getElementById('yr').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

@@ -4,3 +4,10 @@
 [submodule "Avar"]
 	path = Avar
 	url = https://github.com/hris28/Avar.git
+[submodule "BCIModelCardEvaluation"]
+	path = BCIModelCardEvaluation
+	url = https://github.com/hris28/BCIModelCardEvaluation.git
+[submodule "twine-story"]
+	path = twine-story
+	url = https://github.com/hris28/twine-story.git
+	

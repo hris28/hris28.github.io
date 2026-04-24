@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Résumé &amp; CV — Hrishika Roychoudhury</title>
+  <meta name="description" content="Hrishika Roychoudhury's 2-page résumé and detailed academic CV — view in-browser or download." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a href="index.html" class="wordmark">
+        Hrishika Roychoudhury <span class="dot" aria-hidden="true"></span>
+      </a>
+      <nav class="primary" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="resume.html" aria-current="page">Résumé</a>
+        <a href="interests.html">Interests</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-head wrap reveal">
+      <span class="eyebrow">Two documents</span>
+      <h1>Résumé &amp; CV.</h1>
+      <p class="doc-note">
+        Pick whichever fits — the 2-page résumé is tuned for industry and
+        general audiences, the CV is the longer academic record with PIs,
+        collaborators, and publications.
+      </p>
+
+      <div class="doc-tabs" role="tablist" aria-label="Document selector">
+        <button class="doc-tab active" role="tab" aria-selected="true"
+                data-doc="resume">Résumé <small>2 pp</small></button>
+        <button class="doc-tab" role="tab" aria-selected="false"
+                data-doc="cv">Academic CV <small>detailed</small></button>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="doc-frame-wrap">
+        <iframe class="doc-frame"
+                data-frame
+                title="Document preview"
+                src="files/HrishikaRoychoudhury-Resume.pdf#view=FitH"></iframe>
+
+        <div class="doc-mobile-note">
+          <p>
+            PDF previews don't always render well on phones. Tap below to
+            open or download the file.
+          </p>
+          <a class="btn" data-mobile-open href="files/HrishikaRoychoudhury-Resume.pdf" target="_blank" rel="noopener">
+            Open PDF
+          </a>
+        </div>
+      </div>
+
+      <div class="doc-actions">
+        <a class="btn"       data-download href="files/HrishikaRoychoudhury-Resume.pdf" download>Download PDF</a>
+        <a class="btn ghost" data-openblank href="files/HrishikaRoychoudhury-Resume.pdf" target="_blank" rel="noopener">Open in new tab</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <div class="wrap">
+      <span>© <span id="yr"></span> Hrishika Roychoudhury</span>
+      <div class="socials">
+        <a href="mailto:hris@unc.edu">hris@unc.edu</a>
+        <a href="https://linkedin.com/in/hrishikarc" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/hris28" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ──────────────────────────────────────────────────────────────
+       Toggle between résumé and CV — swap the iframe src + links.
+       ────────────────────────────────────────────────────────────── */
+    (function () {
+      const DOCS = {
+        resume: {
+          file: 'files/HrishikaRoychoudhury-Resume.pdf',
+          label: 'Résumé'
+        },
+        cv: {
+          file: 'files/HrishikaRoychoudhury-CV.pdf',
+          label: 'Academic CV'
+        }
+      };
+
+      const tabs       = document.querySelectorAll('[data-doc]');
+      const frame      = document.querySelector('[data-frame]');
+      const download   = document.querySelector('[data-download]');
+      const openBlank  = document.querySelector('[data-openblank]');
+      const mobileOpen = document.querySelector('[data-mobile-open]');
+
+      function setDoc(key) {
+        const doc = DOCS[key];
+        if (!doc) return;
+        frame.src          = doc.file + '#view=FitH';
+        download.href      = doc.file;
+        openBlank.href     = doc.file;
+        mobileOpen.href    = doc.file;
+        tabs.forEach((t) => {
+          const active = t.dataset.doc === key;
+          t.classList.toggle('active', active);
+          t.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+      }
+
+      tabs.forEach((t) => t.addEventListener('click', () => setDoc(t.dataset.doc)));
+    })();
+
+    document.getElementById('yr').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

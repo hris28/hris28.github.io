@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projects · Hrishika Roychoudhury</title>
+  <title>Garden · Hrishika Roychoudhury</title>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
   <script src="js/main.js" defer></script>
-  <script src="js/projects.js" defer></script>
+  <script src="js/garden.js" defer></script>
 </head>
 <body>
 
@@ -32,24 +32,26 @@
   </nav>
 
   <div class="page-header wrap-narrow">
-    <p class="eyebrow">Selected work</p>
-    <h1 class="display">Projects</h1>
+    <p class="eyebrow">Notes in progress</p>
+    <h1 class="display">Garden</h1>
     <p class="lede" style="margin-top: 1rem;">
-      A running timeline of research, code, hardware, and hackathon work,
-      from eye tracking AI studies to published wastewater research, sorted newest first.
+      A growing collection of notes, sketches, and working thoughts. Obsidian compatible markdown,
+      with wiki links between entries. Over time this will grow into a comprehensive OSINT themed
+      Information Security guide.
     </p>
+
+    <!-- Search + tag filter -->
+    <div id="garden-controls" class="garden-controls">
+      <input id="search" class="search-input" type="search" placeholder="Search notes..." aria-label="Search notes" />
+    </div>
+    <div id="tag-filter" class="tag-filter"></div>
   </div>
 
-  <!-- Timeline root. Populated by projects.js. -->
-  <section style="padding-top: 2rem;">
-    <div class="wrap">
-      <div id="projects-root" class="timeline"></div>
+  <section style="padding-top: 1rem;">
+    <div class="wrap-narrow">
+      <!-- Populated by garden.js: shows either the note list or a single rendered note -->
+      <div id="garden-root"></div>
     </div>
-  </section>
-
-  <section class="contact-strip">
-    <h2>Have a project in mind?</h2>
-    <a class="mailto" href="mailto:hris@unc.edu">hris@unc.edu</a>
   </section>
 
   <footer>

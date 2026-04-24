@@ -3,11 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projects · Hrishika Roychoudhury</title>
+  <title>Résumé · Hrishika Roychoudhury</title>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
   <script src="js/main.js" defer></script>
-  <script src="js/projects.js" defer></script>
+  <script>
+    // Switch between the 2-page résumé and the full academic CV.
+    // Drop your PDFs into /assets/ and the filenames below will load them.
+    function showDoc(which) {
+      const frame = document.getElementById("pdf-frame");
+      const src = which === "cv" ? "assets/HrishikaCV.pdf" : "assets/HrishikaResume.pdf";
+      frame.src = src;
+      document.querySelectorAll(".resume-toggle .btn").forEach(b => b.classList.remove("active"));
+      document.getElementById("btn-" + which).classList.add("active");
+    }
+  </script>
 </head>
 <body>
 
@@ -32,24 +42,29 @@
   </nav>
 
   <div class="page-header wrap-narrow">
-    <p class="eyebrow">Selected work</p>
-    <h1 class="display">Projects</h1>
+    <p class="eyebrow">Two documents</p>
+    <h1 class="display">Résumé and CV</h1>
     <p class="lede" style="margin-top: 1rem;">
-      A running timeline of research, code, hardware, and hackathon work,
-      from eye tracking AI studies to published wastewater research, sorted newest first.
+      Pick whichever fits. The 2 page résumé is tuned for industry and general audiences,
+      and the CV is the longer academic record with PIs, collaborators, and publications.
     </p>
+
+    <!-- Toggle buttons. Clicking swaps the iframe source. -->
+    <div class="resume-toggle">
+      <button id="btn-resume" class="btn active" onclick="showDoc('resume')">Résumé <small>2 pp</small></button>
+      <button id="btn-cv" class="btn" onclick="showDoc('cv')">Academic CV <small>detailed</small></button>
+    </div>
+
+    <div class="btn-group" style="margin-top: 1rem;">
+      <a class="btn" href="assets/HrishikaResume.pdf" download>Download résumé</a>
+      <a class="btn" href="assets/HrishikaCV.pdf" download>Download CV</a>
+    </div>
   </div>
 
-  <!-- Timeline root. Populated by projects.js. -->
-  <section style="padding-top: 2rem;">
+  <section style="padding-top: 0;">
     <div class="wrap">
-      <div id="projects-root" class="timeline"></div>
+      <iframe id="pdf-frame" class="pdf-frame" src="assets/HrishikaResume.pdf" title="Résumé"></iframe>
     </div>
-  </section>
-
-  <section class="contact-strip">
-    <h2>Have a project in mind?</h2>
-    <a class="mailto" href="mailto:hris@unc.edu">hris@unc.edu</a>
   </section>
 
   <footer>
