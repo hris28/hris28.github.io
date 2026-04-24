@@ -265,7 +265,8 @@ section { padding: 3rem 0; }
 .btn-group { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 
 /* ---------- Page header (non-home pages) ---------- */
-.page-header { padding: 3rem 0 2rem; }
+.page-header { padding-top: 3rem; padding-bottom: 2rem; }
+/* .page-header { padding: 3rem 0 2rem; } */
 .page-header .eyebrow { margin-bottom: 1rem; }
 
 /* ---------- About page: flex TOC container (preserved from original) ---------- */
