@@ -99,8 +99,8 @@ h3 { font-size: 1.3rem; font-weight: 700; }
 .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 1.5rem; }
 .wrap-avg { max-width: var(--maxw-avg); margin: 0 auto; padding: 0 1.5rem; }
 .wrap-narrow { max-width: var(--maxw-narrow); margin: 0 auto; padding: 0 1.5rem; }
-section { padding: 3rem 0; }
-@media (max-width: 720px) { section { padding: 2rem 0; } }
+section { padding: 2rem 0; }
+@media (max-width: 720px) { section { padding: 1.5rem 0; } }
 
 /* ---------- Navigation ---------- */
 .nav {
@@ -282,10 +282,32 @@ section { padding: 3rem 0; }
 .toc a { color: var(--ink); }
 
 .about-body { max-width: 780px; margin: 0 auto; padding: 0 1.5rem; }
-.about-body h2 { text-align: center; margin: 3rem 0 1.5rem; }
+.about-body h2 { text-align: center; margin: 1rem 0 1.5rem; }
 .about-body p { margin: 0 0 1.2rem; font-size: 1.05rem; }
 .about-portrait { float: left; width: 140px; margin: 0.3rem 1.5rem 0.5rem 0; border-radius: var(--radius); }
 @media (max-width: 560px) { .about-portrait { float: none; margin: 0 auto 1.5rem; } }
+
+/* When .about-header sits inside a .hero, lift it above the background overlay
+   and inherit the cream text color from .hero. */
+.hero .about-header {
+  position: relative;
+  z-index: 1;
+  color: #f1ead9;
+  max-width: var(--maxw);
+  width: 100%;
+}
+.hero .about-header .eyebrow { color: #e6d8b8; opacity: 0.85; }
+.hero .about-header .display { color: #f8f1df; }
+
+/* The TOC needs a translucent background to stay readable over the photo */
+.hero .toc {
+  background: rgba(245, 239, 225, 0.1);
+  border-color: rgba(245, 239, 225, 0.25);
+  backdrop-filter: blur(8px);
+}
+.hero .toc-title { color: #e6d8b8; }
+.hero .toc a { color: #f8f1df; }
+.hero .toc a:hover { color: var(--accent); }
 
 /* ---------- Project timeline (data-driven) ---------- */
 .timeline { position: relative; padding-left: 2rem; }
