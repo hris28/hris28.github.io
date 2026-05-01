@@ -1,0 +1,33 @@
+@use "./base.scss";
+
+table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin: 1.25rem 0;
+}
+
+th,
+td {
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--lightgray);
+  vertical-align: top;
+}
+
+th {
+  font-weight: 700;
+}
+
+tr:nth-child(even) {
+  background: color-mix(in srgb, var(--light) 92%, var(--gray) 8%);
+}
+
+.external-preview {
+  position: relative;
+}
+
+.external-preview .preview-card {
+  display: none;
+  position: absolute;
+}
