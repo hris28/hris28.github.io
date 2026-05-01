@@ -51,3 +51,6 @@ export {
   Flex,
   ConditionalRender,
 }
+export { default as PortfolioNav } from "./PortfolioNav"
+export { default as GardenHero } from "./GardenHero"
+export { default as PortfolioFooter } from "./PortfolioFooter"
