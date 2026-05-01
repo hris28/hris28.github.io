@@ -1,5 +1,91 @@
 @use "./base.scss";
 
+/* ---------- Portfolio design tokens ---------- */
+
+:root {
+  --bg: #f5efe1;
+  --bg-soft: #efe8d6;
+  --ink: #14202b;
+  --ink-soft: #4a5566;
+  --ink-faint: #8a8577;
+  --line: #d9cfb8;
+  --accent: #2b4a6f;
+  --accent-hover: #1a3354;
+  --tag-bg: #e7dec6;
+  --tag-ink: #3a3528;
+  --hero-overlay: rgba(10, 14, 20, 0.55);
+
+  --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+
+  --maxw: 1100px;
+  --maxw-narrow: 760px;
+  --radius: 4px;
+  --radius-pill: 999px;
+  --nav-h: 72px;
+  --transition: 180ms ease;
+}
+
+html[saved-theme="dark"],
+html[data-theme="dark"] {
+  --bg: #0e1620;
+  --bg-soft: #16202d;
+  --ink: #ede5d3;
+  --ink-soft: #b8b1a1;
+  --ink-faint: #878069;
+  --line: #2a3647;
+  --accent: #8ab4dc;
+  --accent-hover: #b4cfea;
+  --tag-bg: #1f2a3a;
+  --tag-ink: #d8d0bd;
+  --hero-overlay: rgba(0, 0, 0, 0.65);
+}
+
+/* ---------- Base ---------- */
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--ink);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+}
+
+.display {
+  font-size: clamp(2.2rem, 5vw, 4.2rem);
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 1rem 0;
+}
+
+.lede { font-family: var(--font-sans); font-size: 1.05rem; line-height: 1.6; color: var(--ink-soft); }
+
+/* table formatting */
 table {
   display: block;
   width: 100%;
@@ -23,6 +109,7 @@ tr:nth-child(even) {
   background: color-mix(in srgb, var(--light) 92%, var(--gray) 8%);
 }
 
+/* will maybe be used for previewing external links upon hover */
 .external-preview {
   position: relative;
 }
