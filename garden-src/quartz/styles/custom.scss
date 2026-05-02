@@ -131,21 +131,6 @@ h1, h2, h3, h4 {
   border: none !important;
 }
 
-/* Push everything down so content doesn't hide behind the fixed nav */
-#quartz-body {
-  padding-top: var(--nav-h) !important;
-}
-
-/* The left sidebar also needs to start below the nav */
-.left.sidebar {
-  padding-top: 1rem;
-}
-
-/* Quartz adds top margin to .page-header that stacks on top of nav height */
-.page > #quartz-body .page-header {
-  margin-top: 0 !important;
-}
-
 .nav {
   position: sticky;
   top: 0;
