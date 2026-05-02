@@ -614,9 +614,9 @@ tr:nth-child(even) {
 
 /* ---------- Spacious rail layout: rails at outer edges, center preserved ---------- */
 
-#quartz-body {
+##quartz-body {
   --garden-content-w: 800px;
-  --garden-rail-w: 205px;
+  --garden-rail-w: 200px;
 
   width: 100% !important;
   max-width: 100% !important;
@@ -624,75 +624,29 @@ tr:nth-child(even) {
   padding: calc(var(--nav-h) + 1.5rem) 2rem 0 2rem !important;
   box-sizing: border-box !important;
 
-  display: grid !important;
-  grid-template-columns:
-    var(--garden-rail-w)
-    minmax(0, var(--garden-content-w))
-    var(--garden-rail-w) !important;
+  /* Override the shorthand, not just grid-template-columns */
+  grid-template:
+    "left center right"
+    / var(--garden-rail-w) minmax(0, var(--garden-content-w)) var(--garden-rail-w) !important;
 
-    /*
-    This is the important part.
-    It pushes the left and right rails outward while keeping
-    the center column visually centered.
-  */
   justify-content: start !important;
   column-gap: clamp(2rem, 4vw, 4rem) !important;
   align-items: start !important;
 }
-  
-/* Center reading column */
-#quartz-body > .center {
-  grid-column: 2 !important;
 
-  width: 100% !important;
-  max-width: var(--garden-content-w) !important;
-  min-width: 0 !important;
-
-  margin: 0 auto !important;
-  padding: 0 0 4rem 0 !important;
-}
-
-/* Left utility rail: pinned to outer left of shell */
+/* Tell each child which named area it belongs to */
 #quartz-body > .left.sidebar {
-  grid-column: 1 !important;
-  justify-self: start !important;
-
-  width: var(--garden-rail-w) !important;
-  max-width: var(--garden-rail-w) !important;
-  min-width: 0 !important;
-
-  box-sizing: border-box !important;
-
-  margin: 0 !important;
-  padding: 1.1rem 1rem 2rem 0 !important;
-
-  border-right: 1px solid color-mix(in srgb, var(--line) 38%, transparent) !important;
-
-  position: sticky !important;
-  top: calc(var(--nav-h) + 1.25rem) !important;
-  align-self: start !important;
+  grid-area: left !important;
 }
 
-/* Right utility rail: pinned to outer right of shell */
+#quartz-body > .center {
+  grid-area: center !important;
+}
+
 #quartz-body > .right.sidebar {
-  grid-column: 3 !important;
-  justify-self: end !important;
-
-  width: var(--garden-rail-w) !important;
-  max-width: var(--garden-rail-w) !important;
-  min-width: 0 !important;
-
-  box-sizing: border-box !important;
-
-  margin: 0 !important;
-  padding: 1.1rem 0 2rem 1rem !important;
-
-  border-left: 1px solid color-mix(in srgb, var(--line) 38%, transparent) !important;
-
-  position: sticky !important;
-  top: calc(var(--nav-h) + 1.25rem) !important;
-  align-self: start !important;
+  grid-area: right !important;
 }
+
 
 /* ---------- 2. Fix Quartz header wrapper ---------- */
 
@@ -917,23 +871,17 @@ tr:nth-child(even) {
 
 /* ---------- 6. Responsive behavior ---------- */
 
-/* ---------- Responsive behavior ---------- */
-
 /* Medium screens: keep left rail, hide right rail */
 @media (max-width: 1320px) {
   #quartz-body {
-    --garden-content-w: 800px;
     --garden-rail-w: 180px;
 
     padding-left: 1.5rem !important;
     padding-right: 1.5rem !important;
 
-    grid-template-columns:
-      var(--garden-rail-w)
-      minmax(0, var(--garden-content-w)) !important;
-
-    justify-content: start !important;
-    column-gap: 2.5rem !important;
+    grid-template:
+      "left center"
+      / var(--garden-rail-w) minmax(0, var(--garden-content-w)) !important;
   }
 
   #quartz-body > .right.sidebar {
@@ -945,9 +893,11 @@ tr:nth-child(even) {
 @media (max-width: 940px) {
   #quartz-body {
     display: block !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    padding: calc(var(--nav-h) + 1rem) 1.25rem 0 1.25rem !important;
+
+    width: min(780px, calc(100vw - 2rem)) !important;
+    max-width: 780px !important;
+
+    padding-top: calc(var(--nav-h) + 1rem) !important;
   }
 
   #quartz-body > .left.sidebar,
@@ -957,5 +907,16 @@ tr:nth-child(even) {
 
   #quartz-body > .center {
     max-width: 100% !important;
+  }
+
+  #quartz-body > .center > .page-header > header .portfolio-quartz-nav {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+
+  #quartz-body > .center > .page-header > header .portfolio-quartz-nav .nav-links {
+    flex-wrap: wrap !important;
+    gap: 0.85rem !important;
   }
 }
