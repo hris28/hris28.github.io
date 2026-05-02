@@ -546,18 +546,20 @@ tr:nth-child(even) {
   margin: 0 auto !important;
 }
 
+
 #quartz-body > .left.sidebar {
   grid-area: left !important;
   justify-self: start !important;
   width: var(--garden-rail-w) !important;
+  border-right: 1px solid var(--line) !important;
 }
 
 #quartz-body > .right.sidebar {
   grid-area: right !important;
   justify-self: end !important;
   width: var(--garden-rail-w) !important;
+  border-left: 1px solid var(--line) !important;
 }
-
 
 /* ---------- 2. Fix Quartz header wrapper ---------- */
 
