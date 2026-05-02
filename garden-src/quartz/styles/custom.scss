@@ -637,7 +637,7 @@ tr:nth-child(even) {
     "left center right"
     / var(--garden-rail-w) minmax(0, var(--garden-content-w)) var(--garden-rail-w) !important;
 
-  justify-content: start !important;
+  justify-content: space-between !important;   // start packs all three columns to the left edge, which is why the right sidebar ended up next to the content. space-between pushes the left column to the far left and the right column to the far right, with the center column filling the space in between.
   column-gap: clamp(2rem, 4vw, 4rem) !important;
   align-items: start !important;
 }
