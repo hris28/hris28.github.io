@@ -59,12 +59,18 @@ jobs:
         working-directory: ./garden-src
         run: npx quartz build --output ../_site/garden
 
-      - name: Add deploy proof files
+      - name: Add proof files
         run: |
           mkdir -p _site/garden
+          mkdir -p _site/notes
+
           echo "root deployed at $(date -u)" > _site/deploy-proof.txt
+
           echo "garden deployed at $(date -u)" > _site/garden/deploy-proof.txt
           echo "<!doctype html><title>Garden test</title><h1>Garden folder works</h1>" > _site/garden/test.html
+
+          echo "notes deployed at $(date -u)" > _site/notes/deploy-proof.txt
+          echo "<!doctype html><title>Notes test</title><h1>Notes folder works</h1>" > _site/notes/test.html
           touch _site/.nojekyll
 
       - name: Verify output structure
