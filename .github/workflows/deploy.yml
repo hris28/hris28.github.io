@@ -1,4 +1,4 @@
-name: Deploy Quartz site to GitHub Pages
+name: Deploy site to GitHub Pages
 
 on:
   push:
@@ -7,16 +7,14 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-22.04
 
     steps:
@@ -25,9 +23,6 @@ jobs:
         with:
           fetch-depth: 0
           submodules: false
-
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v5
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -63,15 +58,13 @@ jobs:
         working-directory: ./garden-src
         run: npx quartz build --output ../_site/garden
 
-      - name: Disable Jekyll processing
-        run: touch _site/.nojekyll
-
       - name: Add deploy proof files
         run: |
           mkdir -p _site/garden
           echo "root deployed at $(date -u)" > _site/deploy-proof.txt
           echo "garden deployed at $(date -u)" > _site/garden/deploy-proof.txt
           echo "<!doctype html><title>Garden test</title><h1>Garden folder works</h1>" > _site/garden/test.html
+          touch _site/.nojekyll
 
       - name: Verify output structure
         run: |
@@ -83,7 +76,6 @@ jobs:
           find _site/garden -maxdepth 3 -type f | sort | head -150
 
           echo ""
-          echo "Required files check"
           test -f _site/index.html
           test -f _site/deploy-proof.txt
           test -f _site/garden/index.html
@@ -92,26 +84,10 @@ jobs:
 
           echo "OK: required files exist."
 
-      - name: Fix file permissions
-        run: |
-          find _site -type d -exec chmod 755 {} \;
-          find _site -type f -exec chmod 644 {} \;
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: _site
-          # include-hidden-files: true
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          publish_branch: gh-pages
+          force_orphan: true
