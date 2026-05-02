@@ -517,9 +517,9 @@ tr:nth-child(even) {
   --garden-content-w: 860px;
   --garden-rail-w: 200px;
 
-  width: 100% !important;
-  max-width: 100% !important;
-  margin: 0 !important;
+  width: min(1280px, 100%) !important;    /* was 100% */
+  max-width: 1280px !important;           /* add this */
+  margin: 0 !important;                   /* keep left-aligned, not centered */
   padding: calc(var(--nav-h) + 0.5rem) 1.5rem 0 0 !important;  /* remove left padding entirely */
   box-sizing: border-box !important;
 
