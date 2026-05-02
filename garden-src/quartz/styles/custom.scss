@@ -83,7 +83,59 @@ h4 {
   margin: 0 0 1rem 0;
 }
 
+/* Tighten article content width */
+.center {
+  max-width: 680px;
+}
+
+/* Tag label style */
+.tag-link {
+  font-size: 0.75rem;
+  background: var(--tag-bg);        /* was --highlight */
+  padding: 2px 8px;
+  border-radius: var(--radius);
+  color: var(--tag-ink);             /* was --darkgray */
+}
+
+/* Left sidebar border */
+.left.sidebar {
+  border-right: 1px solid var(--line);   /* was --lightgray */
+  padding-right: 1.5rem;
+}
+
 .lede { font-family: var(--font-sans); font-size: 1.05rem; line-height: 1.6; color: var(--ink-soft); }
+
+.portfolio-footer .socials {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  a {
+    display: flex;
+    align-items: center;
+    color: var(--ink-faint);       /* was --gray, doesn't exist in your tokens */
+    transition: color var(--transition);
+
+    &:hover {
+      color: var(--accent);         /* was --secondary, doesn't exist in your tokens */
+    }
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+  }
+}
+
+.portfolio-footer .footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.82rem;
+  color: var(--ink-faint);          /* was --gray */
+}
 
 /* table formatting */
 table {
@@ -97,16 +149,17 @@ table {
 th,
 td {
   padding: 0.65rem 0.75rem;
-  border: 1px solid var(--lightgray);
+  border: 1px solid var(--line);    /* was --lightgray */
   vertical-align: top;
+}
+
+tr:nth-child(even) {
+  background: var(--bg-soft);       /* was color-mix using --light and --gray */
+  /* background: color-mix(in srgb, var(--light) 92%, var(--gray) 8%); */
 }
 
 th {
   font-weight: 700;
-}
-
-tr:nth-child(even) {
-  background: color-mix(in srgb, var(--light) 92%, var(--gray) 8%);
 }
 
 /* will maybe be used for previewing external links upon hover */
