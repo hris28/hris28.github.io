@@ -27,7 +27,7 @@
   --maxw-narrow: 760px;
   --radius: 4px;
   --radius-pill: 999px;
-  --nav-h: 72px;
+  --nav-h: 60px;
   --transition: 180ms ease;
 }
 
@@ -610,66 +610,77 @@ tr:nth-child(even) {
 
 /* ---------- 1. Spacious Quartz body layout ---------- */
 
+/* ---------- Spacious rail layout: sidebars pushed outward ---------- */
+
 #quartz-body {
-  width: min(1720px, calc(100vw - 3rem)) !important;
-  max-width: 1720px !important;
+  width: min(1800px, calc(100vw - 2rem)) !important;
+  max-width: 1800px !important;
   margin: 0 auto !important;
 
   display: grid !important;
 
   /*
-    Narrow side rails + generous gutters + comfortable center.
-    This pushes utilities outward and gives the article more visual room.
+    Flexible outer columns.
+    The sidebars live inside these columns and are aligned outward.
   */
   grid-template-columns:
-    175px
+    minmax(170px, 1fr)
     minmax(720px, 840px)
-    175px !important;
+    minmax(170px, 1fr) !important;
 
-  column-gap: clamp(5.5rem, 8vw, 12rem) !important;
+  column-gap: clamp(3rem, 5vw, 6rem) !important;
   align-items: start !important;
 
-  padding-top: calc(var(--nav-h) + 2rem) !important;
+  padding-top: calc(var(--nav-h) + 1.5rem) !important;
 }
 
-/* Main reading column */
+/* Center reading column */
 #quartz-body > .center {
+  grid-column: 2 !important;
+
   width: 100% !important;
   max-width: 840px !important;
   min-width: 0 !important;
+
   margin: 0 auto !important;
   padding: 0 0 4rem 0 !important;
 }
 
-/* Left utility rail */
+/* Left rail: align to the far left of its flexible gutter */
 #quartz-body > .left.sidebar {
-  width: 175px !important;
+  grid-column: 1 !important;
+  justify-self: start !important;
+
+  width: 185px !important;
+  max-width: 185px !important;
   min-width: 0 !important;
-  max-width: 175px !important;
 
   margin: 0 !important;
-  padding: 1.25rem 1rem 2rem 0 !important;
+  padding: 1.1rem 1rem 2rem 0 !important;
 
-  border-right: 1px solid color-mix(in srgb, var(--line) 45%, transparent) !important;
+  border-right: 1px solid color-mix(in srgb, var(--line) 40%, transparent) !important;
 
   position: sticky !important;
-  top: calc(var(--nav-h) + 1.5rem) !important;
+  top: calc(var(--nav-h) + 1.25rem) !important;
   align-self: start !important;
 }
 
-/* Right utility rail */
+/* Right rail: align to the far right of its flexible gutter */
 #quartz-body > .right.sidebar {
-  width: 175px !important;
+  grid-column: 3 !important;
+  justify-self: end !important;
+
+  width: 185px !important;
+  max-width: 185px !important;
   min-width: 0 !important;
-  max-width: 175px !important;
 
   margin: 0 !important;
-  padding: 1.25rem 0 2rem 1rem !important;
+  padding: 1.1rem 0 2rem 1rem !important;
 
-  border-left: 1px solid color-mix(in srgb, var(--line) 45%, transparent) !important;
+  border-left: 1px solid color-mix(in srgb, var(--line) 40%, transparent) !important;
 
   position: sticky !important;
-  top: calc(var(--nav-h) + 1.5rem) !important;
+  top: calc(var(--nav-h) + 1.25rem) !important;
   align-self: start !important;
 }
 
@@ -702,6 +713,9 @@ tr:nth-child(even) {
   margin: 0 !important;
   padding: 0 !important;
 
+  height: var(--nav-h) !important;
+  overflow: hidden !important;
+
   background: transparent !important;
   border: 0 !important;
 }
@@ -718,14 +732,19 @@ tr:nth-child(even) {
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
-  gap: 1.5rem !important;
+  gap: 1.25rem !important;
 
   margin: 0 !important;
-  padding: 1rem 1.5rem !important;
+  padding: 0.7rem 1.5rem !important;
 
-  background: color-mix(in srgb, var(--bg) 88%, transparent) !important;
+  background: color-mix(in srgb, var(--bg) 92%, transparent) !important;
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--line) !important;
+}
+
+/* Prevent stray Quartz header children from appearing in the fixed nav area */
+#quartz-body > .center > .page-header > header > *:not(.portfolio-quartz-nav) {
+  display: none !important;
 }
 
 /* Kill bullets / Quartz list styling in nav */
@@ -888,17 +907,29 @@ tr:nth-child(even) {
 
 /* ---------- 6. Responsive behavior ---------- */
 
-/* Hide right rail first */
-@media (max-width: 1250px) {
+/* Medium screens: keep left rail, hide right rail */
+@media (max-width: 1320px) {
   #quartz-body {
-    width: min(1120px, calc(100vw - 3rem)) !important;
-    max-width: 1120px !important;
+    width: min(1180px, calc(100vw - 3rem)) !important;
+    max-width: 1180px !important;
 
     grid-template-columns:
-      minmax(200px, 240px)
-      minmax(0, 780px) !important;
+      180px
+      minmax(0, 840px) !important;
 
-    column-gap: 3.5rem !important;
+    column-gap: 4rem !important;
+  }
+
+  #quartz-body > .left.sidebar {
+    grid-column: 1 !important;
+    justify-self: start !important;
+
+    width: 180px !important;
+    max-width: 180px !important;
+  }
+
+  #quartz-body > .center {
+    grid-column: 2 !important;
   }
 
   #quartz-body > .right.sidebar {
@@ -906,12 +937,14 @@ tr:nth-child(even) {
   }
 }
 
-/* Single-column mobile layout */
-@media (max-width: 880px) {
+/* Small screens: hide all rails */
+@media (max-width: 940px) {
   #quartz-body {
     display: block !important;
-    width: min(760px, calc(100vw - 2rem)) !important;
-    max-width: 760px !important;
+
+    width: min(780px, calc(100vw - 2rem)) !important;
+    max-width: 780px !important;
+
     padding-top: calc(var(--nav-h) + 1rem) !important;
   }
 
@@ -927,11 +960,11 @@ tr:nth-child(even) {
   #quartz-body > .center > .page-header > header .portfolio-quartz-nav {
     align-items: flex-start !important;
     flex-direction: column !important;
-    gap: 0.75rem !important;
+    gap: 0.5rem !important;
   }
 
   #quartz-body > .center > .page-header > header .portfolio-quartz-nav .nav-links {
     flex-wrap: wrap !important;
-    gap: 0.9rem !important;
+    gap: 0.85rem !important;
   }
 }
