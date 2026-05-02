@@ -10,7 +10,7 @@ const config: QuartzConfig = {
   configuration: {
     pageTitle: "Garden",
     pageTitleSuffix: " · Hrishika Roychoudhury",
-    enableSPA: true,
+    enableSPA: false,
     enablePopovers: true,
     locale: "en-US",
     baseUrl: "hris28.github.io/garden",
