@@ -114,7 +114,7 @@ h1, h2, h3, h4 {
    ============================================================ */
 
 .page-header {
-  padding-top: calc(var(--nav-h) + 0.5rem) !important;
+  padding-top: calc(var(--nav-h) + 0.25rem) !important;
   margin-top: 0 !important;
 }
 
@@ -340,7 +340,7 @@ h1, h2, h3, h4 {
 .center article h1 {
   font-size: clamp(1.8rem, 3vw, 2.4rem);
   letter-spacing: -0.02em;
-  margin-bottom: 0.5rem;
+  // margin-bottom: 0.5rem;
 }
 
 .center article h2 {
@@ -519,14 +519,14 @@ tr:nth-child(even) {
   width: 100% !important;
   max-width: 100% !important;
   margin: 0 !important;
-  padding: calc(var(--nav-h) + 0.5rem) 2rem 0 0 !important;
+  padding: calc(var(--nav-h) + 0.25rem) 0 0 0 !important;  /* no right padding */
   box-sizing: border-box !important;
 
   display: grid !important;
   grid-template:
     "left center right"
     / var(--garden-rail-w) 1fr var(--garden-rail-w) !important;
-  column-gap: 2rem !important;
+  column-gap: 2.5rem !important;  /* was 2rem, gives more center breathing room */
   align-items: start !important;
 }
 
@@ -544,19 +544,19 @@ tr:nth-child(even) {
 
 #quartz-body > .left.sidebar {
   width: var(--garden-rail-w) !important;
-  padding: 1.25rem 1.5rem 1.5rem 1.5rem !important;
+  padding: 1.25rem 2rem 1.5rem 1.5rem !important;  /* was 1.5rem right, now 2rem */
   border-right: 1px solid var(--line) !important;
   position: sticky !important;
-  top: calc(var(--nav-h) + 0.5rem) !important;
+  top: calc(var(--nav-h) + 0.25rem) !important;
   align-self: start !important;
 }
 
 #quartz-body > .right.sidebar {
   width: var(--garden-rail-w) !important;
-  padding: 1.25rem 0 1.5rem 1.5rem !important;
+  padding: 1.25rem 1rem 1.5rem 1.5rem !important;  /* small right padding only */
   border-left: 1px solid var(--line) !important;
   position: sticky !important;
-  top: calc(var(--nav-h) + 0.5rem) !important;
+  top: calc(var(--nav-h) + 0.25rem) !important;
   align-self: start !important;
 }
 
@@ -791,7 +791,7 @@ tr:nth-child(even) {
     grid-template:
       "left center"
       / var(--garden-rail-w) 1fr !important;
-    padding-right: 1.5rem !important;
+    padding-right: 0 !important;
   }
   #quartz-body > .right.sidebar { display: none !important; }
 }
