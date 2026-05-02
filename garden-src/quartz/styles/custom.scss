@@ -615,13 +615,14 @@ tr:nth-child(even) {
 /* ---------- Spacious rail layout: rails at outer edges, center preserved ---------- */
 
 #quartz-body {
-  --garden-shell-w: 1640px;
   --garden-content-w: 800px;
   --garden-rail-w: 205px;
 
-  width: min(var(--garden-shell-w), calc(100vw - 3rem)) !important;
-  max-width: var(--garden-shell-w) !important;
-  margin: 0 auto !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: calc(var(--nav-h) + 1.5rem) 2rem 0 2rem !important;
+  box-sizing: border-box !important;
 
   display: grid !important;
   grid-template-columns:
@@ -629,18 +630,16 @@ tr:nth-child(even) {
     minmax(0, var(--garden-content-w))
     var(--garden-rail-w) !important;
 
-  /*
+    /*
     This is the important part.
     It pushes the left and right rails outward while keeping
     the center column visually centered.
   */
-  justify-content: space-between !important;
-  column-gap: 0 !important;
-
+  justify-content: start !important;
+  column-gap: clamp(2rem, 4vw, 4rem) !important;
   align-items: start !important;
-  padding-top: calc(var(--nav-h) + 1.5rem) !important;
 }
-
+  
 /* Center reading column */
 #quartz-body > .center {
   grid-column: 2 !important;
@@ -923,28 +922,18 @@ tr:nth-child(even) {
 /* Medium screens: keep left rail, hide right rail */
 @media (max-width: 1320px) {
   #quartz-body {
-    --garden-shell-w: 1120px;
     --garden-content-w: 800px;
     --garden-rail-w: 180px;
 
-    width: min(var(--garden-shell-w), calc(100vw - 3rem)) !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
 
     grid-template-columns:
       var(--garden-rail-w)
       minmax(0, var(--garden-content-w)) !important;
 
-    justify-content: space-between !important;
-    column-gap: 0 !important;
-  }
-
-  #quartz-body > .center {
-    grid-column: 2 !important;
-  }
-
-  #quartz-body > .left.sidebar {
-    grid-column: 1 !important;
-    width: var(--garden-rail-w) !important;
-    max-width: var(--garden-rail-w) !important;
+    justify-content: start !important;
+    column-gap: 2.5rem !important;
   }
 
   #quartz-body > .right.sidebar {
@@ -956,11 +945,9 @@ tr:nth-child(even) {
 @media (max-width: 940px) {
   #quartz-body {
     display: block !important;
-
-    width: min(780px, calc(100vw - 2rem)) !important;
-    max-width: 780px !important;
-
-    padding-top: calc(var(--nav-h) + 1rem) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: calc(var(--nav-h) + 1rem) 1.25rem 0 1.25rem !important;
   }
 
   #quartz-body > .left.sidebar,
@@ -970,18 +957,5 @@ tr:nth-child(even) {
 
   #quartz-body > .center {
     max-width: 100% !important;
-  }
-
-  #quartz-body > .center > .page-header > header .portfolio-quartz-nav {
-    align-items: flex-start !important;
-    flex-direction: column !important;
-    gap: 0.5rem !important;
-    height: auto !important;
-    min-height: var(--nav-h) !important;
-  }
-
-  #quartz-body > .center > .page-header > header .portfolio-quartz-nav .nav-links {
-    flex-wrap: wrap !important;
-    gap: 0.85rem !important;
   }
 }
