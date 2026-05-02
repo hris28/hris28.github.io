@@ -514,34 +514,37 @@ tr:nth-child(even) {
 /* ---------- Spacious rail layout: rails at outer edges, center preserved ---------- */
 
 #quartz-body {
-  --garden-content-w: 860px;
+  --garden-content-w: 820px;
   --garden-rail-w: 200px;
 
-  width: min(1280px, 100%) !important;    /* was 100% */
-  max-width: 1280px !important;           /* add this */
-  margin: 0 !important;                   /* keep left-aligned, not centered */
-  padding: calc(var(--nav-h) + 0.5rem) 1.5rem 0 0 !important;  /* remove left padding entirely */
+  width: min(1280px, 100%) !important;
+  max-width: 1280px !important;
+  margin: 0 !important;
+  padding: calc(var(--nav-h) + 0.5rem) 1.5rem 0 0 !important;
   box-sizing: border-box !important;
 
-  /* Override the shorthand, not just grid-template-columns */
   grid-template:
     "left center right"
-    / var(--garden-rail-w) minmax(0, var(--garden-content-w)) var(--garden-rail-w) !important;
+    / var(--garden-rail-w) 1fr var(--garden-rail-w) !important;
 
-  justify-content: space-between !important;   // start packs all three columns to the left edge, which is why the right sidebar ended up next to the content. space-between pushes the left column to the far left and the right column to the far right, with the center column filling the space in between.
+  justify-content: stretch !important;
   column-gap: clamp(1.5rem, 3vw, 2.5rem) !important;
   align-items: start !important;
 }
 
+#quartz-body > .center {
+  grid-area: center !important;
+  width: 100% !important;
+  max-width: var(--garden-content-w) !important;
+  min-width: 0 !important;
+  padding: 0 0 4rem 0 !important;
+  margin: 0 !important;
+}
 /* Tell each child which named area it belongs to */
 #quartz-body > .left.sidebar {
   grid-area: left !important;
   padding: 1.25rem 1.5rem 1.5rem 1.5rem !important;  /* add left padding here */
   border-right: 1px solid var(--line) !important;  /* was color-mix at 38% */
-}
-
-#quartz-body > .center {
-  grid-area: center !important;
 }
 
 #quartz-body > .right.sidebar {
