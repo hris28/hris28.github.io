@@ -608,18 +608,25 @@ tr:nth-child(even) {
    #quartz-body > .right.sidebar
   */
 
+/* ---------- 1. Spacious Quartz body layout ---------- */
+
 #quartz-body {
-  width: min(1540px, calc(100vw - 4rem)) !important;
-  max-width: 1540px !important;
+  width: min(1720px, calc(100vw - 3rem)) !important;
+  max-width: 1720px !important;
   margin: 0 auto !important;
 
   display: grid !important;
-  grid-template-columns:
-    minmax(210px, 260px)
-    minmax(660px, 780px)
-    minmax(210px, 260px) !important;
 
-  column-gap: clamp(3.5rem, 5vw, 6rem) !important;
+  /*
+    Narrow side rails + generous gutters + comfortable center.
+    This pushes utilities outward and gives the article more visual room.
+  */
+  grid-template-columns:
+    175px
+    minmax(720px, 840px)
+    175px !important;
+
+  column-gap: clamp(5.5rem, 8vw, 12rem) !important;
   align-items: start !important;
 
   padding-top: calc(var(--nav-h) + 2rem) !important;
@@ -628,35 +635,38 @@ tr:nth-child(even) {
 /* Main reading column */
 #quartz-body > .center {
   width: 100% !important;
-  max-width: 780px !important;
+  max-width: 840px !important;
   min-width: 0 !important;
   margin: 0 auto !important;
   padding: 0 0 4rem 0 !important;
 }
 
-/* Sidebars pushed outward and visually quiet */
+/* Left utility rail */
 #quartz-body > .left.sidebar {
-  width: auto !important;
+  width: 175px !important;
   min-width: 0 !important;
-  max-width: 260px !important;
-  margin: 0 !important;
-  padding: 1.25rem 1.75rem 2rem 0 !important;
+  max-width: 175px !important;
 
-  border-right: 1px solid color-mix(in srgb, var(--line) 65%, transparent) !important;
+  margin: 0 !important;
+  padding: 1.25rem 1rem 2rem 0 !important;
+
+  border-right: 1px solid color-mix(in srgb, var(--line) 45%, transparent) !important;
 
   position: sticky !important;
   top: calc(var(--nav-h) + 1.5rem) !important;
   align-self: start !important;
 }
 
+/* Right utility rail */
 #quartz-body > .right.sidebar {
-  width: auto !important;
+  width: 175px !important;
   min-width: 0 !important;
-  max-width: 260px !important;
-  margin: 0 !important;
-  padding: 1.25rem 0 2rem 1.75rem !important;
+  max-width: 175px !important;
 
-  border-left: 1px solid color-mix(in srgb, var(--line) 65%, transparent) !important;
+  margin: 0 !important;
+  padding: 1.25rem 0 2rem 1rem !important;
+
+  border-left: 1px solid color-mix(in srgb, var(--line) 45%, transparent) !important;
 
   position: sticky !important;
   top: calc(var(--nav-h) + 1.5rem) !important;
@@ -833,8 +843,14 @@ tr:nth-child(even) {
 
 #quartz-body > .left.sidebar,
 #quartz-body > .right.sidebar {
-  font-size: 0.86rem !important;
+  font-size: 0.78rem !important;
   color: var(--ink-soft) !important;
+  opacity: 0.82;
+}
+
+#quartz-body > .left.sidebar:hover,
+#quartz-body > .right.sidebar:hover {
+  opacity: 1;
 }
 
 #quartz-body > .left.sidebar h1,
@@ -851,7 +867,7 @@ tr:nth-child(even) {
 
 .explorer-content a,
 .toc-content a {
-  font-size: 0.83rem !important;
+  font-size: 0.76rem !important;
   line-height: 1.45 !important;
   color: var(--ink-soft) !important;
 }
@@ -864,7 +880,7 @@ tr:nth-child(even) {
 /* Make search smaller and more portfolio-like */
 #search-bar,
 .search {
-  font-size: 0.82rem !important;
+  font-size: 0.74rem !important;
 }
 
 /* Tone down graph */
@@ -878,30 +894,35 @@ tr:nth-child(even) {
 
 /* ---------- 6. Responsive behavior ---------- */
 
-/* Hide right rail first */
-@media (max-width: 1250px) {
+/* Hide right rail first on medium screens */
+@media (max-width: 1320px) {
   #quartz-body {
     width: min(1120px, calc(100vw - 3rem)) !important;
     max-width: 1120px !important;
 
     grid-template-columns:
-      minmax(200px, 240px)
-      minmax(0, 780px) !important;
+      165px
+      minmax(0, 820px) !important;
 
-    column-gap: 3.5rem !important;
+    column-gap: 4.5rem !important;
   }
 
   #quartz-body > .right.sidebar {
     display: none !important;
   }
+
+  #quartz-body > .left.sidebar {
+    width: 165px !important;
+    max-width: 165px !important;
+  }
 }
 
-/* Single-column mobile layout */
-@media (max-width: 880px) {
+/* Hide all rails on narrower screens */
+@media (max-width: 940px) {
   #quartz-body {
     display: block !important;
-    width: min(760px, calc(100vw - 2rem)) !important;
-    max-width: 760px !important;
+    width: min(780px, calc(100vw - 2rem)) !important;
+    max-width: 780px !important;
     padding-top: calc(var(--nav-h) + 1rem) !important;
   }
 

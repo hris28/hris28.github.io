@@ -20,7 +20,7 @@ This garden prioritizes:
 
 ## Start here
 
-- [[start-here]]
+- [[garden_roadmap]]
 - [[security-basics]]
 - [[privacy-basics]]
 - [[source-evaluation-checklist]]
