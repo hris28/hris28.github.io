@@ -45,7 +45,6 @@ jobs:
           cp projects.html _site/projects.html
           cp resume.html _site/resume.html
           cp interests.html _site/interests.html
-          cp garden.html _site/garden.html || true
           cp 404.html _site/404.html || true
 
           cp -r css _site/css
@@ -53,6 +52,8 @@ jobs:
           cp -r images _site/images
 
           if [ -d assets ]; then cp -r assets _site/assets; fi
+
+          rm -f _site/garden.html
 
       - name: Build Quartz garden into /garden
         working-directory: ./garden-src
