@@ -528,6 +528,7 @@ tr:nth-child(even) {
     / var(--garden-rail-w) 1fr var(--garden-rail-w) !important;
   column-gap: 2.5rem !important;  /* was 2rem, gives more center breathing room */
   align-items: start !important;
+  overflow: visible !important;
 }
 
 #quartz-body > .left.sidebar  { grid-area: left   !important; }
@@ -558,6 +559,14 @@ tr:nth-child(even) {
   position: sticky !important;
   top: calc(var(--nav-h) + 0.25rem) !important;
   align-self: start !important;
+  justify-self: start !important;
+
+  /*
+    Move the right rail visually outward.
+    Tune this number.
+  */
+  transform: translateX(5rem) !important;
+  overflow: visible !important;
 }
 
 
