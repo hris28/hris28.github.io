@@ -68,24 +68,29 @@ jobs:
 
       - name: Add deploy proof files
         run: |
+          mkdir -p _site/garden
           echo "root deployed at $(date -u)" > _site/deploy-proof.txt
           echo "garden deployed at $(date -u)" > _site/garden/deploy-proof.txt
-          
+          echo "<!doctype html><title>Garden test</title><h1>Garden folder works</h1>" > _site/garden/test.html
+
       - name: Verify output structure
         run: |
           echo "Root output"
-          find _site -maxdepth 2 -type f | sort | head -100
+          find _site -maxdepth 3 -type f | sort | head -150
 
           echo ""
           echo "Garden output"
-          find _site/garden -maxdepth 3 -type f | sort | head -100
+          find _site/garden -maxdepth 3 -type f | sort | head -150
 
           echo ""
           echo "Required files check"
           test -f _site/index.html
+          test -f _site/deploy-proof.txt
           test -f _site/garden/index.html
+          test -f _site/garden/deploy-proof.txt
+          test -f _site/garden/test.html
 
-          echo "Required files exist."
+          echo "OK: required files exist."
 
       - name: Fix file permissions
         run: |
