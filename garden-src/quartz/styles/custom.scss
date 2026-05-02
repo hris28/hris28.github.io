@@ -515,12 +515,12 @@ tr:nth-child(even) {
 
 #quartz-body {
   --garden-content-w: 860px;
-  --garden-rail-w: 160px;
+  --garden-rail-w: 200px;
 
   width: 100% !important;
   max-width: 100% !important;
   margin: 0 !important;
-  padding: calc(var(--nav-h) + 0.5rem) 2rem 0 2rem !important;
+  padding: calc(var(--nav-h) + 0.5rem) 1.5rem 0 0 !important;  /* remove left padding entirely */
   box-sizing: border-box !important;
 
   /* Override the shorthand, not just grid-template-columns */
@@ -536,6 +536,7 @@ tr:nth-child(even) {
 /* Tell each child which named area it belongs to */
 #quartz-body > .left.sidebar {
   grid-area: left !important;
+  padding: 1.25rem 1.5rem 1.5rem 1.5rem !important;  /* add left padding here */
   border-right: 1px solid var(--line) !important;  /* was color-mix at 38% */
 }
 
@@ -775,7 +776,7 @@ tr:nth-child(even) {
 /* Medium screens: keep left rail, hide right rail */
 @media (max-width: 1320px) {
   #quartz-body {
-    --garden-rail-w: 150px;
+    --garden-rail-w: 190px;
 
     padding-left: 1.5rem !important;
     padding-right: 1.5rem !important;
