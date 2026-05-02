@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -17,58 +18,89 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-22.04
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           submodules: false
 
-      - uses: actions/setup-node@v4
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 22
 
-      - name: Install dependencies
+      - name: Install Quartz dependencies
         working-directory: ./garden-src
         run: npm ci
 
-      - name: Build Quartz
-        working-directory: ./garden-src
-        run: npx quartz build --output public/garden
-
-      - name: Copy portfolio into build output
+      - name: Create clean combined site folder
         run: |
-          cp index.html garden-src/public/index.html
-          cp about.html garden-src/public/about.html
-          cp projects.html garden-src/public/projects.html
-          cp resume.html garden-src/public/resume.html
-          cp interests.html garden-src/public/interests.html
-          cp garden.html garden-src/public/garden.html || true
-          cp 404.html garden-src/public/404.html
-          cp -r css garden-src/public/css
-          cp -r js garden-src/public/js
-          cp -r images garden-src/public/images
-          cp -r assets garden-src/public/assets
+          rm -rf _site
+          mkdir -p _site
+
+      - name: Copy portfolio files into _site
+        run: |
+          cp index.html _site/index.html
+          cp about.html _site/about.html
+          cp projects.html _site/projects.html
+          cp resume.html _site/resume.html
+          cp interests.html _site/interests.html
+          cp garden.html _site/garden.html || true
+          cp 404.html _site/404.html || true
+
+          cp -r css _site/css
+          cp -r js _site/js
+          cp -r images _site/images
+
+          if [ -d assets ]; then cp -r assets _site/assets; fi
+
+      - name: Build Quartz garden into /garden
+        working-directory: ./garden-src
+        run: npx quartz build --output ../_site/garden
 
       - name: Disable Jekyll processing
-        run: touch garden-src/public/.nojekyll
+        run: touch _site/.nojekyll
 
       - name: Verify output structure
-        run: find garden-src/public -maxdepth 3 -type f | head -40
+        run: |
+          echo "Root output"
+          find _site -maxdepth 2 -type f | sort | head -100
+
+          echo ""
+          echo "Garden output"
+          find _site/garden -maxdepth 3 -type f | sort | head -100
+
+          echo ""
+          echo "Required files check
+          test -f _site/index.html
+          test -f _site/garden/index.html
+
+          echo "Required files exist."
 
       - name: Fix file permissions
-        run: chmod -R 755 garden-src/public
+        run: |
+          find _site -type d -exec chmod 755 {} \;
+          find _site -type f -exec chmod 644 {} \;
 
-      - name: Upload artifact
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: garden-src/public
+          path: _site
+          include-hidden-files: true
 
   deploy:
     needs: build
+    runs-on: ubuntu-latest
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
