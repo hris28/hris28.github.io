@@ -1,6 +1,11 @@
 @use "./base.scss";
 
-/* ---------- Portfolio design tokens ---------- */
+/* ============================================================
+   DESIGN TOKENS
+   These override Quartz's default CSS variables so the garden
+   uses your portfolio's colour palette instead of Quartz's
+   built-in blues and greys.
+   ============================================================ */
 
 :root {
   --bg: #f5efe1;
@@ -26,6 +31,8 @@
   --transition: 180ms ease;
 }
 
+/* Quartz uses saved-theme="dark", your portfolio uses data-theme="dark".
+   Both selectors are here so dark mode works regardless of which one fires. */
 html[saved-theme="dark"],
 html[data-theme="dark"] {
   --bg: #0e1620;
@@ -41,7 +48,11 @@ html[data-theme="dark"] {
   --hero-overlay: rgba(0, 0, 0, 0.65);
 }
 
-/* ---------- Base ---------- */
+/* ============================================================
+   BASE
+   Quartz sets its own body/a/h styles. These override them
+   with your portfolio's values.
+   ============================================================ */
 
 body {
   font-family: var(--font-sans);
@@ -58,10 +69,7 @@ a:hover {
   color: var(--accent-hover);
 }
 
-h1,
-h2,
-h3,
-h4 {
+h1, h2, h3, h4 {
   font-family: var(--font-sans);
   font-weight: 700;
 }
@@ -73,6 +81,7 @@ h4 {
   letter-spacing: -0.03em;
 }
 
+/* Small uppercase label used above headlines, e.g. "NOTES IN PROGRESS" */
 .eyebrow {
   font-family: var(--font-mono);
   font-size: 0.8rem;
@@ -83,61 +92,155 @@ h4 {
   margin: 0 0 1rem 0;
 }
 
-/* Tighten article content width */
+.lede {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+/* ============================================================
+   NAV
+   Quartz wraps the header component in a <header> tag with its
+   own padding and background. The first rule strips that out so
+   your .nav styles take full control.
+   ============================================================ */
+
+header {
+  padding: 0 !important;
+  background: none !important;
+  border: none !important;
+}
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  /* Semi-transparent background so content scrolls underneath it */
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+  min-height: var(--nav-h);
+}
+
+.nav-brand {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+/* The bullet after your name in the nav brand */
+.nav-brand .dot {
+  color: var(--accent);
+  margin-left: 0.35rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.75rem;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding: 0.4rem 0;
+  /* Underline appears on hover/active via border-bottom, not text-decoration,
+     so it can be animated and coloured independently */
+  border-bottom: 1px solid transparent;
+  text-decoration: none;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  border-bottom-color: var(--accent);
+  color: var(--ink);
+}
+
+/* On small screens the links collapse and the hamburger button shows them */
+@media (max-width: 820px) {
+  .nav-toggle {
+    display: inline-flex;
+    background: none;
+    border: 0;
+    color: var(--ink);
+    cursor: pointer;
+    padding: 0.4rem;
+
+    svg {
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    align-items: stretch;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 220ms ease;
+  }
+
+  .nav-links.open {
+    max-height: 520px;
+  }
+
+  .nav-links a {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+}
+
+/* ============================================================
+   CONTENT
+   ============================================================ */
+
+/* Quartz's .center class is used for the main content column.
+   680px matches your portfolio's note-view width. */
 .center {
   max-width: 680px;
 }
 
-/* Tag label style */
+/* Tags shown on article pages */
 .tag-link {
   font-size: 0.75rem;
-  background: var(--tag-bg);        /* was --highlight */
+  background: var(--tag-bg);
   padding: 2px 8px;
   border-radius: var(--radius);
-  color: var(--tag-ink);             /* was --darkgray */
+  color: var(--tag-ink);
 }
 
-/* Left sidebar border */
+/* Left sidebar separator */
 .left.sidebar {
-  border-right: 1px solid var(--line);   /* was --lightgray */
+  border-right: 1px solid var(--line);
   padding-right: 1.5rem;
 }
 
-.lede { font-family: var(--font-sans); font-size: 1.05rem; line-height: 1.6; color: var(--ink-soft); }
+/* ============================================================
+   TABLES
+   Quartz renders Markdown tables but doesn't style them well
+   by default. This matches your portfolio's table style.
+   ============================================================ */
 
-.portfolio-footer .socials {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-
-  a {
-    display: flex;
-    align-items: center;
-    color: var(--ink-faint);       /* was --gray, doesn't exist in your tokens */
-    transition: color var(--transition);
-
-    &:hover {
-      color: var(--accent);         /* was --secondary, doesn't exist in your tokens */
-    }
-  }
-
-  svg {
-    width: 18px;
-    height: 18px;
-    display: block;
-  }
-}
-
-.portfolio-footer .footer-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  font-size: 0.82rem;
-  color: var(--ink-faint);          /* was --gray */
-}
-
-/* table formatting */
 table {
   display: block;
   width: 100%;
@@ -146,23 +249,77 @@ table {
   margin: 1.25rem 0;
 }
 
-th,
-td {
+th, td {
   padding: 0.65rem 0.75rem;
-  border: 1px solid var(--line);    /* was --lightgray */
+  border: 1px solid var(--line);
   vertical-align: top;
-}
-
-tr:nth-child(even) {
-  background: var(--bg-soft);       /* was color-mix using --light and --gray */
-  /* background: color-mix(in srgb, var(--light) 92%, var(--gray) 8%); */
 }
 
 th {
   font-weight: 700;
 }
 
-/* will maybe be used for previewing external links upon hover */
+tr:nth-child(even) {
+  background: var(--bg-soft);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.portfolio-footer {
+  padding: 0.8rem 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-faint);
+  border-top: 1px solid var(--line);
+}
+
+.portfolio-footer .footer-row {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.portfolio-footer .socials {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.portfolio-footer .socials a {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+  transition: all var(--transition);
+}
+
+.portfolio-footer .socials a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* The SVGs have no intrinsic size so without this they expand to fill
+   whatever space is available, which is why they were showing as giant icons */
+.portfolio-footer .socials svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
+/* ============================================================
+   LINK PREVIEW (placeholder for future implementation)
+   ============================================================ */
+
 .external-preview {
   position: relative;
 }
