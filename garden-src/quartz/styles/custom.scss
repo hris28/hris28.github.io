@@ -514,42 +514,50 @@ tr:nth-child(even) {
 /* ---------- Spacious rail layout: rails at outer edges, center preserved ---------- */
 
 #quartz-body {
-  --garden-content-w: 820px;
-  --garden-rail-w: 200px;
+  --garden-rail-w: 220px;
 
-  width: min(1280px, 100%) !important;
-  max-width: 1280px !important;
+  width: 100% !important;
+  max-width: 100% !important;
   margin: 0 !important;
-  padding: calc(var(--nav-h) + 0.5rem) 1.5rem 0 0 !important;
+  padding: calc(var(--nav-h) + 0.5rem) 2rem 0 0 !important;
   box-sizing: border-box !important;
 
+  display: grid !important;
   grid-template:
     "left center right"
     / var(--garden-rail-w) 1fr var(--garden-rail-w) !important;
-
-  justify-content: stretch !important;
-  column-gap: clamp(1.5rem, 3vw, 2.5rem) !important;
+  column-gap: 2rem !important;
   align-items: start !important;
 }
 
+#quartz-body > .left.sidebar  { grid-area: left   !important; }
+#quartz-body > .center        { grid-area: center !important; }
+#quartz-body > .right.sidebar { grid-area: right  !important; }
+
 #quartz-body > .center {
-  grid-area: center !important;
   width: 100% !important;
-  max-width: var(--garden-content-w) !important;
+  max-width: 820px !important;
   min-width: 0 !important;
   padding: 0 0 4rem 0 !important;
   margin: 0 !important;
 }
-/* Tell each child which named area it belongs to */
+
 #quartz-body > .left.sidebar {
-  grid-area: left !important;
-  padding: 1.25rem 1.5rem 1.5rem 1.5rem !important;  /* add left padding here */
-  border-right: 1px solid var(--line) !important;  /* was color-mix at 38% */
+  width: var(--garden-rail-w) !important;
+  padding: 1.25rem 1.5rem 1.5rem 1.5rem !important;
+  border-right: 1px solid var(--line) !important;
+  position: sticky !important;
+  top: calc(var(--nav-h) + 0.5rem) !important;
+  align-self: start !important;
 }
 
 #quartz-body > .right.sidebar {
-  grid-area: right !important;
-  border-left: 1px solid var(--line) !important;   /* was color-mix at 38% */
+  width: var(--garden-rail-w) !important;
+  padding: 1.25rem 0 1.5rem 1.5rem !important;
+  border-left: 1px solid var(--line) !important;
+  position: sticky !important;
+  top: calc(var(--nav-h) + 0.5rem) !important;
+  align-self: start !important;
 }
 
 
@@ -779,49 +787,21 @@ tr:nth-child(even) {
 /* Medium screens: keep left rail, hide right rail */
 @media (max-width: 1320px) {
   #quartz-body {
-    --garden-rail-w: 190px;
-
-    padding-left: 1.5rem !important;
-    padding-right: 1.5rem !important;
-
+    --garden-rail-w: 200px;
     grid-template:
       "left center"
-      / var(--garden-rail-w) minmax(0, var(--garden-content-w)) !important;
+      / var(--garden-rail-w) 1fr !important;
+    padding-right: 1.5rem !important;
   }
-
-  #quartz-body > .right.sidebar {
-    display: none !important;
-  }
+  #quartz-body > .right.sidebar { display: none !important; }
 }
 
-/* Small screens: hide all rails */
 @media (max-width: 940px) {
   #quartz-body {
     display: block !important;
-
-    width: min(780px, calc(100vw - 2rem)) !important;
-    max-width: 780px !important;
-
-    padding-top: calc(var(--nav-h) + 1rem) !important;
+    padding: calc(var(--nav-h) + 1rem) 1.25rem 0 1.25rem !important;
   }
-
   #quartz-body > .left.sidebar,
-  #quartz-body > .right.sidebar {
-    display: none !important;
-  }
-
-  #quartz-body > .center {
-    max-width: 100% !important;
-  }
-
-  #quartz-body > .center > .page-header > header .portfolio-quartz-nav {
-    align-items: flex-start !important;
-    flex-direction: column !important;
-    gap: 0.5rem !important;
-  }
-
-  #quartz-body > .center > .page-header > header .portfolio-quartz-nav .nav-links {
-    flex-wrap: wrap !important;
-    gap: 0.85rem !important;
-  }
+  #quartz-body > .right.sidebar { display: none !important; }
+  #quartz-body > .center { max-width: 100% !important; }
 }
