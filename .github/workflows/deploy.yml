@@ -76,7 +76,7 @@ jobs:
           find _site/garden -maxdepth 3 -type f | sort | head -100
 
           echo ""
-          echo "Required files check
+          echo "Required files check"
           test -f _site/index.html
           test -f _site/garden/index.html
 

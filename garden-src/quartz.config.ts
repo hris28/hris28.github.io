@@ -10,13 +10,13 @@ const config: QuartzConfig = {
   configuration: {
     pageTitle: "Garden",
     pageTitleSuffix: " · Hrishika Roychoudhury",
-enableSPA: true,
-enablePopovers: true,
-locale: "en-US",
-baseUrl: "hris28.github.io/garden",
+    enableSPA: true,
+    enablePopovers: true,
+    locale: "en-US",
+    baseUrl: "hris28.github.io/garden",
     /** analytics: {
-      provider: "plausible",   
-    }, 
+      provider: "plausible",
+    },
     Plausible is privacy-respecting and a reasonable choice for a site about tracking, but it does load an external script. If you want zero external requests, set analytics: null or remove the block entirely.
     */
     ignorePatterns: ["private", "templates", ".obsidian"],
@@ -54,6 +54,7 @@ baseUrl: "hris28.github.io/garden",
         },
       },
     },
+    analytics: null
   },
   plugins: {
     transformers: [
