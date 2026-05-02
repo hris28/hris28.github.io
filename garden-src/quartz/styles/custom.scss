@@ -1,11 +1,10 @@
 @use "./base.scss";
 
-/* ============================================================
-   DESIGN TOKENS
+/* DESIGN TOKENS
    These override Quartz's default CSS variables so the garden
    uses your portfolio's colour palette instead of Quartz's
    built-in blues and greys.
-   ============================================================ */
+   */
 
 :root {
   --bg: #f5efe1;
@@ -343,99 +342,6 @@ h1, h2, h3, h4 {
 }
 
 
-#quartz-body {
-  max-width: 1500px !important;
-  width: min(1500px, calc(100vw - 4rem)) !important;
-  margin: 0 auto !important;
-  padding-top: calc(var(--nav-h) + 1.5rem) !important;
-
-  display: grid !important;
-  grid-template-columns:
-    minmax(190px, 240px)
-    minmax(640px, 760px)
-    minmax(190px, 240px) !important;
-
-  column-gap: clamp(3rem, 6vw, 6rem) !important;
-  align-items: start !important;
-}
-
-/* Left sidebar: quiet, useful, but visually subordinate */
-.left.sidebar {
-  width: auto !important;
-  min-width: 0 !important;
-  max-width: 240px !important;
-
-  padding: 1.25rem 0 1.5rem 0 !important;
-  margin: 0 !important;
-
-  border-right: 1px solid color-mix(in srgb, var(--line) 70%, transparent) !important;
-  padding-right: 1.75rem !important;
-
-  position: sticky;
-  top: calc(var(--nav-h) + 1.5rem);
-  align-self: start;
-}
-
-/* Right sidebar: farther from article, lighter presence */
-.right.sidebar {
-  width: auto !important;
-  min-width: 0 !important;
-  max-width: 240px !important;
-
-  padding: 1.25rem 0 1.5rem 1.75rem !important;
-  margin: 0 !important;
-
-  border-left: 1px solid color-mix(in srgb, var(--line) 70%, transparent) !important;
-
-  position: sticky;
-  top: calc(var(--nav-h) + 1.5rem);
-  align-self: start;
-}
-
-/* Center column should be readable, not tiny */
-.center {
-  max-width: 760px !important;
-  width: 100% !important;
-  min-width: 0 !important;
-  padding: 0 0 4rem 0 !important;
-  margin: 0 auto !important;
-}
-
-/* On medium screens, hide the right rail first */
-@media (max-width: 1180px) {
-  #quartz-body {
-    max-width: 1100px !important;
-    width: min(1100px, calc(100vw - 3rem)) !important;
-
-    grid-template-columns:
-      minmax(190px, 230px)
-      minmax(0, 760px) !important;
-
-    column-gap: 3rem !important;
-  }
-
-  .right.sidebar {
-    display: none !important;
-  }
-}
-
-/* On smaller screens, collapse to one column */
-@media (max-width: 860px) {
-  #quartz-body {
-    display: block !important;
-    width: min(760px, calc(100vw - 2rem)) !important;
-    padding-top: calc(var(--nav-h) + 1rem) !important;
-  }
-
-  .left.sidebar,
-  .right.sidebar {
-    display: none !important;
-  }
-
-  .center {
-    max-width: 100% !important;
-  }
-}
 
 /* Article body text: line length and spacing */
 .center article p,
