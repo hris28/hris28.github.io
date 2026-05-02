@@ -55,7 +55,7 @@ export const defaultContentPageLayout: PageLayout = {
   left: [
     // Optional. You can keep this if you want the left sidebar to say Garden.
     // If it feels redundant with your nav, remove this line.
-    Component.PageTitle(),
+    // Component.PageTitle(),
 
     Component.MobileOnly(Component.Spacer()),
 
