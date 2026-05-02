@@ -3,7 +3,7 @@ name: Deploy Quartz site to GitHub Pages
 on:
   push:
     branches:
-      - v4
+      - main
 
 permissions:
   contents: read
@@ -21,17 +21,24 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          submodules: false   # set to false to skip broken submodules
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+
       - name: Install dependencies
+        working-directory: ./garden-src
         run: npm ci
+
       - name: Build Quartz
+        working-directory: ./garden-src
         run: npx quartz build
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: public
+          path: garden-src/public    # ← Quartz writes output here. Without garden-src, would look for public/ at repo root
 
   deploy:
     needs: build
@@ -43,3 +50,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+        
