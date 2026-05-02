@@ -21,8 +21,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          submodules: false
-
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -34,25 +32,10 @@ jobs:
       - name: Build Quartz
         working-directory: ./garden-src
         run: npx quartz build
-
-      - name: Copy portfolio into build output
-        run: |
-          cp index.html garden-src/public/index.html
-          cp about.html garden-src/public/about.html
-          cp projects.html garden-src/public/projects.html
-          cp resume.html garden-src/public/resume.html
-          cp interests.html garden-src/public/interests.html
-          cp garden.html garden-src/public/garden.html
-          cp 404.html garden-src/public/404.html
-          cp -r css garden-src/public/css
-          cp -r js garden-src/public/js
-          cp -r images garden-src/public/images
-          cp -r assets garden-src/public/assets
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: garden-src/public
+          path: public
 
   deploy:
     needs: build
