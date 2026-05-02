@@ -114,7 +114,7 @@ h1, h2, h3, h4 {
    ============================================================ */
 
 .page-header {
-  padding-top: calc(var(--nav-h) + 1.5rem) !important;
+  padding-top: calc(var(--nav-h) + 0.5rem) !important;
   margin-top: 0 !important;
 }
 
@@ -514,13 +514,13 @@ tr:nth-child(even) {
 /* ---------- Spacious rail layout: rails at outer edges, center preserved ---------- */
 
 #quartz-body {
-  --garden-content-w: 800px;
-  --garden-rail-w: 200px;
+  --garden-content-w: 860px;
+  --garden-rail-w: 160px;
 
   width: 100% !important;
   max-width: 100% !important;
   margin: 0 !important;
-  padding: calc(var(--nav-h) + 1.5rem) 2rem 0 2rem !important;
+  padding: calc(var(--nav-h) + 0.5rem) 2rem 0 2rem !important;
   box-sizing: border-box !important;
 
   /* Override the shorthand, not just grid-template-columns */
@@ -529,13 +529,14 @@ tr:nth-child(even) {
     / var(--garden-rail-w) minmax(0, var(--garden-content-w)) var(--garden-rail-w) !important;
 
   justify-content: space-between !important;   // start packs all three columns to the left edge, which is why the right sidebar ended up next to the content. space-between pushes the left column to the far left and the right column to the far right, with the center column filling the space in between.
-  column-gap: clamp(2rem, 4vw, 4rem) !important;
+  column-gap: clamp(1.5rem, 3vw, 2.5rem) !important;
   align-items: start !important;
 }
 
 /* Tell each child which named area it belongs to */
 #quartz-body > .left.sidebar {
   grid-area: left !important;
+  border-right: 1px solid var(--line) !important;  /* was color-mix at 38% */
 }
 
 #quartz-body > .center {
@@ -544,6 +545,7 @@ tr:nth-child(even) {
 
 #quartz-body > .right.sidebar {
   grid-area: right !important;
+  border-left: 1px solid var(--line) !important;   /* was color-mix at 38% */
 }
 
 
@@ -773,7 +775,7 @@ tr:nth-child(even) {
 /* Medium screens: keep left rail, hide right rail */
 @media (max-width: 1320px) {
   #quartz-body {
-    --garden-rail-w: 180px;
+    --garden-rail-w: 150px;
 
     padding-left: 1.5rem !important;
     padding-right: 1.5rem !important;
