@@ -14,9 +14,11 @@ enableSPA: true,
 enablePopovers: true,
 locale: "en-US",
 baseUrl: "hris28.github.io/garden",
-    analytics: {
-      provider: "plausible",
-    },
+    /** analytics: {
+      provider: "plausible",   
+    }, 
+    Plausible is privacy-respecting and a reasonable choice for a site about tracking, but it does load an external script. If you want zero external requests, set analytics: null or remove the block entirely.
+    */
     ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "modified",
     theme: {
