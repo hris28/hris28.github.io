@@ -48,6 +48,14 @@ html[data-theme="dark"] {
   --hero-overlay: rgba(0, 0, 0, 0.65);
 }
 
+#quartz-root.page,
+.page {
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 /* ============================================================
    BASE
    Quartz sets its own body/a/h styles. These override them
