@@ -33,7 +33,7 @@ jobs:
 
       - name: Build Quartz
         working-directory: ./garden-src
-        run: npx quartz build
+        run: npx quartz build --output public/garden
 
       - name: Copy portfolio into build output
         run: |
