@@ -66,6 +66,11 @@ jobs:
       - name: Disable Jekyll processing
         run: touch _site/.nojekyll
 
+      - name: Add deploy proof files
+        run: |
+          echo "root deployed at $(date -u)" > _site/deploy-proof.txt
+          echo "garden deployed at $(date -u)" > _site/garden/deploy-proof.txt
+          
       - name: Verify output structure
         run: |
           echo "Root output"
@@ -91,7 +96,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
-          include-hidden-files: true
+          # include-hidden-files: true
 
   deploy:
     needs: build
