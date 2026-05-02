@@ -49,6 +49,9 @@ jobs:
           cp -r images garden-src/public/images
           cp -r assets garden-src/public/assets
 
+      - name: Disable Jekyll processing
+        run: touch garden-src/public/.nojekyll
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
