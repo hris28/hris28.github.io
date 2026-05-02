@@ -4,10 +4,6 @@ tags:
   - index
 ---
 
-# Hrishika's Digital Garden
-
-Welcome to my digital garden for notes, explainers, and practical guides on information security, privacy, OSINT, human-computer interaction, and trustworthy technology.
-
 ## Principles
 
 This garden prioritizes:
