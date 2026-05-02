@@ -27,7 +27,7 @@
   --maxw-narrow: 760px;
   --radius: 4px;
   --radius-pill: 999px;
-  --nav-h: 60px;
+  --nav-h: 66px;
   --transition: 180ms ease;
 }
 
@@ -612,25 +612,32 @@ tr:nth-child(even) {
 
 /* ---------- Spacious rail layout: sidebars pushed outward ---------- */
 
+/* ---------- Spacious rail layout: rails at outer edges, center preserved ---------- */
+
 #quartz-body {
-  width: min(1800px, calc(100vw - 2rem)) !important;
-  max-width: 1800px !important;
+  --garden-shell-w: 1640px;
+  --garden-content-w: 800px;
+  --garden-rail-w: 205px;
+
+  width: min(var(--garden-shell-w), calc(100vw - 3rem)) !important;
+  max-width: var(--garden-shell-w) !important;
   margin: 0 auto !important;
 
   display: grid !important;
+  grid-template-columns:
+    var(--garden-rail-w)
+    minmax(0, var(--garden-content-w))
+    var(--garden-rail-w) !important;
 
   /*
-    Flexible outer columns.
-    The sidebars live inside these columns and are aligned outward.
+    This is the important part.
+    It pushes the left and right rails outward while keeping
+    the center column visually centered.
   */
-  grid-template-columns:
-    minmax(170px, 1fr)
-    minmax(720px, 840px)
-    minmax(170px, 1fr) !important;
+  justify-content: space-between !important;
+  column-gap: 0 !important;
 
-  column-gap: clamp(3rem, 5vw, 6rem) !important;
   align-items: start !important;
-
   padding-top: calc(var(--nav-h) + 1.5rem) !important;
 }
 
@@ -639,45 +646,49 @@ tr:nth-child(even) {
   grid-column: 2 !important;
 
   width: 100% !important;
-  max-width: 840px !important;
+  max-width: var(--garden-content-w) !important;
   min-width: 0 !important;
 
   margin: 0 auto !important;
   padding: 0 0 4rem 0 !important;
 }
 
-/* Left rail: align to the far left of its flexible gutter */
+/* Left utility rail: pinned to outer left of shell */
 #quartz-body > .left.sidebar {
   grid-column: 1 !important;
   justify-self: start !important;
 
-  width: 185px !important;
-  max-width: 185px !important;
+  width: var(--garden-rail-w) !important;
+  max-width: var(--garden-rail-w) !important;
   min-width: 0 !important;
+
+  box-sizing: border-box !important;
 
   margin: 0 !important;
   padding: 1.1rem 1rem 2rem 0 !important;
 
-  border-right: 1px solid color-mix(in srgb, var(--line) 40%, transparent) !important;
+  border-right: 1px solid color-mix(in srgb, var(--line) 38%, transparent) !important;
 
   position: sticky !important;
   top: calc(var(--nav-h) + 1.25rem) !important;
   align-self: start !important;
 }
 
-/* Right rail: align to the far right of its flexible gutter */
+/* Right utility rail: pinned to outer right of shell */
 #quartz-body > .right.sidebar {
   grid-column: 3 !important;
   justify-self: end !important;
 
-  width: 185px !important;
-  max-width: 185px !important;
+  width: var(--garden-rail-w) !important;
+  max-width: var(--garden-rail-w) !important;
   min-width: 0 !important;
+
+  box-sizing: border-box !important;
 
   margin: 0 !important;
   padding: 1.1rem 0 2rem 1rem !important;
 
-  border-left: 1px solid color-mix(in srgb, var(--line) 40%, transparent) !important;
+  border-left: 1px solid color-mix(in srgb, var(--line) 38%, transparent) !important;
 
   position: sticky !important;
   top: calc(var(--nav-h) + 1.25rem) !important;
@@ -735,9 +746,9 @@ tr:nth-child(even) {
   gap: 1.25rem !important;
 
   margin: 0 !important;
-  padding: 0.7rem 1.5rem !important;
+  padding: 0.65rem 1.25rem !important;
 
-  background: color-mix(in srgb, var(--bg) 92%, transparent) !important;
+  background: color-mix(in srgb, var(--bg) 90%, transparent) !important;
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--line) !important;
 }
@@ -907,29 +918,33 @@ tr:nth-child(even) {
 
 /* ---------- 6. Responsive behavior ---------- */
 
+/* ---------- Responsive behavior ---------- */
+
 /* Medium screens: keep left rail, hide right rail */
 @media (max-width: 1320px) {
   #quartz-body {
-    width: min(1180px, calc(100vw - 3rem)) !important;
-    max-width: 1180px !important;
+    --garden-shell-w: 1120px;
+    --garden-content-w: 800px;
+    --garden-rail-w: 180px;
+
+    width: min(var(--garden-shell-w), calc(100vw - 3rem)) !important;
 
     grid-template-columns:
-      180px
-      minmax(0, 840px) !important;
+      var(--garden-rail-w)
+      minmax(0, var(--garden-content-w)) !important;
 
-    column-gap: 4rem !important;
-  }
-
-  #quartz-body > .left.sidebar {
-    grid-column: 1 !important;
-    justify-self: start !important;
-
-    width: 180px !important;
-    max-width: 180px !important;
+    justify-content: space-between !important;
+    column-gap: 0 !important;
   }
 
   #quartz-body > .center {
     grid-column: 2 !important;
+  }
+
+  #quartz-body > .left.sidebar {
+    grid-column: 1 !important;
+    width: var(--garden-rail-w) !important;
+    max-width: var(--garden-rail-w) !important;
   }
 
   #quartz-body > .right.sidebar {
@@ -961,6 +976,8 @@ tr:nth-child(even) {
     align-items: flex-start !important;
     flex-direction: column !important;
     gap: 0.5rem !important;
+    height: auto !important;
+    min-height: var(--nav-h) !important;
   }
 
   #quartz-body > .center > .page-header > header .portfolio-quartz-nav .nav-links {

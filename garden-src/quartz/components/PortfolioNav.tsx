@@ -8,11 +8,6 @@ const PortfolioNav: QuartzComponentConstructor = () => {
           <a href="/" class="nav-brand">
             Hrishika Roychoudhury<span class="dot">•</span>
           </a>
-          <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
-            <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M3 6h16M3 11h16M3 16h16" />
-            </svg>
-          </button>
           <ul class="nav-links" id="nav-links">
             <li><a href="https://hris28.github.io/">Home</a></li>
             <li><a href="https://hris28.github.io/about.html">About</a></li>
