@@ -257,8 +257,10 @@ h1, h2, h3, h4 {
 /* Quartz's .center class is used for the main content column.
    680px matches your portfolio's note-view width. */
 .center {
-  padding: 0 2rem 2rem 2.5rem !important;
+  // padding: 0 2rem 2rem 2.5rem !important;
   max-width: 720px;
+  padding: 0 1rem 2rem 1rem !important;
+  min-width: 0; /* prevents flex blowout */
 }
 
 .center article > * + * {
@@ -279,33 +281,39 @@ h1, h2, h3, h4 {
   color: var(--tag-ink);
 }
 
-/* Left sidebar separator */
-.left.sidebar {
-  border-right: 1px solid var(--line);
-  padding-right: 1.5rem;
-}
 
-/* Constrain the full page grid to a readable max width */
 #quartz-body {
+  /* Constrain the full page grid to a readable max width */
   max-width: 1200px;
   margin: 0 auto;
   padding-top: var(--nav-h) !important;
+  /* Add breathing room between the three columns */
+  column-gap: 2.5rem !important;
+  gap: 2.5rem !important;
 }
 
 /* Tighten left sidebar width */
 .left.sidebar {
   width: 220px;
   min-width: 220px;
-  padding: 1.5rem 1rem 1.5rem 1.5rem;
+  padding: 1.5rem 1.5rem 1.5rem 1.5rem;
   border-right: 1px solid var(--line);
+  /* Push it away from the center column */
+  margin-right: 1rem;
 }
 
 /* Tighten right sidebar width */
 .right.sidebar {
   width: 200px;
   min-width: 200px;
-  padding: 1.5rem 1.5rem 1.5rem 1rem;
+  padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+  border-left: 1px solid var(--line);
+  /* Push it away from the center column */
+  margin-left: 1rem;
 }
+
+
+
 
 /* Article body text: line length and spacing */
 .center article p,
