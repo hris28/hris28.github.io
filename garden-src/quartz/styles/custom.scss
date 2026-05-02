@@ -250,18 +250,71 @@ h1, h2, h3, h4 {
   }
 }
 
-/* ============================================================
-   CONTENT
-   ============================================================ */
+/* Force portfolio nav to behave like root portfolio nav, not a Quartz sidebar element */
+.nav.portfolio-quartz-nav,
+.portfolio-quartz-nav {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
 
-/* Quartz's .center class is used for the main content column.
-   680px matches your portfolio's note-view width. */
-.center {
-  // padding: 0 2rem 2rem 2.5rem !important;
-  max-width: 720px;
-  padding: 0 1rem 2rem 1rem !important;
-  min-width: 0; /* prevents flex blowout */
+  width: 100vw !important;
+  min-height: var(--nav-h) !important;
+  z-index: 9999 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+
+  padding: 1rem 1.5rem !important;
+  margin: 0 !important;
+
+  background: color-mix(in srgb, var(--bg) 88%, transparent) !important;
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line) !important;
 }
+
+/* Remove Quartz/list defaults from nav links */
+.portfolio-quartz-nav ul,
+.portfolio-quartz-nav li,
+.portfolio-quartz-nav .nav-links,
+.portfolio-quartz-nav .nav-links li {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.portfolio-quartz-nav .nav-links {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 1.75rem !important;
+  align-items: center !important;
+}
+
+.portfolio-quartz-nav .nav-brand {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: var(--ink) !important;
+  white-space: nowrap;
+}
+
+.portfolio-quartz-nav .nav-links a {
+  font-size: 0.82rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  color: var(--ink) !important;
+  border-bottom: 1px solid transparent !important;
+}
+
+.portfolio-quartz-nav .nav-links a:hover,
+.portfolio-quartz-nav .nav-links a.active {
+  color: var(--ink) !important;
+  border-bottom-color: var(--accent) !important;
+}
+
+/* CONTENT */
+
 
 .center article > * + * {
   margin-top: 1rem;
@@ -283,37 +336,98 @@ h1, h2, h3, h4 {
 
 
 #quartz-body {
-  /* Constrain the full page grid to a readable max width */
-  max-width: 1200px;
-  margin: 0 auto;
-  padding-top: var(--nav-h) !important;
-  /* Add breathing room between the three columns */
-  column-gap: 2.5rem !important;
-  gap: 2.5rem !important;
+  max-width: 1500px !important;
+  width: min(1500px, calc(100vw - 4rem)) !important;
+  margin: 0 auto !important;
+  padding-top: calc(var(--nav-h) + 1.5rem) !important;
+
+  display: grid !important;
+  grid-template-columns:
+    minmax(190px, 240px)
+    minmax(640px, 760px)
+    minmax(190px, 240px) !important;
+
+  column-gap: clamp(3rem, 6vw, 6rem) !important;
+  align-items: start !important;
 }
 
-/* Tighten left sidebar width */
+/* Left sidebar: quiet, useful, but visually subordinate */
 .left.sidebar {
-  width: 220px;
-  min-width: 220px;
-  padding: 1.5rem 1.5rem 1.5rem 1.5rem;
-  border-right: 1px solid var(--line);
-  /* Push it away from the center column */
-  margin-right: 1rem;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: 240px !important;
+
+  padding: 1.25rem 0 1.5rem 0 !important;
+  margin: 0 !important;
+
+  border-right: 1px solid color-mix(in srgb, var(--line) 70%, transparent) !important;
+  padding-right: 1.75rem !important;
+
+  position: sticky;
+  top: calc(var(--nav-h) + 1.5rem);
+  align-self: start;
 }
 
-/* Tighten right sidebar width */
+/* Right sidebar: farther from article, lighter presence */
 .right.sidebar {
-  width: 200px;
-  min-width: 200px;
-  padding: 1.5rem 1.5rem 1.5rem 1.5rem;
-  border-left: 1px solid var(--line);
-  /* Push it away from the center column */
-  margin-left: 1rem;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: 240px !important;
+
+  padding: 1.25rem 0 1.5rem 1.75rem !important;
+  margin: 0 !important;
+
+  border-left: 1px solid color-mix(in srgb, var(--line) 70%, transparent) !important;
+
+  position: sticky;
+  top: calc(var(--nav-h) + 1.5rem);
+  align-self: start;
 }
 
+/* Center column should be readable, not tiny */
+.center {
+  max-width: 760px !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  padding: 0 0 4rem 0 !important;
+  margin: 0 auto !important;
+}
 
+/* On medium screens, hide the right rail first */
+@media (max-width: 1180px) {
+  #quartz-body {
+    max-width: 1100px !important;
+    width: min(1100px, calc(100vw - 3rem)) !important;
 
+    grid-template-columns:
+      minmax(190px, 230px)
+      minmax(0, 760px) !important;
+
+    column-gap: 3rem !important;
+  }
+
+  .right.sidebar {
+    display: none !important;
+  }
+}
+
+/* On smaller screens, collapse to one column */
+@media (max-width: 860px) {
+  #quartz-body {
+    display: block !important;
+    width: min(760px, calc(100vw - 2rem)) !important;
+    padding-top: calc(var(--nav-h) + 1rem) !important;
+  }
+
+  .left.sidebar,
+  .right.sidebar {
+    display: none !important;
+  }
+
+  .center {
+    max-width: 100% !important;
+  }
+}
 
 /* Article body text: line length and spacing */
 .center article p,
@@ -483,4 +597,331 @@ tr:nth-child(even) {
 .external-preview .preview-card {
   display: none;
   position: absolute;
+}
+
+
+/* 
+   FINAL LAYOUT OVERRIDES
+   Based on actual Quartz DOM:
+   #quartz-body > .left.sidebar
+   #quartz-body > .center > .page-header > header > nav.nav
+   #quartz-body > .right.sidebar
+  */
+
+#quartz-body {
+  width: min(1540px, calc(100vw - 4rem)) !important;
+  max-width: 1540px !important;
+  margin: 0 auto !important;
+
+  display: grid !important;
+  grid-template-columns:
+    minmax(210px, 260px)
+    minmax(660px, 780px)
+    minmax(210px, 260px) !important;
+
+  column-gap: clamp(3.5rem, 5vw, 6rem) !important;
+  align-items: start !important;
+
+  padding-top: calc(var(--nav-h) + 2rem) !important;
+}
+
+/* Main reading column */
+#quartz-body > .center {
+  width: 100% !important;
+  max-width: 780px !important;
+  min-width: 0 !important;
+  margin: 0 auto !important;
+  padding: 0 0 4rem 0 !important;
+}
+
+/* Sidebars pushed outward and visually quiet */
+#quartz-body > .left.sidebar {
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: 260px !important;
+  margin: 0 !important;
+  padding: 1.25rem 1.75rem 2rem 0 !important;
+
+  border-right: 1px solid color-mix(in srgb, var(--line) 65%, transparent) !important;
+
+  position: sticky !important;
+  top: calc(var(--nav-h) + 1.5rem) !important;
+  align-self: start !important;
+}
+
+#quartz-body > .right.sidebar {
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: 260px !important;
+  margin: 0 !important;
+  padding: 1.25rem 0 2rem 1.75rem !important;
+
+  border-left: 1px solid color-mix(in srgb, var(--line) 65%, transparent) !important;
+
+  position: sticky !important;
+  top: calc(var(--nav-h) + 1.5rem) !important;
+  align-self: start !important;
+}
+
+/* ---------- 2. Fix Quartz header wrapper ---------- */
+
+/*
+  Your console confirmed:
+  .nav parent = HEADER
+  and that HEADER lives inside:
+  #quartz-body > .center > .page-header
+*/
+
+#quartz-body > .center > .page-header {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Pull the nav's parent header out of the center column */
+#quartz-body > .center > .page-header > header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+
+  width: 100vw !important;
+  max-width: none !important;
+
+  z-index: 9999 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  background: transparent !important;
+  border: 0 !important;
+}
+
+/* ---------- 3. Portfolio nav should look like root site nav ---------- */
+
+#quartz-body > .center > .page-header > header .portfolio-quartz-nav {
+  position: relative !important;
+
+  width: 100vw !important;
+  max-width: none !important;
+  min-height: var(--nav-h) !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 1.5rem !important;
+
+  margin: 0 !important;
+  padding: 1rem 1.5rem !important;
+
+  background: color-mix(in srgb, var(--bg) 88%, transparent) !important;
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line) !important;
+}
+
+/* Kill bullets / Quartz list styling in nav */
+#quartz-body > .center > .page-header > header .portfolio-quartz-nav ul,
+#quartz-body > .center > .page-header > header .portfolio-quartz-nav li {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#quartz-body > .center > .page-header > header .portfolio-quartz-nav li::marker,
+#quartz-body > .center > .page-header > header .portfolio-quartz-nav li::before {
+  display: none !important;
+  content: none !important;
+}
+
+#quartz-body > .center > .page-header > header .portfolio-quartz-nav .nav-brand {
+  font-family: var(--font-sans) !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: var(--ink) !important;
+  letter-spacing: -0.01em !important;
+
+  text-decoration: none !important;
+  border-bottom: 0 !important;
+  white-space: nowrap !important;
+}
+
+#quartz-body > .center > .page-header > header .portfolio-quartz-nav .dot {
+  color: var(--accent) !important;
+  margin-left: 0.35rem !important;
+}
+
+#quartz-body > .center > .page-header > header .portfolio-quartz-nav .nav-links {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 1.75rem !important;
+
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#quartz-body > .center > .page-header > header .portfolio-quartz-nav .nav-links a {
+  font-family: var(--font-sans) !important;
+  font-size: 0.82rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+
+  color: var(--ink) !important;
+  padding: 0.4rem 0 !important;
+
+  border-bottom: 1px solid transparent !important;
+  text-decoration: none !important;
+}
+
+#quartz-body > .center > .page-header > header .portfolio-quartz-nav .nav-links a:hover,
+#quartz-body > .center > .page-header > header .portfolio-quartz-nav .nav-links a.active {
+  color: var(--ink) !important;
+  border-bottom-color: var(--accent) !important;
+}
+
+/* ---------- 4. Improve reading rhythm ---------- */
+
+#quartz-body > .center article {
+  font-size: 1.03rem !important;
+  line-height: 1.75 !important;
+}
+
+#quartz-body > .center article p,
+#quartz-body > .center article li {
+  max-width: 68ch !important;
+}
+
+#quartz-body > .center article p {
+  margin: 0 0 1.15rem 0 !important;
+}
+
+#quartz-body > .center article ul,
+#quartz-body > .center article ol {
+  margin-top: 0.75rem !important;
+  margin-bottom: 1.25rem !important;
+  padding-left: 1.35rem !important;
+}
+
+#quartz-body > .center article li + li {
+  margin-top: 0.35rem !important;
+}
+
+#quartz-body > .center article h1 {
+  font-size: clamp(2rem, 4vw, 2.8rem) !important;
+  line-height: 1.08 !important;
+  letter-spacing: -0.035em !important;
+  margin-bottom: 1rem !important;
+}
+
+#quartz-body > .center article h2 {
+  font-size: 1.45rem !important;
+  line-height: 1.2 !important;
+  margin-top: 2.75rem !important;
+  margin-bottom: 0.85rem !important;
+  padding-bottom: 0.45rem !important;
+  border-bottom: 1px solid var(--line) !important;
+}
+
+#quartz-body > .center article h3 {
+  font-size: 1.15rem !important;
+  margin-top: 2rem !important;
+  margin-bottom: 0.6rem !important;
+}
+
+/* ---------- 5. Quiet sidebars ---------- */
+
+#quartz-body > .left.sidebar,
+#quartz-body > .right.sidebar {
+  font-size: 0.86rem !important;
+  color: var(--ink-soft) !important;
+}
+
+#quartz-body > .left.sidebar h1,
+#quartz-body > .left.sidebar h2,
+#quartz-body > .left.sidebar h3,
+#quartz-body > .right.sidebar h1,
+#quartz-body > .right.sidebar h2,
+#quartz-body > .right.sidebar h3 {
+  font-size: 0.78rem !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: var(--ink-faint) !important;
+}
+
+.explorer-content a,
+.toc-content a {
+  font-size: 0.83rem !important;
+  line-height: 1.45 !important;
+  color: var(--ink-soft) !important;
+}
+
+.explorer-content a:hover,
+.toc-content a:hover {
+  color: var(--accent) !important;
+}
+
+/* Make search smaller and more portfolio-like */
+#search-bar,
+.search {
+  font-size: 0.82rem !important;
+}
+
+/* Tone down graph */
+.graph {
+  opacity: 0.82;
+}
+
+.graph:hover {
+  opacity: 1;
+}
+
+/* ---------- 6. Responsive behavior ---------- */
+
+/* Hide right rail first */
+@media (max-width: 1250px) {
+  #quartz-body {
+    width: min(1120px, calc(100vw - 3rem)) !important;
+    max-width: 1120px !important;
+
+    grid-template-columns:
+      minmax(200px, 240px)
+      minmax(0, 780px) !important;
+
+    column-gap: 3.5rem !important;
+  }
+
+  #quartz-body > .right.sidebar {
+    display: none !important;
+  }
+}
+
+/* Single-column mobile layout */
+@media (max-width: 880px) {
+  #quartz-body {
+    display: block !important;
+    width: min(760px, calc(100vw - 2rem)) !important;
+    max-width: 760px !important;
+    padding-top: calc(var(--nav-h) + 1rem) !important;
+  }
+
+  #quartz-body > .left.sidebar,
+  #quartz-body > .right.sidebar {
+    display: none !important;
+  }
+
+  #quartz-body > .center {
+    max-width: 100% !important;
+  }
+
+  #quartz-body > .center > .page-header > header .portfolio-quartz-nav {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+  }
+
+  #quartz-body > .center > .page-header > header .portfolio-quartz-nav .nav-links {
+    flex-wrap: wrap !important;
+    gap: 0.9rem !important;
+  }
 }
