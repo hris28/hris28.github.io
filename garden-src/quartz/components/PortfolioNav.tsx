@@ -9,12 +9,12 @@ const PortfolioNav: QuartzComponentConstructor = () => {
         </a>
 
         <ul class="nav-links quartz-nav-links">
-          <li><a href="/">Home</a></li>
-          <li><a href="/about.html">About</a></li>
-          <li><a href="/projects.html">Projects</a></li>
-          <li><a href="/resume.html">Résumé</a></li>
-          <li><a href="/garden/" class="active">Garden</a></li>
-          <li><a href="/interests.html">Interests</a></li>
+          <li><a href="https://hris28.github.io/">Home</a></li>
+<li><a href="https://hris28.github.io/about.html">About</a></li>
+<li><a href="https://hris28.github.io/projects.html">Projects</a></li>
+<li><a href="https://hris28.github.io/resume.html">Résumé</a></li>
+<li><a href="https://hris28.github.io/garden/" class="active">Garden</a></li>
+<li><a href="https://hris28.github.io/interests.html">Interests</a></li>
         </ul>
       </nav>
     )
