@@ -106,10 +106,32 @@ h1, h2, h3, h4 {
    your .nav styles take full control.
    ============================================================ */
 
-header {
+/* Pull the nav out of the center column entirely */
+.page-header > header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 100;
   padding: 0 !important;
   background: none !important;
   border: none !important;
+}
+
+/* Push everything down so content doesn't hide behind the fixed nav */
+#quartz-body {
+  padding-top: var(--nav-h) !important;
+}
+
+/* The left sidebar also needs to start below the nav */
+.left.sidebar {
+  padding-top: 1rem;
+}
+
+/* Quartz adds top margin to .page-header that stacks on top of nav height */
+.page > #quartz-body .page-header {
+  margin-top: 0 !important;
 }
 
 .nav {
@@ -167,6 +189,19 @@ header {
 .nav-links a.active {
   border-bottom-color: var(--accent);
   color: var(--ink);
+}
+
+.nav-links,
+.nav-links li {
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+.nav-links li::before,
+.nav-links li::marker {
+  display: none !important;
+  content: none !important;
 }
 
 /* On small screens the links collapse and the hamburger button shows them */
