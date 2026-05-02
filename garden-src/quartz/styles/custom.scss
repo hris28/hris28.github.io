@@ -843,14 +843,8 @@ tr:nth-child(even) {
 
 #quartz-body > .left.sidebar,
 #quartz-body > .right.sidebar {
-  font-size: 0.78rem !important;
+  font-size: 0.86rem !important;
   color: var(--ink-soft) !important;
-  opacity: 0.82;
-}
-
-#quartz-body > .left.sidebar:hover,
-#quartz-body > .right.sidebar:hover {
-  opacity: 1;
 }
 
 #quartz-body > .left.sidebar h1,
@@ -867,7 +861,7 @@ tr:nth-child(even) {
 
 .explorer-content a,
 .toc-content a {
-  font-size: 0.76rem !important;
+  font-size: 0.83rem !important;
   line-height: 1.45 !important;
   color: var(--ink-soft) !important;
 }
@@ -880,7 +874,7 @@ tr:nth-child(even) {
 /* Make search smaller and more portfolio-like */
 #search-bar,
 .search {
-  font-size: 0.74rem !important;
+  font-size: 0.82rem !important;
 }
 
 /* Tone down graph */
@@ -894,35 +888,30 @@ tr:nth-child(even) {
 
 /* ---------- 6. Responsive behavior ---------- */
 
-/* Hide right rail first on medium screens */
-@media (max-width: 1320px) {
+/* Hide right rail first */
+@media (max-width: 1250px) {
   #quartz-body {
     width: min(1120px, calc(100vw - 3rem)) !important;
     max-width: 1120px !important;
 
     grid-template-columns:
-      165px
-      minmax(0, 820px) !important;
+      minmax(200px, 240px)
+      minmax(0, 780px) !important;
 
-    column-gap: 4.5rem !important;
+    column-gap: 3.5rem !important;
   }
 
   #quartz-body > .right.sidebar {
     display: none !important;
   }
-
-  #quartz-body > .left.sidebar {
-    width: 165px !important;
-    max-width: 165px !important;
-  }
 }
 
-/* Hide all rails on narrower screens */
-@media (max-width: 940px) {
+/* Single-column mobile layout */
+@media (max-width: 880px) {
   #quartz-body {
     display: block !important;
-    width: min(780px, calc(100vw - 2rem)) !important;
-    max-width: 780px !important;
+    width: min(760px, calc(100vw - 2rem)) !important;
+    max-width: 760px !important;
     padding-top: calc(var(--nav-h) + 1rem) !important;
   }
 
