@@ -55,6 +55,9 @@ jobs:
       - name: Verify output structure
         run: find garden-src/public -maxdepth 3 -type f | head -40
 
+      - name: Fix file permissions
+        run: chmod -R 755 garden-src/public
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
