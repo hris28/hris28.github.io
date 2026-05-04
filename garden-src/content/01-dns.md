@@ -20,7 +20,7 @@ DNS stands for Domain Name System. It is a lookup service: you give it a domain 
 
 Your computer does not know where `duckduckgo.com` lives on the internet. It only knows how to reach numerical addresses like `52.149.246.39`. Before your browser can connect to any site, it has to ask something to translate the name into an address. That ask is a DNS query.
 
-The resolution process works like this. Your device sends the query to a DNS resolver — a server that handles translation requests. By default, this is a resolver your ISP provides. If the resolver has the answer cached from a recent query, it returns it immediately. If not, it works through a chain: it asks a root nameserver which TLD server handles `.com` domains, then asks that TLD server which authoritative nameserver handles `duckduckgo.com`, then asks the authoritative server for the actual record. The final answer comes back to your device, and your browser can now open a connection to the right IP address.
+The resolution process works like this. Your device sends the query to a DNS resolver, which is a server that handles translation requests. By default, this is a resolver your ISP provides. If the resolver has the answer cached from a recent query, it returns it immediately. If not, it works through a chain: it asks a root nameserver which TLD server handles `.com` domains, then asks that TLD server which authoritative nameserver handles `duckduckgo.com`, then asks the authoritative server for the actual record. The final answer comes back to your device, and your browser can now open a connection to the right IP address.
 
 The resolution typically takes tens of milliseconds and happens invisibly before every page load.
 

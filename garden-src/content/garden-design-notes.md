@@ -1,5 +1,5 @@
 ---
-title: "Garden Design Notes: How to Write Articles with Demos, Comparisons, and Layered Explanations"
+title: "Garden Design Notes"
 date: 2026-05-02
 lastmod: 2026-05-02
 stage: seedling
@@ -9,7 +9,8 @@ description: "Design patterns for articles that include live demonstrations, str
 
 <p class="eyebrow">Meta · Garden Design</p>
 
-# Garden Design Notes: Demos, Comparisons, and Layered Explanations
+# Garden Design Notes: 
+## Demos, Comparisons, and Layered Explanations
 
 This is a working document for how to structure articles that do more than explain. It draws from sites that do this well and from patterns that came up during the research sessions that seeded the garden.
 

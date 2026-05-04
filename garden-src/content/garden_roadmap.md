@@ -4,12 +4,176 @@
 *Working reference for content, structure, writing principles, and design decisions. Updated as the garden grows. Not a finished document.*
 
 ---
+racking and Privacy: Question Map, Search Log, Source Reviews, and Analysis
+
+---
+
+## A Note on the Seeker's Prior Knowledge State
+
+Before beginning, it helps to name the epistemic position this document is written from, because it is a specific and common one that is rarely described precisely.
+
+The seeker recognizes the vocabulary of this domain. Words like DNS, cookie, fingerprinting, VPN, HTTPS, tracker, ISP, metadata, and proxy are not unfamiliar. They appear in sentences the seeker has read and produced without confusion. The seeker could tell you, roughly, that cookies are used for tracking and that a VPN hides your location. But this recognition is surface-level in a particular way: the seeker knows what role a word plays in a sentence without knowing what the thing actually does, how it does it, or why the distinction between this thing and adjacent things matters. Asked "what does a cookie actually store, and how does a third-party cookie differ from a first-party one mechanically," the seeker would not be able to answer. Asked "what does HTTPS encrypt, and what does it leave visible," the seeker would probably say "everything is encrypted" and would be wrong.
+
+This is a meaningful distinction from either genuine ignorance (not recognizing the words at all) or genuine understanding (being able to explain the mechanism, identify edge cases, and connect the concept to adjacent ones). It is what Belkin (1980) would call an Anomalous State of Knowledge: the seeker knows enough to know that a gap exists, but not enough yet to specify what filling it would require.
+
+The questions and search sessions below are written for and by a person in this state.
+
+---
+
+## Part 1: The Question Map
+
+Questions are organized from broad to narrow. Each top-level question is the kind a non-expert would naturally form. Indented questions are the ones that emerge once the top-level question is partially answered -- the questions you could not have asked before you started.
+
+The goal of mapping them this way is to show the shape of the knowledge domain before entering it: where the terrain is flat and simple, where it branches, and where understanding one area unlocks several others.
+
+---
+
+### Cluster A: What actually happens when I visit a website?
+
+This is the entry point for almost everything else. If you can trace a web request from your device to a server and back, most other questions become easier to frame.
+
+**A1. When I type a URL and press Enter, what literally happens?**
+- A1a. What is a DNS request, and where does it go?
+- A1b. What is an IP address, and what does it reveal about me?
+- A1c. What is a TCP connection, and who is involved?
+- A1d. What is HTTPS, and what does the "S" actually do?
+
+**A2. What does HTTPS actually encrypt? What does it leave visible?**
+- A2a. Can my ISP see the websites I visit if I use HTTPS?
+- A2b. Can my ISP see what I do on those websites?
+- A2c. What is Server Name Indication (SNI), and why does it matter?
+- A2d. What is TLS, and how is it different from SSL?
+
+**A3. What is metadata, and how is it different from content?**
+- A3a. What metadata is exposed even over an encrypted connection?
+- A3b. What can timing and volume of traffic reveal, even without content?
+
+---
+
+### Cluster B: Who can see what I am doing online, and when?
+
+This cluster is about mapping the actors in the chain between your device and a website, and understanding what each actor can observe.
+
+**B1. What can my ISP see?**
+- B1a. Does HTTPS limit what my ISP sees?
+- B1b. What is Deep Packet Inspection, and when is it used?
+- B1c. Does my ISP keep logs? For how long?
+- B1d. Under what circumstances does my ISP share data with government or law enforcement?
+
+**B2. What can the website I visit see?**
+- B2a. What is my IP address telling the server?
+- B2b. What does the HTTP request header contain, and who reads it?
+- B2c. What can the website see that I did not intentionally send?
+
+**B3. What can third parties embedded in a website see?**
+- B3a. What is a third-party script, and why do sites load them?
+- B3b. How do advertising networks see me across multiple websites?
+- B3c. What is a tracking pixel, and how is it different from a cookie?
+
+**B4. What can my router or Wi-Fi operator see?**
+- B4a. What does HTTPS protect me from on public Wi-Fi?
+- B4b. What can a Wi-Fi administrator see that HTTPS does not hide?
+
+**B5. What does my browser itself know, and does it share that?**
+- B5a. What is browser telemetry?
+- B5b. How do browser-level accounts (Google, Firefox Sync) affect privacy?
+
+---
+
+### Cluster C: What is tracking, mechanically?
+
+"Tracking" is used loosely to describe very different technical mechanisms. This cluster unpacks those mechanisms.
+
+**C1. What is a cookie, mechanically?**
+- C1a. What is the difference between a first-party and third-party cookie?
+- C1b. What is a session cookie vs. a persistent cookie?
+- C1c. What is a "supercookie" or "zombie cookie"?
+- C1d. What does "blocking third-party cookies" actually do?
+
+**C2. What is browser fingerprinting?**
+- C2a. What data points make up a fingerprint?
+- C2b. Is fingerprinting detectable? Is it blockable?
+- C2c. How accurate is fingerprinting at identifying a unique user?
+
+**C3. What is a tracking pixel?**
+- C3a. How does a 1x1 transparent image track anything?
+- C3b. How do email tracking pixels work, specifically?
+- C3c. What is the relationship between a tracking pixel and a cookie?
+
+**C4. What is IP-based tracking, and how accurate is it?**
+- C4a. Can my rough location be determined from my IP?
+- C4b. Does IP tracking work across devices on the same network?
+
+**C5. What is behavioral profiling, and who builds profiles?**
+- C5a. What is a data broker, and where do they get data?
+- C5b. How do advertising networks relate to data brokers?
+- C5c. What is real-time bidding (RTB), and how does it work in milliseconds?
+
+---
+
+### Cluster D: What do privacy tools actually do?
+
+This cluster is about the mechanisms behind protections, not just their names.
+
+**D1. What does a VPN actually change?**
+- D1a. Does a VPN hide my traffic from my ISP?
+- D1b. Does a VPN hide my identity from websites I visit?
+- D1c. What can the VPN provider itself see?
+- D1d. What does "no-logs policy" mean, and is it verifiable?
+- D1e. What is a DNS leak, and why does it matter?
+
+**D2. What does changing my DNS server change?**
+- D2a. What does my current DNS resolver know about my browsing?
+- D2b. What is DNS-over-HTTPS (DoH), and what does it protect?
+- D2c. What is the difference between DoH and a VPN?
+- D2d. Why does changing DNS not hide my browsing from the sites I visit?
+
+**D3. What does a content blocker like uBlock Origin actually do?**
+- D3a. How does a block list work?
+- D3b. Does blocking third-party scripts prevent fingerprinting?
+- D3c. What does Privacy Badger do differently from uBlock Origin?
+
+**D4. What does Tor do, and how is it different from a VPN?**
+- D4a. What is an onion route?
+- D4b. What are the limitations of Tor?
+
+**D5. What is end-to-end encryption (E2EE), and what does it cover?**
+- D5a. What is the difference between E2EE and transport encryption (TLS)?
+- D5b. What can a messaging platform see if it provides E2EE?
+
+---
+
+### Cluster E: How do entities in the tracking ecosystem relate to one another?
+
+**E1. What is the relationship between websites, advertisers, and ad networks?**
+- E1a. What is programmatic advertising?
+- E1b. Who are the major ad network operators?
+- E1c. What is a supply-side platform vs. a demand-side platform?
+
+**E2. What is a data broker, and how do they operate?**
+- E2a. What types of data do brokers collect, and from where?
+- E2b. Who buys data broker data?
+- E2c. Are data brokers regulated?
+
+**E3. What can be inferred about me from data I did not knowingly produce?**
+- E3a. What is metadata inference?
+- E3b. What does public social media expose?
+- E3c. How does OSINT relate to commercial data collection?
+
+---
 
 ## I. What this document is for
 
 This is the planning layer beneath the garden. It answers three questions: what to write, in what order, and how. It also records what nearby sites do well and where they fail, so the garden learns from them rather than repeating their mistakes. The raw search session that produced much of this document's raw material is appended in the source log; the search itself is as much a data source as the pages it found.
 
-The garden is not a blog. Posts do not expire. The goal is not to publish frequently but to publish accurately, and to mark clearly what is known, what is uncertain, and what is incomplete. A half-finished article that says it is half-finished is more useful than a finished article that omits its own limits.
+More topics I have been confused about in the past that I hope to make guides for:
+
+- LF vs CRLF
+- What telemetry actually sends
+- How torrenting differs from direct downloading at the network level
+- What a VPN provider can actually see
+- The real-time bidding ecosystem
+- https://esphome.github.io/esp-web-tools/
 
 ---
 
