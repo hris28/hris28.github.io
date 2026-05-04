@@ -22,23 +22,6 @@ If you already know roughly how the web works and want to understand tracking sp
 
 If you want to evaluate a specific tool or service, the [[source-evaluation-checklist]] explains what questions to ask before trusting any claim about privacy or security.
 
-## What this covers
-
-The articles here are organized into clusters. Each cluster covers a domain. You do not need to read them in order, but earlier clusters inform later ones.
-
-**The web and tracking.** What happens between pressing Enter and seeing a page. Who can see that request at each step. What cookies, pixels, fingerprinting, and DNS actually do. How advertising networks and data brokers relate to each other.
-
-**Privacy tools.** What VPNs, Tor, content blockers, encrypted DNS, and browser settings actually change about who can see what. What they do not change.
-
-**Hardware and software fundamentals.** What the components of a computer actually do and how to evaluate them. Operating systems, file systems, drivers, and the terminal.
-
-**Networks and self-hosting.** IP addresses, Wi-Fi, upload and download speed, hosting a server, metadata, and cache.
-
-**Anonymity and the dark web.** What anonymity means technically versus in practice. Tor, onion services, and the difference between privacy and anonymity.
-
-**Radio and wireless.** Licensed versus unlicensed spectrum, Wi-Fi standards, Meshtastic versus MeshCore, and how radio still appears in modern infrastructure.
-
-**Historical technologies.** DVD, VHS, magnetic tape, and analog formats — how they work and why they still matter in archiving and evidence preservation.
 
 ## Principles
 
@@ -51,3 +34,4 @@ More topics I have been confused about in the past that I hope to make guides fo
 - How torrenting differs from direct downloading at the network level
 - What a VPN provider can actually see
 - The real-time bidding ecosystem
+- https://esphome.github.io/esp-web-tools/

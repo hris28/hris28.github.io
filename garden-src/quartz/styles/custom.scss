@@ -527,9 +527,9 @@ tr:nth-child(even) {
   display: grid !important;
   grid-template:
     "left center right"
-    / var(--garden-rail-w) var(--garden-content-w) var(--garden-rail-w) !important;
+    / minmax(var(--garden-rail-w), 1fr) minmax(0, var(--garden-content-w)) minmax(var(--garden-rail-w), 1fr) !important;
 
-  justify-content: space-between !important;
+  justify-content: center !important;
   column-gap: 0 !important;
   align-items: start !important;
 }
