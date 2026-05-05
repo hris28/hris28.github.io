@@ -4,15 +4,14 @@
 *Working reference for content, structure, writing principles, and design decisions. Updated as the garden grows. Not a finished document.*
 
 ---
-racking and Privacy: Question Map, Search Log, Source Reviews, and Analysis
-
+Tracking and Privacy: Question Map, Search Log, Source Reviews, and Analysis
 ---
 
 ## A Note on the Seeker's Prior Knowledge State
 
 Before beginning, it helps to name the epistemic position this document is written from, because it is a specific and common one that is rarely described precisely.
 
-The seeker recognizes the vocabulary of this domain. Words like DNS, cookie, fingerprinting, VPN, HTTPS, tracker, ISP, metadata, and proxy are not unfamiliar. They appear in sentences the seeker has read and produced without confusion. The seeker could tell you, roughly, that cookies are used for tracking and that a VPN hides your location. But this recognition is surface-level in a particular way: the seeker knows what role a word plays in a sentence without knowing what the thing actually does, how it does it, or why the distinction between this thing and adjacent things matters. Asked "what does a cookie actually store, and how does a third-party cookie differ from a first-party one mechanically," the seeker would not be able to answer. Asked "what does HTTPS encrypt, and what does it leave visible," the seeker would probably say "everything is encrypted" and would be wrong.
+The seeker recognizes the vocabulary of this domain. Words like DNS, cookie, fingerprinting, VPN, HTTPS, tracker, ISP, metadata, and proxy are not unfamiliar. They appear in sentences the seeker has read and produced without confusion. The seeker could tell you, roughly, that cookies are used for tracking and that a VPN hides your location. But this recognition is surface-level in a particular way: the seeker knows what role a word plays in a sentence without knowing what the thing actually does, how it does it, or why the distinction between this thing and adjacent things matters. Asked "what does a page actually store, and how does a VPN differ from Tor mechanically," the seeker would not be able to answer. Asked "what does HTTPS encrypt, and what does it leave visible," the seeker would probably say "everything is encrypted" and would be wrong.
 
 This is a meaningful distinction from either genuine ignorance (not recognizing the words at all) or genuine understanding (being able to explain the mechanism, identify edge cases, and connect the concept to adjacent ones). It is what Belkin (1980) would call an Anomalous State of Knowledge: the seeker knows enough to know that a gap exists, but not enough yet to specify what filling it would require.
 
@@ -166,7 +165,7 @@ This cluster is about the mechanisms behind protections, not just their names.
 
 This is the planning layer beneath the garden. It answers three questions: what to write, in what order, and how. It also records what nearby sites do well and where they fail, so the garden learns from them rather than repeating their mistakes. The raw search session that produced much of this document's raw material is appended in the source log; the search itself is as much a data source as the pages it found.
 
-More topics I have been confused about in the past that I hope to make guides for:
+More topics I have been confused about in the past that I hope to make more specific guides for:
 
 - LF vs CRLF
 - What telemetry actually sends

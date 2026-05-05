@@ -307,6 +307,9 @@ h1, h2, h3, h4 {
 
 /* CONTENT */
 
+.center {
+  padding: 0 2rem;
+}
 
 .center article > * + * {
   margin-top: 1rem;
@@ -367,14 +370,16 @@ h1, h2, h3, h4 {
 
 .explorer-content a {
   display: block;
-  padding: 0.3rem 0;
-  font-size: 0.85rem;
+  padding: 0.4rem 0.5rem;
+  font-size: 0.95rem;
   color: var(--ink-soft);
   border-radius: var(--radius);
+  transition: color 0.2s ease;
 }
 
 .explorer-content a:hover {
   color: var(--accent);
+  background: var(--bg-soft);
 }
 
 /* Search bar to match portfolio style */
@@ -385,13 +390,21 @@ h1, h2, h3, h4 {
   border: 1px solid var(--line);
   color: var(--ink);
   border-radius: var(--radius);
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  margin: 0;
 }
 
 /* Graph view: tone it down */
+.graph {
+  min-height: 300px;
+}
+
 .graph > .graph-outer {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--bg-soft);
+  height: 100%;
 }
 
 /* Table of contents */
