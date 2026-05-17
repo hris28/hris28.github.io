@@ -182,6 +182,6 @@ Each step reduces what one specific party can observe. None of them produce invi
 
 **[Techlore Forum, What Your ISP Can See](discuss.techlore.tech)** - Community forum. The step-by-step breakdown of ISP visibility by scenario (HTTP, HTTPS, different DNS, VPN) is among the clearest practical explanations of these distinctions. Community source; verify specific claims against primary references.
 
-**[GeeksForGeeks: DNS in the Application Layer](https://www.geeksforgeeks.org/computer-networks/domain-name-system-dns-in-application-layer/)** - Comprehensive vocabulary coverage. Zero hierarchy. Useful as a reference for terms after you already somewhat have a mental model. Not useful as a first read. The source demonstrates a recurring failure mode in technical writing: every term explained, no explanation of which terms matter most or why.
+**[GeeksForGeeks: DNS in the Application Layer](https://www.geeksforgeeks.org/computer-networks/domain-name-system-dns-in-application-layer/)** - Comprehensive vocabulary coverage. Zero hierarchy. Useful as a reference for terms after you already somewhat have a mental model. Not necessarily useful as a first read. The source demonstrates a recurring failure mode in technical writing: every term explained, no explanation of which terms matter most or why.
 
 **[IETF RFC 8484: DNS over HTTPS](https://datatracker.ietf.org/doc/html/rfc8484)** - Primary source for DoH specification. Dry reading. Use it when a claim about DoH behavior needs verification against the actual standard.
