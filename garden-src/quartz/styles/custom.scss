@@ -52,8 +52,9 @@ Tweak any of these to resize the three columns. Each rail scales with the viewpo
   --garden-prose-max: 78ch;          /* line-length cap on PARAGRAPHS only (not list items) */
 
   /* Spacing (scales with viewport) */
-  --garden-page-padding: clamp(0.5rem, 1.5vw, 1.5rem);  /* outer page edge */
-  --garden-col-gap: clamp(1.5rem, 3vw, 3rem);       /* between columns */
+  --garden-page-padding-left: clamp(1.5rem, 2.5vw, 3rem);   /* breathing room on the LEFT edge */
+  --garden-page-padding-right: 0;                            /* zero so right rail hugs viewport edge */
+  --garden-col-gap: clamp(1.5rem, 3vw, 3rem);                /* between columns */
 }
 
 
@@ -596,7 +597,7 @@ tr:nth-child(even) {
   max-width: var(--garden-max-width) !important;
   margin: 0 auto !important;
 
-  padding: calc(var(--nav-h) + 1rem) var(--garden-page-padding) 2rem var(--garden-page-padding) !important;
+  padding: calc(var(--nav-h) + 1rem) var(--garden-page-padding-right) 2rem var(--garden-page-padding-left) !important;
   box-sizing: border-box !important;
 
   display: grid !important;
@@ -634,15 +635,16 @@ tr:nth-child(even) {
   border-left: 1px solid var(--line) !important;
 }
 
-/* Center: capped reading width, centered in its track, with inner padding
-   so the article body never visually butts up against the rail borders. */
+/* Center: fills the full grid track so the article column expands to use
+   whatever space the rails do not claim. The 78ch prose cap on <p>
+   handles reading length separately; the column itself can be wide. */
 #quartz-body > .center {
   width: 100% !important;
-  max-width: var(--garden-center-max) !important;
+  max-width: none !important;
   min-width: 0 !important;
   padding: 0 var(--garden-center-inset) 4rem var(--garden-center-inset) !important;
-  margin: 0 auto !important;
-  justify-self: center !important;
+  margin: 0 !important;
+  justify-self: stretch !important;
 }
 
 /* Strip the base Quartz left/right padding off the sidebar children
