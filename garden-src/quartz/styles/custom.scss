@@ -49,10 +49,10 @@ Tweak any of these to resize the three columns. Each rail scales with the viewpo
   --garden-center-max: 1200px;       /* reading column cap */
   --garden-center-inset: 1.5rem;    /* padding INSIDE the center, creates
                                        breathing room against the rails */
-  --garden-prose-max: 100ch;         /* line-length cap on paragraphs/list items */
+  --garden-prose-max: 78ch;          /* line-length cap on PARAGRAPHS only (not list items) */
 
   /* Spacing (scales with viewport) */
-  --garden-page-padding: clamp(1rem, 2.5vw, 3rem);  /* outer page edge */
+  --garden-page-padding: clamp(0.5rem, 1.5vw, 1.5rem);  /* outer page edge */
   --garden-col-gap: clamp(1.5rem, 3vw, 3rem);       /* between columns */
 }
 
@@ -796,9 +796,10 @@ tr:nth-child(even) {
   line-height: 1.75 !important;
 }
 
-#quartz-body > .center article p,
-#quartz-body > .center article li {
-  // max-width: 68ch !important;
+/* Cap paragraphs at a comfortable reading length. List items are
+   intentionally NOT capped here so topic indexes and link lists
+   use the full column width. */
+#quartz-body > .center article p {
   max-width: var(--garden-prose-max) !important;
 }
 
