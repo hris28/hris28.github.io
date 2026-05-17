@@ -28,7 +28,34 @@
   --radius-pill: 999px;
   --nav-h: 66px;
   --transition: 180ms ease;
+
+/* Garden Layout Knobs:
+Tweak any of these to resize the three columns. Each rail scales with the viewport between its min and max; bump the numbers to taste. */
+
+/* Outer cap: prevents sprawl on ultrawide monitors */
+  --garden-max-width: 1780px; 
+
+/* Left rail (search + explorer) */
+  --garden-left-min: 200px;     /* never narrower */
+  --garden-left-ideal: 17vw;    /* preferred width as % of viewport */
+  --garden-left-max: 280px;     /* never wider */
+
+  /* Right rail (table of contents + graph) */
+  --garden-right-min: 220px;
+  --garden-right-ideal: 16vw;
+  --garden-right-max: 300px;
+
+  /* Center column (article content) */
+  --garden-center-max: 1024px;       /* reading column cap */
+  --garden-center-inset: 1.5rem;    /* padding INSIDE the center, creates
+                                       breathing room against the rails */
+  --garden-prose-max: 100ch;         /* line-length cap on paragraphs/list items */
+
+  /* Spacing (scales with viewport) */
+  --garden-page-padding: clamp(1rem, 2.5vw, 3rem);  /* outer page edge */
+  --garden-col-gap: clamp(2rem, 4vw, 4rem);          /* between columns */
 }
+
 
 /* Quartz uses saved-theme="dark", your portfolio uses data-theme="dark".
    Both selectors are here so dark mode works regardless of which one fires. */
@@ -55,11 +82,9 @@ html[data-theme="dark"] {
   padding: 0 !important;
 }
 
-/* ============================================================
-   BASE
+/* BASE
    Quartz sets its own body/a/h styles. These override them
-   with your portfolio's values.
-   ============================================================ */
+   with your portfolio's values. */
 
 body {
   font-family: var(--font-sans);
@@ -106,12 +131,10 @@ h1, h2, h3, h4 {
   color: var(--ink-soft);
 }
 
-/* ============================================================
-   NAV
+/* NAV
    Quartz wraps the header component in a <header> tag with its
    own padding and background. The first rule strips that out so
-   your .nav styles take full control.
-   ============================================================ */
+   .nav styles take full control. */
 
 .page-header {
   padding-top: calc(var(--nav-h) + 0.25rem) !important;
@@ -154,7 +177,7 @@ h1, h2, h3, h4 {
   letter-spacing: -0.01em;
 }
 
-/* The bullet after your name in the nav brand */
+/* The bullet after name in the nav brand */
 .nav-brand .dot {
   color: var(--accent);
   margin-left: 0.35rem;
@@ -329,8 +352,6 @@ h1, h2, h3, h4 {
   color: var(--tag-ink);
 }
 
-
-
 /* Article body text: line length and spacing */
 .center article p,
 .center article li {
@@ -417,11 +438,9 @@ h1, h2, h3, h4 {
   color: var(--accent);
 }
 
-/* ============================================================
-   TABLES
+/* TABLES
    Quartz renders Markdown tables but doesn't style them well
-   by default. This matches your portfolio's table style.
-   ============================================================ */
+   by default. This matches your portfolio's table style. */
 
 table {
   display: block;
@@ -445,9 +464,7 @@ tr:nth-child(even) {
   background: var(--bg-soft);
 }
 
-/* ============================================================
-   FOOTER
-   ============================================================ */
+/* FOOTER */
 
 .portfolio-footer {
   padding: 0.8rem 1.5rem;
@@ -498,9 +515,7 @@ tr:nth-child(even) {
   display: block;
 }
 
-/* ============================================================
-   LINK PREVIEW (placeholder for future implementation)
-   ============================================================ */
+/* LINK PREVIEW (placeholder for future implementation) */
 
 .external-preview {
   position: relative;
@@ -526,9 +541,10 @@ tr:nth-child(even) {
 
 /* ---------- Spacious rail layout: rails at outer edges, center preserved ---------- */
 
+/* First Draft
 #quartz-body {
   --garden-rail-w: 220px;
-  --garden-content-w: 820px;
+  --garden-content-w: 960px;
 
   width: min(1780px, calc(100vw - 3rem)) !important;
   max-width: 1780px !important;
@@ -539,8 +555,10 @@ tr:nth-child(even) {
 
   display: grid !important;
   grid-template:
-    "left center right"
-    / minmax(var(--garden-rail-w), 1fr) minmax(0, var(--garden-content-w)) minmax(var(--garden-rail-w), 1fr) !important;
+  "left center right"
+  / minmax(var(--garden-rail-w), 1fr)
+    minmax(0, var(--garden-content-w))
+    var(--garden-rail-w) !important;
 
   justify-content: center !important;
   column-gap: 0 !important;
@@ -559,7 +577,6 @@ tr:nth-child(even) {
   margin: 0 auto !important;
 }
 
-
 #quartz-body > .left.sidebar {
   grid-area: left !important;
   justify-self: start !important;
@@ -572,6 +589,79 @@ tr:nth-child(even) {
   justify-self: end !important;
   width: var(--garden-rail-w) !important;
   border-left: 1px solid var(--line) !important;
+}
+  */
+#quartz-body {
+  width: 100% !important;
+  max-width: var(--garden-max-width) !important;
+  margin: 0 auto !important;
+
+  padding: calc(var(--nav-h) + 1rem) var(--garden-page-padding) 2rem var(--garden-page-padding) !important;
+  box-sizing: border-box !important;
+
+  display: grid !important;
+  /* Each rail clamps between its min and max as the viewport grows.
+     Center is whatever's left. */
+  grid-template-columns:
+    clamp(var(--garden-left-min), var(--garden-left-ideal), var(--garden-left-max))
+    minmax(0, 1fr)
+    clamp(var(--garden-right-min), var(--garden-right-ideal), var(--garden-right-max)) !important;
+  grid-template-areas: "left center right" !important;
+
+  column-gap: var(--garden-col-gap) !important;
+  align-items: start !important;
+}
+
+#quartz-body > .left.sidebar  { grid-area: left  !important; justify-self: start !important; }
+#quartz-body > .right.sidebar { grid-area: right !important; justify-self: end   !important; }
+#quartz-body > .center        { grid-area: center !important; }
+
+/* Left rail: fills its track, no inner left padding so search bar is flush */
+#quartz-body > .left.sidebar {
+  width: 100% !important;
+  max-width: none !important;
+  padding: 0 1rem 2rem 0 !important;
+  margin: 0 !important;
+  border-right: 1px solid var(--line) !important;
+}
+
+/* Right rail: fills its track */
+#quartz-body > .right.sidebar {
+  width: 100% !important;
+  max-width: none !important;
+  padding: 0 0 2rem 1rem !important;
+  margin: 0 !important;
+  border-left: 1px solid var(--line) !important;
+}
+
+/* Center: capped reading width, centered in its track, with inner padding
+   so the article body never visually butts up against the rail borders. */
+#quartz-body > .center {
+  width: 100% !important;
+  max-width: var(--garden-center-max) !important;
+  min-width: 0 !important;
+  padding: 0 var(--garden-center-inset) 4rem var(--garden-center-inset) !important;
+  margin: 0 auto !important;
+  justify-self: center !important;
+}
+
+/* Strip the base Quartz left/right padding off the sidebar children
+   so search bar / explorer / toc / graph sit flush to their rail */
+#quartz-body > .left.sidebar > *,
+#quartz-body > .right.sidebar > * {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+#quartz-body > .left.sidebar .flex-component {
+  width: 100%;
+  padding-left: 0 !important;
+}
+
+#search-bar,
+.search > .search-button {
+  width: 100% !important;
+  margin-left: 0 !important;
 }
 
 /* ---------- 2. Fix Quartz header wrapper ---------- */
@@ -708,7 +798,8 @@ tr:nth-child(even) {
 
 #quartz-body > .center article p,
 #quartz-body > .center article li {
-  max-width: 68ch !important;
+  // max-width: 68ch !important;
+  max-width: var(--garden-prose-max) !important;
 }
 
 #quartz-body > .center article p {
@@ -768,14 +859,42 @@ tr:nth-child(even) {
   color: var(--ink-faint) !important;
 }
 
-.explorer-content a,
-.toc-content a {
-  font-size: 0.83rem !important;
-  line-height: 1.45 !important;
+.explorer-content {
+  margin-top: 0.75rem !important;
+}
+
+.explorer-content a {
+  display: block;
+  padding: 0.45rem 0.6rem !important;
+  font-size: 0.92rem !important;
+  line-height: 1.55 !important;
   color: var(--ink-soft) !important;
+  border-radius: var(--radius);
+  transition: background var(--transition), color var(--transition);
 }
 
 .explorer-content a:hover,
+.explorer-content a.active {
+  background: var(--bg-soft);
+  color: var(--accent) !important;
+}
+
+.folder-container > div > a,
+.folder-container > div > button > span {
+  font-size: 0.95rem !important;
+  font-weight: 600;
+}
+
+.explorer-content > ul > li + li {
+  margin-top: 0.1rem;
+}
+
+.toc-content a {
+  font-size: 0.85rem !important;
+  line-height: 1.55 !important;
+  color: var(--ink-soft) !important;
+}
+
 .toc-content a:hover {
   color: var(--accent) !important;
 }
@@ -786,35 +905,50 @@ tr:nth-child(even) {
   font-size: 0.82rem !important;
 }
 
-/* Tone down graph */
+/* Graph view: wider right rail gives it room to breathe */
 .graph {
-  opacity: 0.82;
+  margin-top: 1.25rem;
+  opacity: 0.9;
 }
 
 .graph:hover {
   opacity: 1;
 }
 
+.graph > .graph-outer {
+  height: 340px !important;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg-soft);
+}
+
 /* ---------- 6. Responsive behavior ---------- */
 
-/* Medium screens: keep left rail, hide right rail */
-@media (max-width: 1320px) {
+/* Tablet-ish: drop the right rail but keep left rail + center.
+   Three-column layout persists down to ~720px viewport. */
+@media (max-width: 720px) {
   #quartz-body {
-    --garden-rail-w: 200px;
-    grid-template:
-      "left center"
-      / var(--garden-rail-w) 1fr !important;
-    padding-right: 0 !important;
+    grid-template-columns:
+      clamp(var(--garden-left-min), var(--garden-left-ideal), var(--garden-left-max))
+      minmax(0, 1fr) !important;
+    grid-template-areas: "left center" !important;
+    column-gap: 1.5rem !important;
+    --garden-left-min: 180px;
+    --garden-left-max: 220px;
   }
   #quartz-body > .right.sidebar { display: none !important; }
 }
 
-@media (max-width: 940px) {
+/* Phone: single-column stack */
+@media (max-width: 540px) {
   #quartz-body {
     display: block !important;
-    padding: calc(var(--nav-h) + 1rem) 1.25rem 0 1.25rem !important;
+    padding: calc(var(--nav-h) + 1rem) 1rem 0 1rem !important;
   }
   #quartz-body > .left.sidebar,
   #quartz-body > .right.sidebar { display: none !important; }
-  #quartz-body > .center { max-width: 100% !important; }
+  #quartz-body > .center {
+    max-width: 100% !important;
+    padding: 0 0 4rem 0 !important;
+  }
 }
