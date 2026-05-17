@@ -6,12 +6,6 @@ stage: flower
 description: "A growing reference site for people who want to understand the systems they live inside online."
 ---
 
-<p class="eyebrow">Notes in progress</p>
-
-# Garden
-
-A growing collection of guides, notes, and working thoughts on information security, privacy, OSINT, and the technology that shapes everyday life online. Written for people who recognize the vocabulary but want to understand the mechanism.
-
 ## Principles
 
 This garden prioritizes clear explanations over comprehensive ones. When a mechanism has limits, those limits are named in the same article that describes the mechanism. Sources are cited and reviewed. When information cannot be verified, it is not published. When a source has a commercial interest in its own claims, that interest is noted.
