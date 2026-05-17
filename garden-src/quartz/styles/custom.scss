@@ -33,7 +33,7 @@
 Tweak any of these to resize the three columns. Each rail scales with the viewport between its min and max; bump the numbers to taste. */
 
 /* Outer cap: prevents sprawl on ultrawide monitors */
-  --garden-max-width: 1780px; 
+  --garden-max-width: 100%; 
 
 /* Left rail (search + explorer) */
   --garden-left-min: 200px;     /* never narrower */
@@ -46,14 +46,14 @@ Tweak any of these to resize the three columns. Each rail scales with the viewpo
   --garden-right-max: 300px;
 
   /* Center column (article content) */
-  --garden-center-max: 1024px;       /* reading column cap */
+  --garden-center-max: 1200px;       /* reading column cap */
   --garden-center-inset: 1.5rem;    /* padding INSIDE the center, creates
                                        breathing room against the rails */
   --garden-prose-max: 100ch;         /* line-length cap on paragraphs/list items */
 
   /* Spacing (scales with viewport) */
   --garden-page-padding: clamp(1rem, 2.5vw, 3rem);  /* outer page edge */
-  --garden-col-gap: clamp(2rem, 4vw, 4rem);          /* between columns */
+  --garden-col-gap: clamp(1.5rem, 3vw, 3rem);       /* between columns */
 }
 
 

@@ -8,8 +8,7 @@ description: "A fifteen-minute orientation to how the web works and why it matte
 next_review: 2027-05-01
 ---
 
-<p class="eyebrow">Orientation</p>
-
+<p class="eyebrow">Notes in progress</p>
 # Start Here
 
 This article exists because most privacy advice assumes you already understand the thing it is trying to protect you from. "Use a VPN." "Block third-party cookies." "Switch to an encrypted DNS." These are reasonable suggestions. But if you do not know what a DNS query is, or what a third-party cookie actually does, or what a VPN changes and does not change, the advice requires blind trust. You are installing tools you cannot evaluate.
