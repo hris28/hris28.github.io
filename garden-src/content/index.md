@@ -6,7 +6,6 @@ stage: flower
 description: A growing collection of guides, notes, and working thoughts.
 ---
 
-<p class="eyebrow">Notes in progress</p>
 ## Principles
 
 This started as an information security guide--a growing reference site for people who want to understand the systems they live inside online. 
