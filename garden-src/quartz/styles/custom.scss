@@ -798,11 +798,16 @@ tr:nth-child(even) {
   line-height: 1.75 !important;
 }
 
-/* Cap paragraphs at a comfortable reading length. List items are
-   intentionally NOT capped here so topic indexes and link lists
-   use the full column width. */
+/* Cap paragraphs at a comfortable reading length. */
 #quartz-body > .center article p {
   max-width: var(--garden-prose-max) !important;
+}
+
+/* Explicitly remove the cap on list items so topic indexes and link
+   lists use the full column width. base.scss applies a 65ch cap to
+   both p AND li, so li needs an !important override here to escape it. */
+#quartz-body > .center article li {
+  max-width: none !important;
 }
 
 #quartz-body > .center article p {
@@ -955,3 +960,4 @@ tr:nth-child(even) {
     padding: 0 0 4rem 0 !important;
   }
 }
+
