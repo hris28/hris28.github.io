@@ -601,20 +601,33 @@ tr:nth-child(even) {
   box-sizing: border-box !important;
 
   display: grid !important;
-  /* Each rail clamps between its min and max as the viewport grows.
-     Center is whatever's left. */
+  /* Two-column grid: left rail + center. The right rail is pinned
+     with position:fixed below, so it does not participate in this
+     grid. Reserve space for it with padding-right on the body. */
   grid-template-columns:
     clamp(var(--garden-left-min), var(--garden-left-ideal), var(--garden-left-max))
-    1fr
-    clamp(var(--garden-right-min), var(--garden-right-ideal), var(--garden-right-max)) !important;
-  grid-template-areas: "left center right" !important;
+    1fr !important;
+  grid-template-areas: "left center" !important;
 
   column-gap: var(--garden-col-gap) !important;
   align-items: start !important;
 
-  /* Force tracks to fill the inline axis so 1fr actually claims all
-     leftover space and the right rail reaches the viewport edge. */
-  justify-content: stretch !important;
+  /* padding-right reserves space for the fixed-positioned right rail
+     so the center column never sits underneath it. */
+  padding-right: clamp(var(--garden-right-min), var(--garden-right-ideal), var(--garden-right-max)) !important;
+}
+
+/* Right rail is pinned to the viewport's right edge. It scrolls
+   independently of the page content (sticky panel pattern). */
+#quartz-body > .right.sidebar {
+  position: fixed !important;
+  top: var(--nav-h) !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: clamp(var(--garden-right-min), var(--garden-right-ideal), var(--garden-right-max)) !important;
+  height: calc(100vh - var(--nav-h)) !important;
+  overflow-y: auto !important;
+  z-index: 10 !important;
 }
 
 #quartz-body > .left.sidebar  { grid-area: left  !important; justify-self: start !important; }
