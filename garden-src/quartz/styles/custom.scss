@@ -605,12 +605,16 @@ tr:nth-child(even) {
      Center is whatever's left. */
   grid-template-columns:
     clamp(var(--garden-left-min), var(--garden-left-ideal), var(--garden-left-max))
-    minmax(0, 1fr)
+    1fr
     clamp(var(--garden-right-min), var(--garden-right-ideal), var(--garden-right-max)) !important;
   grid-template-areas: "left center right" !important;
 
   column-gap: var(--garden-col-gap) !important;
   align-items: start !important;
+
+  /* Force tracks to fill the inline axis so 1fr actually claims all
+     leftover space and the right rail reaches the viewport edge. */
+  justify-content: stretch !important;
 }
 
 #quartz-body > .left.sidebar  { grid-area: left  !important; justify-self: start !important; }
