@@ -631,8 +631,9 @@ tr:nth-child(even) {
 }
 
 #quartz-body > .left.sidebar  { grid-area: left  !important; justify-self: start !important; }
-#quartz-body > .right.sidebar { grid-area: right !important; justify-self: end   !important; }
 #quartz-body > .center        { grid-area: center !important; }
+/* .right.sidebar intentionally omitted — it is position:fixed above
+   and no longer a grid item. */
 
 /* Left rail: fills its track, no inner left padding so search bar is flush */
 #quartz-body > .left.sidebar {
@@ -643,13 +644,14 @@ tr:nth-child(even) {
   border-right: 1px solid var(--line) !important;
 }
 
-/* Right rail: fills its track */
+/* Right rail visual styling. Width/position/height are set on the
+   position:fixed rule above. This rule only adds inner padding and
+   the left-edge separator line. */
 #quartz-body > .right.sidebar {
-  width: 100% !important;
-  max-width: none !important;
-  padding: 0 0 2rem 1rem !important;
+  padding: 1rem 1rem 2rem 1rem !important;
   margin: 0 !important;
   border-left: 1px solid var(--line) !important;
+  background: var(--bg) !important;
 }
 
 /* Center: fills the full grid track so the article column expands to use
@@ -990,3 +992,9 @@ tr:nth-child(even) {
   }
 }
 
+{ display: none !important; }
+  #quartz-body > .center {
+    max-width: 100% !important;
+    padding: 0 0 4rem 0 !important;
+  }
+}
