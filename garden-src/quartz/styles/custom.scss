@@ -932,6 +932,18 @@ tr:nth-child(even) {
 
 /* ---------- 6. Responsive behavior ---------- */
 
+/* Belt-and-suspenders: force the center column to actually fill its grid track.
+   Several base.scss rules touch .center; this overrides whatever is left. */
+.page > #quartz-body > .center,
+#quartz-body > .center {
+  width: auto !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  justify-self: stretch !important;
+  align-self: stretch !important;
+}
+
 /* Tablet-ish: drop the right rail but keep left rail + center.
    Three-column layout persists down to ~720px viewport. */
 @media (max-width: 720px) {
