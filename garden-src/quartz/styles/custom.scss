@@ -662,33 +662,81 @@ tr:nth-child(even) {
   background: var(--bg) !important;
 }
 
-/* Center: fills the full grid track so the article column expands to use
-   whatever space the rails do not claim. The 78ch prose cap on <p>
-   handles reading length separately; the column itself can be wide. */
+/* Center: fills the full grid track. A soft border frames the reading
+   area so it reads as a distinct surface against the page background.
+   The right edge of this border is the line the drag handle sits on,
+   which means the handle's position is visible at any scroll depth
+   instead of only when the middle grip happens to be in view. */
 #quartz-body > .center {
   width: 100% !important;
   max-width: none !important;
   min-width: 0 !important;
-  padding: 0 var(--garden-center-inset) 4rem var(--garden-center-inset) !important;
+  padding: 1.5rem var(--garden-center-inset) 4rem var(--garden-center-inset) !important;
   margin: 0 !important;
   justify-self: stretch !important;
   position: relative !important; /* anchor for the drag handle */
+  border: 1px solid var(--line) !important;
+  border-radius: 12px !important;
+  background: color-mix(in srgb, var(--bg-soft) 35%, transparent) !important;
 }
 
-/* Drag handle on the right edge of the center column. Sits just inside
-   the column so it never collides with the fixed right rail. */
+/* Drag handle on the right edge of the center column. Straddles the
+   border so the visible box edge IS the resize affordance. The grip
+   bars below sit in the middle for redundancy; the .center corner
+   accents (further down) hint at the handle at the top and bottom of
+   the column too. */
 .garden-resize-handle {
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 8px;
-  height: 100%;
+  top: 12px;
+  bottom: 12px;
+  right: -7px; /* straddle the 1px border, centered on the right edge */
+  width: 14px;
   cursor: col-resize;
   z-index: 6;
   background: transparent;
   border-radius: 2px;
   transition: background-color 160ms ease;
   touch-action: none;
+}
+
+/* Corner accents at the top-right and bottom-right of the center
+   column. They hint at the resize affordance from the corners so the
+   handle is discoverable when scrolled to the top or bottom of long
+   pages, not only when the middle grip is in view. */
+#quartz-body > .center::before,
+#quartz-body > .center::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  width: 14px;
+  height: 14px;
+  border-style: solid;
+  border-color: var(--ink-faint);
+  border-width: 0;
+  opacity: 0.65;
+  pointer-events: none;
+  transition: border-color 160ms ease, opacity 160ms ease;
+}
+#quartz-body > .center::before {
+  top: -1px;
+  border-right-width: 2px;
+  border-top-width: 2px;
+  border-top-right-radius: 12px;
+}
+#quartz-body > .center::after {
+  bottom: -1px;
+  border-right-width: 2px;
+  border-bottom-width: 2px;
+  border-bottom-right-radius: 12px;
+}
+
+/* Brighten the corner accents when the drag handle is engaged. */
+#quartz-body > .center:has(.garden-resize-handle:hover)::before,
+#quartz-body > .center:has(.garden-resize-handle:hover)::after,
+#quartz-body > .center:has(.garden-resize-handle.dragging)::before,
+#quartz-body > .center:has(.garden-resize-handle.dragging)::after {
+  border-color: var(--accent);
+  opacity: 1;
 }
 
 /* Two parallel bars draw a small "grip" so the handle reads as
@@ -737,35 +785,118 @@ body.garden-resizing * {
   .garden-resize-handle { display: none !important; }
 }
 
-/* Footer escapes the two-column grid and the body's padding so it spans
-   the full viewport, matching the rest of the portfolio. Without this
-   block it ends up auto-placed into a single grid cell and reads ~227px
-   wide instead of edge-to-edge.
+/* ----------------------------------------------------------------------
+   Sidebar toggle buttons.
+   Two small chevron buttons let the reader collapse the left or right
+   rail. State persists in localStorage and re-applies on every SPA
+   navigation. The buttons use position: fixed so they remain reachable
+   when the rail collapses to zero width.
+   ---------------------------------------------------------------------- */
+.garden-rail-toggle {
+  position: fixed;
+  top: calc(var(--nav-h) + 0.75rem);
+  width: 22px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  color: var(--ink-faint);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1;
+  padding: 0;
+  z-index: 12;
+  transition: color 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+.garden-rail-toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.garden-rail-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
 
-   - grid-column: 1 / -1   ➜ stretches across both tracks
-   - negative margins      ➜ cancel #quartz-body padding-left and the
-                              padding-right reserved for the fixed right rail
-   - z-index               ➜ sits over the pinned right rail (z 10) so the
-                              border line is not cut off on tall pages */
+/* Left toggle sits on the right edge of the left rail. */
+.garden-rail-toggle.left {
+  left: clamp(var(--garden-left-min), var(--garden-left-ideal), var(--garden-left-max));
+  transform: translateX(-50%);
+  border-radius: 0 6px 6px 0;
+}
+.garden-rail-toggle.left::before { content: "‹"; }
+body.garden-left-collapsed .garden-rail-toggle.left::before { content: "›"; }
+body.garden-left-collapsed .garden-rail-toggle.left { left: 0; transform: translateX(0); }
+
+/* Right toggle sits on the left edge of the right rail. */
+.garden-rail-toggle.right {
+  right: clamp(var(--garden-right-min), var(--garden-right-ideal), var(--garden-right-max));
+  transform: translateX(50%);
+  border-radius: 6px 0 0 6px;
+}
+.garden-rail-toggle.right::before { content: "›"; }
+body.garden-right-collapsed .garden-rail-toggle.right::before { content: "‹"; }
+body.garden-right-collapsed .garden-rail-toggle.right { right: 0; transform: translateX(0); }
+
+/* Collapsed state: zero out the rail's layout knobs and hide its
+   contents. The grid track then reads 0, the center column expands
+   to fill the freed space, and the right-rail padding reservation
+   on #quartz-body also goes to 0 because it reads the same vars. */
+body.garden-left-collapsed {
+  --garden-left-min: 0px;
+  --garden-left-ideal: 0px;
+  --garden-left-max: 0px;
+}
+body.garden-left-collapsed #quartz-body > .left.sidebar { display: none !important; }
+
+body.garden-right-collapsed {
+  --garden-right-min: 0px;
+  --garden-right-ideal: 0px;
+  --garden-right-max: 0px;
+}
+body.garden-right-collapsed #quartz-body > .right.sidebar { display: none !important; }
+
+@media (max-width: 800px) {
+  /* Mobile already collapses the layout; hide the toggles too. */
+  .garden-rail-toggle { display: none !important; }
+}
+
+/* Footer is pinned to the viewport, not the grid. Its width is 100vw
+   regardless of the drag handle's column width, even when the center
+   column is dragged wider than the body's content box (grid overflow).
+
+   - grid-column: 1 / -1   ➜ still spans tracks for in-flow placement
+   - width: 100vw           ➜ viewport-anchored width
+   - left: -page-padding-left ➜ shift left edge from content-box-left
+                                 to viewport-left
+   - z-index               ➜ sits over the pinned right rail (z 10) */
 #quartz-body > footer.portfolio-footer,
 #quartz-body > .portfolio-footer {
   grid-column: 1 / -1 !important;
-  margin-left: calc(-1 * var(--garden-page-padding-left)) !important;
-  margin-right: calc(-1 * clamp(var(--garden-right-min), var(--garden-right-ideal), var(--garden-right-max))) !important;
-  margin-top: 3rem !important;
   position: relative !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  left: calc(-1 * var(--garden-page-padding-left)) !important;
+  margin: 3rem 0 0 0 !important;
+  padding-left: var(--garden-page-padding-left) !important;
+  padding-right: clamp(var(--garden-right-min), var(--garden-right-ideal), var(--garden-right-max)) !important;
   z-index: 11 !important;
   background: var(--bg) !important;
+  box-sizing: border-box !important;
 }
 
 @media (max-width: 800px) {
   /* On mobile the grid collapses, the right rail is gone, and the body
-     padding-right is 0, so the negative margins above would push the
-     footer off-screen. Reset them. */
+     padding-right is 0. Reset the viewport-shift trick. */
   #quartz-body > footer.portfolio-footer,
   #quartz-body > .portfolio-footer {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
   }
 }
 
