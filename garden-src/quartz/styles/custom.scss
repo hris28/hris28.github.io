@@ -49,7 +49,9 @@ Tweak any of these to resize the three columns. Each rail scales with the viewpo
   --garden-center-max: 1200px;       /* reading column cap */
   --garden-center-inset: 1.5rem;    /* padding INSIDE the center, creates
                                        breathing room against the rails */
-  --garden-prose-max: 78ch;          /* line-length cap on PARAGRAPHS only (not list items) */
+  --garden-prose-max: none;          /* line-length cap on PARAGRAPHS. `none` lets paragraphs
+                                        track the column width set by the drag handle. Switch
+                                        back to e.g. `78ch` if you want a fixed reading cap. */
   --garden-center-width: 1fr;        /* default fills remaining space; the drag handle
                                         overrides this with a fixed pixel value at runtime */
   --garden-center-min: 560px;        /* drag handle clamps inside these bounds */
@@ -689,23 +691,33 @@ tr:nth-child(even) {
   touch-action: none;
 }
 
-.garden-resize-handle::before {
+/* Two parallel bars draw a small "grip" so the handle reads as
+   draggable at rest, not just on hover. ::before and ::after sit on
+   either side of the center line, 3px apart. */
+.garden-resize-handle::before,
+.garden-resize-handle::after {
   content: "";
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   width: 2px;
-  height: 56px;
-  background: var(--line);
-  border-radius: 2px;
-  transition: background-color 160ms ease, height 160ms ease;
+  height: 36px;
+  background: var(--ink-faint);
+  border-radius: 1px;
+  opacity: 0.55;
+  transform: translateY(-50%);
+  transition: background-color 160ms ease, height 160ms ease, opacity 160ms ease;
+  pointer-events: none;
 }
+.garden-resize-handle::before { left: calc(50% - 3px); }
+.garden-resize-handle::after  { left: calc(50% + 1px); }
 
 .garden-resize-handle:hover::before,
-.garden-resize-handle.dragging::before {
+.garden-resize-handle:hover::after,
+.garden-resize-handle.dragging::before,
+.garden-resize-handle.dragging::after {
   background: var(--accent);
-  height: 96px;
+  opacity: 1;
+  height: 72px;
 }
 
 .garden-resize-handle:focus-visible {
@@ -723,6 +735,38 @@ body.garden-resizing * {
 /* Mobile: hide the handle entirely since layout collapses to one column */
 @media (max-width: 800px) {
   .garden-resize-handle { display: none !important; }
+}
+
+/* Footer escapes the two-column grid and the body's padding so it spans
+   the full viewport, matching the rest of the portfolio. Without this
+   block it ends up auto-placed into a single grid cell and reads ~227px
+   wide instead of edge-to-edge.
+
+   - grid-column: 1 / -1   ➜ stretches across both tracks
+   - negative margins      ➜ cancel #quartz-body padding-left and the
+                              padding-right reserved for the fixed right rail
+   - z-index               ➜ sits over the pinned right rail (z 10) so the
+                              border line is not cut off on tall pages */
+#quartz-body > footer.portfolio-footer,
+#quartz-body > .portfolio-footer {
+  grid-column: 1 / -1 !important;
+  margin-left: calc(-1 * var(--garden-page-padding-left)) !important;
+  margin-right: calc(-1 * clamp(var(--garden-right-min), var(--garden-right-ideal), var(--garden-right-max))) !important;
+  margin-top: 3rem !important;
+  position: relative !important;
+  z-index: 11 !important;
+  background: var(--bg) !important;
+}
+
+@media (max-width: 800px) {
+  /* On mobile the grid collapses, the right rail is gone, and the body
+     padding-right is 0, so the negative margins above would push the
+     footer off-screen. Reset them. */
+  #quartz-body > footer.portfolio-footer,
+  #quartz-body > .portfolio-footer {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
 }
 
 /* Strip the base Quartz left/right padding off the sidebar children
@@ -985,6 +1029,23 @@ body.garden-resizing * {
   color: var(--accent) !important;
 }
 
+
+/* ---------- 6. Responsive behavior ---------- */
+
+/* Tablet-ish: drop the right rail but keep left rail + center.
+   Three-column layout persists down to ~720px viewport. */
+@media (max-width: 720px) {
+  #quartz-body {
+    grid-template-columns:
+      clamp(var(--garden-left-min), var(--garden-left-ideal), var(--garden-left-max))
+      minmax(0, 1fr) !important;
+    grid-template-areas: "left center" !important;
+    column-gap: 1.5rem !important;
+    --garden-left-min: 180px;
+    --garden-left-max: 220px;
+  }
+  #quartz-body > .right.sidebar { display: none !important; }
+}
 
 /* Phone: single-column stack */
 @media (max-width: 540px) {
