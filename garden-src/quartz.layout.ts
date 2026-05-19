@@ -13,7 +13,11 @@ export const sharedPageComponents: SharedLayout = {
     Component.PortfolioNav(),
   ],
 
-  afterBody: [],
+  afterBody: [
+    // Mounts the center-column drag handle. Renders nothing visible;
+    // the handle DOM is built by its inline script after `nav` fires.
+    Component.GardenResize(),
+  ],
 
   // Replace the default Quartz footer with your own site footer.
   footer: Component.PortfolioFooter(),

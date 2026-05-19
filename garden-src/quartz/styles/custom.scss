@@ -50,6 +50,10 @@ Tweak any of these to resize the three columns. Each rail scales with the viewpo
   --garden-center-inset: 1.5rem;    /* padding INSIDE the center, creates
                                        breathing room against the rails */
   --garden-prose-max: 78ch;          /* line-length cap on PARAGRAPHS only (not list items) */
+  --garden-center-width: 1fr;        /* default fills remaining space; the drag handle
+                                        overrides this with a fixed pixel value at runtime */
+  --garden-center-min: 560px;        /* drag handle clamps inside these bounds */
+  --garden-center-max-drag: 1400px;
 
   /* Spacing (scales with viewport) */
   --garden-page-padding-left: clamp(1.5rem, 2.5vw, 3rem);   /* breathing room on the LEFT edge */
@@ -603,10 +607,12 @@ tr:nth-child(even) {
   display: grid !important;
   /* Two-column grid: left rail + center. The right rail is pinned
      with position:fixed below, so it does not participate in this
-     grid. Reserve space for it with padding-right on the body. */
+     grid. Reserve space for it with padding-right on the body.
+     The center track reads from --garden-center-width so the drag
+     handle can swap 1fr for a pixel value at runtime. */
   grid-template-columns:
     clamp(var(--garden-left-min), var(--garden-left-ideal), var(--garden-left-max))
-    1fr !important;
+    var(--garden-center-width) !important;
   grid-template-areas: "left center" !important;
 
   column-gap: var(--garden-col-gap) !important;
@@ -664,6 +670,59 @@ tr:nth-child(even) {
   padding: 0 var(--garden-center-inset) 4rem var(--garden-center-inset) !important;
   margin: 0 !important;
   justify-self: stretch !important;
+  position: relative !important; /* anchor for the drag handle */
+}
+
+/* Drag handle on the right edge of the center column. Sits just inside
+   the column so it never collides with the fixed right rail. */
+.garden-resize-handle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 8px;
+  height: 100%;
+  cursor: col-resize;
+  z-index: 6;
+  background: transparent;
+  border-radius: 2px;
+  transition: background-color 160ms ease;
+  touch-action: none;
+}
+
+.garden-resize-handle::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 2px;
+  height: 56px;
+  background: var(--line);
+  border-radius: 2px;
+  transition: background-color 160ms ease, height 160ms ease;
+}
+
+.garden-resize-handle:hover::before,
+.garden-resize-handle.dragging::before {
+  background: var(--accent);
+  height: 96px;
+}
+
+.garden-resize-handle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* While dragging, kill text selection across the page for clean drag UX */
+body.garden-resizing,
+body.garden-resizing * {
+  user-select: none !important;
+  cursor: col-resize !important;
+}
+
+/* Mobile: hide the handle entirely since layout collapses to one column */
+@media (max-width: 800px) {
+  .garden-resize-handle { display: none !important; }
 }
 
 /* Strip the base Quartz left/right padding off the sidebar children
@@ -926,57 +985,6 @@ tr:nth-child(even) {
   color: var(--accent) !important;
 }
 
-/* Make search smaller and more portfolio-like */
-#search-bar,
-.search {
-  font-size: 0.82rem !important;
-}
-
-/* Graph view: wider right rail gives it room to breathe */
-.graph {
-  margin-top: 1.25rem;
-  opacity: 0.9;
-}
-
-.graph:hover {
-  opacity: 1;
-}
-
-.graph > .graph-outer {
-  height: 340px !important;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--bg-soft);
-}
-
-/* ---------- 6. Responsive behavior ---------- */
-
-/* Belt-and-suspenders: force the center column to actually fill its grid track.
-   Several base.scss rules touch .center; this overrides whatever is left. */
-.page > #quartz-body > .center,
-#quartz-body > .center {
-  width: auto !important;
-  max-width: none !important;
-  min-width: 0 !important;
-  margin: 0 !important;
-  justify-self: stretch !important;
-  align-self: stretch !important;
-}
-
-/* Tablet-ish: drop the right rail but keep left rail + center.
-   Three-column layout persists down to ~720px viewport. */
-@media (max-width: 720px) {
-  #quartz-body {
-    grid-template-columns:
-      clamp(var(--garden-left-min), var(--garden-left-ideal), var(--garden-left-max))
-      minmax(0, 1fr) !important;
-    grid-template-areas: "left center" !important;
-    column-gap: 1.5rem !important;
-    --garden-left-min: 180px;
-    --garden-left-max: 220px;
-  }
-  #quartz-body > .right.sidebar { display: none !important; }
-}
 
 /* Phone: single-column stack */
 @media (max-width: 540px) {
