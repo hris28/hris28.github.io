@@ -17,6 +17,10 @@ export const sharedPageComponents: SharedLayout = {
     // Mounts the center-column drag handle. Renders nothing visible;
     // the handle DOM is built by its inline script after `nav` fires.
     Component.GardenResize(),
+    // Mounts the sidebar collapse toggles. Renders nothing visible;
+    // the two buttons are built by its inline script and re-mounted
+    // on every SPA navigation.
+    Component.GardenRails(),
   ],
 
   // Replace the default Quartz footer with your own site footer.
