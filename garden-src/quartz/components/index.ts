@@ -54,3 +54,4 @@ export {
 export { default as PortfolioNav } from "./PortfolioNav"
 export { default as GardenHero } from "./GardenHero"
 export { default as PortfolioFooter } from "./PortfolioFooter"
+export { default as GardenResize } from "./GardenResize"
