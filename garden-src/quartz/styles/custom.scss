@@ -100,18 +100,22 @@ html[data-theme="dark"] {
 
 body {
   font-family: var(--font-sans);
-  /* Solid base colour + faint dot grid that adds texture to the page
-     gutter around the framed reading column. The center box, navbar,
-     and footer all set their own solid bg so the texture only shows
-     in the empty space around them. */
+  /* Solid base colour + a thin curvy vine-and-leaves motif that fits
+     the garden theme. The SVG is inlined as a data URI; the stroke
+     colour is baked into the SVG so we ship one rule per theme.
+     The center box, navbar, and footer set their own solid bg so the
+     pattern only shows through in the gutter and the rails. */
   background-color: var(--bg);
-  background-image: radial-gradient(
-    color-mix(in srgb, var(--ink-faint) 38%, transparent) 0.9px,
-    transparent 1.2px
-  );
-  background-size: 22px 22px;
+  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='120' viewBox='0 0 200 120'%3E%3Cg fill='none' stroke='%238a7a48' stroke-width='0.9' stroke-linecap='round' opacity='0.42'%3E%3Cpath d='M0 60 Q50 10 100 60 T200 60'/%3E%3Cellipse cx='35' cy='32' rx='6' ry='2.6' transform='rotate(-32 35 32)'/%3E%3Cellipse cx='70' cy='22' rx='5.5' ry='2.4' transform='rotate(28 70 22)'/%3E%3Cellipse cx='130' cy='98' rx='6' ry='2.6' transform='rotate(-30 130 98)'/%3E%3Cellipse cx='165' cy='88' rx='5' ry='2.2' transform='rotate(32 165 88)'/%3E%3Cpath d='M20 60 Q30 50 35 32' opacity='0.7'/%3E%3Cpath d='M115 60 Q125 75 130 98' opacity='0.7'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 200px 120px;
+  background-repeat: repeat;
   background-attachment: fixed;
   color: var(--ink);
+}
+
+html[saved-theme="dark"] body,
+html[data-theme="dark"] body {
+  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='120' viewBox='0 0 200 120'%3E%3Cg fill='none' stroke='%23b8a26a' stroke-width='0.9' stroke-linecap='round' opacity='0.32'%3E%3Cpath d='M0 60 Q50 10 100 60 T200 60'/%3E%3Cellipse cx='35' cy='32' rx='6' ry='2.6' transform='rotate(-32 35 32)'/%3E%3Cellipse cx='70' cy='22' rx='5.5' ry='2.4' transform='rotate(28 70 22)'/%3E%3Cellipse cx='130' cy='98' rx='6' ry='2.6' transform='rotate(-30 130 98)'/%3E%3Cellipse cx='165' cy='88' rx='5' ry='2.2' transform='rotate(32 165 88)'/%3E%3Cpath d='M20 60 Q30 50 35 32' opacity='0.7'/%3E%3Cpath d='M115 60 Q125 75 130 98' opacity='0.7'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 /* Light-mode body text reads as a touch thin on the cream surface.
@@ -665,11 +669,12 @@ tr:nth-child(even) {
 /* .right.sidebar intentionally omitted — it is position:fixed above
    and no longer a grid item. */
 
-/* Left rail: fills its track, no inner left padding so search bar is flush */
+/* Left rail: fills its track. Top padding clears the rail toggle so the
+   search row never sits under the toggle's hit area. */
 #quartz-body > .left.sidebar {
   width: 100% !important;
   max-width: none !important;
-  padding: 0 1rem 2rem 0 !important;
+  padding: 3rem 1rem 2rem 0 !important;
   margin: 0 !important;
   border-right: 1px solid var(--line) !important;
 }
@@ -842,10 +847,11 @@ body.garden-resizing * {
   outline-offset: 2px;
 }
 
-/* Left toggle sits on the right edge of the left rail, offset below the
-   search / dark / reader row so it never overlaps those controls. */
+/* Left toggle sits at the top of the rail's right edge, mirroring the
+   right toggle's position. The rail's padding-top (set on .left.sidebar
+   above) keeps the search row from sliding under the toggle. */
 .garden-rail-toggle.left {
-  top: calc(var(--nav-h) + 4rem);
+  top: calc(var(--nav-h) + 0.75rem);
   left: clamp(var(--garden-left-min), var(--garden-left-ideal), var(--garden-left-max));
   transform: translateX(-50%);
   border-radius: 0 6px 6px 0;
@@ -1152,6 +1158,32 @@ body.garden-right-collapsed #quartz-body > .right.sidebar { display: none !impor
   margin-top: 0.75rem !important;
 }
 
+
+/* ---------- 5. Quiet sidebars ---------- */
+
+#quartz-body > .left.sidebar,
+#quartz-body > .right.sidebar {
+  font-size: 0.92rem !important;
+  line-height: 1.55 !important;
+  color: var(--ink-soft) !important;
+}
+
+#quartz-body > .left.sidebar h1,
+#quartz-body > .left.sidebar h2,
+#quartz-body > .left.sidebar h3,
+#quartz-body > .right.sidebar h1,
+#quartz-body > .right.sidebar h2,
+#quartz-body > .right.sidebar h3 {
+  font-size: 0.82rem !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: var(--ink-faint) !important;
+}
+
+.explorer-content {
+  margin-top: 0.75rem !important;
+}
+
 .explorer-content a {
   display: block;
   padding: 0.45rem 0.6rem !important;
@@ -1213,6 +1245,12 @@ body.garden-right-collapsed #quartz-body > .right.sidebar { display: none !impor
   }
   #quartz-body > .left.sidebar,
   #quartz-body > .right.sidebar { display: none !important; }
+  #quartz-body > .center {
+    max-width: 100% !important;
+    padding: 0 0 4rem 0 !important;
+  }
+}
+y: none !important; }
   #quartz-body > .center {
     max-width: 100% !important;
     padding: 0 0 4rem 0 !important;
