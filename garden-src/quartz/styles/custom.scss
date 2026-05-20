@@ -55,7 +55,9 @@ Tweak any of these to resize the three columns. Each rail scales with the viewpo
                                         Switch to e.g. `90ch` if you want a fixed reading cap. */
   --garden-center-width: 1fr;        /* default fills remaining space; the drag handle
                                         overrides this with a fixed pixel value at runtime */
-  --garden-center-min: 560px;        /* drag handle clamps inside these bounds */
+  --garden-center-min: 360px;        /* drag handle clamps inside these bounds; the
+                                        script further clamps max against runtime viewport
+                                        width so the column never overflows on narrow screens */
   --garden-center-max-drag: 1400px;
 
   /* Spacing (scales with viewport) */
@@ -1223,8 +1225,10 @@ body.garden-right-collapsed #quartz-body > .right.sidebar { display: none !impor
 /* ---------- 6. Responsive behavior ---------- */
 
 /* Tablet-ish: drop the right rail but keep left rail + center.
-   Three-column layout persists down to ~720px viewport. */
-@media (max-width: 720px) {
+   Three-column layout needs ~1030px (padding + rails + col gap + center
+   floor). Below that, the center column collides with the fixed right
+   rail. Drop the rail at 1024px so the center has room to breathe. */
+@media (max-width: 1024px) {
   #quartz-body {
     grid-template-columns:
       clamp(var(--garden-left-min), var(--garden-left-ideal), var(--garden-left-max))
@@ -1233,8 +1237,17 @@ body.garden-right-collapsed #quartz-body > .right.sidebar { display: none !impor
     column-gap: 1.5rem !important;
     --garden-left-min: 180px;
     --garden-left-max: 220px;
+    /* No right rail in this range, so cancel its padding reservation */
+    padding-right: 1rem !important;
   }
   #quartz-body > .right.sidebar { display: none !important; }
+  .garden-rail-toggle.right { display: none !important; }
+  /* Pin the footer using only the left padding shift since there's no
+     right rail to escape past on tablet. */
+  #quartz-body > footer.portfolio-footer,
+  #quartz-body > .portfolio-footer {
+    padding-right: 1rem !important;
+  }
 }
 
 /* Phone: single-column stack */
@@ -1245,6 +1258,35 @@ body.garden-right-collapsed #quartz-body > .right.sidebar { display: none !impor
   }
   #quartz-body > .left.sidebar,
   #quartz-body > .right.sidebar { display: none !important; }
+  #quartz-body > .center {
+    max-width: 100% !important;
+    padding: 0 0 4rem 0 !important;
+  }
+}
+em !important;
+  }
+  #quartz-body > .right.sidebar { display: none !important; }
+  .garden-rail-toggle.right { display: none !important; }
+  #quartz-body > footer.portfolio-footer,
+  #quartz-body > .portfolio-footer {
+    padding-right: 1rem !important;
+  }
+}
+
+/* Phone: single-column stack */
+@media (max-width: 540px) {
+  #quartz-body {
+    display: block !important;
+    padding: calc(var(--nav-h) + 1rem) 1rem 0 1rem !important;
+  }
+  #quartz-body > .left.sidebar,
+  #quartz-body > .right.sidebar { display: none !important; }
+  #quartz-body > .center {
+    max-width: 100% !important;
+    padding: 0 0 4rem 0 !important;
+  }
+}
+ !important; }
   #quartz-body > .center {
     max-width: 100% !important;
     padding: 0 0 4rem 0 !important;
