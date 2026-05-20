@@ -9,6 +9,8 @@
 :root {
   --bg: #f5efe1;
   --bg-soft: #efe8d6;
+  --garden-center-bg: #fbf7ec;  /* center reading surface — lighter than --bg
+                                    so text reads cleanly against it */
   --ink: #14202b;
   --ink-soft: #4a5566;
   --ink-faint: #8a7a48;  /* warm gold for light mode, brighter than the old khaki */
@@ -49,19 +51,20 @@ Tweak any of these to resize the three columns. Each rail scales with the viewpo
   --garden-center-max: 1200px;       /* reading column cap */
   --garden-center-inset: 1.5rem;    /* padding INSIDE the center, creates
                                        breathing room against the rails */
-  --garden-prose-max: 95ch;          /* line-length cap on PARAGRAPHS. Set to `none` to let
-                                        paragraphs track the full column. 95ch gives lists and
-                                        headers room to grow with the column while keeping
-                                        prose at a comfortable reading length. */
+  --garden-prose-max: none;          /* paragraphs follow the column width up to --garden-center-max-drag.
+                                        Switch to e.g. `90ch` if you want a fixed reading cap. */
   --garden-center-width: 1fr;        /* default fills remaining space; the drag handle
                                         overrides this with a fixed pixel value at runtime */
   --garden-center-min: 560px;        /* drag handle clamps inside these bounds */
   --garden-center-max-drag: 1400px;
 
   /* Spacing (scales with viewport) */
-  --garden-page-padding-left: clamp(2.25rem, 3.5vw, 4.5rem); /* breathing room on the LEFT edge */
-  --garden-page-padding-right: 0;                            /* zero so right rail hugs viewport edge */
-  --garden-col-gap: clamp(1.5rem, 3vw, 3rem);                /* between columns */
+  --garden-page-padding-left: clamp(1.5rem, 2.5vw, 2.75rem); /* breathing room on the LEFT edge */
+  --garden-page-padding-right: 0;                             /* zero so right rail hugs viewport edge */
+  --garden-col-gap: clamp(2.5rem, 4vw, 4.5rem);               /* between rail and center; doubles as
+                                                                  the gap that keeps the center off the
+                                                                  viewport edge when the left rail is
+                                                                  collapsed */
 }
 
 
@@ -71,6 +74,7 @@ html[saved-theme="dark"],
 html[data-theme="dark"] {
   --bg: #0e1620;
   --bg-soft: #16202d;
+  --garden-center-bg: #1a2838; /* lighter than --bg, easier to read against */
   --ink: #f0e7cf;
   --ink-soft: #d8c79a;   /* warm gold — sidebar items, body meta */
   --ink-faint: #b8a26a;  /* brighter gold — mini titles, faint marks */
@@ -96,8 +100,25 @@ html[data-theme="dark"] {
 
 body {
   font-family: var(--font-sans);
-  background: var(--bg);
+  /* Solid base colour + faint dot grid that adds texture to the page
+     gutter around the framed reading column. The center box, navbar,
+     and footer all set their own solid bg so the texture only shows
+     in the empty space around them. */
+  background-color: var(--bg);
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--ink-faint) 38%, transparent) 0.9px,
+    transparent 1.2px
+  );
+  background-size: 22px 22px;
+  background-attachment: fixed;
   color: var(--ink);
+}
+
+/* Light-mode body text reads as a touch thin on the cream surface.
+   A half-step heavier weight (rendered as IBM Plex Sans Medium) gives
+   the strokes more presence without crossing into bold. */
+html:not([saved-theme="dark"]):not([data-theme="dark"]) #quartz-body > .center article {
+  font-weight: 450;
 }
 
 a {
@@ -660,7 +681,8 @@ tr:nth-child(even) {
   padding: 1rem 1rem 2rem 1rem !important;
   margin: 0 !important;
   border-left: 1px solid var(--line) !important;
-  background: var(--bg) !important;
+  /* Transparent so the body texture shows through behind the rail */
+  background: transparent !important;
 }
 
 /* Center: fills the full grid track. A soft border frames the reading
@@ -678,7 +700,7 @@ tr:nth-child(even) {
   position: relative !important; /* anchor for the drag handle */
   border: 1px solid var(--line) !important;
   border-radius: 12px !important;
-  background: color-mix(in srgb, var(--bg-soft) 35%, transparent) !important;
+  background: var(--garden-center-bg) !important;
 }
 
 /* Drag handle on the right edge of the center column. Straddles the
@@ -795,11 +817,8 @@ body.garden-resizing * {
    ---------------------------------------------------------------------- */
 .garden-rail-toggle {
   position: fixed;
-  /* Vertically centred on the viewport so the toggle never fights with
-     the search / dark / reader row at the top of the left rail. */
-  top: 50%;
   width: 20px;
-  height: 44px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -823,25 +842,29 @@ body.garden-resizing * {
   outline-offset: 2px;
 }
 
-/* Left toggle sits on the right edge of the left rail, mid-viewport. */
+/* Left toggle sits on the right edge of the left rail, offset below the
+   search / dark / reader row so it never overlaps those controls. */
 .garden-rail-toggle.left {
+  top: calc(var(--nav-h) + 4rem);
   left: clamp(var(--garden-left-min), var(--garden-left-ideal), var(--garden-left-max));
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   border-radius: 0 6px 6px 0;
 }
 .garden-rail-toggle.left::before { content: "‹"; }
 body.garden-left-collapsed .garden-rail-toggle.left::before { content: "›"; }
-body.garden-left-collapsed .garden-rail-toggle.left { left: 0; transform: translate(0, -50%); }
+body.garden-left-collapsed .garden-rail-toggle.left { left: 0; transform: translateX(0); }
 
-/* Right toggle sits on the left edge of the right rail, mid-viewport. */
+/* Right toggle sits on the left edge of the right rail. No controls at
+   the top of that rail, so the default top offset is fine. */
 .garden-rail-toggle.right {
+  top: calc(var(--nav-h) + 0.75rem);
   right: clamp(var(--garden-right-min), var(--garden-right-ideal), var(--garden-right-max));
-  transform: translate(50%, -50%);
+  transform: translateX(50%);
   border-radius: 6px 0 0 6px;
 }
 .garden-rail-toggle.right::before { content: "›"; }
 body.garden-right-collapsed .garden-rail-toggle.right::before { content: "‹"; }
-body.garden-right-collapsed .garden-rail-toggle.right { right: 0; transform: translate(0, -50%); }
+body.garden-right-collapsed .garden-rail-toggle.right { right: 0; transform: translateX(0); }
 
 /* Collapsed state: zero out the rail's layout knobs and hide its
    contents. The grid track then reads 0, the center column expands
@@ -1150,7 +1173,6 @@ body.garden-right-collapsed #quartz-body > .right.sidebar { display: none !impor
   font-size: 0.95rem !important;
   font-weight: 600;
 }
-
 .explorer-content > ul > li + li {
   margin-top: 0.1rem;
 }
