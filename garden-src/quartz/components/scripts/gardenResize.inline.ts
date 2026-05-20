@@ -4,10 +4,37 @@
 //
 // Keyboard: when focused, ArrowLeft / ArrowRight nudge by 16px,
 // Shift+Arrow nudges by 64px, Home resets to default.
+//
+// Runtime safety: the script computes the actual horizontal space the
+// center column can occupy on the current viewport and clamps the
+// stored width against it, so a value saved on a wide monitor doesn't
+// overflow on a narrow one (which used to push the handle off-screen
+// and put the article underneath the fixed right rail).
 
 const STORAGE_KEY = "garden:center-width"
 const STEP = 16
 const STEP_LARGE = 64
+
+// Returns the horizontal space the center column can occupy without
+// pushing the grid past the body's content box. The math reads the
+// current grid-template-columns to get the live left-rail width
+// (already 0 when the rail is collapsed) and subtracts body padding,
+// col gap, and the rail. Falls back to a generous value if it can't
+// read the body — better to leave the column alone than truncate.
+function getAvailableWidth(): number {
+  const body = document.getElementById("quartz-body")
+  if (!body) return Infinity
+  const cs = getComputedStyle(body)
+  const padLeft = parseFloat(cs.paddingLeft) || 0
+  const padRight = parseFloat(cs.paddingRight) || 0
+  const colGap = parseFloat(cs.columnGap) || 0
+  const tracks = cs.gridTemplateColumns.trim().split(/\s+/)
+  const leftRail = parseFloat(tracks[0]) || 0
+  const available = window.innerWidth - padLeft - padRight - leftRail - colGap
+  // Leave a couple of pixels of slack so a rounding edge case doesn't
+  // tip the layout into a horizontal scrollbar.
+  return Math.max(0, Math.floor(available) - 2)
+}
 
 function readBounds() {
   const cs = getComputedStyle(document.documentElement)
@@ -15,20 +42,35 @@ function readBounds() {
     const n = parseInt(raw.trim(), 10)
     return Number.isFinite(n) ? n : fallback
   }
-  return {
-    min: parsePx(cs.getPropertyValue("--garden-center-min"), 560),
-    max: parsePx(cs.getPropertyValue("--garden-center-max-drag"), 1400),
-  }
+  const declaredMin = parsePx(cs.getPropertyValue("--garden-center-min"), 360)
+  const declaredMax = parsePx(cs.getPropertyValue("--garden-center-max-drag"), 1400)
+  const available = getAvailableWidth()
+  // Cap the max to whatever the viewport can actually fit; if the
+  // declared min is larger than what fits, the available width wins.
+  const max = Math.max(0, Math.min(declaredMax, available))
+  const min = Math.min(declaredMin, max || declaredMin)
+  return { min, max }
 }
 
 function applyStoredWidth() {
   const stored = localStorage.getItem(STORAGE_KEY)
-  if (!stored) return
-  const w = parseInt(stored, 10)
-  if (!Number.isFinite(w)) return
   const { min, max } = readBounds()
-  const clamped = Math.max(min, Math.min(max, w))
-  document.documentElement.style.setProperty("--garden-center-width", `${clamped}px`)
+  if (stored) {
+    const w = parseInt(stored, 10)
+    if (Number.isFinite(w)) {
+      const clamped = Math.max(min, Math.min(max, w))
+      document.documentElement.style.setProperty("--garden-center-width", `${clamped}px`)
+      return
+    }
+  }
+  // No stored value: let the grid use 1fr but cap via max so the column
+  // never tries to be wider than the runtime viewport allows.
+  document.documentElement.style.setProperty("--garden-center-width", `minmax(0, ${max || 1400}px)`)
+  // Actually 1fr is what we want when nothing's stored. minmax(0, max)
+  // inside grid-template-columns would change semantics. Stay simple:
+  // just remove the inline property so the var falls back to its CSS
+  // default of 1fr.
+  document.documentElement.style.removeProperty("--garden-center-width")
 }
 
 function resetWidth() {
@@ -141,6 +183,20 @@ function setupHandle() {
     document.removeEventListener("touchend", onTouchEnd)
   })
 }
+
+// Re-clamp when the viewport size changes. Throttle to avoid thrashing
+// the grid during a window-drag resize. Module-level so the listener
+// is registered only once even if nav fires repeatedly.
+let resizeTicking = false
+function onResize() {
+  if (resizeTicking) return
+  resizeTicking = true
+  window.requestAnimationFrame(() => {
+    applyStoredWidth()
+    resizeTicking = false
+  })
+}
+window.addEventListener("resize", onResize)
 
 // Apply stored width immediately (before first paint where possible)
 applyStoredWidth()

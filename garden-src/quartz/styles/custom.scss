@@ -1263,15 +1263,13 @@ body.garden-right-collapsed #quartz-body > .right.sidebar { display: none !impor
     padding: 0 0 4rem 0 !important;
   }
 }
-em !important;
-  }
-  #quartz-body > .right.sidebar { display: none !important; }
+
   .garden-rail-toggle.right { display: none !important; }
   #quartz-body > footer.portfolio-footer,
   #quartz-body > .portfolio-footer {
     padding-right: 1rem !important;
   }
-}
+
 
 /* Phone: single-column stack */
 @media (max-width: 540px) {
@@ -1286,9 +1284,4 @@ em !important;
     padding: 0 0 4rem 0 !important;
   }
 }
- !important; }
-  #quartz-body > .center {
-    max-width: 100% !important;
-    padding: 0 0 4rem 0 !important;
-  }
-}
+
