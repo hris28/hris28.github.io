@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+    <channel>
+      <title>Garden</title>
+      <link>https://hris28.github.io/garden</link>
+      <description>Last 10 notes on Garden</description>
+      <generator>Quartz -- quartz.jzhao.xyz</generator>
+      <item>
+    <title>tool-review-notion</title>
+    <link>https://hris28.github.io/garden/tool-review-notion</link>
+    <guid>https://hris28.github.io/garden/tool-review-notion</guid>
+    <description><![CDATA[ Notion AI provides a one-time trial of 20 complimentary responses per workspace for users on the Free or Plus plans. ]]></description>
+    <pubDate>Sun, 17 May 2026 22:09:13 GMT</pubDate>
+  </item><item>
+    <title>garden_roadmap</title>
+    <link>https://hris28.github.io/garden/garden_roadmap</link>
+    <guid>https://hris28.github.io/garden/garden_roadmap</guid>
+    <description><![CDATA[ Garden Content Roadmap and Site Design Notes hris28.github.io/garden — Planning Document Working reference for content, structure, writing principles, and design decisions. ]]></description>
+    <pubDate>Tue, 05 May 2026 04:52:16 GMT</pubDate>
+  </item><item>
+    <title>Browser Fingerprinting</title>
+    <link>https://hris28.github.io/garden/browser-fingerprinting</link>
+    <guid>https://hris28.github.io/garden/browser-fingerprinting</guid>
+    <description><![CDATA[ What browser fingerprinting collects, how unique your browser's fingerprint is, and what defenses actually work. ]]></description>
+    <pubDate>Mon, 04 May 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>What Your ISP Can See</title>
+    <link>https://hris28.github.io/garden/isp-layer</link>
+    <guid>https://hris28.github.io/garden/isp-layer</guid>
+    <description><![CDATA[ A layer-by-layer account of what your Internet Service Provider can observe, under what conditions, and what actually changes when you use HTTPS, encrypted DNS, or a VPN. ]]></description>
+    <pubDate>Mon, 04 May 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>Software Layers: From Firmware to Application</title>
+    <link>https://hris28.github.io/garden/os-layers</link>
+    <guid>https://hris28.github.io/garden/os-layers</guid>
+    <description><![CDATA[ The eleven layers between your hardware and your applications, what each one does, and why the distinctions matter for security and performance. ]]></description>
+    <pubDate>Mon, 04 May 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>Tor Explained</title>
+    <link>https://hris28.github.io/garden/tor-explained</link>
+    <guid>https://hris28.github.io/garden/tor-explained</guid>
+    <description><![CDATA[ How Tor routes traffic, why it is different from a VPN, its real limits, and when to use it. ]]></description>
+    <pubDate>Mon, 04 May 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>Garden Design Notes</title>
+    <link>https://hris28.github.io/garden/garden-design-notes</link>
+    <guid>https://hris28.github.io/garden/garden-design-notes</guid>
+    <description><![CDATA[ Design patterns for articles that include live demonstrations, structured comparisons, and layered technical explanations. ]]></description>
+    <pubDate>Sat, 02 May 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>Tool Review: Bitwarden</title>
+    <link>https://hris28.github.io/garden/tool-review-bitwarden</link>
+    <guid>https://hris28.github.io/garden/tool-review-bitwarden</guid>
+    <description><![CDATA[ Bitwarden is the most commonly recommended open-source password manager. Here is what it actually does, how its encryption model works, and why the open-source and self-hosting options matter. ]]></description>
+    <pubDate>Sat, 02 May 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>Tool Review: DuckDuckGo</title>
+    <link>https://hris28.github.io/garden/tool-review-duckduckgo</link>
+    <guid>https://hris28.github.io/garden/tool-review-duckduckgo</guid>
+    <description><![CDATA[ DuckDuckGo is the most commonly recommended private search engine. Here is what it actually protects, what it does not, and what its business model means for the user. ]]></description>
+    <pubDate>Sat, 02 May 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>Tool Review: Mozilla Firefox</title>
+    <link>https://hris28.github.io/garden/tool-review-firefox</link>
+    <guid>https://hris28.github.io/garden/tool-review-firefox</guid>
+    <description><![CDATA[ Firefox is the only major browser not controlled by an advertising company. Here is what that means in practice, what it does well, and what configuration actually changes. ]]></description>
+    <pubDate>Sat, 02 May 2026 00:00:00 GMT</pubDate>
+  </item>
+    </channel>
+  </rss>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interests · Hrishika Roychoudhury</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-brand">Hrishika Roychoudhury<span class="dot">•</span></a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="resume.html">Résumé</a></li>
+      <li><a href="/garden/">Garden</a></li>
+      <li><a href="interests.html">Interests</a></li>
+      <li>
+        <button class="theme-btn" aria-label="Toggle theme" onclick="toggleTheme()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Parallax hero, shorter than the homepage. Drop your image at
+       images/interests-hero.jpg (dance performance, books, whatever fits). -->
+  <header class="hero">
+    <div class="hero-bg" style="background-image: url('images/marci.JPG');"></div>
+    <div class="hero-content">
+      <p class="eyebrow">Outside the screen</p>
+      <h1 class="display">Interests</h1>
+      <p class="tagline">What I read, dance, watch, and think about when I'm not in front of a terminal.</p>
+    </div>
+  </header>
+
+  <!-- BOOKS with interactive checklist.
+       Each <li> has a checkbox + label. main.js reads data-persist on the <ul>
+       and saves checked IDs to localStorage under that key. -->
+  <section>
+    <div class="wrap-narrow">
+      <h2 class="section-title">Desert island books</h2>
+      <p style="color: var(--ink-soft);">
+        The books I would take with me if I were marooned on a desert island. Check them off as you go.
+      </p>
+
+      <ul class="checklist" data-persist="books">
+        <li><input type="checkbox" id="b1" /><label for="b1"><em>The Great Gatsby</em>, F. Scott Fitzgerald</label></li>
+        <li><input type="checkbox" id="b2" /><label for="b2"><em>Lord of the Flies</em>, William Golding</label></li>
+        <li><input type="checkbox" id="b3" /><label for="b3"><em>Hamlet</em>, William Shakespeare</label></li>
+        <li><input type="checkbox" id="b4" /><label for="b4"><em>Space Boy</em>, Stephen McCranie</label></li>
+        <li><input type="checkbox" id="b5" /><label for="b5"><em>Fahrenheit 451</em>, Ray Bradbury</label></li>
+        <li><input type="checkbox" id="b6" /><label for="b6"><em>To Kill a Mockingbird</em>, Harper Lee</label></li>
+        <li><input type="checkbox" id="b7" /><label for="b7"><em>Divergent</em>, Veronica Roth</label></li>
+        <li><input type="checkbox" id="b8" /><label for="b8"><em>A Thousand Splendid Suns</em>, Khaled Hosseini</label></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- DANCE section shows the inline content-image pattern.
+       Uncomment figure(s) below and drop images into /images/ to use. -->
+  <section style="background: var(--bg-soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+    <div class="wrap-narrow">
+      <h2 class="section-title">Dance</h2>
+      <p>
+        I've trained in Bharatanatyam for over a decade at Nrityam Dance Academy and won Best
+        Choreography at Festival of India. I dabble in hip hop, Bollywood fusion, piano, vocals,
+        and songwriting. If I'm not at a computer, I'm usually moving to something.
+      </p>
+
+      <!-- SINGLE INLINE IMAGE: uncomment and point src at a real file
+      <figure class="content-image">
+        <img src="images/dance-performance.jpg" alt="Bharatanatyam performance" />
+        <figcaption>Festival of India, Charlotte</figcaption>
+      </figure>
+      -->
+
+      <!-- TWO IMAGES SIDE BY SIDE: uncomment to use
+      <div class="content-image-pair">
+        <img src="images/dance-1.jpg" alt="" />
+        <img src="images/dance-2.jpg" alt="" />
+      </div>
+      -->
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap-narrow">
+      <h2 class="section-title">Other loves</h2>
+      <p>
+        Chess shaped how I think about patterns. I've ranked in the top 34 female players in my
+        age group through USCF and still play casually. I compete in Shakespeare monologue and
+        sonnet competitions, and was cast as Marci in my high school production of
+        <em>Almost, Maine</em>.
+      </p>
+      <p>
+        Offline, you can find me cooking something new, choreographing, losing at Catan, or
+        over-engineering a Notion template.
+      </p>
+    </div>
+  </section>
+
+  <section class="contact-strip">
+    <h2>Say hi</h2>
+    <a class="mailto" href="mailto:hris@unc.edu">hris@unc.edu</a>
+  </section>
+
+  <footer>
+    <div class="footer-row">
+      <span>Page last updated, <span id="page-updated"></span></span>
+      <div class="socials">
+        <a href="mailto:hris@unc.edu" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a>
+        <a href="https://linkedin.com/in/hrishikarc" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.7 2.6 4.7 6V21h-4v-5.4c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V21h-4V9z"/></svg></a>
+        <a href="https://github.com/hris28" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.8 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2.9-.3 2-.4 3-.4 1 0 2 .1 3 .4 2.3-1.6 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.4 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.8-5.8 7.8-10.9C23.5 5.7 18.3.5 12 .5z"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

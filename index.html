@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hrishika Roychoudhury</title>
+  <meta name="description" content="MSIS Candidate at UNC SILS. Work at the intersection of HCI, neural networks, and human-centered design." />
+  <!-- 
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+-->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+
+  <!-- Shared nav. Update links here once; all pages use the same markup. -->
+  <nav class="nav">
+    <a href="index.html" class="nav-brand">Hrishika Roychoudhury<span class="dot">•</span></a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="resume.html">Résumé</a></li>
+      <li><a href="/garden/">Garden</a></li>
+      <li><a href="interests.html">Interests</a></li>
+      <li>
+        <button class="theme-btn" aria-label="Toggle theme" onclick="toggleTheme()">
+          <!-- Sun/moon hybrid glyph -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+          </svg>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Hero with parallax background (preserved from original site) -->
+  <header class="hero">
+    <!-- Set your hero image via inline style. Replace images/hero.jpg with any photo. -->
+    <div class="hero-bg" style="background-image: url('images/ncssm-grad.JPG');"></div>
+    <div class="hero-content">
+      <p class="eyebrow">MSIS Candidate · UNC SILS</p>
+      <h1 class="display">Hrishika Roychoudhury</h1>
+      <p class="tagline">Between minds and machines<span class="dot">.</span></p>
+    </div>
+  </header>
+
+  <!-- Short intro section -->
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow">Hello!</p>
+      <p class="lede">
+        I'm Hrishika. I study information science, with an undergraduate background in both neuroscience and computer science. I am currently finishing up my graduate degree at UNC Chapel Hill's School of Data and Information Sciences. My work sits at the intersection of user-computer interaction, neural networks, and human-centered architecture. I have a proven record of interdisciplinary research, cross-functional leadership, and accessible technology solutions. I am experienced in ML model interpretation and evaluation, data visualization, and full-stack web development, as you may be able to see from my various <a href="projects.html">projects</a>. I particularly specialize in and love communicating complex concepts--translating technical insights into actionable design decisions.
+      </p>
+      <div class="spacer"></div>
+      <div class="btn-group">
+        <a class="btn btn-primary" href="projects.html">See projects</a>
+        <a class="btn" href="resume.html">View résumé</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured work: hand-picked highlights. Update the three cards below as needed. -->
+  <section style="background: var(--bg-soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+    <div class="wrap">
+      <p class="eyebrow">Featured work</p>
+      <h2 class="section-title">Selected projects.</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+
+        <article class="project-card" style="border-left-color: var(--accent);">
+          <div class="project-meta"><span class="project-type">Research</span><span class="project-date">2025 to Present</span></div>
+          <h3 class="project-title">Eye Tracking Engagement in AI Assisted Academic Search</h3>
+          <p class="project-desc">Mixed methods study with Tobii Nano Pro comparing ChatGPT against unaided UNC Library Search.</p>
+        </article>
+
+        <article class="project-card">
+          <div class="project-meta"><span class="project-type">Startup</span><span class="project-date">2020 to 2024</span></div>
+          <h3 class="project-title">SkyeLabs Innovation Inc., EcoGel</h3>
+          <p class="project-desc">Sustainable biopolymer aerogel. Pete Conrad Scholar, NASA iTech Top 10 Finalist.</p>
+        </article>
+
+        <article class="project-card">
+          <div class="project-meta"><span class="project-type">Code</span><span class="project-date">2025</span></div>
+          <h3 class="project-title">Health Chart App</h3>
+          <p class="project-desc">FHIR integrated EHR dashboard with Leaflet maps, AJAX, and Highcharts analytics.</p>
+        </article>
+
+      </div>
+      <div style="margin-top: 2rem;">
+        <a href="projects.html" class="btn">All projects →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact strip: tight -->
+  <section class="contact-strip">
+    <h2>Get in touch</h2>
+    <a class="mailto" href="mailto:hris@unc.edu">hris@unc.edu</a>
+  </section>
+
+  <footer>
+    <div class="footer-row">
+      <span>Page last updated, <span id="page-updated"></span></span>
+      <div class="socials">
+        <a href="mailto:hris@unc.edu" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a>
+        <a href="https://linkedin.com/in/hrishikarc" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.7 2.6 4.7 6V21h-4v-5.4c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V21h-4V9z"/></svg></a>
+        <a href="https://github.com/hris28" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.8 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2.9-.3 2-.4 3-.4 1 0 2 .1 3 .4 2.3-1.6 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.4 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.8-5.8 7.8-10.9C23.5 5.7 18.3.5 12 .5z"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
