@@ -124,9 +124,13 @@ const PROJECTS = [
     year: 2024,
     type: "CODE", date: "Jun 2024 to Jul 2024",
     title: "Digital Art Exhibition Catalog",
-    pi: "COMM 150, Introduction to New Media",
+    pi: "COMM 150: Introduction to New Media · Prof. Joyce Rudinsky",
     description: "Immersive virtual gallery built with JavaScript Three.js and Blender, implementing an explorable 3D environment with dynamic lighting and spatial navigation. Integrated Twine scripting and Photoshop layered transitions to create an interactive choice based visual novel storytelling experience.",
     tags: ["THREE.JS", "BLENDER", "TWINE", "NEW MEDIA"],
+    links: [
+      { label: "Code", url: "https://github.com/hris28/twine-story" },
+      { label: "Live", url: "https://hris28.github.io/twine-story/" },
+    ],
   },
 
   // ---------- 2023 ----------
