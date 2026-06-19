@@ -8,12 +8,14 @@
 :root {
   --bg: #f5efe1;               /* warm cream page background */
   --bg-soft: #efe8d6;          /* subtle alt for cards/rails */
-  --ink: #14202b;              /* primary text */
+  --ink: #1d2e40;              /* primary text (navy-tinted, slightly lighter) */
   --ink-soft: #4a5566;         /* secondary text */
   --ink-faint: #8a8577;        /* tertiary, dates, captions */
   --line: #d9cfb8;             /* hairlines, borders */
-  --accent: #1f3a5c;           /* links, navy accent (darkened for contrast) */
+  --accent: #1f3a5c;           /* structural navy accent (borders, markers) */
   --accent-hover: #142a45;
+  --link: #2f6cab;             /* text links (lighter blue) */
+  --link-hover: #244f80;
   --tag-bg: #e7dec6;           /* pill background */
   --tag-ink: #3a3528;
   --hero-overlay: rgba(10, 14, 20, 0.55);
@@ -60,6 +62,8 @@ html[data-theme="dark"] {
   --line: #2a3647;
   --accent: #8ab4dc;
   --accent-hover: #b4cfea;
+  --link: #8ab4dc;
+  --link-hover: #b4cfea;
   --tag-bg: #1f2a3a;
   --tag-ink: #d8d0bd;
   --hero-overlay: rgba(0, 0, 0, 0.65);
@@ -80,8 +84,8 @@ body {
   text-rendering: optimizeLegibility;
 }
 img { max-width: 100%; display: block; }
-a { color: var(--accent); text-decoration: none; transition: color var(--transition); }
-a:hover { color: var(--accent-hover); }
+a { color: var(--link); text-decoration: none; transition: color var(--transition); }
+a:hover { color: var(--link-hover); }
 
 /* Typography */
 h1, h2, h3, h4 { font-family: var(--font-sans); font-weight: 700; letter-spacing: -0.01em; margin: 0; }
@@ -106,8 +110,8 @@ h3 { font-size: 1.35rem; font-weight: 700; }
 .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 1.5rem; }
 .wrap-avg { max-width: var(--maxw-avg); margin: 0 auto; padding: 0 1.5rem; }
 .wrap-narrow { max-width: var(--maxw-narrow); margin: 0 auto; padding: 0 1.5rem; }
-section { padding: 4rem 0; }
-@media (max-width: 720px) { section { padding: 2.5rem 0; } }
+section { padding: 3rem 0; }
+@media (max-width: 720px) { section { padding: 2rem 0; } }
 
 /* Navigation */
 .nav {
@@ -254,6 +258,9 @@ section { padding: 4rem 0; }
   cursor: pointer; flex: 1; font-size: 0.95rem;
   transition: color var(--transition);
 }
+/* Inline muted aside after a book title (kept inside the label so the row
+   flows as one line instead of splitting into a second column). */
+.checklist .note { color: var(--ink-faint); font-size: 0.85em; }
 .checklist input[type="checkbox"]:checked + label {
   color: var(--ink-faint); text-decoration: line-through;
 }
@@ -509,8 +516,8 @@ footer {
 /* =========================================================
    Terminal block (homepage: whoami / cat expertise.txt)
    ========================================================= */
-.terminal-section { padding: 4rem 0 1.25rem; }
-@media (max-width: 720px) { .terminal-section { padding: 2.5rem 0 1rem; } }
+.terminal-section { padding: 2rem 0 1.25rem; }
+@media (max-width: 720px) { .terminal-section { padding: 2rem 0 1rem; } }
 .terminal {
   max-width: var(--maxw-narrow); margin: 0 auto;
   background: var(--term-bg);
@@ -519,6 +526,11 @@ footer {
   overflow: hidden;
   box-shadow: 0 18px 50px -24px rgba(0, 0, 0, 0.55);
   font-family: var(--font-mono);
+  cursor: pointer; /* click toggles show-all / cycling */
+}
+.terminal:focus-visible {
+  outline: 2px solid var(--term-green);
+  outline-offset: 3px;
 }
 .terminal-bar {
   display: flex; align-items: center; gap: 0.5rem;
@@ -534,6 +546,15 @@ footer {
 .terminal-bar .ttitle {
   margin-left: 0.6rem; font-size: 0.72rem; letter-spacing: 0.06em;
   color: color-mix(in srgb, var(--term-ink) 65%, transparent);
+}
+.terminal-bar .thint {
+  margin-left: auto; font-size: 0.66rem; letter-spacing: 0.08em;
+  text-transform: lowercase;
+  color: color-mix(in srgb, var(--term-ink) 42%, transparent);
+  transition: color var(--transition);
+}
+.terminal:hover .thint, .terminal:focus-visible .thint {
+  color: color-mix(in srgb, var(--term-ink) 70%, transparent);
 }
 .terminal-body {
   padding: 1.4rem 1.5rem 1.6rem;
@@ -552,12 +573,8 @@ footer {
   animation: term-blink 1.05s steps(1) infinite;
 }
 @keyframes term-blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
-/* Hovering the terminal reveals the full expertise list immediately. */
-.terminal:hover .out.expertise .pending { opacity: 1; }
-.terminal-body .out.expertise .pending {
-  opacity: 0; transition: opacity 120ms ease;
-}
-.terminal-body .out.expertise.done .pending { opacity: 1; }
+/* Keep the cycling line from collapsing when the word is briefly empty. */
+.terminal-body .out.expertise { min-height: 1.85em; }
 
 /* Subtle lift on the homepage feature cards already handled by .project-card.
    Refine the primary button micro-interaction. */

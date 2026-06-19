@@ -49,19 +49,21 @@
     </div>
   </header>
 
-  <!-- Terminal identity block: whoami / cat expertise.txt.
-       The expertise terms are typed out one-by-one by js/main.js.
-       Accessibility: the full list lives in the .sr-only span for screen
-       readers, the animated line is aria-hidden, reduced-motion shows it
-       instantly, and hovering the terminal reveals everything at once. -->
+  <!-- Terminal identity block: whoami / cat focus.txt.
+       js/main.js rotates through the focus terms one at a time (type, hold,
+       backspace, next, looping). Accessibility: the full list lives in the
+       .sr-only span for screen readers, the animated line is aria-hidden,
+       reduced-motion shows the full list statically, and hovering/focusing
+       the terminal reveals everything at once (the cycle resumes on exit). -->
   <section class="terminal-section reveal">
     <div class="wrap">
-      <div class="terminal" id="terminal" aria-label="Terminal: about Hrishika">
+      <div class="terminal" id="terminal" tabindex="0" aria-label="Terminal: about Hrishika">
         <div class="terminal-bar">
           <span class="dotgroup" aria-hidden="true">
             <span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span>
           </span>
           <span class="ttitle">hris@hrc: ~</span>
+          <span class="thint" aria-hidden="true">click to expand</span>
         </div>
         <div class="terminal-body">
           <p class="line"><span class="prompt">hris@hrc:~$</span> <span class="cmd">whoami</span></p>
@@ -79,7 +81,7 @@
     <div class="wrap-narrow">
       <p class="eyebrow">Hello, world</p>
       <p class="lede">
-        I'm Hrishika. I study information science, with an undergraduate background in both neuroscience and computer science. I am currently finishing up my graduate degree at UNC Chapel Hill's School of Data and Information Sciences. I have a proven record of interdisciplinary research, cross-functional leadership, and accessible technology solutions, as you may be able to see from my various <a href="projects.html">projects</a>. I particularly specialize in and love communicating complex concepts--translating technical insights into actionable design decisions.
+        I'm Hrishika! I study <strong>information science</strong>, with an undergraduate background in both <strong>neuroscience</strong> and <strong>computer science</strong>. I am currently finishing up my graduate degree at UNC Chapel Hill's School of Data and Information Sciences. I have a proven record of interdisciplinary research, cross-functional leadership, and accessible technology solutions, as you may be able to see from my various <a href="projects.html">projects</a>. I particularly specialize in and love communicating complex concepts--translating technical insights into actionable design decisions.
       </p>
       <div class="spacer"></div>
       <div class="btn-group">
@@ -94,7 +96,7 @@
     <div class="wrap">
       <p class="eyebrow">Featured work</p>
       <h2 class="section-title">Selected projects.</h2>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.25rem;">
 
         <article class="project-card" style="border-left-color: var(--accent);">
           <div class="project-meta"><span class="project-type">Research</span><span class="project-date">2025 to Present</span></div>
@@ -115,7 +117,7 @@
         </article>
 
       </div>
-      <div style="margin-top: 2rem;">
+      <div style="margin-top: 1.25rem;">
         <a href="projects.html" class="btn">All projects →</a>
       </div>
     </div>

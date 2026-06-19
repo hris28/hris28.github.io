@@ -94,16 +94,20 @@ function initScrollReveal() {
         }
       });
     },
-    { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+    // threshold 0 = reveal as soon as any part enters view. (A percentage
+    // threshold can never be met by sections taller than the viewport, e.g.
+    // the projects timeline, leaving them stuck invisible.)
+    { threshold: 0, rootMargin: "0px 0px -40px 0px" }
   );
 
   items.forEach((el) => observer.observe(el));
 }
 
-// --- Terminal typewriter: types out expertise.txt one term at a time ---
-// Accessibility: the animated line is aria-hidden and the full list is in a
-// sibling .sr-only span. Reduced motion fills it instantly. Hovering the
-// terminal (or focusing it) skips straight to the full list.
+// --- Terminal typewriter: rotates through expertise terms one at a time ---
+// Types a term, holds, backspaces, then types the next, looping forever.
+// Accessibility: the animated line is aria-hidden and the full list lives in a
+// sibling .sr-only span. Reduced motion shows the full list statically, and
+// hovering/focusing the terminal reveals the whole list (cycle resumes on exit).
 function initTerminalTypewriter() {
   const target = document.getElementById("expertise");
   if (!target) return;
@@ -115,104 +119,147 @@ function initTerminalTypewriter() {
   if (!terms.length) return;
 
   const terminal = document.getElementById("terminal");
-  let finished = false;
+  const hint = terminal ? terminal.querySelector(".thint") : null;
 
-  // Blinking block cursor that trails the typed text and stays put when done.
+  // The single animated word + its trailing blinking cursor.
+  const word = document.createElement("span");
+  word.className = "term";
   const caret = document.createElement("span");
   caret.className = "term-cursor";
   caret.setAttribute("aria-hidden", "true");
 
-  // Build the finished markup once so "reveal all" is trivial.
-  function buildFull() {
-    const frag = document.createDocumentFragment();
+  // Render the whole list statically (reduced-motion + hover "show all").
+  function showAll() {
+    target.textContent = "";
     terms.forEach((term, i) => {
       if (i > 0) {
         const sep = document.createElement("span");
         sep.className = "sep";
         sep.textContent = " · ";
-        frag.appendChild(sep);
+        target.appendChild(sep);
       }
       const span = document.createElement("span");
       span.className = "term";
       span.textContent = term;
-      frag.appendChild(span);
+      target.appendChild(span);
     });
-    return frag;
-  }
-
-  function finish() {
-    if (finished) return;
-    finished = true;
-    target.textContent = "";
-    target.appendChild(buildFull());
     target.appendChild(caret);
     target.classList.add("done");
   }
 
-  // Skip animation entirely for reduced-motion users.
+  // Reduced motion: skip the cycling, just show everything (no toggle hint).
   if (PREFERS_REDUCED_MOTION) {
-    finish();
+    showAll();
+    if (hint) hint.textContent = "";
     return;
   }
 
-  // Let users bail out of the animation by hovering or focusing the terminal.
-  if (terminal) {
-    terminal.addEventListener("mouseenter", finish, { once: true });
-    terminal.addEventListener("focusin", finish, { once: true });
-  }
+  // Rotating cycle: type a term, hold, backspace, advance, loop forever.
+  const TYPE = 55; // ms per typed character
+  const DELETE = 28; // ms per deleted character
+  const HOLD = 1300; // pause once a term is fully typed
+  const BETWEEN = 400; // pause after clearing, before the next term
 
-  let termIndex = 0;
-  let charIndex = 0;
+  let i = 0; // current term index
+  let pos = 0; // characters currently shown
+  let phase = "typing"; // "typing" | "deleting"
+  let timer = null;
+  let revealed = false;
+  let pinned = false; // click locks the full list open until clicked again
 
-  function typeStep() {
-    if (finished) return;
-    const term = terms[termIndex];
-
-    if (charIndex === 0 && termIndex > 0) {
-      const sep = document.createElement("span");
-      sep.className = "sep";
-      sep.textContent = " · ";
-      target.insertBefore(sep, caret);
-    }
-
-    if (charIndex < term.length) {
-      // Group each term's characters under a single .term span.
-      let span = caret.previousElementSibling;
-      if (!span || !span.classList.contains("term") || charIndex === 0) {
-        span = document.createElement("span");
-        span.className = "term";
-        target.insertBefore(span, caret);
-      }
-      span.textContent += term.charAt(charIndex);
-      charIndex++;
-      setTimeout(typeStep, 32 + Math.random() * 34);
-    } else {
-      termIndex++;
-      charIndex = 0;
-      if (termIndex < terms.length) {
-        setTimeout(typeStep, 220); // brief pause between terms
+  function tick() {
+    const term = terms[i];
+    if (phase === "typing") {
+      pos++;
+      word.textContent = term.slice(0, pos);
+      if (pos >= term.length) {
+        phase = "deleting";
+        timer = setTimeout(tick, HOLD);
       } else {
-        // Leave the caret blinking at the end of the line.
-        target.classList.add("done");
-        finished = true;
+        timer = setTimeout(tick, TYPE + Math.random() * 45);
+      }
+    } else {
+      pos--;
+      word.textContent = term.slice(0, pos);
+      if (pos <= 0) {
+        i = (i + 1) % terms.length;
+        phase = "typing";
+        timer = setTimeout(tick, BETWEEN);
+      } else {
+        timer = setTimeout(tick, DELETE);
       }
     }
   }
 
-  function start() {
-    if (finished || target.dataset.started) return;
+  function startCycle() {
     target.dataset.started = "1";
+    target.classList.remove("done");
+    target.textContent = "";
+    target.appendChild(word);
     target.appendChild(caret);
-    typeStep();
+    tick();
   }
 
-  // Begin typing once the terminal scrolls into view.
+  // Reveal = show the full list and stop cycling. Resume = go back to cycling.
+  function reveal() {
+    if (revealed) return;
+    revealed = true;
+    target.dataset.started = "1";
+    clearTimeout(timer);
+    showAll();
+  }
+  function resume() {
+    if (pinned) return; // a click is holding it open
+    if (!revealed) return;
+    revealed = false;
+    pos = 0;
+    phase = "typing";
+    word.textContent = "";
+    startCycle();
+  }
+  // Click (or Enter/Space) pins the full list open; click again resumes cycling.
+  function setLabel() {
+    if (!terminal) return;
+    terminal.setAttribute(
+      "aria-label",
+      pinned
+        ? "Focus areas, showing all. Activate to resume cycling."
+        : "Focus areas, cycling. Activate to show the full list."
+    );
+    if (hint) hint.textContent = pinned ? "click to cycle" : "click to expand";
+  }
+  function togglePin() {
+    pinned = !pinned;
+    setLabel();
+    if (pinned) {
+      reveal();
+    } else {
+      revealed = true; // let resume() proceed
+      resume();
+    }
+  }
+  setLabel();
+  if (terminal) {
+    terminal.addEventListener("mouseenter", reveal);
+    terminal.addEventListener("mouseleave", resume);
+    terminal.addEventListener("focusin", reveal);
+    terminal.addEventListener("focusout", resume);
+    terminal.addEventListener("click", togglePin);
+    terminal.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
+        e.preventDefault();
+        togglePin();
+      }
+    });
+  }
+
+  // Kick off when the terminal scrolls into view.
   if ("IntersectionObserver" in window && terminal) {
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            start();
+            if (!target.dataset.started) startCycle();
             obs.disconnect();
           }
         });
@@ -220,8 +267,8 @@ function initTerminalTypewriter() {
       { threshold: 0.4 }
     );
     obs.observe(terminal);
-  } else {
-    start();
+  } else if (!target.dataset.started) {
+    startCycle();
   }
 }
 
