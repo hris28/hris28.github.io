@@ -1,0 +1,305 @@
+{
+  "main": {
+    "id": "10bc7d62c9338b7f",
+    "type": "split",
+    "children": [
+      {
+        "id": "58236029a0400e64",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "18346d8f0074afed",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "songs/butterfly-effect.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "butterfly-effect"
+            }
+          },
+          {
+            "id": "5bd5a3b3a6d347c9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "songs/peasants-cant-be-princes.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "peasants-cant-be-princes"
+            }
+          },
+          {
+            "id": "c742a74a691fca81",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "songs/power.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "power"
+            }
+          },
+          {
+            "id": "7e83de52923ea0cb",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "songs/what-love-is-like.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "what-love-is-like"
+            }
+          },
+          {
+            "id": "fb4334b6ce85f412",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "songs/city-of-lies.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "city-of-lies"
+            }
+          },
+          {
+            "id": "2ae4da248f986969",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "songs/alone.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "alone"
+            }
+          },
+          {
+            "id": "43b916f7bdb5f963",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "songs/beautiful-blanket-of-blue.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "beautiful-blanket-of-blue"
+            }
+          },
+          {
+            "id": "3c0d0de5df0742b1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "songs/peasants-cant-be-princes.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "peasants-cant-be-princes"
+            }
+          }
+        ],
+        "currentTab": 7
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "b89576e10608e0d9",
+    "type": "split",
+    "children": [
+      {
+        "id": "8aa04489e6d81994",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d658d346cfbe346b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "5c177a57edc05c50",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "08cbd5dceb290cb5",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "right": {
+    "id": "80be581416aec531",
+    "type": "split",
+    "children": [
+      {
+        "id": "3f0f872fa46752e3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "336492a725457cb9",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "songs/alone.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for alone"
+            }
+          },
+          {
+            "id": "896d34dba53697aa",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "songs/alone.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from alone"
+            }
+          },
+          {
+            "id": "29d3c6ded3cc4082",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "17ed8f9a0bd9c6d6",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "0f52e9406c166140",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "songs/alone.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of alone"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "3c0d0de5df0742b1",
+  "lastOpenFiles": [
+    "tools",
+    "thoughts/tools",
+    "thoughts",
+    "posts",
+    "songs/posts",
+    "songs/fairytale.md",
+    "songs/beautiful-blanket-of-blue.md",
+    "songs/harami.md",
+    "songs/alone.md",
+    "songs/rise.md",
+    "songs/insomnia.md",
+    "songs/city-of-lies.md",
+    "songs/what-love-is-like.md",
+    "songs/peasants-cant-be-princes.md",
+    "songs/closer.md",
+    "songs/power.md",
+    "songs/butterfly-effect.md"
+  ]
+}

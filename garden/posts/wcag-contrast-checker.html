@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What makes text readable? · Garden · Hrishika Roychoudhury</title>
+  <meta name="description" content="A question I kept hitting in my own design work — what actually makes text readable enough — answered with a live WCAG contrast checker." />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <script src="../../js/main.js" defer></script>
+</head>
+<body class="garden-page">
+
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <nav class="nav">
+    <a href="../../index.html" class="nav-brand">Hrishika Roychoudhury<span class="dot">•</span></a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <ul class="nav-links">
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../../about.html">About</a></li>
+      <li><a href="../../projects.html">Projects</a></li>
+      <li><a href="../../resume.html">Résumé</a></li>
+      <li><a href="../../garden.html">Garden</a></li>
+      <li><a href="../../interests.html">Interests</a></li>
+      <li>
+        <button class="theme-btn" aria-label="Toggle theme" onclick="toggleTheme()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <section>
+    <div class="wrap-narrow">
+      <a class="back-link" href="../../garden.html">← Back to the garden</a>
+      <p class="eyebrow">post · 🌳 evergreen</p>
+      <h1 class="note-h1">What actually makes text "readable enough"?</h1>
+      <p class="note-meta" style="margin: 0.4rem 0 1.75rem;">10 Feb 2026 · accessibility, design, tool</p>
+
+      <div class="note-view">
+        <p>
+          I kept running into this in my own design work: I'd pick two colors that <em>looked</em> fine,
+          then wonder whether they were actually legible for someone with low vision. It turns out there's
+          a precise, boring, wonderful answer: &#10024;a formula&#10024;. So I built a little checker to stop guessing.
+        </p>
+
+        <!-- ============ EMBEDDED TOOL (kit) ============ -->
+        <div class="kit" id="contrast-kit">
+          <p class="kit-title">⚙ contrast checker</p>
+          <div class="kit-row">
+            <div class="kit-field">
+              <label for="fg">Text color</label>
+              <div class="kit-inputs">
+                <input type="color" id="fg-color" value="#1d2e40" aria-label="Text color picker" />
+                <input type="text" id="fg" value="#1d2e40" aria-label="Text color hex" spellcheck="false" />
+              </div>
+            </div>
+            <div class="kit-field">
+              <label for="bg">Background color</label>
+              <div class="kit-inputs">
+                <input type="color" id="bg-color" value="#f5efe1" aria-label="Background color picker" />
+                <input type="text" id="bg" value="#f5efe1" aria-label="Background color hex" spellcheck="false" />
+              </div>
+            </div>
+          </div>
+
+          <div class="kit-swatch" id="kit-swatch">
+            <span class="big">Almost before we knew it,</span><br />
+            we had left the ground. sample text in your chosen colors.
+          </div>
+
+          <p class="kit-ratio" id="kit-ratio" aria-live="polite">—</p>
+          <div class="kit-badges" id="kit-badges" aria-live="polite"></div>
+        </div>
+        <!-- END EMBEDDED TOOL -->
+
+        <h2>How it actually works</h2>
+        <p>
+          Contrast here isn't about hue, but rather about <em>relative luminance</em>, the perceived brightness of
+          a color normalized so black is 0 and white is 1. For the sRGB colors screens use, luminance is a
+          weighted sum that leans heavily on green (because our eyes do too):
+          <code>L = 0.2126·R + 0.7152·G + 0.0722·B</code>, after each channel is "linearized" from its raw
+          0–255 value.<sup class="cite"><a href="#src-2">[2]</a></sup>
+        </p>
+        <p>
+          The contrast ratio between two colors is then
+          <code>(L1 + 0.05) / (L2 + 0.05)</code>, where L1 is the lighter color and L2 the darker. Ratios run
+          from 1:1 (identical) up to 21:1 (pure black on pure white).<sup class="cite"><a href="#src-1">[1]</a></sup>
+        </p>
+
+        <h2>The thresholds</h2>
+        <p>
+          WCAG 2.1 sets the bar for normal-size text at a ratio of at least <strong>4.5:1</strong> for level AA,
+          and a stricter <strong>7:1</strong> for level AAA. Large text — at least 18pt, or 14pt bold — gets a
+          relaxed bar of <strong>3:1</strong> (AA) and <strong>4.5:1</strong> (AAA), because bigger, heavier
+          letters stay legible at lower contrast.<sup class="cite"><a href="#src-1">[1]</a></sup>
+        </p>
+        <blockquote>
+          One detail I love: the thresholds are hard floors. A computed 4.499:1 does <em>not</em> pass 4.5:1 —
+          you don't round up.<sup class="cite"><a href="#src-1">[1]</a></sup>
+        </blockquote>
+        <p>
+          Why these numbers? They're tied to vision loss: 4.5:1 compensates for roughly 20/40 acuity (common
+          around age 80), and 7:1 for about 20/80.<sup class="cite"><a href="#src-1">[1]</a></sup> The math isn't arbitrary, it's a stand-in for real people squinting at real
+          screens.
+        </p>
+
+        <h2>Sources</h2>
+      </div>
+
+      <div class="sources">
+        <ol>
+          <li id="src-1">
+            W3C, <a href="https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html" target="_blank" rel="noopener">Understanding Success Criterion 1.4.3: Contrast (Minimum)</a>, WCAG 2.1 Understanding Docs.
+          </li>
+          <li id="src-2">
+            W3C, <a href="https://www.w3.org/WAI/WCAG21/Understanding/relative-luminance.html" target="_blank" rel="noopener">Relative luminance</a> (definition and sRGB formula), WCAG 2.1.
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-row">
+      <span>Copyright &copy; Hrishika Roychoudhury 2021-<span id="copyright-year"></span> &nbsp;|&nbsp; Last Updated on <span id="page-updated"></span></span>
+      <div class="socials">
+        <a href="mailto:hrishikarc@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a>
+        <a href="https://linkedin.com/in/hrishikarc" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.7 2.6 4.7 6V21h-4v-5.4c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V21h-4V9z"/></svg></a>
+        <a href="https://github.com/hris28" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.8 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2.9-.3 2-.4 3-.4 1 0 2 .1 3 .4 2.3-1.6 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.4 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.8-5.8 7.8-10.9C23.5 5.7 18.3.5 12 .5z"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- TOOL LOGIC (self-contained) -->
+  <script>
+    (function () {
+      const fgT = document.getElementById("fg");
+      const bgT = document.getElementById("bg");
+      const fgC = document.getElementById("fg-color");
+      const bgC = document.getElementById("bg-color");
+      const swatch = document.getElementById("kit-swatch");
+      const ratioEl = document.getElementById("kit-ratio");
+      const badgesEl = document.getElementById("kit-badges");
+
+      function hexToRgb(hex) {
+        hex = String(hex).replace("#", "").trim();
+        if (hex.length === 3) hex = hex.split("").map((c) => c + c).join("");
+        if (!/^[0-9a-fA-F]{6}$/.test(hex)) return null;
+        return [parseInt(hex.slice(0, 2), 16), parseInt(hex.slice(2, 4), 16), parseInt(hex.slice(4, 6), 16)];
+      }
+      // WCAG 2.1 relative luminance (sRGB), threshold 0.04045.
+      function relLum(rgb) {
+        const f = (v) => { v /= 255; return v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); };
+        return 0.2126 * f(rgb[0]) + 0.7152 * f(rgb[1]) + 0.0722 * f(rgb[2]);
+      }
+      function contrast(a, b) {
+        const L1 = relLum(a), L2 = relLum(b);
+        const hi = Math.max(L1, L2), lo = Math.min(L1, L2);
+        return (hi + 0.05) / (lo + 0.05);
+      }
+      function badge(label, ok) {
+        return `<span class="kit-badge ${ok ? "pass" : "fail"}">${ok ? "✓" : "✗"} ${label}</span>`;
+      }
+
+      function update() {
+        const fg = hexToRgb(fgT.value);
+        const bg = hexToRgb(bgT.value);
+        if (!fg || !bg) {
+          ratioEl.textContent = "Enter two valid hex colors (e.g. #1d2e40).";
+          badgesEl.innerHTML = "";
+          return;
+        }
+        const r = contrast(fg, bg);
+        // Display rounded, but compare against the raw value (no rounding up).
+        ratioEl.innerHTML = r.toFixed(2) + " : 1 <small>contrast ratio</small>";
+        swatch.style.color = fgT.value;
+        swatch.style.background = bgT.value;
+        badgesEl.innerHTML = [
+          badge("AA normal (4.5)", r >= 4.5),
+          badge("AA large (3.0)", r >= 3),
+          badge("AAA normal (7.0)", r >= 7),
+          badge("AAA large (4.5)", r >= 4.5),
+        ].join("");
+      }
+
+      // Keep the color picker and the hex field in sync, both ways.
+      fgC.addEventListener("input", () => { fgT.value = fgC.value; update(); });
+      bgC.addEventListener("input", () => { bgT.value = bgC.value; update(); });
+      fgT.addEventListener("input", () => { const v = hexToRgb(fgT.value); if (v) fgC.value = fgT.value; update(); });
+      bgT.addEventListener("input", () => { const v = hexToRgb(bgT.value); if (v) bgC.value = bgT.value; update(); });
+
+      update();
+    })();
+  </script>
+</body>
+</html>

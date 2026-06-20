@@ -3,16 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projects · Hrishika Roychoudhury</title>
+  <title>Garden · Hrishika Roychoudhury</title>
   <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
   <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
   <script src="js/main.js" defer></script>
-  <script src="js/projects.js" defer></script>
+  <script src="js/garden.js" defer></script>
+  <script src="js/garden-entry.js" defer></script>
 </head>
-<body>
+<body class="garden-page">
+
+  <div class="scroll-progress" aria-hidden="true"></div>
 
   <nav class="nav">
     <a href="index.html" class="nav-brand">Hrishika Roychoudhury<span class="dot">•</span></a>
@@ -34,29 +37,13 @@
     </ul>
   </nav>
 
-  <header class="hero hero-small">
-    <div class="hero-bg" style="background-image: url('images/pearlhacks2.jpeg');"></div>
-    <div class="hero-content">
-      <p class="eyebrow">Selected work</p>
-      <h1 class="display">Projects</h1>
-      <p class="tagline">Research, code, hardware, hackathons</p>
+  <section>
+    <div class="wrap-narrow">
+      <article id="entry-root" class="note-view">
+        <!-- Filled by js/garden-entry.js based on ?slug= -->
+        <p class="garden-empty">Loading…</p>
+      </article>
     </div>
-  </header>
-
-  <!-- Timeline root. Populated by projects.js. -->
-  <section style="padding-top: 2rem;">
-    <div class="wrap">
-      <p class="lede" style="margin-bottom: 2rem;">
-        A running timeline of research, project, and hackathon work,
-        from eye tracking AI studies to published wastewater research, sorted reverse chronologically.
-      </p>
-      <div id="projects-root" class="timeline"></div>
-    </div>
-  </section>
-
-  <section class="contact-strip">
-    <h2>Have a project in mind?</h2>
-    <a class="mailto" href="mailto:hrishikarc@gmail.com">hrishikarc@gmail.com</a>
   </section>
 
   <footer>
