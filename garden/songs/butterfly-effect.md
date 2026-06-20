@@ -1,10 +1,10 @@
-*Every breath
-Has consequence,*
+*Every breath*
+*Has consequence,*
 
 *Somewhere else it seems.*
 
-*Every step
-Has an effect,*
+*Every step*
+*Has an effect,*
 
 *Larger than you’d think.*
 
@@ -23,13 +23,13 @@ Of one sand particle
 Can collapse the complete
 Crowning castle.
 
-*Every past,
-Has a future.*
+*Every past,*
+*Has a future.*
 
 *Time is but fleeting.*
 
-*Every word,
-Paints a picture.*
+*Every word,*
+*Paints a picture.*
 
 *Larger than you’d think.*
 
@@ -53,16 +53,16 @@ Began the journey across,
 Never believed closing the door,
 Would bring about such chaos.
 
-*Brace the butterflies,
-They’ve been stepping stones in the pond.*
+*Brace the butterflies,*
+*They’ve been stepping stones in the pond.*
 
-*Oh Brace the butterfly,
-And the ripples are getting long.*
+*Oh Brace the butterfly,*
+*And the ripples are getting long.*
 
-*Brace the butterflies,
-They have gone and created waves.*
+*Brace the butterflies,*
+*They have gone and created waves.*
 
-*Oh Brace the butterflies,
-Or a tsunami will wreck your place.*
+*Oh Brace the butterflies,*
+*Or a tsunami will wreck your place.*
 
 Take care of what you say,
