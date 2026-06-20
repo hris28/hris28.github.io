@@ -272,10 +272,27 @@ function initTerminalTypewriter() {
   }
 }
 
+// --- Reading progress bar (Wattpad-style) ---
+// Activates on any page that includes <div class="scroll-progress">.
+function initScrollProgress() {
+  const bar = document.querySelector(".scroll-progress");
+  if (!bar) return;
+  function update() {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+    bar.style.width = pct + "%";
+  }
+  window.addEventListener("scroll", () => requestAnimationFrame(update), { passive: true });
+  window.addEventListener("resize", update);
+  update();
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   highlightActiveNav();
   stampFooterDate();
   initChecklists();
   initScrollReveal();
   initTerminalTypewriter();
+  initScrollProgress();
 });

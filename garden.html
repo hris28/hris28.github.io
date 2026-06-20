@@ -3,16 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projects · Hrishika Roychoudhury</title>
+  <title>Garden · Hrishika Roychoudhury</title>
+  <meta name="description" content="A digital garden: mini tools, songs, research notes, posts, and rabbit holes--growing in public." />
   <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
   <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
   <script src="js/main.js" defer></script>
-  <script src="js/projects.js" defer></script>
+  <script src="js/garden.js" defer></script>
 </head>
-<body>
+<body class="garden-page">
 
   <nav class="nav">
     <a href="index.html" class="nav-brand">Hrishika Roychoudhury<span class="dot">•</span></a>
@@ -34,29 +35,65 @@
     </ul>
   </nav>
 
+  <!-- Terminal-flavored garden header -->
   <header class="hero hero-small">
-    <div class="hero-bg" style="background-image: url('images/pearlhacks2.jpeg');"></div>
+    <div class="hero-bg"></div>
     <div class="hero-content">
-      <p class="eyebrow">Selected work</p>
-      <h1 class="display">Projects</h1>
-      <p class="tagline">Research, code, hardware, hackathons</p>
+      <p class="eyebrow">My Personal Archive</p>
+      <h1 class="display">The Garden</h1>
+      <p class="tagline">Tools, songs, notes, posts, and rabbit holes<span class="dot">.</span> Growing in public<span class="dot">.</span></p>
     </div>
   </header>
 
-  <!-- Timeline root. Populated by projects.js. -->
-  <section style="padding-top: 2rem;">
+  <!-- Intro (expandable) -->
+  <section class="reveal" style="padding-bottom: 0;">
     <div class="wrap">
-      <p class="lede" style="margin-bottom: 2rem;">
-        A running timeline of research, project, and hackathon work,
-        from eye tracking AI studies to published wastewater research, sorted reverse chronologically.
-      </p>
-      <div id="projects-root" class="timeline"></div>
+      <details class="garden-intro">
+        <summary>A living archive of things I've created, things I'm learning, and things I find interesting.</summary>
+        <p class="intro-more">Some entries are polished; many are seedlings. Filter by type, search, or wander the explorer. Markdown notes, hand-built posts, embedded mini-tools, and the occasional song--all in one place.</p>
+      </details>
     </div>
   </section>
 
-  <section class="contact-strip">
-    <h2>Have a project in mind?</h2>
-    <a class="mailto" href="mailto:hrishikarc@gmail.com">hrishikarc@gmail.com</a>
+  <!-- Featured slider -->
+  <section class="reveal">
+    <div class="wrap">
+      <p class="eyebrow">Featured</p>
+      <div class="garden-slider">
+        <div id="garden-featured" class="garden-track" tabindex="0" role="list" aria-label="Featured entries"></div>
+        <div class="slider-nav">
+          <button class="slider-btn" id="slider-prev" type="button" aria-label="Previous featured">&lsaquo;</button>
+          <button class="slider-btn" id="slider-next" type="button" aria-label="Next featured">&rsaquo;</button>
+          <div class="slider-dots" id="slider-dots" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Controls + grid + archive -->
+  <section style="padding-top: 1rem;">
+    <div class="wrap">
+      <div class="garden-controls">
+        <input id="garden-search" class="search-input" type="search" placeholder="Search the garden…" aria-label="Search the garden" />
+        <div id="garden-filters" class="tag-filter" role="group" aria-label="Filter by type">
+          <button class="active" data-type="all" aria-pressed="true">All</button>
+          <button data-type="tool" aria-pressed="false">Tools</button>
+          <button data-type="song" aria-pressed="false">Songs</button>
+          <button data-type="note" aria-pressed="false">Notes</button>
+          <button data-type="post" aria-pressed="false">Posts</button>
+          <button data-type="thought" aria-pressed="false">Thoughts</button>
+        </div>
+        <button id="explorer-toggle" class="explorer-rail-toggle" type="button" aria-expanded="true" aria-controls="garden-explorer">☰ Explorer</button>
+      </div>
+
+      <div class="garden-layout" id="garden-layout">
+        <div id="garden-grid" class="garden-grid"></div>
+        <aside class="garden-explorer" id="garden-explorer" aria-label="Explorer">
+          <h3>Explorer</h3>
+          <div id="garden-explorer-list"></div>
+        </aside>
+      </div>
+    </div>
   </section>
 
   <footer>
