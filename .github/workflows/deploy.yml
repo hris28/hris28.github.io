@@ -20,76 +20,35 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          submodules: false
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - name: Install Quartz dependencies
-        working-directory: ./garden-src
-        run: npm ci
-
-      - name: Create clean combined site folder
+      - name: Assemble static site
         run: |
           rm -rf _site
           mkdir -p _site
 
-      - name: Copy portfolio files into _site
-        run: |
-          cp index.html _site/index.html
-          cp about.html _site/about.html
-          cp projects.html _site/projects.html
-          cp resume.html _site/resume.html
-          cp interests.html _site/interests.html
+          # Top-level pages
+          cp index.html about.html projects.html resume.html interests.html garden.html garden-entry.html _site/
           cp 404.html _site/404.html || true
 
-          cp -r css _site/css
-          cp -r js _site/js
-          cp -r images _site/images
-
+          # Shared assets
+          cp -r css js images _site/
           if [ -d assets ]; then cp -r assets _site/assets; fi
 
-          rm -f _site/garden.html
-
-      - name: Build Quartz garden into /garden
-        working-directory: ./garden-src
-        run: npx quartz build --output ../_site/garden
-
-      - name: Add proof files
-        run: |
+          # Garden content: notes, posts, songs (exclude the Obsidian config folder)
           mkdir -p _site/garden
-          mkdir -p _site/notes
+          cp -r garden/. _site/garden/
+          rm -rf _site/garden/.obsidian
 
-          echo "root deployed at $(date -u)" > _site/deploy-proof.txt
-
-          echo "garden deployed at $(date -u)" > _site/garden/deploy-proof.txt
-          echo "<!doctype html><title>Garden test</title><h1>Garden folder works</h1>" > _site/garden/test.html
-
-          echo "notes deployed at $(date -u)" > _site/notes/deploy-proof.txt
-          echo "<!doctype html><title>Notes test</title><h1>Notes folder works</h1>" > _site/notes/test.html
+          # Tell GitHub Pages not to run Jekyll (so files like _template.html survive)
           touch _site/.nojekyll
 
-      - name: Verify output structure
+      - name: Verify key files exist
         run: |
-          echo "Root output"
-          find _site -maxdepth 3 -type f | sort | head -150
-
-          echo ""
-          echo "Garden output"
-          find _site/garden -maxdepth 3 -type f | sort | head -150
-
-          echo ""
           test -f _site/index.html
-          test -f _site/deploy-proof.txt
-          test -f _site/garden/index.html
-          test -f _site/garden/deploy-proof.txt
-          test -f _site/garden/test.html
-
-          echo "OK: required files exist."
+          test -f _site/garden.html
+          test -f _site/garden-entry.html
+          test -f _site/garden/posts/wcag-contrast-checker.html
+          echo "OK: required files present."
 
       - name: Deploy to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4
