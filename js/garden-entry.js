@@ -60,7 +60,7 @@ async function initGardenEntry() {
     } catch {
       body +=
         `<p>Couldn't load this note (<code>${e.md}</code>).</p>` +
-        `<p style="color:var(--ink-faint);font-size:0.9rem">Two common reasons: (1) you're opening the site as a <code>file://</code> path — browsers block reading files that way, so preview through a local server (e.g. <code>python -m http.server</code>) or VS Code Live Server; (2) the markdown file isn't committed to the repo yet, so it 404s on the live site.</p>`;
+        `<p style="color:var(--ink-faint);font-size:0.9rem">Two common reasons: (1) you're opening the site as a <code>file://</code> path--browsers block reading files that way, so preview through a local server (e.g. <code>python -m http.server</code>) or VS Code Live Server; (2) the markdown file isn't committed to the repo yet, so it 404s on the live site.</p>`;
     }
   } else if (e.body) {
     body += e.body;

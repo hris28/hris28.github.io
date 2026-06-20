@@ -42,7 +42,7 @@ const GARDEN = [
   {
     slug: "what-your-browser-knows",
     type: "post",
-    title: "What your browser quietly reveals",
+    title: "What your browser silently sees",
     date: "2026-06-20",
     maturity: "growing",
     featured: true,
@@ -436,7 +436,9 @@ function parseMarkdown(src) {
   out = out.replace(/\*([^*]+)\*/g, "<em>$1</em>");
   out = out.split(/\n{2,}/).map((chunk) => {
     if (/^\s*<(h[1-6]|ul|ol|pre|blockquote)/.test(chunk)) return chunk;
-    return `<p>${chunk.replace(/\n/g, " ")}</p>`;
+    // Blank lines = new paragraphs; single newlines = hard line breaks
+    // (matches Obsidian's default reading view, important for song lyrics).
+    return `<p>${chunk.replace(/\n/g, "<br>")}</p>`;
   }).join("\n");
   return out;
 }

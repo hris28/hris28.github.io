@@ -41,7 +41,10 @@ function highlightActiveNav() {
 // changed), mirroring R.E. Bergquist's script, formatted "Thursday, 28 May 2026".
 function stampFooterDate() {
   const el = document.getElementById("page-updated");
-  if (el) {
+  // Only fill it if the build hasn't already baked in a per-page git date.
+  // (The deploy workflow injects each page's real last-commit date; locally
+  // the span is empty, so we fall back to this file's last-modified time.)
+  if (el && !el.textContent.trim()) {
     const d = new Date(document.lastModified);
     const opts = { weekday: "long", day: "numeric", month: "long", year: "numeric" };
     el.textContent = isNaN(d.getTime()) ? "" : d.toLocaleDateString("en-GB", opts);

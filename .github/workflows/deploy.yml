@@ -20,6 +20,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # full history so per-file git dates are available
 
       - name: Assemble static site
         run: |
@@ -41,6 +43,22 @@ jobs:
 
           # Tell GitHub Pages not to run Jekyll (so files like _template.html survive)
           touch _site/.nojekyll
+
+      - name: Stamp each page with its real last-edited (git) date
+        run: |
+          stamp () {
+            src="$1"; dest="$2"
+            # Last commit date for the SOURCE file, formatted like "Thursday, 28 May 2026"
+            d="$(git log -1 --format=%cd --date=format:'%A, %-d %B %Y' -- "$src" 2>/dev/null || true)"
+            [ -z "$d" ] && d="$(date -u +'%A, %-d %B %Y')"
+            sed -i "s|<span id=\"page-updated\"></span>|<span id=\"page-updated\">$d</span>|g" "$dest"
+          }
+          for f in index about projects resume interests garden garden-entry 404; do
+            [ -f "_site/$f.html" ] && stamp "$f.html" "_site/$f.html"
+          done
+          for src in garden/posts/*.html; do
+            [ -f "$src" ] && stamp "$src" "_site/$src"
+          done
 
       - name: Verify key files exist
         run: |
