@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="css/style.css" />
   <script src="js/main.js" defer></script>
   <script src="js/garden.js" defer></script>
+  <script src="js/garden-graph.js" defer></script>
 </head>
 <body class="garden-page">
 
@@ -50,7 +51,7 @@
     <div class="wrap">
       <details class="garden-intro">
         <summary>A living archive of things I've created, things I'm learning, and things I find interesting.</summary>
-        <p class="intro-more">Some entries are polished; many are seedlings. Filter by type, search, or wander the explorer. Markdown notes, hand-built posts, embedded mini-tools, and the occasional song--all in one place.</p>
+        <p class="intro-more">Entries are categorized by progress (seedling 🌱, growing 🌿, and evergreen 🌳). Filter by type, search, or wander the explorer. Markdown notes, hand-built posts, embedded mini-tools, and the occasional song--all in one place.</p>
       </details>
     </div>
   </section>
@@ -93,6 +94,14 @@
           <div id="garden-explorer-list"></div>
         </aside>
       </div>
+    </div>
+  </section>
+
+  <!-- Map: how entries connect -->
+  <section class="reveal">
+    <div class="wrap">
+      <p class="eyebrow">Map</p>
+      <div class="garden-graph-wrap"><canvas id="garden-graph" aria-label="Graph of how garden entries connect"></canvas></div>
     </div>
   </section>
 

@@ -500,10 +500,8 @@ footer {
   overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
 }
 
-/* =========================================================
-   Scroll-reveal: sections fade + rise as they enter view.
-   JS adds .is-visible via IntersectionObserver.
-   ========================================================= */
+/* Scroll-reveal: sections fade + rise as they enter view.
+   JS adds .is-visible via IntersectionObserver. */
 .reveal {
   opacity: 0;
   transform: translateY(24px);
@@ -520,9 +518,7 @@ footer {
   .term-cursor { animation: none !important; }
 }
 
-/* =========================================================
-   Terminal block (homepage: whoami / cat expertise.txt)
-   ========================================================= */
+/* Terminal block (homepage: whoami / cat expertise.txt) */
 .terminal-section { padding: 2rem 0 1.25rem; }
 @media (max-width: 720px) { .terminal-section { padding: 2rem 0 1rem; } }
 .terminal {
@@ -588,9 +584,7 @@ footer {
 .btn { will-change: transform; }
 .btn:active { transform: translateY(1px); }
 
-/* =========================================================
-   Garden (digital garden): featured cards + grid + archive
-   ========================================================= */
+/* Garden (digital garden): featured cards + grid + archive */
 .garden-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 250px;
@@ -627,7 +621,65 @@ footer {
   font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.12em;
   text-transform: uppercase; color: var(--accent); font-weight: 600;
 }
-.garden-card .maturity { margin-left: auto; font-size: 0.9rem; line-height: 1; }
+.garden-card { overflow: hidden; }
+.garden-card .card-img {
+  display: block; width: calc(100% + 2.6rem); margin: -1.2rem -1.3rem 0.9rem;
+  aspect-ratio: 16 / 9; object-fit: cover; background: var(--bg);
+}
+.garden-card .card-kit {
+  font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--term-green); border: 1px solid color-mix(in srgb, var(--term-green) 45%, transparent);
+  border-radius: var(--radius-pill); padding: 0.1rem 0.45rem;
+}
+.garden-card .maturity { margin-left: auto; font-size: 0.95rem; line-height: 1; }
+
+/* Subtle per-type top accent on cards without a cover image, for visual rhythm */
+.garden-card:not(.has-img) { border-top: 3px solid var(--line); }
+.garden-card.type-tool:not(.has-img) { border-top-color: var(--term-green); }
+.garden-card.type-song:not(.has-img) { border-top-color: #c98bdc; }
+.garden-card.type-note:not(.has-img) { border-top-color: var(--dot-accent); }
+.garden-card.type-post:not(.has-img) { border-top-color: #e0a458; }
+.garden-card.type-thought:not(.has-img) { border-top-color: #8bb0c9; }
+
+/* Stage-colored word, used in article eyebrows (e.g. "GROWING" in green) */
+.stage-seedling { color: #6a9f2f; }
+.stage-growing { color: #2f9e6a; }
+.stage-evergreen { color: #1c7a4a; }
+html[data-theme="dark"] .stage-seedling { color: #9ccc65; }
+html[data-theme="dark"] .stage-growing { color: #5fcf97; }
+html[data-theme="dark"] .stage-evergreen { color: #57b487; }
+
+/* Internal-link hover preview card */
+.garden-hovercard {
+  position: absolute; z-index: 80; max-width: 300px; width: max-content;
+  background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: 0 14px 40px -16px rgba(0, 0, 0, 0.45); overflow: hidden; font-size: 0.85rem;
+}
+.garden-hovercard .hc-img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; }
+.garden-hovercard .hc-body { padding: 0.7rem 0.85rem; }
+.garden-hovercard .hc-meta { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.25rem; }
+.garden-hovercard .hc-title { font-weight: var(--w-bold); letter-spacing: -0.01em; margin-bottom: 0.2rem; line-height: 1.25; }
+.garden-hovercard .hc-excerpt { color: var(--ink-soft); line-height: 1.45; }
+
+/* Graph view (global on the index, local on an entry) */
+.garden-graph-wrap { border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-soft); margin-top: 1.25rem; }
+#garden-graph { display: block; width: 100%; height: 440px; }
+.localgraph-wrap { border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-soft); margin: 1rem 0 1.25rem; }
+#garden-localgraph { display: block; width: 100%; height: 280px; }
+
+/* Connections (backlinks + links to) on an entry page */
+.garden-connections { margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid var(--line); }
+.garden-connections h2 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+.garden-connections h4 { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 0.4rem; }
+.conn-lists { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.conn-lists ul { list-style: none; margin: 0; padding: 0; }
+.conn-lists li { padding: 0.25rem 0; }
+@media (max-width: 560px) { .conn-lists { grid-template-columns: 1fr; } }
+
+/* Media embeds inside garden entries */
+.media-video { display: block; width: 100%; border-radius: var(--radius); border: 1px solid var(--line); margin: 1.5rem 0; background: #000; }
+.audio-embed { width: 100%; margin: 1.25rem 0; }
+.pdf-embed { width: 100%; height: 80vh; border: 1px solid var(--line); border-radius: var(--radius); margin: 1.5rem 0; }
 .garden-card .card-title {
   font-size: 1.12rem; font-weight: var(--w-bold);
   letter-spacing: -0.01em; line-height: 1.25; margin: 0;
@@ -658,7 +710,7 @@ footer {
   letter-spacing: -0.02em; line-height: 1.1; margin: 0;
 }
 
-/* ---- Garden background texture (subtle wavy "vine" pattern) ---- */
+/* Garden background texture (subtle wavy "vine" pattern) */
 /* Light theme: faint navy lines. */
 .garden-page::before {
   content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
@@ -670,7 +722,7 @@ html[data-theme="dark"] .garden-page::before {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='70'%3E%3Cpath d='M0,35 C17.5,15 52.5,15 70,35 C87.5,55 122.5,55 140,35' fill='none' stroke='%23e6d8b8' stroke-opacity='0.06' stroke-width='1.5'/%3E%3C/svg%3E");
 }
 
-/* ---- Collapsible intro card ---- */
+/* Collapsible intro card */
 .garden-intro {
   background: var(--bg-soft); border: 1px solid var(--line);
   border-radius: var(--radius); padding: 1rem 1.3rem; margin-top: 0.5rem;
@@ -687,7 +739,7 @@ html[data-theme="dark"] .garden-page::before {
 .garden-intro[open] summary::after { content: "collapse"; }
 .garden-intro .intro-more { margin: 0.9rem 0 0.2rem; color: var(--ink-soft); }
 
-/* ---- Featured slider ---- */
+/* Featured slider */
 .garden-slider { position: relative; margin-top: 1.25rem; }
 .garden-track {
   display: flex; gap: 1.25rem; overflow-x: auto; scroll-snap-type: x mandatory;
@@ -714,14 +766,14 @@ html[data-theme="dark"] .garden-page::before {
 .slider-dots button.active { background: var(--dot-accent); }
 @media (prefers-reduced-motion: reduce) { .garden-track { scroll-behavior: auto; } }
 
-/* ---- Scroll-progress bar ---- */
+/* Scroll-progress bar */
 .scroll-progress {
   position: fixed; top: 0; left: 0; height: 3px; width: 0;
   background: var(--dot-accent); z-index: 60;
 }
 @media (prefers-reduced-motion: no-preference) { .scroll-progress { transition: width 90ms linear; } }
 
-/* ---- Explorer rail (replaces archive): grouped by type ---- */
+/* Explorer rail (replaces archive): grouped by type */
 .explorer-rail-toggle {
   background: none; border: 1px solid var(--line); color: var(--ink-soft);
   font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em;
@@ -750,9 +802,7 @@ html[data-theme="dark"] .garden-page::before {
 .garden-explorer a:hover { color: var(--link); }
 @media (max-width: 880px) { .garden-explorer { position: static; } }
 
-/* =========================================================
-   Embedded mini-tool ("kit") inside educational posts + citations
-   ========================================================= */
+/* Embedded mini-tool ("kit") inside educational posts + citations */
 .kit {
   background: var(--bg-soft); border: 1px solid var(--line);
   border-radius: var(--radius); padding: 1.4rem 1.5rem; margin: 1.75rem 0;
@@ -804,7 +854,7 @@ sup.cite a { font-weight: 600; padding: 0 0.12em; }
 .sources li a { word-break: break-word; }
 .sources li:target { background: var(--bg-soft); border-radius: var(--radius); padding: 0.2rem 0.4rem; }
 
-/* ---- Fingerprint / privacy tool ---- */
+/* Fingerprint / privacy tool */
 .fp-id-wrap { text-align: center; padding: 0.5rem 0 0.75rem; }
 .fp-id { font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; color: var(--accent); letter-spacing: 0.02em; }
 .fp-id-note { font-size: 0.8rem; color: var(--ink-faint); margin-top: 0.3rem; }
@@ -835,6 +885,32 @@ sup.cite a { font-weight: 600; padding: 0 0.12em; }
   color: #1c7a4a; display: inline-flex; align-items: center; gap: 0.4rem; margin-bottom: 0.5rem;
 }
 html[data-theme="dark"] .fp-safe { color: #6fcf97; }
+
+/* Expandable per-field rows (hover for tooltip, click to expand) */
+.fp-row { border-bottom: 1px solid color-mix(in srgb, var(--line) 70%, transparent); }
+.fp-row summary {
+  cursor: pointer; list-style: none; display: flex; gap: 1rem; align-items: baseline;
+  padding: 0.45rem 0;
+}
+.fp-row summary::-webkit-details-marker { display: none; }
+.fp-row summary::after {
+  content: "▸"; margin-left: auto; color: var(--ink-faint); font-size: 0.7rem;
+  transition: transform var(--transition); flex: none;
+}
+.fp-row[open] summary::after { transform: rotate(90deg); }
+.fp-row .fp-k { color: var(--ink-faint); font-family: var(--font-mono); font-size: 0.74rem; min-width: 9rem; flex: none; }
+.fp-row .fp-v { color: var(--ink); font-size: 0.88rem; word-break: break-word; }
+.fp-explain { padding: 0.2rem 0 0.85rem; }
+.fp-explain p { margin: 0.35rem 0; font-size: 0.85rem; color: var(--ink-soft); line-height: 1.55; }
+.fp-tag {
+  display: inline-block; min-width: 6.5rem; margin-right: 0.5rem;
+  font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--accent); vertical-align: baseline;
+}
+@media (max-width: 560px) {
+  .fp-row .fp-k { min-width: 7rem; }
+  .fp-tag { display: block; min-width: 0; margin-bottom: 0.1rem; }
+}
 
 /* Responsive video embed (song entries) */
 .video-embed {

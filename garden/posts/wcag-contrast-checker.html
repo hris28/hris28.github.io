@@ -4,13 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>What makes text readable? · Garden · Hrishika Roychoudhury</title>
-  <meta name="description" content="A question I kept hitting in my own design work — what actually makes text readable enough — answered with a live WCAG contrast checker." />
+  <meta name="description" content="A question I kept hitting in my own design work: what actually makes text readable enough, answered with a live WCAG contrast checker." />
   <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
   <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../../css/style.css" />
   <script src="../../js/main.js" defer></script>
+  <script src="../../js/garden.js" defer></script>
 </head>
 <body class="garden-page">
 
@@ -39,7 +40,7 @@
   <section>
     <div class="wrap-narrow">
       <a class="back-link" href="../../garden.html">← Back to the garden</a>
-      <p class="eyebrow">post · 🌳 evergreen</p>
+      <p class="eyebrow">post · 🌳 <span class="stage-evergreen">evergreen</span></p>
       <h1 class="note-h1">What actually makes text "readable enough"?</h1>
       <p class="note-meta" style="margin: 0.4rem 0 1.75rem;">10 Feb 2026 · accessibility, design, tool</p>
 
@@ -75,7 +76,7 @@
             we had left the ground. sample text in your chosen colors.
           </div>
 
-          <p class="kit-ratio" id="kit-ratio" aria-live="polite">—</p>
+          <p class="kit-ratio" id="kit-ratio" aria-live="polite">calculating…</p>
           <div class="kit-badges" id="kit-badges" aria-live="polite"></div>
         </div>
         <!-- END EMBEDDED TOOL -->
@@ -86,7 +87,7 @@
           a color normalized so black is 0 and white is 1. For the sRGB colors screens use, luminance is a
           weighted sum that leans heavily on green (because our eyes do too):
           <code>L = 0.2126·R + 0.7152·G + 0.0722·B</code>, after each channel is "linearized" from its raw
-          0–255 value.<sup class="cite"><a href="#src-2">[2]</a></sup>
+          0-255 value.<sup class="cite"><a href="#src-2">[2]</a></sup>
         </p>
         <p>
           The contrast ratio between two colors is then
@@ -97,18 +98,18 @@
         <h2>The thresholds</h2>
         <p>
           WCAG 2.1 sets the bar for normal-size text at a ratio of at least <strong>4.5:1</strong> for level AA,
-          and a stricter <strong>7:1</strong> for level AAA. Large text — at least 18pt, or 14pt bold — gets a
+          and a stricter <strong>7:1</strong> for level AAA. Large text (at least 18pt, or 14pt bold) gets a
           relaxed bar of <strong>3:1</strong> (AA) and <strong>4.5:1</strong> (AAA), because bigger, heavier
           letters stay legible at lower contrast.<sup class="cite"><a href="#src-1">[1]</a></sup>
         </p>
         <blockquote>
-          One detail I love: the thresholds are hard floors. A computed 4.499:1 does <em>not</em> pass 4.5:1 —
-          you don't round up.<sup class="cite"><a href="#src-1">[1]</a></sup>
+          One detail I love: the thresholds are hard floors. A computed 4.499:1 does <em>not</em> pass 4.5:1, as
+          you do not round up.<sup class="cite"><a href="#src-1">[1]</a></sup>
         </blockquote>
         <p>
           Why these numbers? They're tied to vision loss: 4.5:1 compensates for roughly 20/40 acuity (common
-          around age 80), and 7:1 for about 20/80.<sup class="cite"><a href="#src-1">[1]</a></sup> The math isn't arbitrary, it represents real people squinting at real
-          screens.
+          around age 80), and 7:1 for about 20/80.<sup class="cite"><a href="#src-1">[1]</a></sup> The math isn't arbitrary, 
+          it represents real people squinting at real screens.
         </p>
 
         <h2>Sources</h2>
