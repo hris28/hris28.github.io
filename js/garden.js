@@ -59,7 +59,7 @@ const GARDEN = [
     featured: true,
     tags: ["privacy", "security", "web"],
     excerpt: "A fifteen-minute orientation to how the web works and why it matters for your privacy.",
-    page: "garden/posts/internet-interaction.html",
+    page: "garden/posts/internet-interaction.md",
   },
   {
     slug: "evaluating-sources",
@@ -70,7 +70,7 @@ const GARDEN = [
     featured: true,
     tags: ["privacy", "security", "web"],
     excerpt: "Privacy and security information comes from sources with very different incentives. Here is how to tell them apart.",
-    page: "garden/posts/source-evaluation.html",
+    page: "garden/posts/source-evaluation.md",
   },
   {
     slug: "threat-modeling",
@@ -81,7 +81,7 @@ const GARDEN = [
     featured: true,
     tags: ["privacy", "security", "web"],
     excerpt: "Most security advice is written for an abstract worst-case. Threat modeling is about figuring out which risks actually apply to you.",
-    page: "garden/posts/threat-modeling.html",
+    page: "garden/posts/threat-modeling.md",
   },
   {
     slug: "privacy-basics",
@@ -92,7 +92,7 @@ const GARDEN = [
     featured: true,
     tags: ["privacy", "security", "web"],
     excerpt: "What cookies, tracking pixels, and browser fingerprinting actually are, how they work mechanically, and what blocking them does and does not achieve.",
-    page: "garden/posts/privacy-basics.html",
+    page: "garden/posts/privacy-basics.md",
   },
   {
   slug: "vpn-explained",
@@ -137,12 +137,12 @@ const GARDEN = [
 {
   slug: "os-layer",
   type: "note",
-  title: "The OS Layer: What Your Operating System Sees",
+  title: "Software Layers: From Firmware to Application",
   date: "2026-05-01",
   maturity: "growing",
   tags: ["os", "privacy", "network"],
-  excerpt: "What the OS handles for you, and what can be exposed.",
-  md: "garden/notes/os-layer.md",
+  excerpt: "The eleven layers between your hardware and your applications, what each one does, and why the distinctions matter for security and performance.",
+  md: "garden/notes/os-layers.md",
 },
 { 
   slug: "hardware-basics", 

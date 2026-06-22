@@ -121,14 +121,14 @@ This is a policy and legal situation, not a technical one. No encryption scheme 
 
 ## Sources reviewed
 
-**[Techlore Forum: What Your ISP Can See](https://discuss.techlore.tech/t/what-your-isp-can-see/12157)** — The visibility table in this article is adapted from a community forum post. The step-by-step breakdown by scenario is cleaner than most professional explainers. It is a forum post rather than a primary source. Use it for the structure; verify technical claims against IETF RFCs or EFF documentation.
+**[Techlore Forum: What Your ISP Can See](https://discuss.techlore.tech/t/what-your-isp-can-see/12157)** - The visibility table in this article is adapted from a community forum post. The step-by-step breakdown by scenario is cleaner than most professional explainers. It is a forum post rather than a primary source. Use it for the structure; verify technical claims against IETF RFCs or EFF documentation.
 
-**[Cloudflare: DNS Encryption Explained](https://blog.cloudflare.com/dns-encryption-explained/)** — Good on the mechanics of DoH and DoT. Note that Cloudflare operates 1.1.1.1, so they have a commercial interest in DNS encryption adoption. The technical content is accurate and verifiable against the [IETF RFC 8484](https://datatracker.ietf.org/doc/html/rfc8484).
+**[Cloudflare: DNS Encryption Explained](https://blog.cloudflare.com/dns-encryption-explained/)** - Good on the mechanics of DoH and DoT. Note that Cloudflare operates 1.1.1.1, so they have a commercial interest in DNS encryption adoption. The technical content is accurate and verifiable against the [IETF RFC 8484](https://datatracker.ietf.org/doc/html/rfc8484).
 
-**[ismyispspying.com: What Can Your ISP See](https://ismyispspying.com/blog/what-isp-can-see)** — Comprehensive and readable. The full visibility table is one of the better formatted ones available. No obvious commercial interest. Cross-check against primary sources before citing.
+**[ismyispspying.com: What Can Your ISP See](https://ismyispspying.com/blog/what-isp-can-see)** - Comprehensive and readable. The full visibility table is one of the better formatted ones available. No obvious commercial interest. Cross-check against primary sources before citing.
 
-**[Vercara/Digicert: Encrypted DNS Queries](https://vercara.digicert.com/resources/encrypted-dns-queries)** — Good history and mechanics of DoH. Honest about implementation challenges. Concludes with a product recommendation for their own resolver, which should be noted when evaluating any conclusions about what DoH does or does not solve.
+**[Vercara/Digicert: Encrypted DNS Queries](https://vercara.digicert.com/resources/encrypted-dns-queries)** - Good history and mechanics of DoH. Honest about implementation challenges. Concludes with a product recommendation for their own resolver, which should be noted when evaluating any conclusions about what DoH does or does not solve.
 
-**[EFF: Understanding Network Censorship](https://ssd.eff.org/module/understanding-and-circumventing-network-censorship)** — EFF is a nonprofit with no commercial interest in the tools they discuss. The threat model framing here is reliable. The tool recommendations are more cautious and methodology-driven than most VPN review sites.
+**[EFF: Understanding Network Censorship](https://ssd.eff.org/module/understanding-and-circumventing-network-censorship)** - EFF is a nonprofit with no commercial interest in the tools they discuss. The threat model framing here is reliable. The tool recommendations are more cautious and methodology-driven than most VPN review sites.
 
-**[EPIC: Data Brokers](https://epic.org/issues/consumer-privacy/data-brokers/)** — Source for US ISP data sale policy. EPIC is a privacy advocacy nonprofit. Their legal analysis of the 2017 rollback is accurate and cited with primary sources.
+**[EPIC: Data Brokers](https://epic.org/issues/consumer-privacy/data-brokers/)** - Source for US ISP data sale policy. EPIC is a privacy advocacy nonprofit. Their legal analysis of the 2017 rollback is accurate and cited with primary sources.
