@@ -36,6 +36,7 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../../css/style.css" />
   <script src="../../js/main.js" defer></script>
+  <script src="../../js/garden.js" defer></script>
 </head>
 <body class="garden-page">
 
@@ -64,14 +65,14 @@
   <section>
     <div class="wrap-narrow">
       <a class="back-link" href="../../garden.html">← Back to the garden</a>
-      <p class="eyebrow">post · 🌱 seedling</p>
+      <p class="eyebrow">post · 🌱 <span class="stage-seedling">seedling</span></p>
       <h1 class="note-h1">POST TITLE</h1>
       <p class="note-meta" style="margin: 0.4rem 0 1.75rem;">DATE · tag, tag</p>
 
       <div class="note-view">
         <p>Open with the question you investigated and why it nagged at you.</p>
 
-        <!-- ============ EMBEDDED TOOL (kit) — optional ============ -->
+        <!-- EMBEDDED TOOL (kit), optional -->
         <div class="kit" id="my-kit">
           <p class="kit-title">⚙ tool name</p>
           <div class="kit-row">
@@ -82,9 +83,9 @@
               </div>
             </div>
           </div>
-          <p class="kit-ratio" id="kit-output" aria-live="polite">—</p>
+          <p class="kit-ratio" id="kit-output" aria-live="polite">--</p>
         </div>
-        <!-- ========== END EMBEDDED TOOL ========== -->
+        <!-- END EMBEDDED TOOL -->
 
         <h2>What I found</h2>
         <p>
@@ -114,7 +115,7 @@
     </div>
   </footer>
 
-  <!-- ============ TOOL LOGIC (self-contained) ============ -->
+  <!-- TOOL LOGIC (self-contained) -->
   <script>
     (function () {
       const input = document.getElementById("kit-input");
@@ -122,7 +123,7 @@
       if (!input || !output) return;
       function update() {
         // Replace with your tool's logic.
-        output.textContent = input.value ? "You typed: " + input.value : "—";
+        output.textContent = input.value ? "You typed: " + input.value : "--";
       }
       input.addEventListener("input", update);
       update();

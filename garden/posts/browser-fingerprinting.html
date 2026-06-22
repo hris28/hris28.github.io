@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Browser Fingerprinting · Garden · Hrishika Roychoudhury</title>
+  <meta name="description" content="An interactive look at the data any website can read from your browser all computed locally, plus how to push back." />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <script src="../../js/main.js" defer></script>
+  <script src="../../js/garden.js" defer></script>
+</head>
+<body class="garden-page">
+
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <nav class="nav">
+    <a href="../../index.html" class="nav-brand">Hrishika Roychoudhury<span class="dot">•</span></a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <ul class="nav-links">
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../../about.html">About</a></li>
+      <li><a href="../../projects.html">Projects</a></li>
+      <li><a href="../../resume.html">Résumé</a></li>
+      <li><a href="../../garden.html">Garden</a></li>
+      <li><a href="../../interests.html">Interests</a></li>
+      <li>
+        <button class="theme-btn" aria-label="Toggle theme" onclick="toggleTheme()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <section>
+    <div class="wrap-narrow">
+      <a class="back-link" href="../../garden.html">← Back to the garden</a>
+      <p class="eyebrow">post · 🌿 <span class="stage-growing">growing</span></p>
+      <h1 class="note-h1">What your browser silently sees</h1>
+      <p class="note-meta" style="margin: 0.4rem 0 1.75rem;">20 Jun 2026 · privacy, security, web</p>
+
+      <div class="note-view">
+        <p>
+          A rabbit hole I keep falling back into: how much can a website learn about me, without any login or interaction, just from opening the page. The answer is "a startling amount,"
+          and the unsettling part is that these signals combine into a near-unique
+          <em>fingerprint</em> that follows you even with cookies cleared.<sup class="cite"><a href="#src-1">[1]</a></sup>
+          So I built something to read it all back to you, running entirely in your browser.
+        </p>
+
+        <!-- EMBEDDED TOOL (kit) -->
+        <div class="kit" id="fp-kit">
+          <p class="kit-title">⚙ what your browser reveals</p>
+          <p class="fp-safe">● this panel is read entirely in your browser; only the IP lookup at the bottom makes one request</p>
+          <p class="fp-id-note" style="margin:0 0 0.5rem;">Tip: hover any line for a quick definition, or click it to expand what it is, where it lives, how it was read, who can see it, and how to hide it.</p>
+
+          <div class="fp-id-wrap">
+            <div class="fp-id" id="fp-id">computing…</div>
+            <div class="fp-id-note">a rough fingerprint built from your browser's quirks: the more unusual, the easier you are to single out</div>
+          </div>
+
+          <div id="fp-sections"><!-- filled by the script below --></div>
+
+          <div class="kit-actions">
+            <button class="kit-btn" id="fp-json" type="button">⬇ Export JSON</button>
+            <button class="kit-btn" id="fp-copy" type="button">⧉ Copy</button>
+          </div>
+
+          <div class="optin">
+            <p><strong>One external lookup.</strong> Everything above is read locally. Your public IP and rough
+            location cannot be known without asking an outside service, so this page makes a single request to
+            ipapi.co when it loads. <button class="kit-btn" id="fp-ip-refresh" type="button">refresh</button></p>
+            <h3 style="margin: 0.6rem 0 0.4rem;">From an external lookup</h3>
+            <div id="fp-ip-out" class="fp-section"></div>
+          </div>
+        </div>
+        <!-- END EMBEDDED TOOL -->
+
+        <h2>What this is actually showing</h2>
+        <p>
+          None of this required permission. The browser hands it over to make pages work: your screen size so
+          layouts fit, your language so text localizes, your GPU so graphics render. Individually it's harmless.
+          Combined, the set of values is distinctive enough that researchers found most browsers are
+          <em>uniquely identifiable</em> from these traits alone, a technique called
+          <strong>browser fingerprinting</strong>.<sup class="cite"><a href="#src-2">[2]</a></sup> Unlike a cookie,
+          you can't delete a fingerprint.
+        </p>
+
+        <h2>Reading the blanks: where each value lives and who can see it</h2>
+        <p>
+          A line that says "not available" or "not exposed" does not mean the fact about you does not exist, or that no one can know it. It just means your browser's JavaScript did not hand that value to this page. Whether you are still exposed depends on which of three places the data actually lives.
+        </p>
+        <ul>
+          <li><strong>Read locally by JavaScript</strong> (everything in the panel above). If it is blank here, this page could not read it. That is a real, verifiable win when the browser withheld it on purpose.</li>
+          <li><strong>Seen by the network no matter what JavaScript does.</strong> Your public IP is the headline example: local scripts cannot read it, which is why the lookup at the bottom needs an outside service, yet every server you connect to sees it automatically because it is part of the connection itself. The WebRTC row makes the same point, surfacing local and sometimes real IP addresses that ordinary scripts are not meant to expose.<sup class="cite"><a href="#src-1">[1]</a></sup></li>
+          <li><strong>Inferred indirectly.</strong> Even when one signal is blocked, a tracker can often estimate the same thing another way: screen size hints at device class, request timing hints at connection speed. Blocking a vector raises the cost; it rarely deletes the fact.</li>
+        </ul>
+        <p>So a blank in the panel means "this channel was closed," which is genuinely informative, but it is not a clean bill of privacy, because the network layer and cross-method inference live outside what any in-page script can read.</p>
+
+        <h2>Why the same value shows in one browser and not another</h2>
+        <p>
+          None of these values is pulled from a hidden file. Each one exists only because a browser chose to implement a JavaScript interface that returns it, and browsers disagree about which interfaces to ship. That disagreement is exactly why "GPU renderer" or "device memory" appears in Chrome but is blank in Firefox or Tor. Three different mechanisms sit behind a blank:
+        </p>
+        <ul>
+          <li><strong>The browser never implemented the API.</strong> <code>navigator.deviceMemory</code> (the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Device_Memory_API" target="_blank" rel="noopener">Device Memory API</a>) and the connection group (<code>navigator.connection</code>, the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Network_Information_API" target="_blank" rel="noopener">Network Information API</a>) are Chromium-only. Chrome, Edge, and Brave ship them; Firefox and Safari deliberately never did, in part because they add fingerprinting surface for little user benefit. Your RAM and your connection speed are perfectly real. The browser just offers no property for a script to read them, so the value is <code>undefined</code> and the tool prints "not exposed."<sup class="cite"><a href="#src-3">[3]</a></sup></li>
+          <li><strong>The browser implemented it, then deliberately neutralized it.</strong> Your <strong>GPU vendor and renderer</strong> come from a WebGL extension called <a href="https://developer.mozilla.org/en-US/docs/Web/API/WEBGL_debug_renderer_info" target="_blank" rel="noopener">WEBGL_debug_renderer_info</a>. Standard Chrome returns the real string (for example "ANGLE (NVIDIA GeForce RTX...)") because games and graphics apps legitimately want it. Brave and the Tor Browser intercept that exact call and return a generic or empty value on purpose, because the precise GPU and driver is one of the most identifying things a page can learn. The difference you see is not your hardware changing; it is the browser deciding whether to answer. The Battery Status API is the end state of this approach: Firefox and Safari did not just blank it, they removed it entirely after it was shown to aid tracking.</li>
+          <li><strong>It needs a secure context or a user action, or it genuinely does not apply.</strong> Some APIs only work over HTTPS or after you interact with the page. And some blanks are honest absences: <code>maxTouchPoints</code> is 0 on a non-touch laptop, there is no battery to report on a desktop, and screen orientation is often unset outside mobile.</li>
+        </ul>
+        <p>
+          Two more reasons are not about the browser at all. A value you control and have not set shows "not set" (Do Not Track and Global Privacy Control are blank because you are sending no such signal), and a request that something blocked simply fails (if the IP lookup errors, a tracker blocker stopped that one call, although your IP is still exposed to every server you actually connect to).
+        </p>
+
+        <h2>How to tell which case you are in</h2>
+        <p>Three checks turn a blank from a mystery into a known quantity:</p>
+        <ul>
+          <li><strong>The console.</strong> Open developer tools and type the exact property, for example <code>navigator.deviceMemory</code> or <code>navigator.getBattery</code>. If it returns <code>undefined</code>, this browser does not expose it, which is proof it is a browser gap rather than missing hardware.</li>
+          <li><strong>The compatibility tables.</strong> MDN documents, per browser and version, which interfaces are implemented. That is how we know <code>deviceMemory</code> and the Network Information API are Chromium-only and that Firefox and Safari dropped the Battery API, rather than guessing.<sup class="cite"><a href="#src-3">[3]</a></sup></li>
+          <li><strong>Compare browsers, and use the external lookup.</strong> Open this page in Chrome and the blank "device memory" fills in, which proves the value exists and only the browser was withholding it. The IP lookup returning your address proves the network sees what local scripts could not.</li>
+        </ul>
+
+        <h2>What data makes up a fingerprint</h2>
+        <p>For these same mechanisms framed as separate ideas (cookies vs pixels vs fingerprinting), see <a class="wiki-link" href="garden-entry.html?slug=privacy-basics">Cookies, pixels, and fingerprinting</a>.</p>
+        <ul>
+          <li><strong>User-Agent string:</strong> Your browser sends this with every request. It contains the browser name and version, the operating system, and sometimes device information. Example: <code>Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36</code>.</li>
+          <li><strong>Screen resolution and color depth:</strong> Available to any JavaScript running on the page.</li>
+          <li><strong>Installed fonts:</strong> Websites can probe which fonts are installed by rendering text and measuring its dimensions. Different operating systems and users have different font sets.</li>
+          <li><strong>Canvas fingerprint:</strong> A website can instruct your browser to draw a hidden image using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API" target="_blank" rel="noopener">HTML Canvas API</a>. The rendered result varies subtly across different <a class="wiki-link" href="garden-entry.html?slug=hardware-basics">GPUs</a>, drivers, and operating systems, consistently for a given device, so the hash of the image becomes a stable identifier.<sup class="cite"><a href="#src-2">[2]</a></sup></li>
+          <li><strong>WebGL fingerprint:</strong> Similar to canvas fingerprinting, using the <a href="https://en.wikipedia.org/wiki/WebGL" target="_blank" rel="noopener">WebGL</a> API to identify GPU and driver combinations.</li>
+          <li><strong>Audio context fingerprint:</strong> The <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API" target="_blank" rel="noopener">Web Audio API</a> processes audio signals slightly differently across hardware. A fingerprint can be derived from those differences without playing any audible sound.</li>
+          <li><strong>Timezone and language:</strong> Your timezone and preferred language are disclosed in headers and available to JavaScript.</li>
+          <li><strong>Browser plugins and extensions:</strong> The presence of extensions changes how your browser behaves, and some are detectable.</li>
+          <li><strong>Do Not Track header:</strong> Ironically, setting the <a href="https://en.wikipedia.org/wiki/Do_Not_Track" target="_blank" rel="noopener">Do Not Track</a> header makes your browser slightly more distinctive, because fewer browsers send it.</li>
+          <li><strong>Battery status:</strong> Historically available through the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Battery_Status_API" target="_blank" rel="noopener">Battery Status API</a>. Most browsers have removed or restricted it due to fingerprinting risk, but it shows how any API exposing hardware information is a potential fingerprinting vector.</li>
+        </ul>
+        <p>
+          None of these is particularly unique on its own. Combined, they often single out one browser among millions. Peter Eckersley's 2010 Panopticlick study put numbers on it: of 470,161 browsers tested, 83.6% had a unique fingerprint from a handful of characteristics, rising to 94.2% among those running Flash or Java.<sup class="cite"><a href="#src-4">[4]</a></sup>
+        </p>
+
+        <h2>How this tool builds your fingerprint (and how mine compares)</h2>
+        <p>
+          The id at the top of the panel is honest about being a demo, so here is exactly how it is made. The tool draws a short string onto a hidden <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API" target="_blank" rel="noopener">canvas</a> and reads back the encoded image, which renders slightly differently depending on your GPU, driver, and OS. It then concatenates that image data with your user-agent, languages, screen and viewport sizes, GPU strings, and timezone, and runs the whole blob through a small non-cryptographic hash (FNV-1a) to get the eight-character id. The same browser on the same machine produces the same id; a different device produces a different one.
+        </p>
+        <p>
+          It is deliberately simple, and weaker than a real tracker in two ways. First, it uses only a handful of signals, whereas production libraries like the open-source <a href="https://github.com/fingerprintjs/fingerprintjs" target="_blank" rel="noopener">FingerprintJS</a> combine more than forty, including canvas, WebGL, audio, and font probes.<sup class="cite"><a href="#src-6">[6]</a></sup> Second, my hash is brittle: change one value (resize the window, update a driver) and the id changes completely. Real fingerprinters use fuzzy matching to recognize you across those small changes, which is what makes the technique durable in practice. The underlying idea is identical; mine is just smaller and more honest about its limits.
+        </p>
+
+        <h2>How real websites go further</h2>
+        <p>
+          This demo stops at what your browser volunteers. Commercial trackers add layers on top:
+        </p>
+        <ul>
+          <li><strong>IP geolocation</strong> - your address maps to a city/region and your <a class="wiki-link" href="garden-entry.html?slug=isp-layer">internet provider</a>.</li>
+          <li><strong>Cross-site tracking</strong> - the same third-party scripts on many sites stitch your visits together.<sup class="cite"><a href="#src-1">[1]</a></sup></li>
+          <li><strong>Tracking pixels</strong> - invisible 1×1 images that report when you opened an email or page.</li>
+          <li><strong>Third-party cookies</strong> - persistent IDs shared across sites. Safari and Firefox block them by default; Chrome planned to phase them out but reversed course in 2024 to 2025, so they remain on by default there.<sup class="cite"><a href="#src-5">[5]</a></sup></li>
+        </ul>
+
+        <h2>How consent levels work</h2>
+        <p>
+          The cookie banner isn't decoration. Choices usually map to tiers, each unlocking more collection:
+          <strong>Essential</strong> (basic data needed to function) → <strong>+ Functional</strong> (preferences,
+          storage) → <strong>+ Analytics</strong> (behavior, performance) → <strong>+ Marketing</strong> (full
+          cross-site profiling). "Reject all" really does collect less.
+        </p>
+
+        <h2>The URL itself is tracking you</h2>
+        <p id="utm-demo">Checking this page's address for tracking parameters…</p>
+        <p>
+          Those <code>utm_source</code>, <code>utm_campaign</code>, and <code>gclid</code> tags appended to links
+          tell a site exactly which ad, email, or post sent you. Try adding
+          <code>?utm_source=garden&amp;utm_campaign=demo</code> to this page's URL and reload. The line above will
+          read it back.
+        </p>
+
+        <h2>What you can actually do</h2>
+        <ul>
+          <li>Use a tracker-blocking browser or extension (uBlock Origin; Firefox or Brave with strong defaults).</li>
+          <li>Turn on Global Privacy Control / "Do Not Track" where available.</li>
+          <li>Block third-party cookies in your browser settings.</li>
+          <li>A <a class="wiki-link" href="garden-entry.html?slug=vpn-explained">VPN</a> hides your IP and approximate location (it doesn't stop fingerprinting).</li>
+          <li>Test yourself against a real tracker with EFF's Cover Your Tracks.<sup class="cite"><a href="#src-1">[1]</a></sup></li>
+        </ul>
+
+        <h2>See it from the other side</h2>
+        <p>If you want the raw view, not just a summary of what each actor sees:</p>
+        <ul>
+          <li><strong>What a server receives from you:</strong> <a href="https://httpbin.org/headers" target="_blank" rel="noopener">httpbin.org/headers</a> and <a href="https://httpbin.org/ip" target="_blank" rel="noopener">/ip</a> echo back the exact HTTP headers and IP address your browser hands every site.</li>
+          <li><strong>A fuller fingerprint than this demo:</strong> <a href="https://browserleaks.com/" target="_blank" rel="noopener">BrowserLeaks</a> and <a href="https://amiunique.org/" target="_blank" rel="noopener">AmIUnique</a> show far more signals and how rare your configuration is.</li>
+          <li><strong>What your ISP collects:</strong> the FTC's 2021 staff report examined six major US providers and what they gather and share.<sup class="cite"><a href="#src-7">[7]</a></sup> More on this in <a class="wiki-link" href="garden-entry.html?slug=isp-layer">what your ISP can see</a>.</li>
+          <li><strong>What a VPN changes:</strong> it moves that visibility to the provider, so whether they keep logs is the whole question. See <a class="wiki-link" href="garden-entry.html?slug=vpn-explained">VPN</a>.</li>
+        </ul>
+
+        <h2>Sources</h2>
+      </div>
+
+      <div class="sources">
+        <ol>
+          <li id="src-1">Electronic Frontier Foundation, <a href="https://coveryourtracks.eff.org/" target="_blank" rel="noopener">Cover Your Tracks</a> - test how trackers see your browser.</li>
+          <li id="src-2">Electronic Frontier Foundation, <a href="https://coveryourtracks.eff.org/learn" target="_blank" rel="noopener">Learn More About Fingerprinting</a>.</li>
+          <li id="src-3">MDN Web Docs, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator" target="_blank" rel="noopener">Navigator API</a> and its per-browser compatibility tables (plus the Device Memory, Network Information, and WebGL debug-renderer-info pages linked inline), documenting which browsers expose each value.</li>
+          <li id="src-4">Peter Eckersley, <a href="https://coveryourtracks.eff.org/static/browser-uniqueness.pdf" target="_blank" rel="noopener">How Unique Is Your Web Browser?</a> (Panopticlick), PETS 2010.</li>
+          <li id="src-5">Google, <a href="https://privacysandbox.google.com/blog/privacy-sandbox-next-steps" target="_blank" rel="noopener">Next steps for Privacy Sandbox and tracking protections in Chrome</a> (third-party cookies retained), 2025.</li>
+          <li id="src-6">FingerprintJS, <a href="https://github.com/fingerprintjs/fingerprintjs" target="_blank" rel="noopener">open-source browser fingerprinting library</a> (40+ signals, hashed visitor id).</li>
+          <li id="src-7">US Federal Trade Commission, <a href="https://www.ftc.gov/reports/look-what-isps-know-about-you-examining-privacy-practices-six-major-internet-service-providers" target="_blank" rel="noopener">A Look at What ISPs Know About You</a>, staff report, October 2021.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-row">
+      <span>Copyright &copy; Hrishika Roychoudhury 2021-<span id="copyright-year"></span> &nbsp;|&nbsp; Last Updated on <span id="page-updated"></span></span>
+      <div class="socials">
+        <a href="mailto:hrishikarc@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a>
+        <a href="https://www.instagram.com/hrcdream" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://linkedin.com/in/hrishikarc" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.7 2.6 4.7 6V21h-4v-5.4c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V21h-4V9z"/></svg></a>
+        <a href="https://github.com/hris28" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.8 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2.9-.3 2-.4 3-.4 1 0 2 .1 3 .4 2.3-1.6 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.4 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.8-5.8 7.8-10.9C23.5 5.7 18.3.5 12 .5z"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- TOOL LOGIC (self-contained, all local) -->
+  <script>
+    (function () {
+      const safe = (fn, fallback) => { try { const v = fn(); return (v === undefined || v === null || v === "") ? (fallback ?? "not available") : v; } catch (e) { return fallback ?? "not available"; } };
+      const yn = (v) => (v ? "Yes" : "No");
+
+      // WebGL GPU
+      function gpu() {
+        try {
+          const c = document.createElement("canvas");
+          const gl = c.getContext("webgl") || c.getContext("experimental-webgl");
+          if (!gl) return null;
+          const dbg = gl.getExtension("WEBGL_debug_renderer_info");
+          return dbg
+            ? { vendor: gl.getParameter(dbg.UNMASKED_VENDOR_WEBGL), renderer: gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) }
+            : { vendor: gl.getParameter(gl.VENDOR), renderer: gl.getParameter(gl.RENDERER) };
+        } catch (e) { return null; }
+      }
+      const g = gpu();
+
+      // Canvas fingerprint -> short hash
+      function canvasSig() {
+        try {
+          const c = document.createElement("canvas"); c.width = 240; c.height = 60;
+          const ctx = c.getContext("2d");
+          ctx.textBaseline = "top"; ctx.font = "16px 'Arial'";
+          ctx.fillStyle = "#f60"; ctx.fillRect(10, 10, 100, 30);
+          ctx.fillStyle = "#069"; ctx.fillText("garden 🌱 fingerprint", 12, 15);
+          ctx.fillStyle = "rgba(102,200,0,0.7)"; ctx.fillText("garden 🌱 fingerprint", 14, 17);
+          return c.toDataURL();
+        } catch (e) { return navigator.userAgent; }
+      }
+      function fnv1a(str) {
+        let h = 2166136261 >>> 0;
+        for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
+        return ("00000000" + (h >>> 0).toString(16)).slice(-8);
+      }
+
+      const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+
+      // Gather everything into labelled sections
+      const data = {
+        "Browser & OS": {
+          "User agent": safe(() => navigator.userAgent),
+          "Platform": safe(() => navigator.platform),
+          "Vendor": safe(() => navigator.vendor),
+          "Languages": safe(() => (navigator.languages || [navigator.language]).join(", ")),
+          "CPU cores": safe(() => navigator.hardwareConcurrency),
+          "Device memory (GB)": safe(() => navigator.deviceMemory, "not exposed"),
+          "Max touch points": safe(() => navigator.maxTouchPoints),
+          "Cookies enabled": safe(() => yn(navigator.cookieEnabled)),
+          "Do Not Track": safe(() => navigator.doNotTrack || "not set"),
+          "Online": safe(() => yn(navigator.onLine)),
+          "Global Privacy Control": safe(() => ("globalPrivacyControl" in navigator ? yn(navigator.globalPrivacyControl) : "not set")),
+        },
+        "Screen & display": {
+          "Resolution": safe(() => screen.width + " × " + screen.height),
+          "Available": safe(() => screen.availWidth + " × " + screen.availHeight),
+          "Viewport": safe(() => window.innerWidth + " × " + window.innerHeight),
+          "Color depth": safe(() => screen.colorDepth + "-bit"),
+          "Pixel ratio": safe(() => window.devicePixelRatio),
+          "Orientation": safe(() => (screen.orientation && screen.orientation.type), "not available"),
+        },
+        "Locale & time": {
+          "Time zone": safe(() => Intl.DateTimeFormat().resolvedOptions().timeZone),
+          "UTC offset (min)": safe(() => -new Date().getTimezoneOffset()),
+          "Locale": safe(() => Intl.DateTimeFormat().resolvedOptions().locale),
+          "Local time": safe(() => new Date().toString()),
+        },
+        "Graphics": {
+          "GPU vendor": g ? g.vendor : "blocked / unavailable",
+          "GPU renderer": g ? g.renderer : "blocked / unavailable",
+        },
+        "Page & connection": {
+          "Page URL": safe(() => location.href),
+          "Referrer": safe(() => document.referrer, "(none)"),
+          "Character set": safe(() => document.characterSet),
+          "Last modified": safe(() => document.lastModified),
+          "Connection type": safe(() => (conn && conn.effectiveType), "not exposed"),
+          "Downlink (Mbps)": safe(() => (conn && conn.downlink), "not exposed"),
+          "Round-trip (ms)": safe(() => (conn && conn.rtt), "not exposed"),
+          "Data saver": safe(() => (conn ? yn(conn.saveData) : "not exposed")),
+        },
+        "Storage & features": {
+          "localStorage": safe(() => yn(!!window.localStorage)),
+          "sessionStorage": safe(() => yn(!!window.sessionStorage)),
+          "IndexedDB": safe(() => yn(!!window.indexedDB)),
+          "Service Worker": safe(() => yn("serviceWorker" in navigator)),
+          "WebGL": safe(() => yn(!!g)),
+          "Touch events": safe(() => yn("ontouchstart" in window)),
+        },
+      };
+
+      // Per-field explanations: what it is, where it lives, how it was read, who sees it, how to hide it.
+      const EXPLAIN = {
+        "User agent": { what: "The identifying string your browser announces: its name and version, your OS, and the rendering engine.", where: "Sent in the User-Agent HTTP header on every single request your browser makes, and also readable in JS as navigator.userAgent.", how: "navigator.userAgent", who: "Every server that handles the request (the site, its CDN, and any third-party domain whose scripts or pixels load) plus any script on the page. Your ISP cannot read it over HTTPS, because headers travel inside the encrypted channel.", hide: "Use a browser that freezes or trims it (Chrome and Safari now send a reduced UA; Tor makes everyone share one string). Hand-spoofing usually backfires by making you rarer and can break sites." },
+        "Platform": { what: "Your operating-system family (Win32, MacIntel, Linux, and so on).", where: "navigator.platform, now frozen or deprecated in most browsers.", how: "navigator.platform", who: "Any script on the page.", hide: "Privacy browsers return a generic value; the modern, permissioned replacement is User-Agent Client Hints, which a site must explicitly request." },
+        "Vendor": { what: "Your browser engine's vendor string, 'Google Inc.' for Chromium engines and empty for Firefox.", where: "navigator.vendor.", how: "navigator.vendor", who: "Any script. On its own it only narrows you to an engine family, but it adds entropy when combined with everything else.", hide: "Firefox already returns empty; privacy builds blank it." },
+        "Languages": { what: "Your preferred languages in priority order, which hints at where you are and your background.", where: "Sent in the Accept-Language HTTP header and readable as navigator.languages.", how: "navigator.languages", who: "Every server you connect to (via the header) and any script. A rare language order is quite identifying.", hide: "Set a single common value like en-US; spoofing to something unusual makes you stand out more, not less." },
+        "CPU cores": { what: "The number of logical processor cores (threads) your machine reports.", where: "navigator.hardwareConcurrency.", how: "navigator.hardwareConcurrency", who: "Any script. Combined with RAM and GPU it helps pin down your exact device model.", hide: "Tor and Brave cap or randomize the reported value." },
+        "Device memory (GB)": { what: "Approximate device RAM, rounded to a coarse value (0.25, 0.5, 1, 2, 4, 8).", where: "navigator.deviceMemory, part of the Device Memory API.", how: "navigator.deviceMemory", who: "Scripts, but only in Chromium browsers (Chrome, Edge, Brave). The RAM exists on your machine regardless; Firefox and Safari simply never built a property to expose it, so they report nothing.", hide: "Use Firefox or Safari, which do not implement it at all." },
+        "Max touch points": { what: "How many simultaneous touch points the screen supports; 0 means no touchscreen.", where: "navigator.maxTouchPoints.", how: "navigator.maxTouchPoints", who: "Any script. Distinguishes phones and tablets from desktops.", hide: "Hard to change without breaking touch input; not a high-value target." },
+        "Cookies enabled": { what: "Whether the browser currently accepts cookies.", where: "navigator.cookieEnabled.", how: "navigator.cookieEnabled", who: "Any script.", hide: "Disabling cookies blocks one vector, but 'cookies off' is itself an unusual, identifying setting." },
+        "Do Not Track": { what: "A header asking sites not to track you. It was widely ignored and is now being removed from browsers.", where: "navigator.doNotTrack and the legacy DNT request header.", how: "navigator.doNotTrack", who: "Servers and scripts can read it, but almost none are legally required to honour it, so in practice it does little.", hide: "Prefer Global Privacy Control, which some laws (such as California's CCPA) treat as a binding opt-out." },
+        "Online": { what: "Whether the browser thinks it currently has network connectivity.", where: "navigator.onLine.", how: "navigator.onLine", who: "Any script. Not identifying on its own.", hide: "Nothing to do; it carries no personal information." },
+        "Global Privacy Control": { what: "A signal telling sites you do not want your data sold or shared. Unlike Do Not Track, it has legal teeth in some places.", where: "navigator.globalPrivacyControl and the Sec-GPC header.", how: "navigator.globalPrivacyControl", who: "Servers and scripts; under laws like the CCPA, honouring it is mandatory for covered businesses.", hide: "This is one you want ON; enable it in your browser settings or a privacy extension." },
+        "Resolution": { what: "Your full screen size in pixels.", where: "screen.width and screen.height.", how: "screen.width + screen.height", who: "Any script. A common resolution blends in; an unusual one (ultrawide, scaled) stands out.", hide: "Tor Browser letterboxes the window to a small set of common sizes so everyone looks alike." },
+        "Available": { what: "Screen size minus the space taken by OS bars and docks, which leaks your taskbar or menu-bar setup.", where: "screen.availWidth and screen.availHeight.", how: "screen.availWidth + screen.availHeight", who: "Any script.", hide: "Hard to mask directly; privacy browsers normalize the window instead." },
+        "Viewport": { what: "The inner size of the browser window itself.", where: "window.innerWidth and window.innerHeight.", how: "window.innerWidth + window.innerHeight", who: "Any script, and it updates as you resize.", hide: "Use a standard or maximized window; resizing constantly changes this value." },
+        "Color depth": { what: "Bits of color per pixel, almost always 24.", where: "screen.colorDepth.", how: "screen.colorDepth", who: "Any script. Rarely varies, so it adds little entropy.", hide: "Little to do; nearly everyone reports the same value." },
+        "Pixel ratio": { what: "Device pixels per CSS pixel, i.e. screen density (1 for standard, 2 or more for retina or HiDPI).", where: "window.devicePixelRatio.", how: "window.devicePixelRatio", who: "Any script. Separates high-DPI laptops and phones from standard monitors, and it also tracks your zoom level.", hide: "Hard to mask without breaking rendering; it also shifts when you zoom." },
+        "Orientation": { what: "Whether the screen is portrait or landscape.", where: "screen.orientation.type.", how: "screen.orientation.type", who: "Any script. Mainly meaningful on mobile.", hide: "Not strongly identifying." },
+        "Time zone": { what: "Your IANA time zone (such as America/New_York), which narrows you to a region.", where: "Computed by the browser's Intl engine from your OS clock settings.", how: "Intl.DateTimeFormat().resolvedOptions().timeZone", who: "Any script. With language it is a strong location hint, and a mismatch against your IP location is a tell that you are on a VPN.", hide: "Tor sets every user to UTC." },
+        "UTC offset (min)": { what: "How many minutes your local time differs from UTC.", where: "Derived from your system clock.", how: "new Date().getTimezoneOffset()", who: "Any script; it corroborates the time zone above.", hide: "Same fix as time zone: use a browser that normalizes it." },
+        "Locale": { what: "Your formatting locale for dates, numbers, and currency.", where: "The browser's Intl resolved options.", how: "Intl.DateTimeFormat().resolvedOptions().locale", who: "Any script.", hide: "Set to a common locale; unusual ones add entropy." },
+        "Local time": { what: "Your current clock time.", where: "The system clock.", how: "new Date()", who: "Any script. Not identifying alone, but it confirms your time zone and how accurate your clock is.", hide: "Nothing meaningful to hide here." },
+        "GPU vendor": { what: "The maker of your graphics hardware (NVIDIA, AMD, Intel, Apple).", where: "Exposed by a WebGL extension, WEBGL_debug_renderer_info, not by any header.", how: "WEBGL_debug_renderer_info.UNMASKED_VENDOR_WEBGL", who: "Any script that opens a WebGL context. Standard Chrome answers truthfully; Brave and Tor return a generic value on purpose.", hide: "Use Brave or Tor, which standardize or block it, or disable WebGL." },
+        "GPU renderer": { what: "Your exact graphics chip and driver string. This is one of the single most identifying values in the whole panel.", where: "The same WebGL debug extension as the vendor.", how: "WEBGL_debug_renderer_info.UNMASKED_RENDERER_WEBGL", who: "Any script with WebGL. Only machines with the identical model and driver match, so it narrows you sharply. See the hardware-basics note for why the GPU is so revealing.", hide: "Brave and Tor neutralize it; disabling WebGL removes it at the cost of breaking some sites." },
+        "Page URL": { what: "This page's full address, including any tracking parameters appended to it.", where: "location.href.", how: "location.href", who: "Any script on the page, and the next site receives it as the referrer when you click a link out.", hide: "Strip utm_, gclid, and fbclid parameters; there is nothing to hide on your own pages." },
+        "Referrer": { what: "The page you came from before this one.", where: "Sent in the Referer HTTP header and readable as document.referrer.", how: "document.referrer", who: "The site you land on, on every navigation, which lets it learn where you have been.", hide: "Browsers now trim cross-site referrers by default; a stricter Referrer-Policy or an extension removes it entirely." },
+        "Character set": { what: "The text encoding of the page, almost always UTF-8.", where: "document.characterSet.", how: "document.characterSet", who: "Any script. Effectively not identifying.", hide: "Nothing to do." },
+        "Last modified": { what: "When this page file itself was last changed. This describes the page, not you.", where: "The Last-Modified HTTP header and document.lastModified.", how: "document.lastModified", who: "Any script.", hide: "Not personal data." },
+        "Connection type": { what: "A coarse class for your connection speed (slow-2g, 2g, 3g, 4g).", where: "The Network Information API.", how: "navigator.connection.effectiveType", who: "Scripts, in Chromium only. Your real connection exists regardless; Firefox and Safari just do not implement the API, so they report nothing.", hide: "Use Firefox or Safari, which do not expose it." },
+        "Downlink (Mbps)": { what: "An estimate of your download bandwidth.", where: "Network Information API.", how: "navigator.connection.downlink", who: "Scripts, Chromium only.", hide: "Same as connection type; Firefox and Safari do not expose it." },
+        "Round-trip (ms)": { what: "An estimate of your network latency.", where: "Network Information API.", how: "navigator.connection.rtt", who: "Scripts, Chromium only.", hide: "Same as connection type." },
+        "Data saver": { what: "Whether you have asked the browser to reduce data usage.", where: "Network Information API.", how: "navigator.connection.saveData", who: "Scripts, Chromium only.", hide: "Same as connection type." },
+        "localStorage": { what: "Persistent per-site key-value storage, smaller than IndexedDB but used the same way trackers use cookies.", where: "window.localStorage, partitioned per origin.", how: "!!window.localStorage", who: "Scripts on each site. Like IndexedDB it is not auto-sent, but a value written here survives a cookie clear, so it is another supercookie vector.", hide: "Clear site data (not just cookies); block third-party storage; private windows discard it on close." },
+        "sessionStorage": { what: "Temporary storage scoped to a single tab; gone when the tab closes.", where: "window.sessionStorage.", how: "!!window.sessionStorage", who: "Scripts in that tab.", hide: "Self-clears with the tab, so it is a weak tracking vector." },
+        "IndexedDB": { what: "A full key-value database a page can store in your browser, far bigger than a cookie (often hundreds of MB). It is meant for offline apps, but a tracker can hide a persistent identifier in it.", where: "window.indexedDB, partitioned per site (origin).", how: "!!window.indexedDB", who: "Scripts on each site. Unlike a cookie it is not sent automatically; a script must read it and send it back. But once written it survives clearing cookies, which is why it is a classic 'supercookie' that can re-identify you (and undermine anonymity) after you think you wiped your trail.", hide: "Clear site data, not just cookies; use a private window, which isolates it and discards it on close; modern browsers increasingly partition it per top-level site to block cross-site reuse." },
+        "Service Worker": { what: "A background script a site can install that keeps running after you leave the page, used for offline support and push notifications.", where: "navigator.serviceWorker.", how: "'serviceWorker' in navigator", who: "The installing site. It can cache content and, in principle, persist identifiers, so it has a privacy dimension beyond convenience.", hide: "Clear site data to unregister them; some privacy modes disable them entirely." },
+        "WebGL": { what: "Whether 3D graphics are available, which is also what enables GPU fingerprinting.", where: "Tested by trying to get a WebGL canvas context.", how: "canvas.getContext('webgl')", who: "Any script.", hide: "Disabling WebGL removes the GPU fingerprint but breaks maps, games, and some visual sites." },
+        "Touch events": { what: "Whether the page can receive touch input, which hints at the device type.", where: "The presence of an ontouchstart handler.", how: "'ontouchstart' in window", who: "Any script.", hide: "Reveals device class; minor and hard to change." },
+        "Battery level": { what: "Your remaining charge as a percentage. The briefly-unique level value was once abused to follow users across sites.", where: "The now-deprecated Battery Status API.", how: "navigator.getBattery()", who: "Scripts, in Chromium only. Firefox and Safari removed it specifically because of that tracking abuse.", hide: "Use Firefox or Safari, which no longer expose it." },
+        "Charging": { what: "Whether your device is plugged in.", where: "The Battery Status API.", how: "BatteryManager.charging", who: "Scripts, Chromium only.", hide: "Same as battery level." },
+        "Local / network IPs": { what: "The private addresses your device uses on its own network (like 192.168.x.x), and historically sometimes your real public IP even while on a VPN.", where: "Surfaced by the WebRTC connection setup, not by any header you sent, which is what made it a notorious leak.", how: "new RTCPeerConnection() ICE candidates", who: "Any script, with no permission prompt at all. A site could use it to defeat a VPN or map your local network.", hide: "Disable WebRTC or restrict it with an extension or enterprise policy; Brave and Tor mitigate it by default." },
+        "Detected fonts": { what: "Which fonts are installed on your system, which together form a distinctive set tied to your OS and the apps you have installed.", where: "Not stored anywhere readable; inferred by rendering a string in each candidate font and measuring whether the size changes versus a fallback.", how: "compare element width across font-family guesses", who: "Any script. The exact font list is strongly identifying and a staple of real fingerprinters.", hide: "Privacy browsers limit font enumeration; Tor ships a fixed font set so everyone looks the same." },
+      };
+
+      const wrap = document.getElementById("fp-sections");
+      function rowHtml(k, v) {
+        const x = EXPLAIN[k];
+        const val = String(v).replace(/</g, "&lt;");
+        if (!x) return `<details class="fp-row"><summary><span class="fp-k">${k}</span><span class="fp-v">${val}</span></summary></details>`;
+        const L = [];
+        if (x.what) L.push(`<p><span class="fp-tag">what</span>${x.what}</p>`);
+        if (x.where) L.push(`<p><span class="fp-tag">where it lives</span>${x.where}</p>`);
+        if (x.how) L.push(`<p><span class="fp-tag">how it was read</span><code>${x.how.replace(/</g, "&lt;")}</code></p>`);
+        if (x.who) L.push(`<p><span class="fp-tag">who can see it</span>${x.who}</p>`);
+        if (x.hide) L.push(`<p><span class="fp-tag">how to obscure</span>${x.hide}</p>`);
+        const tip = (x.what || "").replace(/"/g, "&quot;");
+        return `<details class="fp-row"><summary title="${tip}"><span class="fp-k">${k}</span><span class="fp-v">${val}</span></summary><div class="fp-explain">${L.join("")}</div></details>`;
+      }
+      function appendSection(title, entries) {
+        const d = document.createElement("div"); d.className = "fp-section";
+        d.innerHTML = `<h3>${title}</h3>` + entries.map(([k, v]) => rowHtml(k, v)).join("");
+        wrap.appendChild(d);
+      }
+      wrap.innerHTML = Object.keys(data).map((section) =>
+        `<div class="fp-section"><h3>${section}</h3>${Object.entries(data[section]).map(([k, v]) => rowHtml(k, v)).join("")}</div>`
+      ).join("");
+
+      // Fingerprint id
+      const sig = canvasSig() + "|" + JSON.stringify(data["Browser & OS"]) + "|" +
+        JSON.stringify(data["Screen & display"]) + "|" + JSON.stringify(data["Graphics"]) +
+        "|" + data["Locale & time"]["Time zone"];
+      document.getElementById("fp-id").textContent = "#" + fnv1a(sig);
+
+      // Battery (async)
+      if (navigator.getBattery) {
+        navigator.getBattery().then((b) => {
+          appendSection("Power (probed)", [
+            ["Battery level", Math.round(b.level * 100) + "%"],
+            ["Charging", yn(b.charging)],
+          ]);
+        }).catch(() => {});
+      }
+
+      // WebRTC local/network addresses (async probe, no permission prompt)
+      (function () {
+        try {
+          const pc = new RTCPeerConnection({ iceServers: [] });
+          const ips = new Set();
+          let done = false;
+          const finish = () => {
+            if (done) return; done = true;
+            try { pc.close(); } catch (e) {}
+            appendSection("Network (WebRTC probe)", [["Local / network IPs", ips.size ? [...ips].join(", ") : "none exposed"]]);
+          };
+          pc.createDataChannel("");
+          pc.onicecandidate = (e) => {
+            if (!e.candidate) { finish(); return; }
+            const m = /([0-9]{1,3}(?:\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){2,7})/i.exec(e.candidate.candidate);
+            if (m) ips.add(m[1]);
+          };
+          pc.createOffer().then((o) => pc.setLocalDescription(o)).catch(() => {});
+          setTimeout(finish, 1500);
+        } catch (e) {}
+      })();
+
+      // Installed-font probe (async, by measuring text)
+      (function () {
+        try {
+          const fonts = ["Arial", "Helvetica", "Times New Roman", "Courier New", "Georgia", "Verdana", "Comic Sans MS", "Impact", "Trebuchet MS", "Calibri", "Cambria", "Consolas", "Segoe UI", "Tahoma", "Palatino", "Garamond"];
+          const base = ["monospace", "sans-serif", "serif"];
+          const s = document.createElement("span");
+          s.style.cssText = "position:absolute;left:-9999px;top:-9999px;font-size:72px;white-space:nowrap";
+          s.textContent = "mmmmmmmmmmlli";
+          document.body.appendChild(s);
+          const def = {};
+          base.forEach((b) => { s.style.fontFamily = b; def[b] = [s.offsetWidth, s.offsetHeight]; });
+          const found = fonts.filter((f) => base.some((b) => { s.style.fontFamily = "'" + f + "'," + b; return s.offsetWidth !== def[b][0] || s.offsetHeight !== def[b][1]; }));
+          s.remove();
+          appendSection("Installed fonts (probed)", [["Detected fonts", found.length + " of " + fonts.length + " tested" + (found.length ? " (" + found.join(", ") + ")" : "")]]);
+        } catch (e) {}
+      })();
+
+      // UTM demo
+      const params = new URLSearchParams(location.search);
+      const tracked = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "gclid", "fbclid"]
+        .filter((p) => params.has(p)).map((p) => `${p}=${params.get(p)}`);
+      document.getElementById("utm-demo").innerHTML = tracked.length
+        ? `This URL is carrying tracking parameters right now: <code>${tracked.join("&amp;").replace(/</g, "&lt;")}</code>. A site would log exactly where you came from.`
+        : `This URL has no tracking parameters on it right now - clean.`;
+
+      // Export + copy
+      function payload() {
+        const flat = {};
+        Object.keys(data).forEach((s) => Object.assign(flat, data[s]));
+        flat["Fingerprint"] = document.getElementById("fp-id").textContent;
+        return JSON.stringify(flat, null, 2);
+      }
+      document.getElementById("fp-json").addEventListener("click", () => {
+        const blob = new Blob([payload()], { type: "application/json" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob); a.download = "my-browser-footprint.json";
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+      });
+      document.getElementById("fp-copy").addEventListener("click", async (e) => {
+        try { await navigator.clipboard.writeText(payload()); e.target.textContent = "✓ Copied"; setTimeout(() => (e.target.textContent = "⧉ Copy"), 1500); }
+        catch { e.target.textContent = "copy failed"; }
+      });
+
+      // Public IP + location: one external lookup, run on page load.
+      async function lookupIP() {
+        const out = document.getElementById("fp-ip-out");
+        if (!out) return;
+        out.innerHTML = `<p class="fp-id-note">Looking up your IP…</p>`;
+        try {
+          const res = await fetch("https://ipapi.co/json/");
+          if (!res.ok) throw new Error();
+          const j = await res.json();
+          const cell = (v) => String(v || "not available").replace(/</g, "&lt;");
+          out.innerHTML = `<dl class="fp-grid">
+            <dt>Public IP</dt><dd>${cell(j.ip)}</dd>
+            <dt>Location</dt><dd>${cell([j.city, j.region, j.country_name].filter(Boolean).join(", "))}</dd>
+            <dt>ISP / org</dt><dd>${cell(j.org)}</dd>
+            <dt>Timezone</dt><dd>${cell(j.timezone)}</dd></dl>
+            <p class="fp-id-note">Your IP is exposed to every server you connect to the moment you connect; this lookup just echoes it back. A VPN or Tor changes the address seen here.</p>`;
+        } catch {
+          out.innerHTML = `<p class="fp-id-note">Could not reach the lookup service. It may be rate-limited or blocked by your tracker blocker, which is rather the point. Use refresh to retry.</p>`;
+        }
+      }
+      const ipBtn = document.getElementById("fp-ip-refresh");
+      if (ipBtn) ipBtn.addEventListener("click", lookupIP);
+      lookupIP();
+    })();
+  </script>
+</body>
+</html>

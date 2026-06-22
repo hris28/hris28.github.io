@@ -1,5 +1,4 @@
-/* =========================================================
-   garden.js
+/* garden.js
    The digital garden: a data-driven stream of entries plus a tiny
    Markdown renderer (reused by the entry viewer).
 
@@ -25,7 +24,7 @@
 
    Anything with url/page links out directly; everything else opens in the
    shared viewer at garden-entry.html?slug=...
-   ========================================================= */
+   */
 
 const GARDEN = [
   {
@@ -84,16 +83,6 @@ const GARDEN = [
     tags: ["webdev", "design", "accessibility"],
     excerpt: "Why I added a little terminal to my homepage, and how I kept the typing animation accessible.",
     page: "garden/posts/terminal-typewriter.html",
-  },
-  {
-    slug: "rabbit-hole-dancing-plague",
-    type: "thought",
-    title: "Rabbit hole: the 1518 dancing plague",
-    date: "2026-01-02",
-    maturity: "seedling",
-    tags: ["rabbit-hole", "history"],
-    excerpt: "Fell into an hour-long hole about people who danced themselves to exhaustion in Strasbourg.",
-    body: "<p>Replace this with the actual thought. Inline HTML is fine — a couple of paragraphs, a link or two, whatever. Short, unpolished, fun.</p>",
   },
   {
     slug: "pcbp-an-original-song",
@@ -161,7 +150,7 @@ const GARDEN = [
     maturity: "evergreen",
     featured: true,
     tags: ["songwriting", "music"],
-    excerpt: "A song I wrote for my 9th grade english final project submission on A Thousand Splendid Suns by Khaled Hosseini.",
+    excerpt: "A song I wrote for my 9th grade English final project submission on A Thousand Splendid Suns by Khaled Hosseini.",
     youtube: "nll0UUAyE_k",
     md: "garden/songs/harami.md",
   },
@@ -173,7 +162,7 @@ const GARDEN = [
     maturity: "evergreen",
     featured: true,
     tags: ["songwriting", "music"],
-    excerpt: "A song I wrote for my 8th grade english final project submission on Romeo and Juliet.",
+    excerpt: "A song I wrote for my 8th grade English final project submission on Romeo and Juliet.",
     md: "garden/songs/alone.md",
   },
   {
@@ -256,12 +245,16 @@ function renderGardenCard(e, isFeature) {
   const external = (e.type === "tool" && e.url) || /^https?:/.test(href);
   const mat = MATURITY[e.maturity];
   const matHtml = mat
-    ? `<span class="maturity" title="${mat.label}" aria-label="maturity: ${mat.label}">${mat.icon}</span>`
+    ? `<span class="maturity" title="maturity: ${mat.label}">${mat.icon}</span>`
     : "";
+  const imgHtml = e.image ? `<img class="card-img" src="${e.image}" alt="" loading="lazy" />` : "";
+  const kitHtml = (e.tool || e.type === "tool") ? `<span class="card-kit">kit</span>` : "";
   return `
-    <a class="garden-card${isFeature ? " feature" : ""}" href="${href}"${external ? ' target="_blank" rel="noopener"' : ""}${isFeature ? ' role="listitem"' : ""}>
+    <a class="garden-card type-${e.type}${isFeature ? " feature" : ""}${e.image ? " has-img" : ""}" href="${href}"${external ? ' target="_blank" rel="noopener"' : ""}${isFeature ? ' role="listitem"' : ""}>
+      ${imgHtml}
       <div class="card-top">
         <span class="card-type">${TYPE_LABEL[e.type] || e.type}</span>
+        ${kitHtml}
         ${matHtml}
       </div>
       <h3 class="card-title">${e.title}</h3>
@@ -291,7 +284,13 @@ function initGardenIndex() {
   let query = "";
 
   function matches(e) {
-    if (activeType !== "all" && e.type !== activeType) return false;
+    if (activeType !== "all") {
+      if (activeType === "tool") {
+        if (!(e.type === "tool" || e.tool)) return false; // interactive posts surface here too
+      } else if (e.type !== activeType) {
+        return false;
+      }
+    }
     if (!query) return true;
     const hay = (e.title + " " + e.excerpt + " " + (e.tags || []).join(" ")).toLowerCase();
     return hay.includes(query);
@@ -300,7 +299,7 @@ function initGardenIndex() {
     const list = sorted.filter(matches);
     grid.innerHTML = list.length
       ? list.map((e) => renderGardenCard(e, false)).join("")
-      : `<p class="garden-empty">No entries here yet — check back as the garden grows.</p>`;
+      : `<p class="garden-empty">No entries here yet. Check back as the garden grows.</p>`;
   }
 
   const filters = document.getElementById("garden-filters");
@@ -403,16 +402,96 @@ function initFeaturedSlider(track) {
   syncUI();
 }
 
-document.addEventListener("DOMContentLoaded", initGardenIndex);
+// Resolve a link's href to a GARDEN entry (for hover previews).
+function entryFromHref(href) {
+  try {
+    const u = new URL(href, location.href);
+    const slug = u.searchParams.get("slug");
+    if (slug) return gardenFindBySlug(slug);
+    const path = u.pathname.replace(/^\//, "");
+    return GARDEN.find(
+      (e) =>
+        (e.page && path.endsWith(e.page.replace(/^\//, ""))) ||
+        (e.url && path.endsWith(e.url.replace(/^\//, "")))
+    );
+  } catch (e) {
+    return null;
+  }
+}
 
-/* =========================================================
+// Hover/focus previews for internal links (wiki-links and ?slug= links).
+function initGardenHovercards() {
+  if (typeof GARDEN === "undefined") return;
+  const SEL = 'a.wiki-link, a[href*="garden-entry.html?slug="]';
+  let card = null, hideTimer = null, current = null;
+
+  function ensureCard() {
+    if (card) return card;
+    card = document.createElement("div");
+    card.className = "garden-hovercard";
+    card.hidden = true;
+    card.addEventListener("mouseenter", () => clearTimeout(hideTimer));
+    card.addEventListener("mouseleave", scheduleHide);
+    document.body.appendChild(card);
+    return card;
+  }
+  function scheduleHide() {
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => { if (card) card.hidden = true; current = null; }, 180);
+  }
+  function show(link, e) {
+    clearTimeout(hideTimer);
+    if (current === e && card && !card.hidden) return;
+    current = e;
+    const c = ensureCard();
+    const mat = MATURITY[e.maturity];
+    const meta = (TYPE_LABEL[e.type] || e.type) + (mat ? " · " + mat.icon + " " + mat.label : "");
+    c.innerHTML =
+      (e.image ? `<img class="hc-img" src="${e.image}" alt="" />` : "") +
+      `<div class="hc-body"><div class="hc-meta">${meta}</div>` +
+      `<div class="hc-title">${e.title}</div>` +
+      `<div class="hc-excerpt">${e.excerpt || ""}</div></div>`;
+    c.hidden = false;
+    const r = link.getBoundingClientRect();
+    const cw = c.offsetWidth, ch = c.offsetHeight;
+    let top = window.scrollY + r.bottom + 8;
+    if (r.bottom + ch + 12 > window.innerHeight) top = window.scrollY + r.top - ch - 8;
+    let left = Math.min(window.scrollX + r.left, window.scrollX + window.innerWidth - cw - 12);
+    if (left < window.scrollX + 8) left = window.scrollX + 8;
+    c.style.top = top + "px";
+    c.style.left = left + "px";
+  }
+  function onEnter(ev) {
+    const link = ev.target.closest(SEL);
+    if (!link) return;
+    const e = entryFromHref(link.getAttribute("href"));
+    if (e) show(link, e);
+  }
+  document.addEventListener("mouseover", onEnter);
+  document.addEventListener("focusin", onEnter);
+  document.addEventListener("mouseout", (ev) => { if (ev.target.closest(SEL)) scheduleHide(); });
+  document.addEventListener("focusout", (ev) => { if (ev.target.closest(SEL)) scheduleHide(); });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initGardenIndex();
+  initGardenHovercards();
+});
+
+/*
    Minimal Markdown parser (reused by garden-entry.js for `md` entries).
    Covers headings, bold, italic, inline code, code blocks, blockquotes,
    lists, links, and Obsidian-style [[wiki-links]]. Kept tiny on purpose.
    Note: it escapes raw HTML, so Markdown files are display-only (safe).
-   ========================================================= */
+   */
 function parseMarkdown(src) {
   let out = src;
+  // Obsidian/Quartz compatibility: drop YAML frontmatter, a leftover eyebrow
+  // <p> line, and the first H1 (the viewer already shows the title + maturity).
+  out = out.replace(/^﻿?---\r?\n[\s\S]*?\r?\n---[ \t]*\r?\n?/, "");
+  out = out.replace(/^\s*<p[^>]*>[\s\S]*?<\/p>[ \t]*\r?\n?/, "");
+  out = out.replace(/^\s*#\s+.*\r?\n?/, "");
+  out = out.replace(/^\s+/, ""); // drop any leftover leading blank lines
   out = out.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   out = out.replace(/```([\s\S]*?)```/g, (_, code) => `<pre><code>${code.trim()}</code></pre>`);
   out = out.replace(/^###### (.+)$/gm, "<h6>$1</h6>");
@@ -430,7 +509,15 @@ function parseMarkdown(src) {
     const clean = slug.trim().toLowerCase().replace(/\s+/g, "-");
     return `<a class="wiki-link" href="garden-entry.html?slug=${clean}">${label || slug}</a>`;
   });
-  out = out.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+  out = out.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, text, url) => {
+    // A bare slug like [VPN](vpn-explained) links to an internal garden entry
+    // (and gets a hover preview); anything with a scheme/slash/dot is external.
+    if (/^[a-z0-9][a-z0-9-]*$/i.test(url)) {
+      return `<a class="wiki-link" href="garden-entry.html?slug=${url}">${text}</a>`;
+    }
+    const ext = /^https?:/i.test(url) ? ' target="_blank" rel="noopener"' : "";
+    return `<a href="${url}"${ext}>${text}</a>`;
+  });
   out = out.replace(/`([^`]+)`/g, "<code>$1</code>");
   out = out.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
   out = out.replace(/\*([^*]+)\*/g, "<em>$1</em>");
