@@ -15,11 +15,16 @@ The catch: you have not removed a watcher, you have **moved** the trust. Your IS
 
 What a VPN does well:
 
-- Hides your browsing from your ISP and from others on the same local network (cafe wifi, etc.).
+- Hides your browsing from your [ISP](isp-layer) and from others on the same local network (cafe wifi, etc.).
 - Changes the IP address sites see, which shifts your apparent location.
 
 What a VPN does not do:
 
 - It does not make you anonymous. Logins, cookies, and browser fingerprints still identify you. For anonymity, see [Tor](tor-explained).
 - It does not stop fingerprinting or tracking inside the page.
+
+## Sources
+
+- EFF Surveillance Self-Defense, [Choosing the VPN That's Right for You](https://ssd.eff.org/module/choosing-vpn-thats-right-you): confirms a VPN hides traffic from your ISP and local network but exposes all of it to the provider.
+- [Virtual private network](https://en.wikipedia.org/wiki/Virtual_private_network) (Wikipedia), for the basic mechanism.
 

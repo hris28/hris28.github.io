@@ -19,5 +19,5 @@ The parts of a computer that come up most when reading about performance or trac
 
 ## Why the GPU matters for privacy
 
-The combination of your exact **GPU model plus its driver version** is unusually identifying. When a page renders graphics, the result varies in tiny, consistent ways across different GPU and driver combinations, and a script can read the precise model string through a WebGL extension called [WEBGL_debug_renderer_info](https://developer.mozilla.org/en-US/docs/Web/API/WEBGL_debug_renderer_info). That makes it one of the strongest single signals in a browser [fingerprint](what-your-browser-knows). Privacy-focused browsers like Brave and Tor deliberately blank or standardize it for that reason.
+The combination of your exact **GPU model plus its driver version** is unusually identifying. When a page renders graphics, the result varies in tiny, consistent ways across different GPU and driver combinations, and a script can read the precise model string through a WebGL extension called [WEBGL_debug_renderer_info](https://developer.mozilla.org/en-US/docs/Web/API/WEBGL_debug_renderer_info). That makes it one of the strongest single signals in a browser [fingerprint](browser-fingerprinting). Privacy-focused browsers like Brave and Tor deliberately blank or standardize it for that reason.
 

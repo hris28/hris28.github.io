@@ -29,6 +29,7 @@
 const GARDEN = [
   {
     slug: "avar-compendium",
+    image: "images/museum.JPG",
     type: "tool",
     title: "Avar Intelligence Compendium",
     date: "2025-12-01",
@@ -40,6 +41,7 @@ const GARDEN = [
   },
   {
     slug: "browser-fingerprinting",
+    image: "images/shadow.jpg",
     type: "post",
     title: "What your browser silently sees",
     date: "2026-06-20",
@@ -52,6 +54,7 @@ const GARDEN = [
   },
   {
     slug: "interacting-with-the-internet",
+    image: "images/tour.jpg",
     type: "post",
     title: "Interacting with the Internet",
     date: "2026-06-20",
@@ -59,10 +62,11 @@ const GARDEN = [
     featured: true,
     tags: ["privacy", "security", "web"],
     excerpt: "A fifteen-minute orientation to how the web works and why it matters for your privacy.",
-    page: "garden/posts/internet-interaction.md",
+    md: "garden/posts/internet-interaction.md",
   },
   {
     slug: "evaluating-sources",
+    image: "images/lab-goggles.jpg",
     type: "post",
     title: "Evaluating Online Sources",
     date: "2026-06-20",
@@ -70,10 +74,11 @@ const GARDEN = [
     featured: true,
     tags: ["privacy", "security", "web"],
     excerpt: "Privacy and security information comes from sources with very different incentives. Here is how to tell them apart.",
-    page: "garden/posts/source-evaluation.md",
+    md: "garden/posts/source-evaluation.md",
   },
   {
     slug: "threat-modeling",
+    image: "images/snow.jpg",
     type: "post",
     title: "Security Basics: Threat Modeling for Ordinary People",
     date: "2026-06-20",
@@ -81,10 +86,11 @@ const GARDEN = [
     featured: true,
     tags: ["privacy", "security", "web"],
     excerpt: "Most security advice is written for an abstract worst-case. Threat modeling is about figuring out which risks actually apply to you.",
-    page: "garden/posts/threat-modeling.md",
+    md: "garden/posts/threat-modeling.md",
   },
   {
     slug: "privacy-basics",
+    image: "images/monke.JPG",
     type: "post",
     title: "Privacy Basics: Understanding Your Digital Footprint",
     date: "2026-06-20",
@@ -92,10 +98,11 @@ const GARDEN = [
     featured: true,
     tags: ["privacy", "security", "web"],
     excerpt: "What cookies, tracking pixels, and browser fingerprinting actually are, how they work mechanically, and what blocking them does and does not achieve.",
-    page: "garden/posts/privacy-basics.md",
+    md: "garden/posts/privacy-basics.md",
   },
   {
   slug: "vpn-explained",
+  image: "images/tire.JPG",
   type: "note",
   title: "VPNs and how they work (and don't)",
   date: "2026-06-20",
@@ -106,6 +113,7 @@ const GARDEN = [
 },
 {
   slug: "tor-explained",
+  image: "images/temple.jpg",
   type: "note",
   title: "Tor: what it is, how it works",
   date: "2026-05-01",
@@ -116,6 +124,7 @@ const GARDEN = [
 },
 {
   slug: "dns-explained",
+  image: "images/ganga.jpg",
   type: "note",
   title: "DNS: what it is, what it exposes",
   date: "2026-05-01",
@@ -126,6 +135,7 @@ const GARDEN = [
 },
 {
   slug: "isp-layer",
+  image: "images/climbing.JPG",
   type: "note",
   title: "The ISP Layer: What Your Internet Provider Can See",
   date: "2026-05-01",
@@ -136,6 +146,7 @@ const GARDEN = [
 },
 {
   slug: "os-layer",
+  image: "images/ligand-visualization-chimerax.jpeg",
   type: "note",
   title: "Software Layers: From Firmware to Application",
   date: "2026-05-01",
@@ -145,7 +156,8 @@ const GARDEN = [
   md: "garden/notes/os-layers.md",
 },
 { 
-  slug: "hardware-basics", 
+  slug: "hardware-basics",
+  image: "images/isef-name.jpg", 
   type: "note", 
   title: "Hardware basics", 
   date: "2026-06-20", 
@@ -156,6 +168,7 @@ const GARDEN = [
 },
   {
     slug: "butterfly-effect-an-original-song",
+    image: "images/dance_stairs.PNG",
     type: "song",
     title: "Butterfly Effect",
     date: "2022-02-18",
@@ -170,6 +183,7 @@ const GARDEN = [
   },
   {
     slug: "linguistic-effect-of-llms",
+    image: "images/painting-duck.jpg",
     type: "note",
     title: "Notes: how LLMs are shifting human language",
     date: "2025-09-15",
@@ -180,6 +194,7 @@ const GARDEN = [
   },
   {
     slug: "building-the-terminal",
+    image: "images/secretservice-tour.JPG",
     type: "post",
     title: "Building the whoami terminal on my homepage",
     date: "2025-11-20",
@@ -192,6 +207,7 @@ const GARDEN = [
   },
   {
     slug: "pcbp-an-original-song",
+    image: "images/durga-stage.jpg",
     type: "song",
     title: "Peasants Can't Be Princes",
     date: "2022-02-16",
@@ -205,6 +221,7 @@ const GARDEN = [
   },
   {
     slug: "bbb-an-original-song",
+    image: "images/eden1.jpg",
     type: "song",
     title: "Beautiful Blanket of Blue",
     date: "2022-01-03",
@@ -216,6 +233,7 @@ const GARDEN = [
   },
   {
     slug: "wlil-an-original-song",
+    image: "images/eden2.jpg",
     type: "song",
     title: "What Love Is Like",
     date: "2023-07-20",
@@ -227,6 +245,7 @@ const GARDEN = [
   },
   {
     slug: "insomnia-an-original-song",
+    image: "images/shot.jpg",
     type: "song",
     title: "Insomnia",
     date: "2022-04-15",
@@ -238,6 +257,7 @@ const GARDEN = [
   },
   {
     slug: "rise-an-original-song",
+    image: "images/stage-singing.jpg",
     type: "song",
     title: "Rise",
     date: "2022-03-10",
@@ -250,6 +270,7 @@ const GARDEN = [
   },
   {
     slug: "harami-an-original-song",
+    image: "images/pink-lehenga.jpg",
     type: "song",
     title: "Harami",
     date: "2018-04-20",
@@ -262,6 +283,7 @@ const GARDEN = [
   },
   {
     slug: "alone-an-original-song",
+    image: "images/red-lehenga.jpg",
     type: "song",
     title: "Alone",
     date: "2018-04-20",
@@ -273,6 +295,7 @@ const GARDEN = [
   },
   {
     slug: "col-an-original-song",
+    image: "images/eden3.jpg",
     type: "song",
     title: "City of Lies",
     date: "2017-06-03",
@@ -284,6 +307,7 @@ const GARDEN = [
   },
   {
     slug: "closer-an-original-song",
+    image: "images/dancing.jpg",
     type: "song",
     title: "Closer",
     date: "2022-04-02",
@@ -291,13 +315,13 @@ const GARDEN = [
     featured: true,
     tags: ["songwriting", "music"],
     excerpt: "A song I wrote and recorded.",
-    // Replace VIDEO_ID with the id from a YouTube URL (the part after v=).
     youtube: "OdPnB6DJDNY",
     // body: "<p></p>",
     md: "garden/songs/closer.md",
   },
   {
     slug: "fairytale-an-original-song",
+    image: "images/flower.jpg",
     type: "song",
     title: "Fairytale",
     date: "2016-02-04",
@@ -312,6 +336,7 @@ const GARDEN = [
   },
   {
   slug: "wcag-contrast-checker",
+    image: "images/flower2.jpg",
   type: "post",
   title: "What actually makes text readable? (a contrast checker)",
   date: "2026-02-10",
@@ -608,6 +633,7 @@ function parseMarkdown(src) {
   out = out.replace(/^## (.+)$/gm, "<h2>$1</h2>");
   out = out.replace(/^# (.+)$/gm, "<h1>$1</h1>");
   out = out.replace(/^&gt; (.+)$/gm, "<blockquote>$1</blockquote>");
+  out = out.replace(/^(?:---|\*\*\*|___)[ \t]*$/gm, "<hr>");
   out = out.replace(/(?:^- .+(?:\n|$))+/gm, (block) => {
     const items = block.trim().split("\n").map((l) => `<li>${l.replace(/^- /, "")}</li>`).join("");
     return `<ul>${items}</ul>`;
@@ -629,7 +655,7 @@ function parseMarkdown(src) {
   out = out.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
   out = out.replace(/\*([^*]+)\*/g, "<em>$1</em>");
   out = out.split(/\n{2,}/).map((chunk) => {
-    if (/^\s*<(h[1-6]|ul|ol|pre|blockquote)/.test(chunk)) return chunk;
+    if (/^\s*<(h[1-6]|ul|ol|pre|blockquote|hr)/.test(chunk)) return chunk;
     // Blank lines = new paragraphs; single newlines = hard line breaks
     // (matches Obsidian's default reading view, important for song lyrics).
     return `<p>${chunk.replace(/\n/g, "<br>")}</p>`;
