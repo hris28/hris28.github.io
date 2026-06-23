@@ -56,21 +56,19 @@ HTTPS does not protect DNS queries. The [TLS](https://en.wikipedia.org/wiki/Tran
 
 ## What this exposes by default
 
-The critical privacy implication: **traditional DNS queries are sent in plain text.**
-
-Every domain you look up is transmitted as an unencrypted text string over the network. This means:
+Traditional DNS queries are sent in plain text, so every domain you look up is transmitted as an unencrypted text string over the network.
 
 Your ISP's resolver receives every domain you query. They can log it. In the US, ISPs are legally permitted to sell this data for advertising purposes. Some do.
 
 Anyone on the network path between you and the resolver can also read the queries. On a home network this is usually just your router and your ISP. On a public Wi-Fi network, this could include the network operator and anyone who has compromised the network.
 
-This happens regardless of whether HTTPS is in use. HTTPS encrypts the content of what passes between your browser and a web server after the connection is made. It does not encrypt the DNS lookup that made the connection possible. If you visit a medical information site over HTTPS, your ISP cannot read what you looked at--but they can read the DNS query that preceded the visit, which tells them you visited the site at all.
+This happens regardless of whether HTTPS is in use. HTTPS encrypts the content of what passes between your browser and a web server after the connection is made. It does not encrypt the DNS lookup that made the connection possible. If you visit a medical information site over HTTPS, your ISP cannot read what you looked at, but they can read the DNS query that preceded the visit, which tells them you visited the site at all.
 
 ## QNAME minimization
 
-Standard DNS sends the full domain name at every step of the resolution chain. The root nameserver, the TLD nameserver, and the authoritative nameserver all see the full query--`duckduckgo.com`--even though only the authoritative nameserver needs it. The root server only needs to know the TLD (`.com`), and the TLD server only needs to know the second-level domain (`duckduckgo`).
+Standard DNS sends the full domain name at every step of the resolution chain. The root nameserver, the TLD nameserver, and the authoritative nameserver all see the full query, `duckduckgo.com`, even though only the authoritative nameserver needs it. The root server only needs to know the TLD (`.com`), and the TLD server only needs to know the second-level domain (`duckduckgo`).
 
-QNAME minimization is a standard (RFC 7816) that addresses this by sending only the portion of the query each server needs. This meaningfully reduces how many servers learn about your browsing habits during each resolution. It is not widely discussed in mainstream privacy advice, but it is a real improvement that does not require any user action--resolvers implement it server-side.
+QNAME minimization is a standard (RFC 7816) that addresses this by sending only the portion of the query each server needs. This meaningfully reduces how many servers learn about your browsing habits during each resolution. It is not widely discussed in mainstream privacy advice, but it is a real improvement that does not require any user action; resolvers implement it server-side.
 
 ## What "changing your DNS" does
 

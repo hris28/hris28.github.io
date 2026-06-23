@@ -26,7 +26,7 @@ A [cookie](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies) is a small
 Set-Cookie: session_id=abc123; Path=/; Secure; HttpOnly; SameSite=Lax
 ```
 
-Your browser stores that text. The next time you make any request to that domain--whether it be loading a page, submitting a form, or fetching an image--your browser automatically includes the cookie in the request header:
+Your browser stores that text. The next time you make any request to that domain, whether loading a page, submitting a form, or fetching an image, your browser automatically includes the cookie in the request header:
 
 ```
 Cookie: session_id=abc123
@@ -62,7 +62,7 @@ The flags in a Set-Cookie header change how a cookie behaves.
 
 **HttpOnly** means the cookie cannot be accessed by JavaScript running on the page. This matters for security: without HttpOnly, a cross-site scripting (XSS) attack can steal cookies by injecting malicious script that reads them. With HttpOnly, even if an attacker injects script, they cannot read these particular cookies.
 
-**SameSite** controls when the cookie is sent across sites. `Strict` means the cookie is only sent when you navigate directly to the domain. `Lax` allows the cookie on top-level navigations (clicking a link) but not on embedded resource loads. `None` sends the cookie with every request, which is required for third-party cookies to work at all. Modern browsers are increasingly blocking cookies with `SameSite=None` by default, which is the primary driver of the decline of third-party cookie tracking.
+**SameSite** controls when the cookie is sent across sites. `Strict` means the cookie is only sent when you navigate directly to the domain. `Lax` allows the cookie on top-level navigations (clicking a link) but not on embedded resource loads. `None` sends the cookie with every request, which is required for third-party cookies to work at all. Safari and Firefox now block third-party cookies by default; Chrome planned to phase them out but reversed course in 2024 to 2025, so they still work there. See [browser fingerprinting](browser-fingerprinting) for why this shift is pushing trackers toward fingerprinting instead.
 
 ### What "clearing cookies" does
 
@@ -141,7 +141,7 @@ None of these are stored on your device. Each is a property your browser exposes
 
 The EFF's Cover Your Tracks project runs a live test that shows how distinctive your browser is in their test population. Most readers who run it find that their browser is either unique or within a very small group. A 2020 academic study by Laperdrix et al. found fingerprints stable enough to re-identify users across sessions even when cookies were cleared.
 
-Fingerprinting alone is not perfect--browser updates, new hardware, and privacy features that randomize fingerprint values all degrade accuracy. But combined with other signals, it substantially closes the gap that cookie-blocking leaves open.
+Fingerprinting alone is not perfect: browser updates, new hardware, and privacy features that randomize fingerprint values all degrade accuracy. But combined with other signals, it substantially closes the gap that cookie-blocking leaves open.
 
 ### What defenses exist
 
@@ -151,7 +151,7 @@ Fingerprinting alone is not perfect--browser updates, new hardware, and privacy 
 
 **Firefox's resistFingerprinting** setting does something similar to Brave's approach, reducing the precision of the values exposed to scripts.
 
-**uBlock Origin** in advanced mode can block known fingerprinting scripts, but this only works against scripts from known domains on block lists. First-party fingerprinting--where the site itself fingerprints you without loading any third-party script--is not addressed by list-based blocking.
+**uBlock Origin** in advanced mode can block known fingerprinting scripts, but this only works against scripts from known domains on block lists. First-party fingerprinting, where the site itself fingerprints you without loading any third-party script, is not addressed by list-based blocking.
 
 The honest assessment: fingerprinting is the mechanism that makes the privacy advice "just block cookies and clear your history" incomplete. A site that fingerprints you directly does not need a cookie. There is nothing to delete.
 
@@ -189,7 +189,7 @@ Each step uses a different mechanism. A cookie blocker disrupts step 2 and step 
 
 The advertising ecosystem uses these three mechanisms in combination. A cookie identifies your browser across visits to sites that share an advertising network. A pixel fires on key pages to log events that matter to advertisers. Fingerprinting re-identifies you if cookies are cleared. Cookie syncing allows networks to merge their datasets.
 
-No single defense addresses all of these. Content blocking handles pixels and known third-party scripts. Cookie settings affect cookie-based tracking. Fingerprinting resistance addresses the stateless layer. For most people, a content blocker plus a browser that blocks third-party cookies by default addresses the majority of the threat surface. This is why it is important to develop your own [[threat-model]]. Understanding that fingerprinting exists and is not addressed by those tools is important for calibrating what you have and have not protected.
+No single defense addresses all of these. Content blocking handles pixels and known third-party scripts. Cookie settings affect cookie-based tracking. Fingerprinting resistance addresses the stateless layer. For most people, a content blocker plus a browser that blocks third-party cookies by default addresses the majority of the threat surface. This is why it is important to develop your own [[threat-modeling]]. Understanding that fingerprinting exists and is not addressed by those tools is important for calibrating what you have and have not protected.
 
 ## What you can see for yourself
  
@@ -216,6 +216,6 @@ In Firefox or Chrome: press `F12`, click the **Network** tab, then visit a page.
  
 **[givemeyourdata.org](https://givemeyourdata.org)** - Live demonstration of what a server receives. High value for making abstract mechanisms concrete. One significant failure on design-end is that the UTM parameter demonstration does not tell you what you are supposed to notice, leaving users uncertain whether the demo worked. 
 
-**[EFF Cover Your Tracks](coveryourtracks.eff.org)** - Live fingerprinting test with a large test population and documented methodology. Nonprofit, no commercial interest. Run this before reading about fingerprinting; seeing your own result is more persuasive than any prose description. Weakness: brief on defenses.
+**[EFF Cover Your Tracks](https://coveryourtracks.eff.org/)** - Live fingerprinting test with a large test population and documented methodology. Nonprofit, no commercial interest. Run this before reading about fingerprinting; seeing your own result is more persuasive than any prose description. Weakness: brief on defenses.
 
 **Laperdrix, P. et al. (2020). Browser Fingerprinting: A Survey.** *ACM Transactions on the Web, 14*(2). - Peer-reviewed academic source. The most comprehensive study of fingerprinting accuracy and stability available. Technical reading, but sections 4 and 5 on accuracy are accessible.
