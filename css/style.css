@@ -633,13 +633,36 @@ footer {
 }
 .garden-card .maturity { margin-left: auto; font-size: 0.95rem; line-height: 1; }
 
-/* Subtle per-type top accent on cards without a cover image, for visual rhythm */
-.garden-card:not(.has-img) { border-top: 3px solid var(--line); }
-.garden-card.type-tool:not(.has-img) { border-top-color: var(--term-green); }
-.garden-card.type-song:not(.has-img) { border-top-color: #c98bdc; }
-.garden-card.type-note:not(.has-img) { border-top-color: var(--dot-accent); }
-.garden-card.type-post:not(.has-img) { border-top-color: #e0a458; }
-.garden-card.type-thought:not(.has-img) { border-top-color: #8bb0c9; }
+/* Per-type top accent (the "folder" colour) shown on every card, image or not */
+.garden-card { border-top: 3px solid var(--line); }
+.garden-card.type-tool { border-top-color: var(--term-green); }
+.garden-card.type-song { border-top-color: #c98bdc; }
+.garden-card.type-note { border-top-color: var(--dot-accent); }
+.garden-card.type-post { border-top-color: #e0a458; }
+.garden-card.type-thought { border-top-color: #8bb0c9; }
+
+/* Pagination */
+.garden-main { min-width: 0; }
+.garden-pagination { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1.75rem; }
+.garden-pagination:empty { display: none; }
+.pager-left { display: flex; align-items: center; gap: 1rem; color: var(--ink-soft); font-size: 0.85rem; }
+.pager-size { display: inline-flex; align-items: center; gap: 0.4rem; }
+.pager-size select {
+  font-family: var(--font-mono); font-size: 0.82rem; color: var(--ink);
+  background: var(--bg-soft); border: 1px solid var(--line); border-radius: 8px;
+  padding: 0.25rem 0.4rem; cursor: pointer;
+}
+.pager-count { color: var(--ink-faint); }
+.pager-nav { display: flex; align-items: center; gap: 0.35rem; }
+.pager-btn {
+  min-width: 34px; height: 34px; padding: 0 0.5rem; cursor: pointer;
+  font-family: var(--font-mono); font-size: 0.85rem; color: var(--ink);
+  background: var(--bg-soft); border: 1px solid var(--line); border-radius: 8px;
+  transition: border-color var(--transition), background var(--transition), color var(--transition);
+}
+.pager-btn:hover:not(:disabled) { border-color: var(--dot-accent); }
+.pager-btn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.pager-btn:disabled { opacity: 0.4; cursor: default; }
 
 /* Stage-colored word, used in article eyebrows (e.g. "GROWING" in green) */
 .stage-seedling { color: #6a9f2f; }
@@ -662,8 +685,12 @@ html[data-theme="dark"] .stage-evergreen { color: #57b487; }
 .garden-hovercard .hc-excerpt { color: var(--ink-soft); line-height: 1.45; }
 
 /* Graph view (global on the index, local on an entry) */
-.garden-graph-wrap { position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-soft); margin-top: 1.25rem; }
-#garden-graph { display: block; width: 100%; height: 440px; }
+.garden-graph-wrap { position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-soft); }
+#garden-graph { display: block; width: 100%; height: 260px; }
+
+/* Map lives in the sidebar (Quartz-style), above the Explorer list */
+.rail-graph { margin-bottom: 1.5rem; }
+.rail-graph > h3 { font-size: 0.95rem; margin-bottom: 0.5rem; }
 .localgraph-wrap { position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-soft); margin: 1rem 0 1.25rem; }
 #garden-localgraph { display: block; width: 100%; height: 280px; }
 

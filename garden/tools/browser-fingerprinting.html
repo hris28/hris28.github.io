@@ -123,12 +123,12 @@
         </ul>
 
         <h2>What data makes up a fingerprint</h2>
-        <p>For these same mechanisms framed as separate ideas (cookies vs pixels vs fingerprinting), see <a class="wiki-link" href="garden-entry.html?slug=privacy-basics">Cookies, pixels, and fingerprinting</a>.</p>
+        <p>For these same mechanisms framed as separate ideas (cookies vs pixels vs fingerprinting), see <a class="wiki-link" href="../../garden-entry.html?slug=privacy-basics">Cookies, pixels, and fingerprinting</a>.</p>
         <ul>
           <li><strong>User-Agent string:</strong> Your browser sends this with every request. It contains the browser name and version, the operating system, and sometimes device information. Example: <code>Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36</code>.</li>
           <li><strong>Screen resolution and color depth:</strong> Available to any JavaScript running on the page.</li>
           <li><strong>Installed fonts:</strong> Websites can probe which fonts are installed by rendering text and measuring its dimensions. Different operating systems and users have different font sets.</li>
-          <li><strong>Canvas fingerprint:</strong> A website can instruct your browser to draw a hidden image using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API" target="_blank" rel="noopener">HTML Canvas API</a>. The rendered result varies subtly across different <a class="wiki-link" href="garden-entry.html?slug=hardware-basics">GPUs</a>, drivers, and operating systems, consistently for a given device, so the hash of the image becomes a stable identifier.<sup class="cite"><a href="#src-2">[2]</a></sup></li>
+          <li><strong>Canvas fingerprint:</strong> A website can instruct your browser to draw a hidden image using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API" target="_blank" rel="noopener">HTML Canvas API</a>. The rendered result varies subtly across different <a class="wiki-link" href="../../garden-entry.html?slug=hardware-basics">GPUs</a>, drivers, and operating systems, consistently for a given device, so the hash of the image becomes a stable identifier.<sup class="cite"><a href="#src-2">[2]</a></sup></li>
           <li><strong>WebGL fingerprint:</strong> Similar to canvas fingerprinting, using the <a href="https://en.wikipedia.org/wiki/WebGL" target="_blank" rel="noopener">WebGL</a> API to identify GPU and driver combinations.</li>
           <li><strong>Audio context fingerprint:</strong> The <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API" target="_blank" rel="noopener">Web Audio API</a> processes audio signals slightly differently across hardware. A fingerprint can be derived from those differences without playing any audible sound.</li>
           <li><strong>Timezone and language:</strong> Your timezone and preferred language are disclosed in headers and available to JavaScript.</li>
@@ -153,7 +153,7 @@
           This demo stops at what your browser volunteers. Commercial trackers add layers on top:
         </p>
         <ul>
-          <li><strong>IP geolocation</strong> - your address maps to a city/region and your <a class="wiki-link" href="garden-entry.html?slug=isp-layer">internet provider</a>.</li>
+          <li><strong>IP geolocation</strong> - your address maps to a city/region and your <a class="wiki-link" href="../../garden-entry.html?slug=isp-layer">internet provider</a>.</li>
           <li><strong>Cross-site tracking</strong> - the same third-party scripts on many sites stitch your visits together.<sup class="cite"><a href="#src-1">[1]</a></sup></li>
           <li><strong>Tracking pixels</strong> - invisible 1×1 images that report when you opened an email or page.</li>
           <li><strong>Third-party cookies</strong> - persistent IDs shared across sites. Safari and Firefox block them by default; Chrome planned to phase them out but reversed course in 2024 to 2025, so they remain on by default there.<sup class="cite"><a href="#src-5">[5]</a></sup></li>
@@ -181,7 +181,7 @@
           <li>Use a tracker-blocking browser or extension (uBlock Origin; Firefox or Brave with strong defaults).</li>
           <li>Turn on Global Privacy Control / "Do Not Track" where available.</li>
           <li>Block third-party cookies in your browser settings.</li>
-          <li>A <a class="wiki-link" href="garden-entry.html?slug=vpn-explained">VPN</a> hides your IP and approximate location (it doesn't stop fingerprinting).</li>
+          <li>A <a class="wiki-link" href="../../garden-entry.html?slug=vpn-explained">VPN</a> hides your IP and approximate location (it doesn't stop fingerprinting).</li>
           <li>Test yourself against a real tracker with EFF's Cover Your Tracks.<sup class="cite"><a href="#src-1">[1]</a></sup></li>
         </ul>
 
@@ -190,8 +190,8 @@
         <ul>
           <li><strong>What a server receives from you:</strong> <a href="https://httpbin.org/headers" target="_blank" rel="noopener">httpbin.org/headers</a> and <a href="https://httpbin.org/ip" target="_blank" rel="noopener">/ip</a> echo back the exact HTTP headers and IP address your browser hands every site.</li>
           <li><strong>A fuller fingerprint than this demo:</strong> <a href="https://browserleaks.com/" target="_blank" rel="noopener">BrowserLeaks</a> and <a href="https://amiunique.org/" target="_blank" rel="noopener">AmIUnique</a> show far more signals and how rare your configuration is.</li>
-          <li><strong>What your ISP collects:</strong> the FTC's 2021 staff report examined six major US providers and what they gather and share.<sup class="cite"><a href="#src-7">[7]</a></sup> More on this in <a class="wiki-link" href="garden-entry.html?slug=isp-layer">what your ISP can see</a>.</li>
-          <li><strong>What a VPN changes:</strong> it moves that visibility to the provider, so whether they keep logs is the whole question. See <a class="wiki-link" href="garden-entry.html?slug=vpn-explained">VPN</a>.</li>
+          <li><strong>What your ISP collects:</strong> the FTC's 2021 staff report examined six major US providers and what they gather and share.<sup class="cite"><a href="#src-7">[7]</a></sup> More on this in <a class="wiki-link" href="../../garden-entry.html?slug=isp-layer">what your ISP can see</a>.</li>
+          <li><strong>What a VPN changes:</strong> it moves that visibility to the provider, so whether they keep logs is the whole question. See <a class="wiki-link" href="../../garden-entry.html?slug=vpn-explained">VPN</a>.</li>
         </ul>
 
         <h2>Sources</h2>

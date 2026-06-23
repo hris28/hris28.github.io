@@ -199,7 +199,7 @@ In Firefox or Chrome: press `F12`, click the **Network** tab, then visit a page.
  
 [givemeyourdata.org](https://givemeyourdata.org) shows you live what information your browser sends with every request: your IP address, your User-Agent string, your screen resolution, your timezone, and more. The data is displayed before any explanation, which makes the explanation land differently.
  
-[EFF Cover Your Tracks](https://coveryourtracks.eff.org/) tests your browser's fingerprint and tells you how unique it is. It is worth running before reading [[browser-fingerprinting]], because seeing your own result makes the subsequent explanation easier to follow.
+[EFF Cover Your Tracks](https://coveryourtracks.eff.org/) tests your browser's fingerprint and tells you how unique it is. 
 
 
 ---
