@@ -185,27 +185,39 @@ function createGraph(canvas, nodes, edges, opts = {}) {
   function draw() {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, w, h);
-    // edges
-    ctx.strokeStyle = C.line; ctx.lineWidth = 1;
+    const hov = hoverId;
+    // edges (gentle highlight on the hovered node's links, no dimming)
     edges.forEach((e) => {
       const a = byId[e.a], b = byId[e.b]; if (!a || !b) return;
+      const hot = hov && (e.a === hov || e.b === hov);
+      ctx.strokeStyle = hot ? C.lineHi : C.line; ctx.lineWidth = hot ? 1.4 : 1;
       ctx.beginPath(); ctx.moveTo(sx(a), sy(a)); ctx.lineTo(sx(b), sy(b)); ctx.stroke();
     });
-    // nodes
+    // nodes (all full opacity)
     nodes.forEach((n) => {
       const r = radiusOf(n) * zoom;
       ctx.beginPath(); ctx.arc(sx(n), sy(n), r, 0, Math.PI * 2);
       ctx.fillStyle = TYPE_COLOR[n.type] || TYPE_COLOR.default; ctx.fill();
       if (n.id === focusSlug) { ctx.lineWidth = 2; ctx.strokeStyle = C.ring; ctx.stroke(); }
     });
-    // labels (always visible)
+    // labels: keep it uncluttered. Small graphs show everything; large graphs
+    // show hubs + the focused entry always, the rest fade in as you zoom or hover.
+    const fewNodes = nodes.length <= 10;
+    const zoomA = Math.max(0, Math.min(1, (zoom - 0.85) / 0.7));
     ctx.textAlign = "center"; ctx.textBaseline = "top";
     ctx.font = "600 11px ui-sans-serif, system-ui, -apple-system, sans-serif";
     ctx.fillStyle = C.label;
     nodes.forEach((n) => {
+      let a = fewNodes ? 1 : zoomA;
+      if (!fewNodes && (degree[n.id] || 0) >= 3) a = Math.max(a, 0.92);
+      if (hov && (n.id === hov || neighbours.has(n.id))) a = 1;
+      if (n.id === focusSlug) a = 1;
+      if (a <= 0.05) return;
+      ctx.globalAlpha = a;
       const t = n.title.length > 24 ? n.title.slice(0, 23) + "…" : n.title;
       ctx.fillText(t, sx(n), sy(n) + radiusOf(n) * zoom + 4);
     });
+    ctx.globalAlpha = 1;
   }
 
   // animation loop

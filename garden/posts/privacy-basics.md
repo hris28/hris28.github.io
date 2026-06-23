@@ -99,7 +99,6 @@ The mechanism for all three is identical: a request fires, a server logs it.
 **Pixels in email** work the same way. Most email clients fetch images automatically. When your client loads an email and requests the embedded pixel image, the sender's server knows the email was opened, when it was opened, your approximate location from your IP address, and what client you used. This is why some privacy-focused email clients disable automatic image loading by default.
  
 > **What an ad blocker does to pixels:** A content blocker like [uBlock Origin](https://ublockorigin.com/) prevents the request from being made at all. The image never loads. The server never receives the request. No data is logged. This is why blocking at the request level is more effective than simply hiding the visual result.
- 
 > **What it does not do:** It does not protect you from pixels hosted on the same domain as the page you are visiting. First-party pixels are indistinguishable from any other resource the site loads.
 
 

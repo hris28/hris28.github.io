@@ -58,13 +58,6 @@ This is where privacy advice usually fails: tools are described by what they do,
 
 **Browser fingerprinting** is worth understanding because it is what makes cookie-blocking insufficient on its own. Your browser broadcasts a combination of properties on every request: screen resolution, installed fonts, timezone, language, GPU characteristics, canvas rendering behavior. Together these can form a combination that is statistically unique to your device. Fingerprinting does not store anything on your machine, so there is nothing to delete. Content blockers can block known fingerprinting scripts, but cannot prevent a first-party site from fingerprinting you directly.
 
-## The key insight
-
-Privacy tools do not make you invisible. They shift where visibility sits. Each tool prevents a specific party from observing a specific thing. The question to ask of any tool is: what does this prevent, who does it transfer that observation to, and is that a better situation for me?
-
-That question requires understanding what each actor in the chain can see by default. This article is meant to give you enough of that picture to start asking it.
-
-
 ---
 
 ### Sources reviewed for this article
