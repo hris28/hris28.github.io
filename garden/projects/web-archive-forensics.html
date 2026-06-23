@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Archive Forensics for NC's Accountability Journalists · Garden · Hrishika Roychoudhury</title>
+  <meta name="description" content="A three-tier reference service I designed for the State Library of North Carolina to give journalists in news-desert counties a durable web-verification tool." />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <script src="../../js/main.js" defer></script>
+  <script src="../../js/garden.js" defer></script>
+</head>
+<body class="garden-page">
+
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <nav class="nav">
+    <a href="../../index.html" class="nav-brand">Hrishika Roychoudhury<span class="dot">•</span></a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <ul class="nav-links">
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../../about.html">About</a></li>
+      <li><a href="../../projects.html">Projects</a></li>
+      <li><a href="../../resume.html">Résumé</a></li>
+      <li><a href="../../garden.html">Garden</a></li>
+      <li><a href="../../interests.html">Interests</a></li>
+      <li>
+        <button class="theme-btn" aria-label="Toggle theme" onclick="toggleTheme()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <section>
+    <div class="wrap-narrow">
+      <a class="back-link" href="../../garden.html">← Back to the garden</a>
+      <p class="eyebrow">project · 🌿 <span class="stage-growing">growing</span></p>
+      <h1 class="note-h1">Web Archive Forensics for NC's Accountability Journalists</h1>
+      <p class="note-meta" style="margin: 0.4rem 0 1.75rem;">Spring 2026 · INLS 500 (Human Information Interactions), Prof. Leslie Thomson</p>
+
+      <div class="note-view">
+        <h2>Overview</h2>
+        <p>
+          As more than 240 news sites move to block <a href="https://archive.org/" target="_blank" rel="noopener">Internet Archive</a>
+          crawlers, the journalists who rely on archived pages to prove "this is what the page said on this date"
+          are losing a basic verification tool, and the loss falls hardest on independent reporters in
+          news-desert counties. For this project I designed a <strong>three-tier reference service</strong> for the
+          State Library of North Carolina to give those journalists a durable way to capture and authenticate web
+          evidence.
+        </p>
+
+        <h2>Why it matters</h2>
+        <p>
+          Accountability reporting depends on the web record holding still. When a page can be quietly edited or
+          pulled, and the public archive that would have caught it is blocked, a reporter without institutional
+          tooling simply cannot prove what was there. A public library is exactly the kind of neutral, durable
+          institution that can fill that gap, if the service is designed around how journalists actually work.
+        </p>
+
+        <h2>What I did</h2>
+        <p>
+          I designed three tiers: <strong>on-demand authenticated web captures</strong> for specific verification
+          needs, a <strong>statewide workshop series</strong> delivered through the NC Cardinal partner-library
+          consortium, and a <strong>curated Archive-It collection</strong> for ongoing local-news preservation.
+          The design rests on a four-stream literature and institutional-landscape review and is grounded in
+          library and information science theory, Taylor's information use environment, Savolainen's source
+          horizon, and Koufogiannakis's evidence-based practice, to define the user population and justify each tier.
+        </p>
+
+        <h2>Read the proposal</h2>
+        <p>
+          The full proposal is embedded below. If it does not display, use the
+          <a href="../../images/papers/web-archive-forensics.pdf" target="_blank" rel="noopener">open in a new tab</a> link.
+        </p>
+        <iframe class="pdf-embed" src="../../images/papers/web-archive-forensics.pdf" title="Web Archive Forensics for NC Journalists (PDF)"
+          loading="lazy" style="width:100%; height:80vh; border:1px solid var(--line); border-radius:var(--radius);"></iframe>
+        <p style="margin-top:0.75rem;"><a href="../../images/papers/web-archive-forensics.pdf" download>Download the PDF</a></p>
+
+        <h2>Takeaways</h2>
+        <p>
+          Designing for a population you do not belong to means leading with their workflow, not your tooling. The
+          tiers exist because a one-off capture, a skill-building workshop, and a standing collection answer three
+          different information needs, and a single "service" that ignored those differences would have helped no
+          one well. Tying each tier back to an information-behavior model kept the design honest about <em>who</em>
+          it was for.
+        </p>
+
+        <h2>Sources</h2>
+      </div>
+
+      <div class="sources">
+        <ol>
+          <li id="src-1">Internet Archive, <a href="https://archive.org/about/" target="_blank" rel="noopener">About the Internet Archive</a>; Archive-It, <a href="https://archive-it.org/" target="_blank" rel="noopener">archive-it.org</a>.</li>
+          <li id="src-2">NC Cardinal partner-library consortium, State Library of North Carolina, <a href="https://statelibrary.ncdcr.gov/services-libraries/nc-cardinal" target="_blank" rel="noopener">nc-cardinal</a>.</li>
+          <li id="src-3">Information-behavior frameworks referenced: R. S. Taylor (information use environments); R. Savolainen (source horizon); D. Koufogiannakis (evidence-based library practice).</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-row">
+      <span>Copyright &copy; Hrishika Roychoudhury 2021-<span id="copyright-year"></span> &nbsp;|&nbsp; Last Updated on <span id="page-updated"></span></span>
+      <div class="socials">
+        <a href="mailto:hrishikarc@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a>
+        <a href="https://www.instagram.com/hrcdream" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://linkedin.com/in/hrishikarc" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.7 2.6 4.7 6V21h-4v-5.4c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V21h-4V9z"/></svg></a>
+        <a href="https://github.com/hris28" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.8 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2.9-.3 2-.4 3-.4 1 0 2 .1 3 .4 2.3-1.6 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.4 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.8-5.8 7.8-10.9C23.5 5.7 18.3.5 12 .5z"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

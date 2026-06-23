@@ -158,7 +158,10 @@ function createGraph(canvas, nodes, edges, opts = {}) {
     let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
     nodes.forEach((n) => { minX = Math.min(minX, n.x); maxX = Math.max(maxX, n.x); minY = Math.min(minY, n.y); maxY = Math.max(maxY, n.y); });
     const spanX = Math.max(maxX - minX, 1), spanY = Math.max(maxY - minY, 1);
-    zoom = Math.max(0.25, Math.min(4, Math.min((w * 0.82) / spanX, (h * 0.82) / spanY)));
+    // Zoom in past a pure fit so the connected cluster reads clearly by default;
+    // outlying nodes sit just off-frame and you can pan/zoom out to them.
+    const fit = Math.min((w * 0.82) / spanX, (h * 0.82) / spanY);
+    zoom = Math.max(0.25, Math.min(4, fit * 1.8));
     const cx = (minX + maxX) / 2, cy = (minY + maxY) / 2;
     panX = -cx * zoom; panY = -cy * zoom;
   }

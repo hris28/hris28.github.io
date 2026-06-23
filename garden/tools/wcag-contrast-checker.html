@@ -40,7 +40,7 @@
   <section>
     <div class="wrap-narrow">
       <a class="back-link" href="../../garden.html">← Back to the garden</a>
-      <p class="eyebrow">post · 🌳 <span class="stage-evergreen">evergreen</span></p>
+      <p class="eyebrow">tool · 🌳 <span class="stage-evergreen">evergreen</span></p>
       <h1 class="note-h1">What actually makes text "readable enough"?</h1>
       <p class="note-meta" style="margin: 0.4rem 0 1.75rem;">10 Feb 2026 · accessibility, design, tool</p>
 
@@ -97,10 +97,39 @@
 
         <h2>The thresholds</h2>
         <p>
-          WCAG 2.1 sets the bar for normal-size text at a ratio of at least <strong>4.5:1</strong> for level AA,
-          and a stricter <strong>7:1</strong> for level AAA. Large text (at least 18pt, or 14pt bold) gets a
-          relaxed bar of <strong>3:1</strong> (AA) and <strong>4.5:1</strong> (AAA), because bigger, heavier
-          letters stay legible at lower contrast.<sup class="cite"><a href="#src-1">[1]</a></sup>
+          First, the vocabulary, because the labels on the badges above (AA, AAA) are jargon until someone
+          explains them. <strong>WCAG</strong> stands for the Web Content Accessibility Guidelines, the
+          international standard published by the W3C for making web content usable by people with
+          disabilities. It defines three <em>conformance levels</em>, which are simply tiers of strictness:<sup class="cite"><a href="#src-3">[3]</a></sup>
+        </p>
+        <ul>
+          <li><strong>Level A</strong> is the bare minimum: skip it and some people genuinely cannot use the
+            content. For contrast specifically, level A sets no ratio requirement at all.</li>
+          <li><strong>Level AA</strong> is the practical target almost everyone aims for. It is what the
+            ADA, US Section 508, the European EN 301 549 standard, and most company policies require. If you
+            remember one number, aim for AA.</li>
+          <li><strong>Level AAA</strong> is the enhanced, strictest tier. It is excellent when you can reach
+            it, but the W3C itself does not recommend requiring AAA across a whole site, because some content
+            cannot meet it. Treat it as a stretch goal, not a baseline.</li>
+        </ul>
+        <p>
+          The other distinction is <strong>normal</strong> versus <strong>large</strong> text. Bigger letters
+          carry more visual signal, so they stay readable at lower contrast and get an easier bar. WCAG counts
+          text as large when it is at least <strong>18pt (about 24px) regular</strong>, or <strong>14pt (about
+          18.66px) bold</strong>; anything smaller counts as normal.<sup class="cite"><a href="#src-1">[1]</a></sup>
+        </p>
+        <p>
+          Putting those together, here is what each badge in the checker is testing:
+        </p>
+        <ul>
+          <li><strong>AA normal: 4.5:1</strong> — the everyday default for body text.</li>
+          <li><strong>AA large: 3:1</strong> — headings and other large text passing the standard bar.</li>
+          <li><strong>AAA normal: 7:1</strong> — body text at the enhanced bar.</li>
+          <li><strong>AAA large: 4.5:1</strong> — large text at the enhanced bar.</li>
+        </ul>
+        <p>
+          Large, heavier letters stay legible at lower contrast, which is why every "large" bar is gentler
+          than its "normal" counterpart.<sup class="cite"><a href="#src-1">[1]</a></sup>
         </p>
         <p>
           The thresholds are hard floors. A computed 4.499:1 does <em>not</em> pass 4.5:1, as
@@ -122,6 +151,9 @@
           </li>
           <li id="src-2">
             W3C, <a href="https://www.w3.org/WAI/WCAG21/Understanding/relative-luminance.html" target="_blank" rel="noopener">Relative luminance</a> (definition and sRGB formula), WCAG 2.1.
+          </li>
+          <li id="src-3">
+            W3C Web Accessibility Initiative, <a href="https://www.w3.org/WAI/standards-guidelines/wcag/" target="_blank" rel="noopener">WCAG 2 Overview</a> and <a href="https://www.w3.org/WAI/WCAG21/Understanding/conformance" target="_blank" rel="noopener">Understanding Conformance</a> (the A, AA, and AAA conformance levels and what each requires).
           </li>
         </ol>
       </div>
