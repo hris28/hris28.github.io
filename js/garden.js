@@ -49,7 +49,7 @@ const GARDEN = [
     featured: true,
     tags: ["privacy", "security", "tool"],
     excerpt: "An interactive look at everything a website can read from your browser (computed locally) plus how to push back.",
-    page: "garden/posts/browser-fingerprinting.html",
+    page: "garden/tools/browser-fingerprinting.html",
     tool: true,
   },
   {
@@ -344,7 +344,7 @@ const GARDEN = [
   featured: true,
   tags: ["accessibility", "design", "tool"],
   excerpt: "A question I kept hitting in my own design work--with a live WCAG contrast checker to answer it.",
-  page: "garden/posts/wcag-contrast-checker.html",
+  page: "garden/tools/wcag-contrast-checker.html",
   tool: true,
 },
 ];
@@ -379,7 +379,7 @@ function renderGardenCard(e, isFeature) {
   const matHtml = mat
     ? `<span class="maturity" title="maturity: ${mat.label}">${mat.icon}</span>`
     : "";
-  const imgHtml = e.image ? `<img class="card-img" src="${e.image}" alt="" loading="lazy" />` : "";
+  const imgHtml = e.image ? `<img class="card-img" src="${e.image}" alt="" />` : "";
   const kitHtml = (e.tool || e.type === "tool") ? `<span class="card-kit">kit</span>` : "";
   return `
     <a class="garden-card type-${e.type}${isFeature ? " feature" : ""}${e.image ? " has-img" : ""}" href="${href}"${external ? ' target="_blank" rel="noopener"' : ""}${isFeature ? ' role="listitem"' : ""}>
@@ -414,6 +414,9 @@ function initGardenIndex() {
 
   let activeType = "all";
   let query = "";
+  let pageSize = 9;  // entries shown at once; adjustable via the pager
+  let page = 1;
+  const pager = document.getElementById("garden-pagination");
 
   function matches(e) {
     if (activeType !== "all") {
@@ -429,9 +432,55 @@ function initGardenIndex() {
   }
   function draw() {
     const list = sorted.filter(matches);
-    grid.innerHTML = list.length
-      ? list.map((e) => renderGardenCard(e, false)).join("")
+    const total = list.length;
+    const allMode = pageSize === "all";
+    const pages = allMode ? 1 : Math.max(1, Math.ceil(total / pageSize));
+    if (page > pages) page = pages;
+    if (page < 1) page = 1;
+    const visible = allMode ? list : list.slice((page - 1) * pageSize, page * pageSize);
+    grid.innerHTML = visible.length
+      ? visible.map((e) => renderGardenCard(e, false)).join("")
       : `<p class="garden-empty">No entries here yet. Check back as the garden grows.</p>`;
+    renderPager(total, pages, allMode);
+  }
+
+  function renderPager(total, pages, allMode) {
+    if (!pager) return;
+    const sizes = [6, 9, 12, 24];
+    const opts =
+      sizes.map((s) => `<option value="${s}"${!allMode && s === pageSize ? " selected" : ""}>${s}</option>`).join("") +
+      `<option value="all"${allMode ? " selected" : ""}>All</option>`;
+    const left =
+      `<label class="pager-size">Show
+        <select id="pager-size" aria-label="Entries per page">${opts}</select>
+        per page</label>` +
+      (total ? `<span class="pager-count">${total} ${total === 1 ? "entry" : "entries"}</span>` : "");
+
+    let nav = "";
+    if (!allMode && pages > 1) {
+      const btn = (p, label, o = {}) =>
+        `<button type="button" class="pager-btn${o.active ? " active" : ""}" data-page="${p}"${o.disabled ? " disabled" : ""}${o.active ? ' aria-current="page"' : ""} aria-label="${o.aria || "Page " + label}">${label}</button>`;
+      nav += btn(page - 1, "‹", { disabled: page <= 1, aria: "Previous page" });
+      for (let p = 1; p <= pages; p++) nav += btn(p, String(p), { active: p === page });
+      nav += btn(page + 1, "›", { disabled: page >= pages, aria: "Next page" });
+    }
+    pager.innerHTML = `<div class="pager-left">${left}</div><div class="pager-nav">${nav}</div>`;
+
+    const sizeSel = pager.querySelector("#pager-size");
+    if (sizeSel) sizeSel.addEventListener("change", () => {
+      pageSize = sizeSel.value === "all" ? "all" : parseInt(sizeSel.value, 10);
+      page = 1; draw();
+    });
+    pager.querySelectorAll(".pager-btn[data-page]").forEach((b) => {
+      if (b.disabled) return;
+      b.addEventListener("click", () => {
+        const p = parseInt(b.dataset.page, 10);
+        if (!isNaN(p) && p !== page) {
+          page = p; draw();
+          document.querySelector(".garden-controls")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    });
   }
 
   const filters = document.getElementById("garden-filters");
@@ -440,6 +489,7 @@ function initGardenIndex() {
       const btn = ev.target.closest("button[data-type]");
       if (!btn) return;
       activeType = btn.dataset.type;
+      page = 1;
       filters.querySelectorAll("button").forEach((b) => {
         const on = b === btn;
         b.classList.toggle("active", on);
@@ -453,6 +503,7 @@ function initGardenIndex() {
   if (search) {
     search.addEventListener("input", () => {
       query = search.value.trim().toLowerCase();
+      page = 1;
       draw();
     });
   }
@@ -554,7 +605,9 @@ function entryFromHref(href) {
 // Hover/focus previews for internal links (wiki-links and ?slug= links).
 function initGardenHovercards() {
   if (typeof GARDEN === "undefined") return;
-  const SEL = 'a.wiki-link, a[href*="garden-entry.html?slug="]';
+  // Inline links only: the big cards already show their own preview, so we
+  // exclude .garden-card to avoid a redundant popup firing on hover.
+  const SEL = 'a.wiki-link:not(.garden-card), a[href*="garden-entry.html?slug="]:not(.garden-card)';
   let card = null, hideTimer = null, current = null;
 
   function ensureCard() {

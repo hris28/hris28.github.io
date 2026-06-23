@@ -88,20 +88,19 @@
       </div>
 
       <div class="garden-layout" id="garden-layout">
-        <div id="garden-grid" class="garden-grid"></div>
+        <div class="garden-main">
+          <div id="garden-grid" class="garden-grid"></div>
+          <nav id="garden-pagination" class="garden-pagination" aria-label="Garden pages"></nav>
+        </div>
         <aside class="garden-explorer" id="garden-explorer" aria-label="Explorer">
+          <div class="rail-graph">
+            <h3>Map</h3>
+            <div class="garden-graph-wrap"><canvas id="garden-graph" aria-label="Graph of how garden entries connect"></canvas></div>
+          </div>
           <h3>Explorer</h3>
           <div id="garden-explorer-list"></div>
         </aside>
       </div>
-    </div>
-  </section>
-
-  <!-- Map: how entries connect -->
-  <section class="reveal">
-    <div class="wrap">
-      <p class="eyebrow">Map</p>
-      <div class="garden-graph-wrap"><canvas id="garden-graph" aria-label="Graph of how garden entries connect"></canvas></div>
     </div>
   </section>
 

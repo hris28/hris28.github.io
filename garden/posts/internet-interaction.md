@@ -64,9 +64,6 @@ Privacy tools do not make you invisible. They shift where visibility sits. Each 
 
 That question requires understanding what each actor in the chain can see by default. This article is meant to give you enough of that picture to start asking it.
 
-## What to read next
-
-[[privacy-basics]] covers cookies, tracking pixels, and browser fingerprinting in more depth. [[01-dns]] covers DNS and what changing it actually changes. [[01-https]] covers TLS in more detail, including SNI and what remains visible even over encrypted connections.
 
 ---
 

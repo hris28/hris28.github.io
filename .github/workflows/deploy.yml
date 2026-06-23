@@ -56,7 +56,7 @@ jobs:
           for f in index about projects resume interests garden garden-entry 404; do
             [ -f "_site/$f.html" ] && stamp "$f.html" "_site/$f.html"
           done
-          for src in garden/posts/*.html; do
+          for src in garden/posts/*.html garden/tools/*.html; do
             [ -f "$src" ] && stamp "$src" "_site/$src"
           done
 
@@ -65,7 +65,8 @@ jobs:
           test -f _site/index.html
           test -f _site/garden.html
           test -f _site/garden-entry.html
-          test -f _site/garden/posts/wcag-contrast-checker.html
+          test -f _site/garden/tools/wcag-contrast-checker.html
+          test -f _site/garden/tools/browser-fingerprinting.html
           echo "OK: required files present."
 
       - name: Deploy to gh-pages branch

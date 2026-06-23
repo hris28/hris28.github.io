@@ -185,40 +185,26 @@ function createGraph(canvas, nodes, edges, opts = {}) {
   function draw() {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, w, h);
-    const active = hoverId || focusSlug;
     // edges
+    ctx.strokeStyle = C.line; ctx.lineWidth = 1;
     edges.forEach((e) => {
       const a = byId[e.a], b = byId[e.b]; if (!a || !b) return;
-      const hot = active && (e.a === active || e.b === active);
-      ctx.strokeStyle = hot ? C.lineHi : C.line;
-      ctx.lineWidth = hot ? 1.4 : 1;
       ctx.beginPath(); ctx.moveTo(sx(a), sy(a)); ctx.lineTo(sx(b), sy(b)); ctx.stroke();
     });
-    // label visibility: fade in as you zoom past 1x, plus hovered/neighbours
-    const zoomAlpha = Math.max((zoom - 1) / 2.5, 0);
     // nodes
     nodes.forEach((n) => {
       const r = radiusOf(n) * zoom;
-      const isActive = active && (n.id === active || neighbours.has(n.id));
-      const dim = active && !isActive ? 0.3 : 1;
-      ctx.globalAlpha = dim;
       ctx.beginPath(); ctx.arc(sx(n), sy(n), r, 0, Math.PI * 2);
       ctx.fillStyle = TYPE_COLOR[n.type] || TYPE_COLOR.default; ctx.fill();
       if (n.id === focusSlug) { ctx.lineWidth = 2; ctx.strokeStyle = C.ring; ctx.stroke(); }
-      ctx.globalAlpha = 1;
     });
-    // labels (drawn last, screen-space, constant size)
+    // labels (always visible)
     ctx.textAlign = "center"; ctx.textBaseline = "top";
     ctx.font = "600 11px ui-sans-serif, system-ui, -apple-system, sans-serif";
+    ctx.fillStyle = C.label;
     nodes.forEach((n) => {
-      const hovered = active && (n.id === active || neighbours.has(n.id));
-      const a = hovered ? 1 : zoomAlpha;
-      if (a <= 0.02) return;
-      ctx.globalAlpha = Math.min(a, 1);
-      ctx.fillStyle = C.label;
       const t = n.title.length > 24 ? n.title.slice(0, 23) + "…" : n.title;
       ctx.fillText(t, sx(n), sy(n) + radiusOf(n) * zoom + 4);
-      ctx.globalAlpha = 1;
     });
   }
 
