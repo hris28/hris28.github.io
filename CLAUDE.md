@@ -1,1 +1,1 @@
-This folder contains all the files used in the https://hris28.github.io/ portfolio. Suggest what changes to make and why, before making any actual changes. Optimize to be user-friendly, easy to navigate, and organically engaging to read.
+This folder contains all the files used in the https://hris28.github.io/ portfolio. Suggest what changes to make and why, before making any actual changes. Optimize to be user-friendly, easy to navigate, and organically engaging to read. When stuck, output your current hypothesis before making changes.

@@ -18,6 +18,7 @@ function toggleTheme() {
   const next = cur === "dark" ? "light" : "dark";
   document.documentElement.setAttribute("data-theme", next);
   localStorage.setItem("theme", next);
+  document.dispatchEvent(new CustomEvent("themechange", { detail: { theme: next } }));
 }
 
 // --- Mobile nav expand/collapse ---

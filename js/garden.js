@@ -29,7 +29,7 @@
 const GARDEN = [
   {
     slug: "avar-compendium",
-    image: "images/museum.JPG",
+    image: "images/garden.png",
     type: "tool",
     title: "Avar Intelligence Compendium",
     date: "2025-12-01",
@@ -41,7 +41,7 @@ const GARDEN = [
   },
   {
     slug: "browser-fingerprinting",
-    image: "images/shadow.jpg",
+    image: "images/garden.png",
     type: "post",
     title: "What your browser silently sees",
     date: "2026-06-20",
@@ -54,7 +54,7 @@ const GARDEN = [
   },
   {
     slug: "interacting-with-the-internet",
-    image: "images/tour.jpg",
+    image: "images/garden.png",
     type: "post",
     title: "Interacting with the Internet",
     date: "2026-06-20",
@@ -66,7 +66,7 @@ const GARDEN = [
   },
   {
     slug: "evaluating-sources",
-    image: "images/lab-goggles.jpg",
+    image: "images/garden.png",
     type: "post",
     title: "Evaluating Online Sources",
     date: "2026-06-20",
@@ -78,7 +78,7 @@ const GARDEN = [
   },
   {
     slug: "threat-modeling",
-    image: "images/snow.jpg",
+    image: "images/garden.png",
     type: "post",
     title: "Security Basics: Threat Modeling for Ordinary People",
     date: "2026-06-20",
@@ -90,7 +90,7 @@ const GARDEN = [
   },
   {
     slug: "privacy-basics",
-    image: "images/monke.JPG",
+    image: "images/garden.png",
     type: "post",
     title: "Privacy Basics: Understanding Your Digital Footprint",
     date: "2026-06-20",
@@ -102,7 +102,7 @@ const GARDEN = [
   },
   {
   slug: "vpn-explained",
-  image: "images/tire.JPG",
+  image: "images/garden.png",
   type: "note",
   title: "VPNs and how they work (and don't)",
   date: "2026-06-20",
@@ -113,7 +113,7 @@ const GARDEN = [
 },
 {
   slug: "tor-explained",
-  image: "images/temple.jpg",
+  image: "images/garden.png",
   type: "note",
   title: "Tor: what it is, how it works",
   date: "2026-05-01",
@@ -124,7 +124,7 @@ const GARDEN = [
 },
 {
   slug: "dns-explained",
-  image: "images/ganga.jpg",
+  image: "images/garden.png",
   type: "note",
   title: "DNS: what it is, what it exposes",
   date: "2026-05-01",
@@ -135,7 +135,7 @@ const GARDEN = [
 },
 {
   slug: "isp-layer",
-  image: "images/climbing.JPG",
+  image: "images/garden.png",
   type: "note",
   title: "The ISP Layer: What Your Internet Provider Can See",
   date: "2026-05-01",
@@ -146,7 +146,7 @@ const GARDEN = [
 },
 {
   slug: "os-layer",
-  image: "images/ligand-visualization-chimerax.jpeg",
+  image: "images/garden.png",
   type: "note",
   title: "Software Layers: From Firmware to Application",
   date: "2026-05-01",
@@ -157,7 +157,7 @@ const GARDEN = [
 },
 { 
   slug: "hardware-basics",
-  image: "images/isef-name.jpg", 
+  image: "images/garden.png", 
   type: "note", 
   title: "Hardware basics", 
   date: "2026-06-20", 
@@ -168,7 +168,7 @@ const GARDEN = [
 },
   {
     slug: "butterfly-effect-an-original-song",
-    image: "images/dance_stairs.PNG",
+    image: "images/garden.png",
     type: "song",
     title: "Butterfly Effect",
     date: "2022-02-18",
@@ -183,7 +183,7 @@ const GARDEN = [
   },
   {
     slug: "linguistic-effect-of-llms",
-    image: "images/painting-duck.jpg",
+    image: "images/garden.png",
     type: "note",
     title: "Notes: how LLMs are shifting human language",
     date: "2025-09-15",
@@ -194,7 +194,7 @@ const GARDEN = [
   },
   {
     slug: "building-the-terminal",
-    image: "images/secretservice-tour.JPG",
+    image: "images/garden.png",
     type: "post",
     title: "Building the whoami terminal on my homepage",
     date: "2025-11-20",
@@ -207,7 +207,7 @@ const GARDEN = [
   },
   {
     slug: "pcbp-an-original-song",
-    image: "images/durga-stage.jpg",
+    image: "images/garden.png",
     type: "song",
     title: "Peasants Can't Be Princes",
     date: "2022-02-16",
@@ -221,7 +221,7 @@ const GARDEN = [
   },
   {
     slug: "bbb-an-original-song",
-    image: "images/eden1.jpg",
+    image: "images/garden.png",
     type: "song",
     title: "Beautiful Blanket of Blue",
     date: "2022-01-03",
@@ -233,7 +233,7 @@ const GARDEN = [
   },
   {
     slug: "wlil-an-original-song",
-    image: "images/eden2.jpg",
+    image: "images/garden.png",
     type: "song",
     title: "What Love Is Like",
     date: "2023-07-20",
@@ -245,7 +245,7 @@ const GARDEN = [
   },
   {
     slug: "insomnia-an-original-song",
-    image: "images/shot.jpg",
+    image: "images/garden.png",
     type: "song",
     title: "Insomnia",
     date: "2022-04-15",
@@ -257,7 +257,7 @@ const GARDEN = [
   },
   {
     slug: "rise-an-original-song",
-    image: "images/stage-singing.jpg",
+    image: "images/garden.png",
     type: "song",
     title: "Rise",
     date: "2022-03-10",
@@ -270,7 +270,7 @@ const GARDEN = [
   },
   {
     slug: "harami-an-original-song",
-    image: "images/pink-lehenga.jpg",
+    image: "images/garden.png",
     type: "song",
     title: "Harami",
     date: "2018-04-20",
@@ -283,7 +283,7 @@ const GARDEN = [
   },
   {
     slug: "alone-an-original-song",
-    image: "images/red-lehenga.jpg",
+    image: "images/garden.png",
     type: "song",
     title: "Alone",
     date: "2018-04-20",
@@ -295,7 +295,7 @@ const GARDEN = [
   },
   {
     slug: "col-an-original-song",
-    image: "images/eden3.jpg",
+    image: "images/garden.png",
     type: "song",
     title: "City of Lies",
     date: "2017-06-03",
@@ -307,7 +307,7 @@ const GARDEN = [
   },
   {
     slug: "closer-an-original-song",
-    image: "images/dancing.jpg",
+    image: "images/garden.png",
     type: "song",
     title: "Closer",
     date: "2022-04-02",
@@ -321,7 +321,7 @@ const GARDEN = [
   },
   {
     slug: "fairytale-an-original-song",
-    image: "images/flower.jpg",
+    image: "images/garden.png",
     type: "song",
     title: "Fairytale",
     date: "2016-02-04",
@@ -336,7 +336,7 @@ const GARDEN = [
   },
   {
   slug: "wcag-contrast-checker",
-    image: "images/flower2.jpg",
+    image: "images/garden.png",
   type: "post",
   title: "What actually makes text readable? (a contrast checker)",
   date: "2026-02-10",
