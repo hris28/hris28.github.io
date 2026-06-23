@@ -108,7 +108,7 @@
         <ul>
           <li><strong>The browser never implemented the API.</strong> <code>navigator.deviceMemory</code> (the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Device_Memory_API" target="_blank" rel="noopener">Device Memory API</a>) and the connection group (<code>navigator.connection</code>, the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Network_Information_API" target="_blank" rel="noopener">Network Information API</a>) are Chromium-only. Chrome, Edge, and Brave ship them; Firefox and Safari deliberately never did, in part because they add fingerprinting surface for little user benefit. Your RAM and your connection speed are perfectly real. The browser just offers no property for a script to read them, so the value is <code>undefined</code> and the tool prints "not exposed."<sup class="cite"><a href="#src-3">[3]</a></sup></li>
           <li><strong>The browser implemented it, then deliberately neutralized it.</strong> Your <strong>GPU vendor and renderer</strong> come from a WebGL extension called <a href="https://developer.mozilla.org/en-US/docs/Web/API/WEBGL_debug_renderer_info" target="_blank" rel="noopener">WEBGL_debug_renderer_info</a>. Standard Chrome returns the real string (for example "ANGLE (NVIDIA GeForce RTX...)") because games and graphics apps legitimately want it. Brave and the Tor Browser intercept that exact call and return a generic or empty value on purpose, because the precise GPU and driver is one of the most identifying things a page can learn. The difference you see is not your hardware changing; it is the browser deciding whether to answer. The Battery Status API is the end state of this approach: Firefox and Safari did not just blank it, they removed it entirely after it was shown to aid tracking.</li>
-          <li><strong>It needs a secure context or a user action, or it genuinely does not apply.</strong> Some APIs only work over HTTPS or after you interact with the page. And some blanks are honest absences: <code>maxTouchPoints</code> is 0 on a non-touch laptop, there is no battery to report on a desktop, and screen orientation is often unset outside mobile.</li>
+          <li><strong>It needs a secure context or a user action, or it simply does not apply.</strong> Some APIs only work over HTTPS or after you interact with the page. And some blanks are honest absences: <code>maxTouchPoints</code> is 0 on a non-touch laptop, there is no battery to report on a desktop, and screen orientation is often unset outside mobile.</li>
         </ul>
         <p>
           Two more reasons are not about the browser at all. A value you control and have not set shows "not set" (Do Not Track and Global Privacy Control are blank because you are sending no such signal), and a request that something blocked simply fails (if the IP lookup errors, a tracker blocker stopped that one call, although your IP is still exposed to every server you actually connect to).
@@ -140,12 +140,21 @@
           None of these is particularly unique on its own. Combined, they often single out one browser among millions. Peter Eckersley's 2010 Panopticlick study put numbers on it: of 470,161 browsers tested, 83.6% had a unique fingerprint from a handful of characteristics, rising to 94.2% among those running Flash or Java.<sup class="cite"><a href="#src-4">[4]</a></sup>
         </p>
 
-        <h2>How this tool builds your fingerprint (and how mine compares)</h2>
+        <h2>The URL itself is tracking you</h2>
+        <p id="utm-demo">Checking this page's address for tracking parameters…</p>
         <p>
-          The id at the top of the panel is honest about being a demo, so here is exactly how it is made. The tool draws a short string onto a hidden <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API" target="_blank" rel="noopener">canvas</a> and reads back the encoded image, which renders slightly differently depending on your GPU, driver, and OS. It then concatenates that image data with your user-agent, languages, screen and viewport sizes, GPU strings, and timezone, and runs the whole blob through a small non-cryptographic hash (FNV-1a) to get the eight-character id. The same browser on the same machine produces the same id; a different device produces a different one.
+          Those <code>utm_source</code>, <code>utm_campaign</code>, and <code>gclid</code> tags appended to links
+          tell a site exactly which ad, email, or post sent you. Try adding
+          <code>?utm_source=garden&amp;utm_campaign=demo</code> to this page's URL and reload. The line above will
+          read it back.
+        </p>
+
+        <h2>How this tool builds your fingerprint</h2>
+        <p>
+          This tool draws a short string onto a hidden <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API" target="_blank" rel="noopener">canvas</a> and reads back the encoded image, which renders slightly differently depending on your GPU, driver, and OS. It then concatenates that image data with your user-agent, languages, screen and viewport sizes, GPU strings, and timezone, and runs the whole blob through a small non-cryptographic hash (FNV-1a) to get the eight-character id. The same browser on the same machine produces the same id; a different device produces a different one.
         </p>
         <p>
-          It is deliberately simple, and weaker than a real tracker in two ways. First, it uses only a handful of signals, whereas production libraries like the open-source <a href="https://github.com/fingerprintjs/fingerprintjs" target="_blank" rel="noopener">FingerprintJS</a> combine more than forty, including canvas, WebGL, audio, and font probes.<sup class="cite"><a href="#src-6">[6]</a></sup> Second, my hash is brittle: change one value (resize the window, update a driver) and the id changes completely. Real fingerprinters use fuzzy matching to recognize you across those small changes, which is what makes the technique durable in practice. The underlying idea is identical; mine is just smaller and more honest about its limits.
+          It is deliberately simple, and weaker than a real tracker in two ways. First, it uses only a handful of signals, whereas production libraries like the open-source <a href="https://github.com/fingerprintjs/fingerprintjs" target="_blank" rel="noopener">FingerprintJS</a> combine more than forty, including canvas, WebGL, audio, and font probes.<sup class="cite"><a href="#src-6">[6]</a></sup> Second, my hash is brittle: change one value (resize the window, update a driver) and the id changes completely. Real fingerprinters use fuzzy matching to recognize you across those small changes, which is what makes the technique durable in practice.
         </p>
 
         <h2>How real websites go further</h2>
@@ -158,23 +167,6 @@
           <li><strong>Tracking pixels</strong> - invisible 1×1 images that report when you opened an email or page.</li>
           <li><strong>Third-party cookies</strong> - persistent IDs shared across sites. Safari and Firefox block them by default; Chrome planned to phase them out but reversed course in 2024 to 2025, so they remain on by default there.<sup class="cite"><a href="#src-5">[5]</a></sup></li>
         </ul>
-
-        <h2>How consent levels work</h2>
-        <p>
-          The cookie banner isn't decoration. Choices usually map to tiers, each unlocking more collection:
-          <strong>Essential</strong> (basic data needed to function) → <strong>+ Functional</strong> (preferences,
-          storage) → <strong>+ Analytics</strong> (behavior, performance) → <strong>+ Marketing</strong> (full
-          cross-site profiling). "Reject all" really does collect less.
-        </p>
-
-        <h2>The URL itself is tracking you</h2>
-        <p id="utm-demo">Checking this page's address for tracking parameters…</p>
-        <p>
-          Those <code>utm_source</code>, <code>utm_campaign</code>, and <code>gclid</code> tags appended to links
-          tell a site exactly which ad, email, or post sent you. Try adding
-          <code>?utm_source=garden&amp;utm_campaign=demo</code> to this page's URL and reload. The line above will
-          read it back.
-        </p>
 
         <h2>What you can actually do</h2>
         <ul>

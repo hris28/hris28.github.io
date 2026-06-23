@@ -441,7 +441,8 @@ section { padding: 3rem 0; }
 /* Rendered markdown view */
 .note-view { max-width: 720px; margin: 0 auto; }
 .note-view h1 { font-size: 1.8rem; margin-bottom: 0.5rem; font-weight: 700; letter-spacing: -0.02em; }
-.note-view h2 { font-size: 1.3rem; margin: 2rem 0 0.8rem; font-weight: 700; }
+.note-view h2 { font-size: 1.6rem; margin: 2.6rem 0 0.8rem; font-weight: 700; letter-spacing: -0.01em; }
+.note-view h3 { font-size: 1.2rem; margin: 2rem 0 0.7rem; font-weight: 700; }
 .note-view p { margin: 0 0 1.1rem; }
 .note-view code {
   background: var(--bg-soft); padding: 0.15rem 0.4rem; border-radius: 3px;

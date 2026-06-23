@@ -42,7 +42,7 @@ const GARDEN = [
   {
     slug: "browser-fingerprinting",
     image: "images/garden.png",
-    type: "post",
+    type: "tool",
     title: "What your browser silently sees",
     date: "2026-06-20",
     maturity: "growing",
@@ -337,7 +337,7 @@ const GARDEN = [
   {
   slug: "wcag-contrast-checker",
     image: "images/garden.png",
-  type: "post",
+  type: "tool",
   title: "What actually makes text readable? (a contrast checker)",
   date: "2026-02-10",
   maturity: "evergreen",
@@ -356,6 +356,8 @@ const MATURITY = {
   evergreen: { icon: "🌳", label: "evergreen" },
 };
 const TYPE_LABEL = { tool: "tool", song: "song", note: "note", post: "post", thought: "thought" };
+// Display order for the homepage cards and the explorer rail.
+const TYPE_ORDER = ["tool", "post", "note", "thought", "song"];
 
 function gardenEntryHref(e) {
   if (e.type === "tool" && e.url) return e.url;
@@ -379,10 +381,11 @@ function renderGardenCard(e, isFeature) {
   const matHtml = mat
     ? `<span class="maturity" title="maturity: ${mat.label}">${mat.icon}</span>`
     : "";
-  const imgHtml = e.image ? `<img class="card-img" src="${e.image}" alt="" />` : "";
+  const showImg = isFeature && e.image;  // covers only on featured cards
+  const imgHtml = showImg ? `<img class="card-img" src="${e.image}" alt="" />` : "";
   const kitHtml = (e.tool || e.type === "tool") ? `<span class="card-kit">kit</span>` : "";
   return `
-    <a class="garden-card type-${e.type}${isFeature ? " feature" : ""}${e.image ? " has-img" : ""}" href="${href}"${external ? ' target="_blank" rel="noopener"' : ""}${isFeature ? ' role="listitem"' : ""}>
+    <a class="garden-card type-${e.type}${isFeature ? " feature" : ""}${showImg ? " has-img" : ""}" href="${href}"${external ? ' target="_blank" rel="noopener"' : ""}${isFeature ? ' role="listitem"' : ""}>
       ${imgHtml}
       <div class="card-top">
         <span class="card-type">${TYPE_LABEL[e.type] || e.type}</span>
@@ -399,11 +402,18 @@ function initGardenIndex() {
   const grid = document.getElementById("garden-grid");
   if (!grid) return; // not on the index page
 
-  const sorted = [...GARDEN].sort((a, b) => (a.date < b.date ? 1 : -1));
+  const byDate = [...GARDEN].sort((a, b) => (a.date < b.date ? 1 : -1));
+  // Cards + explorer group by type (tools, posts, notes, thoughts, songs),
+  // then by date within each type. Featured stays purely date-ordered.
+  const sorted = [...GARDEN].sort(
+    (a, b) =>
+      TYPE_ORDER.indexOf(a.type) - TYPE_ORDER.indexOf(b.type) ||
+      (a.date < b.date ? 1 : -1)
+  );
 
   const featuredEl = document.getElementById("garden-featured");
   if (featuredEl) {
-    const feats = sorted.filter((e) => e.featured);
+    const feats = byDate.filter((e) => e.featured).slice(0, 6);
     if (feats.length) {
       featuredEl.innerHTML = feats.map((e) => renderGardenCard(e, true)).join("");
       initFeaturedSlider(featuredEl);
@@ -511,7 +521,7 @@ function initGardenIndex() {
   // Explorer rail (entries grouped by type)
   const explorer = document.getElementById("garden-explorer-list");
   if (explorer) {
-    const ORDER = ["tool", "song", "note", "post", "thought"];
+    const ORDER = TYPE_ORDER;
     const byType = {};
     sorted.forEach((e) => (byType[e.type] = byType[e.type] || []).push(e));
     explorer.innerHTML = ORDER.filter((t) => byType[t])
