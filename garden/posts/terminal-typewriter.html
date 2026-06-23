@@ -40,33 +40,100 @@
   <section>
     <div class="wrap-narrow">
       <a class="back-link" href="../../garden.html">← Back to the garden</a>
-      <p class="eyebrow">post · 🌳 <span class="stage-evergreen">evergreen</span></p>
+      <p class="eyebrow">tool · 🌳 <span class="stage-evergreen">evergreen</span></p>
       <h1 class="note-h1">Building the whoami terminal on my homepage</h1>
       <p class="note-meta" style="margin: 0.4rem 0 1.75rem;">20 Nov 2025 · webdev, design, accessibility</p>
 
       <div class="note-view">
         <p>
-          This is an example of a hand-built HTML post--the kind of entry where I want full
-          control over layout, images, or embeds. (For quicker notes I just write Markdown; the
-          garden supports both.)
+          This is a hand-built HTML post, and the terminal below is the real thing: it runs the exact
+          same code that sits at the top of my <a href="../../index.html">homepage</a>. Hover it, tap it,
+          or focus it with the keyboard to reveal the full list; move away and the cycle resumes.
         </p>
+
+        <div class="terminal" id="terminal" tabindex="0" aria-label="Terminal: about Hrishika" style="margin: 1.5rem 0;">
+          <div class="terminal-bar">
+            <span class="dotgroup" aria-hidden="true"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span></span>
+            <span class="ttitle">hris@hrc: ~</span>
+            <span class="thint" aria-hidden="true">click to expand</span>
+          </div>
+          <div class="terminal-body">
+            <p class="line"><span class="prompt">hris@hrc:~$</span> <span class="cmd">whoami</span></p>
+            <p class="line out">hrishika roychoudhury. msis candidate, unc sils.</p>
+            <p class="line"><span class="prompt">hris@hrc:~$</span> <span class="cmd">cat focus.txt</span></p>
+            <p class="line out expertise" id="expertise" aria-hidden="true" data-terms="human-computer interaction|ai/ml evaluation|user experience|health informatics|neural networks|interdisciplinary research|data visualization|full-stack web development|accessible technology|osint|digital preservation|archiving the now"></p>
+            <span class="sr-only">Areas of expertise: human-computer interaction, ai/ml evaluation, user experience, health informatics, neural networks, interdisciplinary research, data visualization, full-stack web development, accessible technology, osint, digital preservation, and archiving the now.</span>
+          </div>
+        </div>
+
         <h2>Why a terminal?</h2>
         <p>
           I wanted my homepage to say what I do without reading like a résumé bullet list. A little
-          terminal that types out <code>whoami</code> and <code>cat focus.txt</code> felt more like me--a nod to the command line, with a bit of personality.
+          terminal that types out <code>whoami</code> and <code>cat focus.txt</code> felt more like me, with a nod to the command line and some personality.
         </p>
+
+        <h2>The markup</h2>
+        <p>
+          The whole thing is one box. The first command line is static text. The second command,
+          <code>cat focus.txt</code>, is followed by an <em>empty</em> paragraph whose
+          <code>data-terms</code> attribute holds every focus area, separated by a <code>|</code> pipe.
+          That empty paragraph is what the script types into. A hidden <code>sr-only</code> sentence
+          repeats the full list in plain prose so screen readers get everything at once.
+        </p>
+        <pre><code>&lt;div class="terminal" id="terminal" tabindex="0"&gt;
+  &lt;div class="terminal-body"&gt;
+    &lt;p class="line"&gt;&lt;span class="prompt"&gt;hris@hrc:~$&lt;/span&gt; whoami&lt;/p&gt;
+    &lt;p class="line out"&gt;hrishika roychoudhury. msis candidate, unc sils.&lt;/p&gt;
+    &lt;p class="line"&gt;&lt;span class="prompt"&gt;hris@hrc:~$&lt;/span&gt; cat focus.txt&lt;/p&gt;
+
+    &lt;!-- the empty line the script types into --&gt;
+    &lt;p class="out expertise" id="expertise" aria-hidden="true"
+       data-terms="human-computer interaction|ai/ml evaluation|user experience|..."&gt;&lt;/p&gt;
+
+    &lt;!-- the same list, in plain prose, for screen readers --&gt;
+    &lt;span class="sr-only"&gt;Areas of expertise: human-computer interaction, ...&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+        <h2>The script</h2>
+        <p>
+          On load the script reads <code>data-terms</code>, splits it on the <code>|</code>, and animates
+          one word at a time. The loop has two phases: <strong>typing</strong> adds a character and
+          schedules the next tick a few milliseconds later (with a little random jitter so it feels human);
+          once the word is complete it pauses, then <strong>deleting</strong> removes characters one by one
+          until the line is empty, advances to the next term, and starts again, forever. Here is the core
+          of it, lightly trimmed:
+        </p>
+        <pre><code>const terms = target.dataset.terms.split("|").map(t =&gt; t.trim());
+
+const TYPE = 55, DELETE = 28, HOLD = 1300, BETWEEN = 400; // milliseconds
+let i = 0, pos = 0, phase = "typing";
+
+function tick() {
+  const term = terms[i];
+  if (phase === "typing") {
+    word.textContent = term.slice(0, ++pos);
+    if (pos &gt;= term.length) { phase = "deleting"; setTimeout(tick, HOLD); }
+    else setTimeout(tick, TYPE + Math.random() * 45);   // jitter
+  } else {
+    word.textContent = term.slice(0, --pos);
+    if (pos === 0) { i = (i + 1) % terms.length; phase = "typing"; setTimeout(tick, BETWEEN); }
+    else setTimeout(tick, DELETE);
+  }
+}
+
+// Respect the OS "reduce motion" setting: skip the animation entirely
+// and just render the full list at once.
+if (matchMedia("(prefers-reduced-motion: reduce)").matches) showAll();
+else tick();</code></pre>
+
         <h2>Keeping it accessible</h2>
         <p>
           The catch with typewriter effects is that they can be hostile to screen readers and to people
-          who get motion-sick. So the animated line is hidden from assistive tech, the full list of focus
-          areas lives in a screen-reader-only element, and anyone with <em>reduce motion</em> turned on
-          just sees the complete list with no animation at all. Clicking the terminal also pins the full
-          list open.
-        </p>
-        <blockquote>The fun part should never cost someone the content.</blockquote>
-        <p>
-          That's the whole idea behind the garden, really--a place for the cool stuff that still
-          respects whoever shows up to read it.
+          who get motion-sick. So the animated line carries <code>aria-hidden="true"</code> (assistive tech
+          ignores it), the full list of focus areas lives in that screen-reader-only sentence, and anyone
+          with <em>reduce motion</em> turned on skips the animation and just sees the complete list. Clicking
+          or focusing the terminal also pins the full list open, so nobody is forced to wait for the cycle.
         </p>
       </div>
     </div>

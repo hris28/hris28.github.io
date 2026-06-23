@@ -138,7 +138,7 @@ None of these are stored on your device. Each is a property your browser exposes
 
 ### How accurate is it
 
-The EFF's Cover Your Tracks project runs a live test that shows how distinctive your browser is in their test population. Most readers who run it find that their browser is either unique or within a very small group. A 2020 academic study by Laperdrix et al. found fingerprints stable enough to re-identify users across sessions even when cookies were cleared.
+The EFF's Cover Your Tracks project runs a live test that shows how distinctive your browser is in their test population. Most readers who run it find that their browser is either unique or within a very small group. A 2020 academic study by Laperdrix et al. found fingerprints stable enough to re-identify users across sessions even when cookies were cleared. The EFF frames the contrast with a useful image: a cookie behaves like a GPS tracker that works only until it is knocked off or deleted, whereas a fingerprint is more like recognizing a car by its make, model, color, and number plate, which is far harder to change and impossible to delete ([EFF, Cover Your Tracks: Learn](https://coveryourtracks.eff.org/learn#simple)).
 
 Fingerprinting alone is not perfect: browser updates, new hardware, and privacy features that randomize fingerprint values all degrade accuracy. But combined with other signals, it substantially closes the gap that cookie-blocking leaves open.
 

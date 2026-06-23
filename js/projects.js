@@ -23,6 +23,7 @@ const PROJECTS = [
     pi: "INLS 690: AI Law & the Struggle for Control of Knowledge · Profs. Will Cross & Dave Hansen",
     description: "Authored a three tier access and use policy for the Internet Archive, Open Access, Credentialed Research, and a Data Trust tier for commercial model training, governing large scale automated and AI scraping, packaged with an implementation guide, a model data use agreement, and a public FAQ. Grounded the framework in a legal analysis synthesizing key fair use and copyright management cases (HathiTrust, Google Books, Thomson Reuters v. Ross, Bartz v. Anthropic, Kadrey v. Meta) and a stakeholder scenario analysis weighing the competing interests of archives, publishers, researchers, and AI developers.",
     tags: ["DIGITAL PRESERVATION", "AI POLICY", "COPYRIGHT", "GOVERNANCE"],
+    links: [{ label: "Write-up", url: "garden/projects/ai-scraping-archives.html" }],
   },
   {
     year: 2026, tag: "NOW",
@@ -43,6 +44,7 @@ const PROJECTS = [
     pi: "INLS 500: Human Information Interactions · Prof. Leslie Thomson",
     description: "Designed a three tier reference service for the State Library of North Carolina, on demand authenticated web captures, a statewide workshop series via the NC Cardinal partner library consortium, and a curated Archive-It collection, to give independent journalists in news desert counties a durable verification tool as 240+ news sites move to block Internet Archive crawlers. Built on a four stream literature and institutional landscape review and grounded in LIS information behavior theory (Taylor's information use environment, Savolainen's source horizon, Koufogiannakis's evidence based practice) to define the user population and justify each tier.",
     tags: ["DIGITAL PRESERVATION", "SERVICE DESIGN", "INFORMATION BEHAVIOR", "ARCHIVES"],
+    links: [{ label: "Write-up", url: "garden/projects/web-archive-forensics.html" }],
   },
   {
     year: 2026, tag: "NOW",
@@ -100,8 +102,7 @@ const PROJECTS = [
     pi: "PI: Dr. Alexandra Nowlan · 4 person design team",
     description: "Interactive physical model of the D3 dopamine receptor (GPCR) demonstrating conformational change triggered by the bitopic ligand FOB02 04A using cryo EM structures. Receptor processed in ChimeraX and Blender, binding pockets carved in TinkerCAD and Onshape, printed in PLA and PETG through multiple design iterations. Authored the model specification and prototype documentation, designed poster content, and presented at UNC BeAM Makerfest as a communication tool for medicinal chemists working on Parkinson's therapeutics.",
     tags: ["3D PRINTING", "CHIMERAX", "BLENDER", "CAD", "NEUROPHARMACOLOGY"],
-    // To add an image, drop a file in images/projects/ and set the path below
-    // image: "images/projects/d3-receptor.jpg",
+    image: "images/ligand-visualization-chimerax.jpeg",
   },
 
   // ---------- 2024 ----------

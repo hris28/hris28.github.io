@@ -90,6 +90,8 @@ Tor is not appropriate as a general-purpose browsing tool for speed-sensitive ta
 
 Use the [Tor Browser](https://www.torproject.org/download/), which is a hardened version of Firefox pre-configured to route traffic through Tor and to resist fingerprinting. Do not configure a regular browser to use Tor manually unless you are certain you understand what you are changing. The Tor Browser includes specific settings that prevent fingerprinting and other application-level deanonymization attacks.
 
+Its anti-fingerprinting strategy is the opposite of hiding: it makes every user present the same screen size, fonts, and user-agent, so an individual [browser fingerprint](browser-fingerprinting) cannot tell one Tor user from another. After downloading, verify the file's cryptographic signature before installing. A digital signature confirms the package genuinely came from the Tor Project's developers and was not modified in transit; the Tor Project documents the exact [GnuPG verification steps](https://support.torproject.org/tor-browser/getting-started/verifying-tor-browser/).
+
 The EFF has installation guides for [Linux](https://ssd.eff.org/module/how-use-tor-linux), [macOS](https://ssd.eff.org/module/how-use-tor-mac), [Windows](https://ssd.eff.org/module/how-use-tor-windows), and [smartphones](https://ssd.eff.org/module/how-use-tor-mobile).
 
 Another option is using the incognito Tor feature in Brave Browser. This is not recommended if "your life depends on remaining anonymous," as stated on Reddit in 2019 by Brave's VP of IT, Ryan Watson. Brave has previously experienced [leaks in browsing history](https://github.com/brave/brave-browser/labels/feature%2Ftor%2Fleakproofing) that have [since been patched](https://decrypt.co/58290/brave-leaking-browsing-history-anonymous-tor-browser). However, using a [Private Window with Tor](https://support.brave.app/hc/en-us/articles/360018121491-What-is-a-Private-Window-with-Tor-Connectivity) means using Tor as a proxy (where you first connect to a chain of computers to obsure where the connection is coming from, before connecting to your target website) in regular private windows, and still provides a comparatively enhanced level of anonymity for browsing the internet.
@@ -101,6 +103,8 @@ Another option is using the incognito Tor feature in Brave Browser. This is not 
 **[privacy.net: Everything You Wanted to Know About Tor](https://privacy.net/what-is-tor/)** - User-oriented, covers the anonymity vs. privacy distinction cleanly. The trust model explanation is one of the clearest available for a non-technical audience. The downsides section is honest about speed, ISP visibility, and the limits against state-level adversaries. Credibility is harder to verify than EFF or the Tor Project's own documentation.
 
 **[Tor Project: Documentation](https://tb-manual.torproject.org/)** - Primary source for Tor Browser behavior. No commercial interest. Written by the team that builds the software.
+
+**[Tor Project: Verify Tor Browser's signature](https://support.torproject.org/tor-browser/getting-started/verifying-tor-browser/)** - Primary-source, step-by-step GnuPG instructions for confirming a download genuinely came from the Tor Project and was not tampered with. Platform-specific commands for Windows, macOS, and Linux.
 
 **[EFF: Tor Guides](https://ssd.eff.org/)** - Platform-specific installation guides and threat-model framing. EFF is a nonprofit with no commercial interest in the tools they recommend.
 

@@ -56,7 +56,7 @@ jobs:
           for f in index about projects resume interests garden garden-entry 404; do
             [ -f "_site/$f.html" ] && stamp "$f.html" "_site/$f.html"
           done
-          for src in garden/posts/*.html garden/tools/*.html; do
+          for src in garden/posts/*.html garden/tools/*.html garden/projects/*.html; do
             [ -f "$src" ] && stamp "$src" "_site/$src"
           done
 

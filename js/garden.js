@@ -101,6 +101,28 @@ const GARDEN = [
     md: "garden/posts/privacy-basics.md",
   },
   {
+    slug: "ai-scraping-archives",
+    image: "images/garden.png",
+    type: "post",
+    title: "AI Scraping & the Future of Digital Preservation Archives",
+    date: "2026-05-15",
+    maturity: "growing",
+    tags: ["digital preservation", "ai policy", "copyright", "project"],
+    excerpt: "A three-tier access policy I wrote for the Internet Archive to govern large-scale AI scraping, grounded in fair-use case law.",
+    page: "garden/projects/ai-scraping-archives.html",
+  },
+  {
+    slug: "web-archive-forensics",
+    image: "images/garden.png",
+    type: "post",
+    title: "Web Archive Forensics for NC's Accountability Journalists",
+    date: "2026-05-10",
+    maturity: "growing",
+    tags: ["digital preservation", "service design", "archives", "project"],
+    excerpt: "A three-tier reference service for the State Library of NC giving journalists in news-desert counties a durable web-verification tool.",
+    page: "garden/projects/web-archive-forensics.html",
+  },
+  {
   slug: "vpn-explained",
   image: "images/garden.png",
   type: "note",
@@ -195,7 +217,7 @@ const GARDEN = [
   {
     slug: "building-the-terminal",
     image: "images/garden.png",
-    type: "post",
+    type: "tool",
     title: "Building the whoami terminal on my homepage",
     date: "2025-11-20",
     maturity: "evergreen",
@@ -387,14 +409,16 @@ function renderGardenCard(e, isFeature) {
   return `
     <a class="garden-card type-${e.type}${isFeature ? " feature" : ""}${showImg ? " has-img" : ""}" href="${href}"${external ? ' target="_blank" rel="noopener"' : ""}${isFeature ? ' role="listitem"' : ""}>
       ${imgHtml}
-      <div class="card-top">
-        <span class="card-type">${TYPE_LABEL[e.type] || e.type}</span>
-        ${kitHtml}
-        ${matHtml}
+      <div class="card-body">
+        <div class="card-top">
+          <span class="card-type">${TYPE_LABEL[e.type] || e.type}</span>
+          ${kitHtml}
+          ${matHtml}
+        </div>
+        <h3 class="card-title">${e.title}</h3>
+        <p class="card-excerpt">${e.excerpt}</p>
+        <span class="card-date">${gardenFormatDate(e.date)}</span>
       </div>
-      <h3 class="card-title">${e.title}</h3>
-      <p class="card-excerpt">${e.excerpt}</p>
-      <span class="card-date">${gardenFormatDate(e.date)}</span>
     </a>`;
 }
 
@@ -402,18 +426,13 @@ function initGardenIndex() {
   const grid = document.getElementById("garden-grid");
   if (!grid) return; // not on the index page
 
-  const byDate = [...GARDEN].sort((a, b) => (a.date < b.date ? 1 : -1));
-  // Cards + explorer group by type (tools, posts, notes, thoughts, songs),
-  // then by date within each type. Featured stays purely date-ordered.
-  const sorted = [...GARDEN].sort(
-    (a, b) =>
-      TYPE_ORDER.indexOf(a.type) - TYPE_ORDER.indexOf(b.type) ||
-      (a.date < b.date ? 1 : -1)
-  );
+  // Cards are chronological: most recent first, driven entirely by each
+  // entry's `date`. Change a date and it re-sorts on the next reload.
+  const sorted = [...GARDEN].sort((a, b) => (a.date < b.date ? 1 : -1));
 
   const featuredEl = document.getElementById("garden-featured");
   if (featuredEl) {
-    const feats = byDate.filter((e) => e.featured).slice(0, 6);
+    const feats = sorted.filter((e) => e.featured).slice(0, 6);
     if (feats.length) {
       featuredEl.innerHTML = feats.map((e) => renderGardenCard(e, true)).join("");
       initFeaturedSlider(featuredEl);
@@ -527,7 +546,7 @@ function initGardenIndex() {
     explorer.innerHTML = ORDER.filter((t) => byType[t])
       .map((t) => {
         const items = byType[t]
-          .map((e) => `<li><a href="${gardenEntryHref(e)}">${e.title}</a></li>`)
+          .map((e) => `<li><a class="exp-link" href="${gardenEntryHref(e)}">${e.title}</a></li>`)
           .join("");
         const label = (TYPE_LABEL[t] || t) + "s";
         return `<details class="exp-group" open>
@@ -617,7 +636,7 @@ function initGardenHovercards() {
   if (typeof GARDEN === "undefined") return;
   // Inline links only: the big cards already show their own preview, so we
   // exclude .garden-card to avoid a redundant popup firing on hover.
-  const SEL = 'a.wiki-link:not(.garden-card), a[href*="garden-entry.html?slug="]:not(.garden-card)';
+  const SEL = 'a.wiki-link:not(.garden-card), a.exp-link, a[href*="garden-entry.html?slug="]:not(.garden-card)';
   let card = null, hideTimer = null, current = null;
 
   function ensureCard() {
