@@ -1,11 +1,9 @@
 ---
 title: "How to Evaluate a Privacy or Security Source"
 date: 2026-05-01
-lastmod: 2026-05-01
 stage: flower
 tags: [research, trust, sources, osint, beginner]
 description: "Privacy and security information comes from sources with very different incentives. Here is how to tell them apart."
-next_review: 2027-05-01
 ---
 
 # How to tell if a source is actually trustworthy

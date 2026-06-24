@@ -28,9 +28,22 @@
 
 const GARDEN = [
   {
+    slug: "garden-about",
+    image: "images/garden.png",
+    type: "post",
+    title: "About the Garden",
+    date: "2026-04-04",
+    maturity: "growing",
+    featured: true,
+    tags: ["meta", "archive"],
+    excerpt: "Why this archive exists, and the principles behind how it is written.",
+    md: "garden/posts/garden-about.md",
+  },
+  {
     slug: "avar-compendium",
     image: "images/garden.png",
     type: "tool",
+    label: "project",
     title: "Avar Intelligence Compendium",
     date: "2025-12-01",
     maturity: "growing",
@@ -48,7 +61,7 @@ const GARDEN = [
     maturity: "growing",
     featured: true,
     tags: ["privacy", "security", "tool"],
-    excerpt: "An interactive look at everything a website can read from your browser (computed locally) plus how to push back.",
+    excerpt: "An interactive look at everything a website can read from your browser (computed locally), and which settings change what each value reveals.",
     page: "garden/tools/browser-fingerprinting.html",
     tool: true,
   },
@@ -59,7 +72,6 @@ const GARDEN = [
     title: "Interacting with the Internet",
     date: "2026-05-02",
     maturity: "growing",
-    featured: true,
     tags: ["privacy", "security", "web"],
     excerpt: "A fifteen-minute orientation to how the web works and why it matters for your privacy.",
     md: "garden/posts/internet-interaction.md",
@@ -71,7 +83,6 @@ const GARDEN = [
     title: "Evaluating Online Sources",
     date: "2026-05-20",
     maturity: "growing",
-    featured: true,
     tags: ["privacy", "security", "web"],
     excerpt: "Privacy and security information comes from sources with very different incentives. Here is how to tell them apart.",
     md: "garden/posts/source-evaluation.md",
@@ -83,7 +94,6 @@ const GARDEN = [
     title: "Security Basics: Threat Modeling for Ordinary People",
     date: "2026-04-10",
     maturity: "growing",
-    featured: true,
     tags: ["privacy", "security", "web"],
     excerpt: "A lot of security advice is written for an abstract worst-case. Threat modeling is about figuring out which risks actually apply to you.",
     md: "garden/posts/threat-modeling.md",
@@ -95,7 +105,6 @@ const GARDEN = [
     title: "Privacy Basics: Understanding Your Digital Footprint",
     date: "2026-04-20",
     maturity: "growing",
-    featured: true,
     tags: ["privacy", "security", "web"],
     excerpt: "What cookies, tracking pixels, and browser fingerprinting actually are, how they work mechanically, and what blocking them does and does not achieve.",
     md: "garden/posts/privacy-basics.md",
@@ -104,6 +113,7 @@ const GARDEN = [
     slug: "ai-scraping-archives",
     image: "images/garden.png",
     type: "post",
+    label: "project",
     title: "AI Scraping & the Future of Digital Preservation Archives",
     date: "2026-05-06",
     maturity: "growing",
@@ -115,6 +125,7 @@ const GARDEN = [
     slug: "web-archive-forensics",
     image: "images/garden.png",
     type: "post",
+    label: "project",
     title: "Web Archive Forensics for NC's Accountability Journalists",
     date: "2026-05-05",
     maturity: "growing",
@@ -126,6 +137,7 @@ const GARDEN = [
     slug: "eye-tracking-ai-search",
     image: "images/garden.png",
     type: "post",
+    label: "project",
     title: "Eye Tracking Engagement in AI-Assisted Academic Search",
     date: "2025-12-08",
     maturity: "growing",
@@ -137,6 +149,7 @@ const GARDEN = [
     slug: "d3-receptor-model",
     image: "images/ligand-visualization-3Dprint.jpg",
     type: "post",
+    label: "project",
     title: "3D Printed D3 Dopamine Receptor Model",
     date: "2025-12-05",
     maturity: "evergreen",
@@ -148,6 +161,7 @@ const GARDEN = [
     slug: "wastewater-bioremediation",
     image: "images/wastewater-poster.JPG",
     type: "post",
+    label: "project",
     title: "Wastewater Bioremediation",
     date: "2020-06-01",
     maturity: "evergreen",
@@ -159,6 +173,7 @@ const GARDEN = [
     slug: "tracking-the-trackers",
     image: "images/garden.png",
     type: "post",
+    label: "project",
     title: "Tracking the Trackers: A Privacy Information-Seeking Study",
     date: "2026-04-20",
     maturity: "growing",
@@ -449,14 +464,12 @@ function renderGardenCard(e, isFeature) {
     : "";
   const showImg = isFeature && e.image;  // covers only on featured cards
   const imgHtml = showImg ? `<img class="card-img" src="${e.image}" alt="" />` : "";
-  const kitHtml = (e.tool || e.type === "tool") ? `<span class="card-kit">kit</span>` : "";
   return `
     <a class="garden-card type-${e.type}${isFeature ? " feature" : ""}${showImg ? " has-img" : ""}" href="${href}"${external ? ' target="_blank" rel="noopener"' : ""}${isFeature ? ' role="listitem"' : ""}>
       ${imgHtml}
       <div class="card-body">
         <div class="card-top">
-          <span class="card-type">${TYPE_LABEL[e.type] || e.type}</span>
-          ${kitHtml}
+          <span class="card-type">${e.label || TYPE_LABEL[e.type] || e.type}</span>
           ${matHtml}
         </div>
         <h3 class="card-title">${e.title}</h3>
@@ -476,7 +489,7 @@ function initGardenIndex() {
 
   const featuredEl = document.getElementById("garden-featured");
   if (featuredEl) {
-    const feats = sorted.filter((e) => e.featured).slice(0, 6);
+    const feats = sorted.filter((e) => e.featured);
     if (feats.length) {
       featuredEl.innerHTML = feats.map((e) => renderGardenCard(e, true)).join("");
       initFeaturedSlider(featuredEl);
@@ -628,34 +641,44 @@ function initFeaturedSlider(track) {
   const cards = Array.from(track.children);
   if (!cards.length) return;
 
-  if (dotsWrap) {
-    dotsWrap.innerHTML = cards
-      .map((_, i) => `<button type="button" aria-label="Go to featured ${i + 1}"></button>`)
-      .join("");
-  }
-  const dots = dotsWrap ? Array.from(dotsWrap.children) : [];
-
+  // One dot per *scroll position* (page), not per card, so the dots always map
+  // to somewhere you can actually scroll to.
   const step = () =>
     cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : cards[0].offsetWidth;
-  const currentIndex = () => Math.round(track.scrollLeft / step());
-  const go = (i) => {
-    const idx = Math.max(0, Math.min(cards.length - 1, i));
-    track.scrollTo({ left: idx * step(), behavior: "smooth" });
-  };
+  const maxScroll = () => Math.max(0, track.scrollWidth - track.clientWidth);
+  const pageCount = () => Math.max(1, Math.round(maxScroll() / step()) + 1);
 
-  function syncUI() {
-    const i = currentIndex();
-    dots.forEach((d, di) => d.classList.toggle("active", di === i));
-    if (prev) prev.disabled = i <= 0;
-    if (next) next.disabled = i >= cards.length - 1;
+  let cur = 0;
+  let dots = [];
+
+  function buildDots() {
+    if (!dotsWrap) return;
+    dots = [];
+    dotsWrap.innerHTML = Array.from({ length: pageCount() }, (_, i) =>
+      `<button type="button" aria-label="Go to featured page ${i + 1}"></button>`).join("");
+    dots = Array.from(dotsWrap.children);
+    dots.forEach((d, i) => d.addEventListener("click", () => go(i)));
+  }
+  function syncDots() { dots.forEach((d, di) => d.classList.toggle("active", di === cur)); }
+
+  // Wrap around so the slider loops forever (next past the end returns to start).
+  function go(i) {
+    const n = pageCount();
+    cur = ((i % n) + n) % n;
+    track.scrollTo({ left: Math.min(cur * step(), maxScroll()), behavior: "smooth" });
+    syncDots();
   }
 
-  if (prev) prev.addEventListener("click", () => go(currentIndex() - 1));
-  if (next) next.addEventListener("click", () => go(currentIndex() + 1));
-  dots.forEach((d, i) => d.addEventListener("click", () => go(i)));
-  track.addEventListener("scroll", () => window.requestAnimationFrame(syncUI), { passive: true });
-  window.addEventListener("resize", syncUI);
-  syncUI();
+  if (prev) prev.addEventListener("click", () => go(cur - 1));
+  if (next) next.addEventListener("click", () => go(cur + 1));
+  track.addEventListener("scroll", () => window.requestAnimationFrame(() => {
+    cur = Math.min(pageCount() - 1, Math.max(0, Math.round(track.scrollLeft / step())));
+    syncDots();
+  }), { passive: true });
+  window.addEventListener("resize", () => { buildDots(); cur = Math.min(cur, pageCount() - 1); syncDots(); });
+
+  buildDots();
+  syncDots();
 }
 
 // Resolve a link's href to a GARDEN entry (for hover previews).
@@ -703,7 +726,7 @@ function initGardenHovercards() {
     current = e;
     const c = ensureCard();
     const mat = MATURITY[e.maturity];
-    const meta = (TYPE_LABEL[e.type] || e.type) + (mat ? " · " + mat.icon + " " + mat.label : "");
+    const meta = (e.label || TYPE_LABEL[e.type] || e.type) + (mat ? " · " + mat.icon + " " + mat.label : "");
     c.innerHTML =
       (e.image ? `<img class="hc-img" src="${e.image}" alt="" />` : "") +
       `<div class="hc-body"><div class="hc-meta">${meta}</div>` +

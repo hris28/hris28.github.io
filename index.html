@@ -4,13 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hrishika Roychoudhury</title>
-  <meta name="description" content="MSIS Candidate at UNC SILS. Work at the intersection of HCI, neural networks, and human-centered design." />
+  <meta name="description" content="Information scientist at UNC SILS focused on human-AI interaction, HCI, AI/ML evaluation, and accessible, human-centered design." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Hrishika Roychoudhury, Information scientist focused on human-AI interaction" />
+  <meta property="og:description" content="Information scientist at UNC SILS working at the intersection of HCI, AI/ML evaluation, and accessible, human-centered design." />
+  <meta property="og:image" content="https://hris28.github.io/images/abt_pic.png" />
+  <meta property="og:url" content="https://hris28.github.io/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
   <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
   <script src="js/main.js" defer></script>
+  <script src="js/projects.js" defer></script>
 </head>
 <body>
 
@@ -45,7 +53,7 @@
     <div class="hero-content">
       <p class="eyebrow">MSIS Candidate · UNC SILS</p>
       <h1 class="display">Hrishika Roychoudhury</h1>
-      <p class="tagline">Between minds and machines<span class="dot">.</span></p>
+      <p class="tagline">Information scientist focused on human-AI interaction<span class="dot">.</span></p>
     </div>
   </header>
 
@@ -87,6 +95,8 @@
       <div class="btn-group">
         <a class="btn btn-primary" href="projects.html">See projects</a>
         <a class="btn" href="resume.html">View résumé</a>
+        <a class="btn" href="https://linkedin.com/in/hrishikarc" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="mailto:hrishikarc@gmail.com">Email me</a>
       </div>
     </div>
   </section>
@@ -96,27 +106,7 @@
     <div class="wrap">
       <p class="eyebrow">Featured work</p>
       <h2 class="section-title">Selected projects.</h2>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.25rem;">
-
-        <article class="project-card" style="border-left-color: var(--accent);">
-          <div class="project-meta"><span class="project-type">Research</span><span class="project-date">2025 to Present</span></div>
-          <h3 class="project-title">Eye Tracking Engagement in AI Assisted Academic Search</h3>
-          <p class="project-desc">Mixed methods study with the Tobii Pro Nano comparing ChatGPT against unaided UNC Library Search.</p>
-        </article>
-
-        <article class="project-card">
-          <div class="project-meta"><span class="project-type">Startup</span><span class="project-date">2020 to 2024</span></div>
-          <h3 class="project-title">SkyeLabs Innovation Inc., EcoGel</h3>
-          <p class="project-desc">Sustainable biopolymer aerogel. Pete Conrad Scholar, NASA iTech Top 10 Finalist.</p>
-        </article>
-
-        <article class="project-card">
-          <div class="project-meta"><span class="project-type">Code</span><span class="project-date">2025</span></div>
-          <h3 class="project-title">Health Chart App</h3>
-          <p class="project-desc">FHIR integrated EHR dashboard with Leaflet maps, AJAX, and Highcharts analytics.</p>
-        </article>
-
-      </div>
+      <div id="home-featured" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.25rem;"></div>
       <div style="margin-top: 1.25rem;">
         <a href="projects.html" class="btn">All projects →</a>
       </div>

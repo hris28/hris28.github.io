@@ -1,7 +1,6 @@
 ---
 title: "VPN"
 date: 2026-06-20
-lastmod: 2026-06-20
 stage: seedling
 tags: [vpn, privacy, network, term]
 description: "A VPN routes your traffic through one server run by a provider, hiding it from your ISP but handing all of it to the provider instead."

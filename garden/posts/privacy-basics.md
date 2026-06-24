@@ -1,11 +1,9 @@
 ---
 title: "Privacy Basics"
 date: 2026-05-01
-lastmod: 2026-05-01
 stage: flower
 tags: [privacy, tracking, cookies, fingerprinting, beginner]
 description: "What cookies, tracking pixels, and browser fingerprinting actually are, how they work mechanically, and what blocking them does and does not achieve."
-next_review: 2027-05-01
 ---
 
 # Cookies, pixels, and fingerprinting
@@ -142,7 +140,7 @@ The EFF's Cover Your Tracks project runs a live test that shows how distinctive 
 
 Fingerprinting alone is not perfect: browser updates, new hardware, and privacy features that randomize fingerprint values all degrade accuracy. But combined with other signals, it substantially closes the gap that cookie-blocking leaves open.
 
-### What defenses exist
+### What each setting changes
 
 **Tor Browser** standardizes the fingerprint across all users. Every Tor Browser instance presents the same screen size, the same fonts, the same User-Agent. The goal is not to hide the fingerprint but to make every user look identical, so an individual fingerprint is meaningless.
 
@@ -188,7 +186,7 @@ Each step uses a different mechanism. A cookie blocker disrupts step 2 and step 
 
 The advertising ecosystem uses these three mechanisms in combination. A cookie identifies your browser across visits to sites that share an advertising network. A pixel fires on key pages to log events that matter to advertisers. Fingerprinting re-identifies you if cookies are cleared. Cookie syncing allows networks to merge their datasets.
 
-No single defense addresses all of these. Content blocking handles pixels and known third-party scripts. Cookie settings affect cookie-based tracking. Fingerprinting resistance addresses the stateless layer. For most people, a content blocker plus a browser that blocks third-party cookies by default addresses the majority of the threat surface. This is why it is important to develop your own [[threat-modeling]]. Understanding that fingerprinting exists and is not addressed by those tools is important for calibrating what you have and have not protected.
+No single defense addresses all of these. Content blocking handles pixels and known third-party scripts. Cookie settings affect cookie-based tracking. Fingerprinting resistance addresses the stateless layer. Which of these matters to you depends on your own [[threat-modeling]]. Fingerprinting in particular sits outside the cookie and content-blocking tools, so it is worth knowing that those tools do not address it.
 
 ## What you can see for yourself
  

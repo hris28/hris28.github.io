@@ -644,11 +644,6 @@ footer {
   display: block; width: 100%; margin: 0;
   aspect-ratio: 16 / 9; object-fit: cover; background: var(--bg);
 }
-.garden-card .card-kit {
-  font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--term-green); border: 1px solid color-mix(in srgb, var(--term-green) 45%, transparent);
-  border-radius: var(--radius-pill); padding: 0.1rem 0.45rem;
-}
 .garden-card .maturity { margin-left: auto; font-size: 0.95rem; line-height: 1; }
 
 /* Per-type top accent (the "folder" colour) shown on every card, image or not */
@@ -684,11 +679,11 @@ footer {
 
 /* Stage-colored word, used in article eyebrows (e.g. "GROWING" in green) */
 .stage-seedling { color: #6a9f2f; }
-.stage-growing { color: #2f9e6a; }
-.stage-evergreen { color: #1c7a4a; }
+.stage-growing { color: #259d3a; }
+.stage-evergreen { color: #14592e; }
 html[data-theme="dark"] .stage-seedling { color: #9ccc65; }
-html[data-theme="dark"] .stage-growing { color: #5fcf97; }
-html[data-theme="dark"] .stage-evergreen { color: #57b487; }
+html[data-theme="dark"] .stage-growing { color: #4ccf5e; }
+html[data-theme="dark"] .stage-evergreen { color: #2f955f; }
 
 /* Internal-link hover preview card */
 .garden-hovercard {
@@ -882,7 +877,7 @@ html[data-theme="dark"] .garden-page::before {
 .garden-explorer .exp-count { margin-left: auto; }
 .garden-explorer ul { list-style: none; margin: 0 0 0.5rem; padding: 0 0 0 0.95rem; }
 .garden-explorer li { padding: 0.28rem 0; }
-.garden-explorer a { font-size: 0.86rem; color: var(--ink); }
+.garden-explorer a { display: block; font-size: 0.86rem; line-height: 1.25; color: var(--ink); }
 .garden-explorer a:hover { color: var(--link); }
 @media (max-width: 880px) { .garden-explorer { position: static; } }
 

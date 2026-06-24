@@ -1,8 +1,6 @@
 ---
 title: "What Your ISP Can See"
 date: 2026-05-04
-lastmod: 2026-05-04
-next-review: 2027-05-04
 stage: sprout
 tags: [ISP, DNS, HTTPS, privacy, network]
 description: "A layer-by-layer account of what your Internet Service Provider can observe, under what conditions, and what actually changes when you use HTTPS, encrypted DNS, or a VPN."

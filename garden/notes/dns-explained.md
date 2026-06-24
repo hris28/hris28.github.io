@@ -1,11 +1,9 @@
 ---
 title: "DNS Explained"
 date: 2026-05-01
-lastmod: 2026-05-01
 stage: flower
 tags: [dns, privacy, network, beginner, intermediate]
 description: "Every domain you visit produces a DNS query your ISP can read by default. Here is what DNS is, who sees it, and what encrypted DNS actually protects."
-next_review: 2027-05-01
 ---
 
 # DNS: what it is and what changing it actually does
