@@ -2,7 +2,7 @@
 
 > Working notes: rough, evolving, and mostly for me. Expect half-finished thoughts.
 
-These are reading notes from the systematic review I'm running with Dr. Fei Yu.
+These are reading notes from the systematic review I'm running.
 
 ## What counts as "LLM exposure"?
 
@@ -21,7 +21,7 @@ The classic example is the spike in words like *delve*, *intricate*, and *unders
 - How to measure change in **spoken** language, not just written?
 - Where is the line between a tool helping you write and a tool writing *for* you?
 
-## Sources
+## Additional Sources
 
 - Kobak, González-Márquez, Horvát, Lause (2024), [Delving into LLM-assisted writing in biomedical publications through excess vocabulary](https://arxiv.org/abs/2406.07016) (also published in *Science Advances*).
 

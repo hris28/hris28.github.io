@@ -108,7 +108,7 @@ const GARDEN = [
     date: "2026-05-06",
     maturity: "growing",
     tags: ["digital preservation", "ai policy", "copyright", "project"],
-    excerpt: "A three-tier access policy I wrote for the Internet Archive to govern large-scale AI scraping, grounded in fair-use case law.",
+    excerpt: "A tiered access policy I wrote for the Internet Archive to govern large-scale AI scraping, grounded in fair-use case law.",
     page: "garden/projects/ai-scraping-archives.html",
   },
   {
@@ -331,7 +331,7 @@ const GARDEN = [
     maturity: "evergreen",
     featured: true,
     tags: ["songwriting", "music"],
-    excerpt: "A song I wrote for the 2021 TEDx Music Competition. Themed around the phrase 'up from the ashes'.",
+    excerpt: "A song I wrote for the 2021 TEDx Music Competition themed around the phrase 'up from the ashes'. Won first place.",
     body: "<p>Hello! I'm Hrishika Roychoudhury and I will be performing my original composition called Rise, for the phrase *Up From The Ashes* reminds me of the mythological creature from many stories that have been told for generations: the Phoenix, often depicted as a majestic bird that can die in a show of flames before being reborn from the decomposition of its own ashes. People often find themselves stuck, depressed, unable to reach their goals. This song is a reminder that tough times do occur and it may seem nearly impossible to get out of the 'abyss', but a rise cannot exist without a fall and even a phoenix cannot be reborn from the ashes without first dying. So never give up, because it's only a matter of time until you rise 'up from the ashes.'</p>",
     md: "garden/songs/rise.md",
   },
