@@ -1,11 +1,9 @@
 ---
 title: "Security Basics: Threat Modeling for Ordinary People"
 date: 2026-05-01
-lastmod: 2026-05-01
 stage: sprout
 tags: [security, beginner, threat-modeling]
-description: "Most security advice is written for an abstract worst-case. Threat modeling is about figuring out which risks actually apply to you."
-next_review: 2027-05-01
+description: "A lot of security advice is written for an abstract worst-case. Threat modeling is about figuring out which risks actually apply to you."
 ---
 
 # Threat modeling, for normal people

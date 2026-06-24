@@ -1,11 +1,9 @@
 ---
 title: "Interacting with the Internet"
 date: 2026-05-01
-lastmod: 2026-05-01
 stage: flower
 tags: [beginner, web, privacy, orientation]
-description: "A fifteen-minute orientation to how the web works and why it matters for your privacy."
-next_review: 2027-05-01
+description: "An orientation to how the web works step-by-step."
 ---
 
 # How the internet actually works

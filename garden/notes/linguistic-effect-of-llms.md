@@ -2,7 +2,7 @@
 
 > Working notes: rough, evolving, and mostly for me. Expect half-finished thoughts.
 
-These are reading notes from the systematic review I'm running.
+These are reading notes from a systematic review I'm running.
 
 ## What counts as "LLM exposure"?
 
@@ -26,3 +26,5 @@ The classic example is the spike in words like *delve*, *intricate*, and *unders
 - Kobak, González-Márquez, Horvát, Lause (2024), [Delving into LLM-assisted writing in biomedical publications through excess vocabulary](https://arxiv.org/abs/2406.07016) (also published in *Science Advances*).
 
 Related: [[terminal-typewriter]]
+
+## Draft Report

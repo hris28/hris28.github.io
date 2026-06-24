@@ -1,8 +1,6 @@
 ---
 title: "Tor Explained"
 date: 2026-05-04
-lastmod: 2026-05-04
-next-review: 2027-05-04
 stage: sprout
 tags: [Tor, anonymity, privacy, network]
 description: "How Tor routes traffic, why it is different from a VPN, its real limits, and when to use it."

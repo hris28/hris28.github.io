@@ -1,7 +1,6 @@
 ---
 title: "Hardware basics"
 date: 2026-06-20
-lastmod: 2026-06-20
 stage: seedling
 tags: [hardware, gpu, cpu, term]
 description: "The few hardware parts worth knowing when you read about performance or fingerprinting: CPU, RAM, GPU, storage, firmware, and why the GPU is so identifying."

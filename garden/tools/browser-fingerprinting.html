@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Browser Fingerprinting · Garden · Hrishika Roychoudhury</title>
-  <meta name="description" content="An interactive look at the data any website can read from your browser all computed locally, plus how to push back." />
+  <meta name="description" content="An interactive look at the data any website can read from your browser, all computed locally, and which settings change what each value reveals." />
   <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
   <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap" rel="stylesheet" />
@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="../../css/style.css" />
   <script src="../../js/main.js" defer></script>
   <script src="../../js/garden.js" defer></script>
+  <script src="../../js/garden-graph.js" defer></script>
 </head>
 <body class="garden-page">
 
@@ -95,19 +96,19 @@
           A line that says "not available" or "not exposed" does not mean the fact about you does not exist, or that no one can know it. It just means your browser's JavaScript did not hand that value to this page. Whether you are still exposed depends on which of three places the data actually lives.
         </p>
         <ul>
-          <li><strong>Read locally by JavaScript</strong> (everything in the panel above). If it is blank here, this page could not read it. That is a real, verifiable win when the browser withheld it on purpose.</li>
+          <li><strong>Read locally by JavaScript</strong> (everything in the panel above). If it is blank here, this page could not read it, which means the browser withheld that value from this page.</li>
           <li><strong>Seen by the network no matter what JavaScript does.</strong> Your public IP is the headline example: local scripts cannot read it, which is why the lookup at the bottom needs an outside service, yet every server you connect to sees it automatically because it is part of the connection itself. The WebRTC row makes the same point, surfacing local and sometimes real IP addresses that ordinary scripts are not meant to expose.<sup class="cite"><a href="#src-1">[1]</a></sup></li>
           <li><strong>Inferred indirectly.</strong> Even when one signal is blocked, a tracker can often estimate the same thing another way: screen size hints at device class, request timing hints at connection speed. Blocking a vector raises the cost; it rarely deletes the fact.</li>
         </ul>
-        <p>So a blank in the panel means "this channel was closed," which is genuinely informative, but it is not a clean bill of privacy, because the network layer and cross-method inference live outside what any in-page script can read.</p>
+        <p>So a blank in the panel means "this channel was closed," which is still informative, but it does not mean nothing about you is visible elsewhere, because the network layer and cross-method inference live outside what any in-page script can read.</p>
 
         <h2>Why the same value shows in one browser and not another</h2>
         <p>
           None of these values is pulled from a hidden file. Each one exists only because a browser chose to implement a JavaScript interface that returns it, and browsers disagree about which interfaces to ship. That disagreement is exactly why "GPU renderer" or "device memory" appears in Chrome but is blank in Firefox or Tor. Three different mechanisms sit behind a blank:
         </p>
         <ul>
-          <li><strong>The browser never implemented the API.</strong> <code>navigator.deviceMemory</code> (the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Device_Memory_API" target="_blank" rel="noopener">Device Memory API</a>) and the connection group (<code>navigator.connection</code>, the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Network_Information_API" target="_blank" rel="noopener">Network Information API</a>) are Chromium-only. Chrome, Edge, and Brave ship them; Firefox and Safari deliberately never did, in part because they add fingerprinting surface for little user benefit. Your RAM and your connection speed are perfectly real. The browser just offers no property for a script to read them, so the value is <code>undefined</code> and the tool prints "not exposed."<sup class="cite"><a href="#src-3">[3]</a></sup></li>
-          <li><strong>The browser implemented it, then deliberately neutralized it.</strong> Your <strong>GPU vendor and renderer</strong> come from a WebGL extension called <a href="https://developer.mozilla.org/en-US/docs/Web/API/WEBGL_debug_renderer_info" target="_blank" rel="noopener">WEBGL_debug_renderer_info</a>. Standard Chrome returns the real string (for example "ANGLE (NVIDIA GeForce RTX...)") because games and graphics apps legitimately want it. Brave and the Tor Browser intercept that exact call and return a generic or empty value on purpose, because the precise GPU and driver is one of the most identifying things a page can learn. The difference you see is not your hardware changing; it is the browser deciding whether to answer. The Battery Status API is the end state of this approach: Firefox and Safari did not just blank it, they removed it entirely after it was shown to aid tracking.</li>
+          <li><strong>The browser never implemented the API.</strong> <code>navigator.deviceMemory</code> (the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Device_Memory_API" target="_blank" rel="noopener">Device Memory API</a>) and the connection group (<code>navigator.connection</code>, the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Network_Information_API" target="_blank" rel="noopener">Network Information API</a>) are Chromium-only. Chrome, Edge, and Brave ship them; Firefox and Safari never did, citing the added fingerprinting surface. Your RAM and your connection speed are perfectly real. The browser just offers no property for a script to read them, so the value is <code>undefined</code> and the tool prints "not exposed."<sup class="cite"><a href="#src-3">[3]</a></sup></li>
+          <li><strong>The browser implemented it, then deliberately neutralized it.</strong> Your <strong>GPU vendor and renderer</strong> come from a WebGL extension called <a href="https://developer.mozilla.org/en-US/docs/Web/API/WEBGL_debug_renderer_info" target="_blank" rel="noopener">WEBGL_debug_renderer_info</a>. Standard Chrome returns the real string (for example "ANGLE (NVIDIA GeForce RTX...)") because games and graphics apps use it. Brave and the Tor Browser intercept that exact call and return a generic or empty value on purpose, because the precise GPU and driver is one of the most identifying things a page can learn. The difference you see is not your hardware changing; it is the browser deciding whether to answer. The Battery Status API is the end state of this approach: Firefox and Safari did not just blank it, they removed it entirely after it was shown to aid tracking.</li>
           <li><strong>It needs a secure context or a user action, or it simply does not apply.</strong> Some APIs only work over HTTPS or after you interact with the page. And some blanks are honest absences: <code>maxTouchPoints</code> is 0 on a non-touch laptop, there is no battery to report on a desktop, and screen orientation is often unset outside mobile.</li>
         </ul>
         <p>
@@ -186,14 +187,15 @@
           <li><strong>Third-party cookies</strong> - persistent IDs shared across sites. Safari and Firefox block them by default; Chrome planned to phase them out but reversed course in 2024 to 2025, so they remain on by default there.<sup class="cite"><a href="#src-5">[5]</a></sup></li>
         </ul>
 
-        <h2>What you can actually do</h2>
+        <h2>If you'd rather a value not be exposed</h2>
+        <p>This is not a recommendation to change anything. It is a map of which setting affects which value, so you can decide for yourself what you are comfortable sharing.</p>
         <ul>
-          <li>Use a tracker-blocking browser or extension (uBlock Origin; Firefox or Brave with strong defaults).</li>
-          <li>Turn on Global Privacy Control / "Do Not Track" where available.</li>
-          <li>Block third-party cookies in your browser settings.</li>
-          <li>A <a class="wiki-link" href="../../garden-entry.html?slug=vpn-explained">VPN</a> hides your IP and approximate location (it doesn't stop fingerprinting, since the IP is not part of the fingerprint).</li>
-          <li>For the strongest fingerprint protection, use the <a href="https://www.torproject.org/" target="_blank" rel="noopener">Tor Browser</a>, which makes everyone's fingerprint look identical, or Brave, which randomises it. Resist hand-editing a single value: changing just one attribute usually makes you rarer, not safer.<sup class="cite"><a href="#src-2">[2]</a></sup></li>
-          <li>Test yourself against a real tracker with EFF's Cover Your Tracks.<sup class="cite"><a href="#src-1">[1]</a></sup></li>
+          <li>Content blockers (such as uBlock Origin) and browsers like Firefox or Brave stop many third-party scripts from running, which limits what those scripts can read.</li>
+          <li>Global Privacy Control (and the older Do Not Track) sends sites a signal about data sharing; under some laws, such as California's CCPA, covered businesses are required to honour GPC.</li>
+          <li>Most browsers have a setting to block third-party cookies; Safari and Firefox block them by default.</li>
+          <li>A <a class="wiki-link" href="../../garden-entry.html?slug=vpn-explained">VPN</a> changes the IP and approximate location a site sees, but not the browser fingerprint, since the IP is not part of it.</li>
+          <li>The <a href="https://www.torproject.org/" target="_blank" rel="noopener">Tor Browser</a> makes its users present the same fingerprint as one another, and Brave randomises some values; changing a single value by hand tends to make a browser more distinctive rather than less.<sup class="cite"><a href="#src-2">[2]</a></sup></li>
+          <li>EFF's Cover Your Tracks lets you compare your own browser against a large sample.<sup class="cite"><a href="#src-1">[1]</a></sup></li>
         </ul>
 
         <h2>See it from the other side</h2>
@@ -343,7 +345,7 @@
         "Cookies enabled": { what: "Whether the browser currently accepts cookies.", where: "navigator.cookieEnabled.", how: "navigator.cookieEnabled", who: "Any script.", hide: "Disabling cookies blocks one vector, but 'cookies off' is itself an unusual, identifying setting." },
         "Do Not Track": { what: "A header asking sites not to track you. It was widely ignored and is now being removed from browsers.", where: "navigator.doNotTrack and the legacy DNT request header.", how: "navigator.doNotTrack", who: "Servers and scripts can read it, but almost none are legally required to honour it, so in practice it does little.", hide: "Prefer Global Privacy Control, which some laws (such as California's CCPA) treat as a binding opt-out." },
         "Online": { what: "Whether the browser thinks it currently has network connectivity.", where: "navigator.onLine.", how: "navigator.onLine", who: "Any script. Not identifying on its own.", hide: "Nothing to do; it carries no personal information." },
-        "Global Privacy Control": { what: "A signal telling sites you do not want your data sold or shared. Unlike Do Not Track, it has legal teeth in some places.", where: "navigator.globalPrivacyControl and the Sec-GPC header.", how: "navigator.globalPrivacyControl", who: "Servers and scripts; under laws like the CCPA, honouring it is mandatory for covered businesses.", hide: "This is one you want ON; enable it in your browser settings or a privacy extension." },
+        "Global Privacy Control": { what: "A signal telling sites you do not want your data sold or shared. Unlike Do Not Track, it has legal teeth in some places.", where: "navigator.globalPrivacyControl and the Sec-GPC header.", how: "navigator.globalPrivacyControl", who: "Servers and scripts; under laws like the CCPA, honouring it is mandatory for covered businesses.", hide: "Enable it in your browser settings or a privacy extension; under laws like the CCPA, covered businesses are required to honour it." },
         "Resolution": { what: "Your full screen size in pixels.", where: "screen.width and screen.height.", how: "screen.width + screen.height", who: "Any script. A common resolution blends in; an unusual one (ultrawide, scaled) stands out.", hide: "Tor Browser letterboxes the window to a small set of common sizes so everyone looks alike." },
         "Available": { what: "Screen size minus the space taken by OS bars and docks, which leaks your taskbar or menu-bar setup.", where: "screen.availWidth and screen.availHeight.", how: "screen.availWidth + screen.availHeight", who: "Any script.", hide: "Hard to mask directly; privacy browsers normalize the window instead." },
         "Viewport": { what: "The inner size of the browser window itself.", where: "window.innerWidth and window.innerHeight.", how: "window.innerWidth + window.innerHeight", who: "Any script, and it updates as you resize.", hide: "Use a standard or maximized window; resizing constantly changes this value." },
@@ -386,7 +388,7 @@
         if (x.where) L.push(`<p><span class="fp-tag">where it lives</span>${x.where}</p>`);
         if (x.how) L.push(`<p><span class="fp-tag">how it was read</span><code>${x.how.replace(/</g, "&lt;")}</code></p>`);
         if (x.who) L.push(`<p><span class="fp-tag">who can see it</span>${x.who}</p>`);
-        if (x.hide) L.push(`<p><span class="fp-tag">how to obscure</span>${x.hide}</p>`);
+        if (x.hide) L.push(`<p><span class="fp-tag">what changes it</span>${x.hide}</p>`);
         const tip = (x.what || "").replace(/"/g, "&quot;");
         return `<details class="fp-row"><summary title="${tip}"><span class="fp-k">${k}</span><span class="fp-v">${val}</span></summary><div class="fp-explain">${L.join("")}</div></details>`;
       }

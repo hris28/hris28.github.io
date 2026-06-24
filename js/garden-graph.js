@@ -374,7 +374,21 @@ function addExpandButton(wrap, buildNodesEdges) {
 
 async function initGardenGraph() {
   const globalCanvas = document.getElementById("garden-graph");
-  const connections = document.getElementById("garden-connections");
+  let connections = document.getElementById("garden-connections");
+  // Standalone article pages (the HTML tool/project pages) have no graph
+  // container of their own. If this page's URL maps to a garden entry, inject a
+  // connections section at the end of the article so it gets the same map.
+  if (!globalCanvas && !connections && typeof entryFromHref === "function") {
+    const e = entryFromHref(location.href);
+    const host = document.querySelector(".note-view") || document.querySelector(".wrap-narrow");
+    if (e && host) {
+      connections = document.createElement("div");
+      connections.id = "garden-connections";
+      connections.className = "garden-connections";
+      connections.dataset.slug = e.slug;
+      host.appendChild(connections);
+    }
+  }
   if (!globalCanvas && !connections) return;
   if (typeof GARDEN === "undefined") return;
 
@@ -403,12 +417,28 @@ async function initGardenGraph() {
 
   // Entry page: backlinks + a local graph focused on this entry
   if (connections) {
-    const slug = new URLSearchParams(location.search).get("slug");
+    const slug = new URLSearchParams(location.search).get("slug") || connections.dataset.slug;
     if (!slug || !gardenFindBySlug(slug)) { connections.remove(); return; }
     const nbrs = graph.neighbors(slug);
     const back = graph.backlinks(slug);
     const outl = graph.dir[slug] ? [...graph.dir[slug]] : [];
-    if (!nbrs.length) { connections.remove(); return; }
+    if (!nbrs.length) {
+      // No links to other entries: show the whole garden map instead, with this
+      // entry highlighted, so the page still offers a way to explore.
+      connections.innerHTML =
+        `<h2>Garden map</h2>
+         <div class="localgraph-wrap"><canvas id="garden-localgraph" aria-label="Map of the whole garden"></canvas></div>`;
+      const allCanvas = document.getElementById("garden-localgraph");
+      const buildAll = () => ({
+        nodes: GARDEN.map((e) => nodeFor(e.slug)).filter(Boolean),
+        edges: graph.edges,
+        focusSlug: slug,
+      });
+      addExpandButton(allCanvas.closest(".localgraph-wrap"), buildAll);
+      const a = buildAll();
+      createGraph(allCanvas, a.nodes, a.edges, { focusSlug: slug });
+      return;
+    }
 
     const list = (slugs) =>
       slugs.map((s) => { const e = gardenFindBySlug(s); return e ? `<li><a class="wiki-link" href="${gardenEntryHref(e)}">${e.title}</a></li>` : ""; }).join("");

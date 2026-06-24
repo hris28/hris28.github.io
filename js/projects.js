@@ -15,6 +15,7 @@ const PROJECTS = [
     pi: "PI: Dr. Fei Yu · with Jaegoo Ha",
     description: "Mixed methods between subjects study (target n = 20) comparing ChatGPT assisted search against unaided UNC Library Search (EBSCOhost / Articles+). Pairs Tobii Pro Nano eye tracking, fixation, saccade, and pupil dilation metrics across labeled interface regions, with think aloud protocols and post task instruments adapting Cognitive Load Theory (DCLQ) and the System Usability Scale. A needs assessment of 12 student interviews found 65% struggled with keyword expansion and 38% used ChatGPT without verifying sources; early pilot sessions hint at a reduced time to first relevant result with AI assistance (preliminary trends only). Findings translate into UX guidance for AI tools in educational interfaces, delivered as a slide deck, prompt handout, and screen recorded tutorial.",
     tags: ["HCI", "EYE TRACKING", "MIXED METHODS", "AI LITERACY", "UX RESEARCH"],
+    image: "images/project-thumbs/eye-tracking.png",
     links: [{ label: "Write-up", url: "garden/projects/eye-tracking-ai-search.html" }],
   },
   {
@@ -24,6 +25,7 @@ const PROJECTS = [
     pi: "INLS 690: AI Law & the Struggle for Control of Knowledge · Profs. Will Cross & Dave Hansen",
     description: "Authored a tiered access and use policy for the Internet Archive, Open Access, Credentialed Research, and a Data Trust tier for commercial model training, governing large scale automated and AI scraping, packaged with an implementation guide, a model data use agreement, and a public FAQ. Grounded the framework in a legal analysis synthesizing key fair use and copyright management cases (HathiTrust, Google Books, Thomson Reuters v. Ross, Bartz v. Anthropic, Kadrey v. Meta) and a stakeholder scenario analysis weighing the competing interests of archives, publishers, researchers, and AI developers.",
     tags: ["DIGITAL PRESERVATION", "AI POLICY", "COPYRIGHT", "GOVERNANCE"],
+    image: "images/project-thumbs/ai-scraping.png",
     links: [{ label: "Write-up", url: "garden/projects/ai-scraping-archives.html" }],
   },
   {
@@ -45,6 +47,7 @@ const PROJECTS = [
     pi: "INLS 500: Human Information Interactions · Prof. Leslie Thomson",
     description: "Designed a three tier reference service for the State Library of North Carolina, on demand authenticated web captures, a statewide workshop series via the NC Cardinal partner library consortium, and a curated Archive-It collection, to give independent journalists in news desert counties a durable verification tool as 240+ news sites move to block Internet Archive crawlers. Built on a four stream literature and institutional landscape review and grounded in LIS information behavior theory (Taylor's information use environment, Savolainen's source horizon, Koufogiannakis's evidence based practice) to define the user population and justify each tier.",
     tags: ["DIGITAL PRESERVATION", "SERVICE DESIGN", "INFORMATION BEHAVIOR", "ARCHIVES"],
+    image: "images/project-thumbs/web-archive.png",
     links: [{ label: "Write-up", url: "garden/projects/web-archive-forensics.html" }],
   },
   {
@@ -54,6 +57,7 @@ const PROJECTS = [
     pi: "INLS 500: Human Information Interactions · Prof. Leslie Thomson",
     description: "Ran and analyzed a think aloud observation of a self directed session on web tracking and digital privacy, treating the screen recorded transcript as primary qualitative data. Mapped query formulation and source selection behavior onto four information behavior models (Taylor's levels of need, Kuhlthau's Information Search Process, Bates' berrypicking, Bawden & Robinson's information anxiety) and derived concrete design principles for an accessible security guide directly from observed user friction.",
     tags: ["UX RESEARCH", "QUALITATIVE", "THINK ALOUD", "PRIVACY"],
+    image: "images/project-thumbs/tracking-trackers.png",
     links: [{ label: "Write-up", url: "garden/projects/tracking-the-trackers.html" }],
   },
   {
@@ -63,6 +67,7 @@ const PROJECTS = [
     pi: "PI: Dr. Fei Yu · Independent Study",
     description: "PRISMA guided systematic review across 6 databases and 4 preprint servers synthesizing evidence for LLM associated changes in human language. Developed a five lens conceptual extraction framework examining how studies operationalize LLM exposure and measure linguistic outcomes, surfacing methodological gaps in spoken language and secondhand diffusion research.",
     tags: ["SYSTEMATIC REVIEW", "PRISMA", "LLMS", "LINGUISTICS"],
+    image: "images/project-thumbs/llm-review.png",
     links: [{ label: "Notes & draft", url: "garden-entry.html?slug=linguistic-effect-of-llms" }],
   },
 

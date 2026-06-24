@@ -1,8 +1,6 @@
 ---
 title: "Software Layers: From Firmware to Application"
 date: 2026-05-04
-lastmod: 2026-05-04
-next-review: 2027-05-04
 stage: sprout
 tags: [operating-system, hardware, software, drivers, security]
 description: "The eleven layers between your hardware and your applications, what each one does, and why the distinctions matter for security and performance."

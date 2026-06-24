@@ -1,7 +1,6 @@
 ---
 title: The Garden
 date: 2026-05-01
-lastmod: 2026-05-01
 stage: flower
 description: A growing collection of guides, notes, and working thoughts.
 ---
