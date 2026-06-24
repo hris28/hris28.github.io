@@ -10,17 +10,6 @@ const PROJECTS = [
   // ---------- 2026 (NOW) ----------
   {
     year: 2026, tag: "NOW",
-    type: "RESEARCH", date: "Sept 2025 to Present",
-    title: "Eye Tracking Engagement in AI Assisted Academic Search",
-    pi: "PI: Dr. Fei Yu · with Jaegoo Ha",
-    description: "Mixed methods between subjects study (target n = 20) comparing ChatGPT assisted search against unaided UNC Library Search (EBSCOhost / Articles+). Pairs Tobii Pro Nano eye tracking, fixation, saccade, and pupil dilation metrics across labeled interface regions, with think aloud protocols and post task instruments adapting Cognitive Load Theory (DCLQ) and the System Usability Scale. A needs assessment of 12 student interviews found 65% struggled with keyword expansion and 38% used ChatGPT without verifying sources; early pilot sessions hint at a reduced time to first relevant result with AI assistance (preliminary trends only). Findings translate into UX guidance for AI tools in educational interfaces, delivered as a slide deck, prompt handout, and screen recorded tutorial.",
-    tags: ["HCI", "EYE TRACKING", "MIXED METHODS", "AI LITERACY", "UX RESEARCH"],
-    image: "images/project-thumbs/eye-tracking.png",
-    home: true, accent: true, homeDesc: "Mixed-methods study with the Tobii Pro Nano comparing ChatGPT against unaided UNC Library Search.",
-    links: [{ label: "Write-up", url: "garden/projects/eye-tracking-ai-search.html" }],
-  },
-  {
-    year: 2026, tag: "NOW",
     type: "POLICY", date: "Jan 2026 to May 2026",
     title: "AI Scraping & the Future of Digital Preservation Archives",
     pi: "INLS 690: AI Law & the Struggle for Control of Knowledge · Profs. Will Cross & Dave Hansen",
@@ -107,6 +96,17 @@ const PROJECTS = [
     description: "Built an end to end EEG classification pipeline in TensorFlow, Keras, and MNE. Trained EEGNet, DeepConvNet, and ShallowConvNet on the bigP3BCI P300 dataset and stress tested DREAMS style model cards against a noisy free movement dataset, evaluating them with a 13 item System Explainability Scale across Trust, Usability, and Understandability. Found the cards readable and well visualized but weak on actionable guidance and uncertainty communication; published a reproducible artifact.",
     tags: ["BCI", "TENSORFLOW", "EEG", "CNN", "MODEL CARDS"],
     links: [{ label: "Code", url: "https://github.com/hris28/BCIModelCardEvaluation" }],
+  },
+  {
+    year: 2025, tag: "NOW",
+    type: "RESEARCH", date: "Sept 2025 to Present",
+    title: "Eye Tracking Engagement in AI Assisted Academic Search",
+    pi: "PI: Dr. Fei Yu · with Jaegoo Ha",
+    description: "Mixed methods between subjects study (target n = 20) comparing ChatGPT assisted search against unaided UNC Library Search (EBSCOhost / Articles+). Pairs Tobii Pro Nano eye tracking, fixation, saccade, and pupil dilation metrics across labeled interface regions, with think aloud protocols and post task instruments adapting Cognitive Load Theory (DCLQ) and the System Usability Scale. A needs assessment of 12 student interviews found 65% struggled with keyword expansion and 38% used ChatGPT without verifying sources; early pilot sessions hint at a reduced time to first relevant result with AI assistance (preliminary trends only). Findings translate into UX guidance for AI tools in educational interfaces, delivered as a slide deck, prompt handout, and screen recorded tutorial.",
+    tags: ["HCI", "EYE TRACKING", "MIXED METHODS", "AI LITERACY", "UX RESEARCH"],
+    image: "images/project-thumbs/eye-tracking.png",
+    home: true, accent: true, homeDesc: "Mixed-methods study with the Tobii Pro Nano comparing ChatGPT against unaided UNC Library Search.",
+    links: [{ label: "Write-up", url: "garden/projects/eye-tracking-ai-search.html" }],
   },
   {
     year: 2025, tag: "NOW",
