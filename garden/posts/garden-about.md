@@ -20,7 +20,7 @@ So this is my attempt at a personal archive--part informational notes, part news
 
 We live in a world where the smallest overlooked detail can be taken advantage of--a misconfigured setting, a misleading summary, a recommendation you trusted without knowing who paid for it. Staying informed is not paranoia. It is just the cost of living carefully in a world that is not always careful with you. It is the difference between a decision that was yours and one that was made for you without your knowing. Finding places that take this seriously without becoming alarmist is difficult, but I hope to develop such a space where fear does not obstruct curiosity and understanding the world you live inside of feels possible, even when it does not always feel simple.
 
-Some of these notes are finished. Most are working drafts. A few are placeholders where I know a gap exists and intend to come back. I continually update this site with more features for a better user interface and experience. This garden will always prioritize trustworthy, accessible learning.
+Some of these notes are finished. Most are working drafts. A few are placeholders where I know a gap exists and intend to come back. I continually update this site with more features for a better user interface and experience. This garden will always prioritize trustworthy, accessible learning. It is also hand-built from scratch: no website framework, just HTML, CSS, and vanilla JavaScript, with accessibility as a first principle (keyboard operability, reduced-motion fallbacks, and screen-reader text throughout).
 
 ## Design Decisions
 

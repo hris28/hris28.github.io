@@ -31,6 +31,7 @@ jobs:
           # Top-level pages
           cp index.html about.html projects.html resume.html interests.html garden.html garden-entry.html _site/
           cp 404.html _site/404.html || true
+          cp favicon.svg _site/favicon.svg || true
 
           # Shared assets
           cp -r css js images _site/
