@@ -160,8 +160,11 @@ function createGraph(canvas, nodes, edges, opts = {}) {
     const spanX = Math.max(maxX - minX, 1), spanY = Math.max(maxY - minY, 1);
     // Zoom in past a pure fit so the connected cluster reads clearly by default;
     // outlying nodes sit just off-frame and you can pan/zoom out to them.
+    // DEFAULT ZOOM KNOB: raise DEFAULT_ZOOM for a tighter starting view, lower it
+    // to see more of the graph at once (it is clamped to the 0.25–4 range below).
+    const DEFAULT_ZOOM = 2.2;
     const fit = Math.min((w * 0.82) / spanX, (h * 0.82) / spanY);
-    zoom = Math.max(0.25, Math.min(4, fit * 1.8));
+    zoom = Math.max(0.25, Math.min(4, fit * DEFAULT_ZOOM));
     const cx = (minX + maxX) / 2, cy = (minY + maxY) / 2;
     panX = -cx * zoom; panY = -cy * zoom;
   }

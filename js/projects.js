@@ -12,8 +12,8 @@ const PROJECTS = [
     year: 2026, tag: "NOW",
     type: "RESEARCH", date: "Sept 2025 to Present",
     title: "Eye Tracking Engagement in AI Assisted Academic Search",
-    pi: "PI: Dr. Fei Yu · with Jaegoo Ha, Johanna Klara Lohmus",
-    description: "Mixed methods between subjects study (target n = 20) comparing ChatGPT assisted search against unaided UNC Library Search (EBSCOhost / Articles+). Pairs Tobii Nano Pro eye tracking, fixation, saccade, and pupil dilation metrics across labeled interface regions, with think aloud protocols and post task instruments adapting Cognitive Load Theory (DCLQ) and the System Usability Scale. A needs assessment of 12 student interviews found 65% struggled with keyword expansion and 38% used ChatGPT without verifying sources; pilot sessions show reduced time to first relevant result with AI assistance. Findings translate into UX guidance for AI tools in educational interfaces, delivered as a slide deck, prompt handout, and screen recorded tutorial.",
+    pi: "PI: Dr. Fei Yu · with Jaegoo Ha",
+    description: "Mixed methods between subjects study (target n = 20) comparing ChatGPT assisted search against unaided UNC Library Search (EBSCOhost / Articles+). Pairs Tobii Pro Nano eye tracking, fixation, saccade, and pupil dilation metrics across labeled interface regions, with think aloud protocols and post task instruments adapting Cognitive Load Theory (DCLQ) and the System Usability Scale. A needs assessment of 12 student interviews found 65% struggled with keyword expansion and 38% used ChatGPT without verifying sources; early pilot sessions hint at a reduced time to first relevant result with AI assistance (preliminary trends only). Findings translate into UX guidance for AI tools in educational interfaces, delivered as a slide deck, prompt handout, and screen recorded tutorial.",
     tags: ["HCI", "EYE TRACKING", "MIXED METHODS", "AI LITERACY", "UX RESEARCH"],
     links: [{ label: "Write-up", url: "garden/projects/eye-tracking-ai-search.html" }],
   },
@@ -22,7 +22,7 @@ const PROJECTS = [
     type: "POLICY", date: "Jan 2026 to May 2026",
     title: "AI Scraping & the Future of Digital Preservation Archives",
     pi: "INLS 690: AI Law & the Struggle for Control of Knowledge · Profs. Will Cross & Dave Hansen",
-    description: "Authored a three tier access and use policy for the Internet Archive, Open Access, Credentialed Research, and a Data Trust tier for commercial model training, governing large scale automated and AI scraping, packaged with an implementation guide, a model data use agreement, and a public FAQ. Grounded the framework in a legal analysis synthesizing key fair use and copyright management cases (HathiTrust, Google Books, Thomson Reuters v. Ross, Bartz v. Anthropic, Kadrey v. Meta) and a stakeholder scenario analysis weighing the competing interests of archives, publishers, researchers, and AI developers.",
+    description: "Authored a tiered access and use policy for the Internet Archive, Open Access, Credentialed Research, and a Data Trust tier for commercial model training, governing large scale automated and AI scraping, packaged with an implementation guide, a model data use agreement, and a public FAQ. Grounded the framework in a legal analysis synthesizing key fair use and copyright management cases (HathiTrust, Google Books, Thomson Reuters v. Ross, Bartz v. Anthropic, Kadrey v. Meta) and a stakeholder scenario analysis weighing the competing interests of archives, publishers, researchers, and AI developers.",
     tags: ["DIGITAL PRESERVATION", "AI POLICY", "COPYRIGHT", "GOVERNANCE"],
     links: [{ label: "Write-up", url: "garden/projects/ai-scraping-archives.html" }],
   },
@@ -67,15 +67,18 @@ const PROJECTS = [
   },
 
   // ---------- 2025 ----------
-  
   {
     year: 2025,
-    type: "RESEARCH", date: "Jul 2025 to Dec 2025",
-    title: "Brain Computer Interface Model Card, DREAMS Framework Evaluation",
-    pi: "PI: Dr. Raghavendra Pradyumna Pothukuchi · with Disha Kohal Math",
-    description: "Built an end to end EEG classification pipeline in TensorFlow, Keras, and MNE. Trained EEGNet, DeepConvNet, and ShallowConvNet on the bigP3BCI P300 dataset and stress tested DREAMS style model cards against a noisy free movement dataset, evaluating them with a 13 item System Explainability Scale across Trust, Usability, and Understandability. Found the cards readable and well visualized but weak on actionable guidance and uncertainty communication; published a reproducible artifact.",
-    tags: ["BCI", "TENSORFLOW", "EEG", "CNN", "MODEL CARDS"],
-    links: [{ label: "Code", url: "https://github.com/hris28/BCIModelCardEvaluation" }],
+    type: "HARDWARE", date: "Aug 2025 to Dec 2025",
+    title: "3D Printed D3 Dopamine Receptor Model",
+    pi: "PI: Dr. Alexandra Nowlan · 4 person design team",
+    description: "Interactive physical model of the D3 dopamine receptor (GPCR) demonstrating conformational change triggered by the bitopic ligand FOB02 04A using cryo EM structures. Receptor processed in ChimeraX and Blender, binding pockets carved in TinkerCAD and Onshape, printed in PLA and PETG through multiple design iterations. Authored the model specification and prototype documentation, designed poster content, and presented at UNC BeAM Makerfest as a communication tool for medicinal chemists working on Parkinson's therapeutics.",
+    tags: ["3D PRINTING", "CHIMERAX", "BLENDER", "CAD", "NEUROPHARMACOLOGY"],
+    images: [
+      { src: "images/ligand-visualization-chimerax.jpeg", caption: "D3 receptor + bitopic ligand, visualized in ChimeraX" },
+      { src: "images/ligand-visualization-3Dprint.jpg", caption: "A 3D-printed model" },
+    ],
+    links: [{ label: "Write-up", url: "garden/projects/d3-receptor-model.html" }],
   },
   {
     year: 2025,
@@ -91,16 +94,12 @@ const PROJECTS = [
   },
   {
     year: 2025,
-    type: "HARDWARE", date: "Aug 2025 to Dec 2025",
-    title: "3D Printed D3 Dopamine Receptor Model",
-    pi: "PI: Dr. Alexandra Nowlan · 4 person design team",
-    description: "Interactive physical model of the D3 dopamine receptor (GPCR) demonstrating conformational change triggered by the bitopic ligand FOB02 04A using cryo EM structures. Receptor processed in ChimeraX and Blender, binding pockets carved in TinkerCAD and Onshape, printed in PLA and PETG through multiple design iterations. Authored the model specification and prototype documentation, designed poster content, and presented at UNC BeAM Makerfest as a communication tool for medicinal chemists working on Parkinson's therapeutics.",
-    tags: ["3D PRINTING", "CHIMERAX", "BLENDER", "CAD", "NEUROPHARMACOLOGY"],
-    images: [
-      { src: "images/ligand-visualization-chimerax.jpeg", caption: "D3 receptor + bitopic ligand, visualized in ChimeraX" },
-      { src: "images/ligand-visualization-3Dprint.jpg", caption: "The final 3D-printed model" },
-    ],
-    links: [{ label: "Write-up", url: "garden/projects/d3-receptor-model.html" }],
+    type: "HARDWARE", date: "Jul 2025 to Dec 2025",
+    title: "Brain Computer Interface Model Card, DREAMS Framework Evaluation",
+    pi: "PI: Dr. Raghavendra Pradyumna Pothukuchi · with Disha Kohal Math",
+    description: "Built an end to end EEG classification pipeline in TensorFlow, Keras, and MNE. Trained EEGNet, DeepConvNet, and ShallowConvNet on the bigP3BCI P300 dataset and stress tested DREAMS style model cards against a noisy free movement dataset, evaluating them with a 13 item System Explainability Scale across Trust, Usability, and Understandability. Found the cards readable and well visualized but weak on actionable guidance and uncertainty communication; published a reproducible artifact.",
+    tags: ["BCI", "TENSORFLOW", "EEG", "CNN", "MODEL CARDS"],
+    links: [{ label: "Code", url: "https://github.com/hris28/BCIModelCardEvaluation" }],
   },
   {
     year: 2025, tag: "NOW",
