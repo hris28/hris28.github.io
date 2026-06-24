@@ -44,7 +44,7 @@ The defenses here are well-established and effective. A password manager generat
 
 ### Targeted adversaries
 
-A targeted adversary is someone or something specifically trying to access your data, as opposed to you being one victim in a mass operation. Targeted threats include domestic abusers with physical access to your devices, stalkers, journalists' sources being investigated, activists under surveillance by governments, and corporate espionage. The defenses required for targeted threats are substantially more involved than those for the commercial or credential categories, and they involve operational security considerations beyond technical tools. [[start-here]] is not the right resource for these situations; the EFF's Surveillance Self-Defense (ssd.eff.org) organizes its content by threat model specifically to address this.
+A targeted adversary is someone or something specifically trying to access your data, as opposed to you being one victim in a mass operation. Targeted threats include domestic abusers with physical access to your devices, stalkers, journalists' sources being investigated, activists under surveillance by governments, and corporate espionage. The defenses required for targeted threats are substantially more involved than those for the commercial or credential categories, and they involve operational security considerations beyond technical tools. The EFF's Surveillance Self-Defense (ssd.eff.org) organizes its content by threat model specifically to address this.
 
 ## Practical minimums for most people
 
@@ -54,7 +54,7 @@ A password manager for every account. Unique, randomly generated passwords. Bitw
 
 2FA on every account that supports it, using an authenticator app rather than SMS wherever available. FIDO2 hardware keys (passkeys, YubiKey) are stronger still and increasingly supported by major services.
 
-A browser that blocks third-party cookies by default. Firefox, Brave, and Safari all do this. Chrome does not, though this is changing incrementally.
+A browser that blocks third-party cookies by default. Firefox, Brave, and Safari all do this. Chrome currently does not.
 
 uBlock Origin on desktop browsers. It prevents the majority of third-party tracking by blocking requests to known tracker domains before they leave your browser.
 
@@ -64,7 +64,7 @@ These five things address the majority of what most people face. They are not di
 
 ## Where reasonable people disagree
 
-**SMS 2FA.** Mainstream security organizations including NIST and CISA strongly recommend enabling any form of 2FA, including SMS, on the grounds that it prevents the overwhelming majority of credential attacks. A privacy-rights critique argues that requiring a phone number for 2FA is primarily a mechanism for harvesting phone numbers, and that SMS 2FA's security value is overstated given its vulnerability to SIM-swapping. Both views contain truths. The constructive synthesis: use an authenticator app or hardware key where available; use SMS 2FA where it is the only option rather than leaving the account unprotected; treat any service that mandates a phone number and offers no alternative as a service whose data practices warrant scrutiny.
+**SMS 2FA.** Mainstream security organizations including NIST and CISA strongly recommend enabling any form of 2FA, including SMS, on the grounds that it prevents the overwhelming majority of credential attacks. Privacy-rights critiques argue that requiring a phone number for 2FA is primarily a mechanism for harvesting phone numbers, and that SMS 2FA's security value is overstated given its vulnerability to SIM-swapping. Both views contain truths. The constructive synthesis: use an authenticator app or hardware key where available; use SMS 2FA where it is the only option rather than leaving the account unprotected; treat any service that mandates a phone number and offers no alternative as a service whose data practices warrant scrutiny.
 
 **VPNs.** VPNs are frequently recommended as general privacy tools. They shift your ISP's network-level visibility to the VPN provider, which may or may not be an improvement. A VPN does not protect against in-browser tracking, fingerprinting, or third-party cookies. For most people whose threat model is commercial surveillance, a content blocker accomplishes more at the tracking layer than a VPN does, at no cost and with no trust dependency on a third-party provider. VPNs are most valuable when your ISP is a more significant threat than a VPN provider would be, or when you need to obscure your IP address from a specific service.
 
