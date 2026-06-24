@@ -16,6 +16,7 @@ const PROJECTS = [
     description: "Mixed methods between subjects study (target n = 20) comparing ChatGPT assisted search against unaided UNC Library Search (EBSCOhost / Articles+). Pairs Tobii Pro Nano eye tracking, fixation, saccade, and pupil dilation metrics across labeled interface regions, with think aloud protocols and post task instruments adapting Cognitive Load Theory (DCLQ) and the System Usability Scale. A needs assessment of 12 student interviews found 65% struggled with keyword expansion and 38% used ChatGPT without verifying sources; early pilot sessions hint at a reduced time to first relevant result with AI assistance (preliminary trends only). Findings translate into UX guidance for AI tools in educational interfaces, delivered as a slide deck, prompt handout, and screen recorded tutorial.",
     tags: ["HCI", "EYE TRACKING", "MIXED METHODS", "AI LITERACY", "UX RESEARCH"],
     image: "images/project-thumbs/eye-tracking.png",
+    home: true, accent: true, homeDesc: "Mixed-methods study with the Tobii Pro Nano comparing ChatGPT against unaided UNC Library Search.",
     links: [{ label: "Write-up", url: "garden/projects/eye-tracking-ai-search.html" }],
   },
   {
@@ -90,6 +91,7 @@ const PROJECTS = [
     type: "CODE", date: "Sept 2025 to Dec 2025",
     title: "Health Chart App",
     pi: "PI: Jonathan Tweedy",
+    home: true, homeDesc: "FHIR-integrated EHR dashboard with Leaflet maps, AJAX, and Highcharts analytics.",
     description: "JavaScript web app using Leaflet and AJAX to visualize patient vitals, clinical trends, and care locations. Integrates the FHIR REST API for real time interoperability with EHR systems like EPIC, layering patient CRUD operations and Highcharts analytics on top. Proposed as a clinical decision support and patient communication tool.",
     tags: ["JAVASCRIPT", "FHIR", "LEAFLET", "AJAX", "HEALTHCARE"],
     links: [
@@ -124,6 +126,7 @@ const PROJECTS = [
     title: "SkyeLabs Innovation Inc., EcoGel",
     description: "Co founded a sustainable materials startup developing EcoGel, a flexible carbon biopolymer aerogel with applications in high performance apparel, aerospace, and space exploration. Led R&D, business strategy, prototyping, and investor outreach. Filed a provisional patent and secured $2,000 from the Bowman Brockman Endowment for Entrepreneurship and Advanced Research.",
     honor: "Pete Conrad Scholar, Aerospace and Aviation (2021) · NASA iTech Top 10 Finalist and sole Honorable Mention (2021)",
+    home: true, homeDesc: "Sustainable biopolymer aerogel. Pete Conrad Scholar, NASA iTech Top 10 Finalist.",
     tags: ["ENTREPRENEURSHIP", "MATERIALS SCIENCE", "R&D", "AEROSPACE"],
     links: [
       { label: "Competition", url: "https://static1.squarespace.com/static/53cd080fe4b006756b7288ea/t/60a564d925c8aa6d5b4fe6f6/1621451994142/International+Student+Innovators+Awarded+Top+Honors+in.pdf" },
@@ -275,4 +278,21 @@ function renderCard(p) {
   return `<article class="project-card${hasImg ? " has-image" : ""}">${body}${imgEl}</article>`;
 }
 
-document.addEventListener("DOMContentLoaded", renderProjects);
+// Homepage "Featured work" cards, drawn from this same PROJECTS list so the two
+// never drift apart. Flag a project with `home: true` (and optional `homeDesc`
+// for a shorter blurb, `accent: true` for the highlighted left border).
+function renderHomeFeatured() {
+  const root = document.getElementById("home-featured");
+  if (!root) return;
+  const picks = PROJECTS.filter((p) => p.home).slice(0, 3);
+  root.innerHTML = picks
+    .map((p) => `
+    <article class="project-card"${p.accent ? ' style="border-left-color: var(--accent);"' : ""}>
+      <div class="project-meta"><span class="project-type">${p.type}</span><span class="project-date">${p.date}</span></div>
+      <h3 class="project-title">${p.title}</h3>
+      <p class="project-desc">${p.homeDesc || p.description}</p>
+    </article>`)
+    .join("");
+}
+
+document.addEventListener("DOMContentLoaded", () => { renderProjects(); renderHomeFeatured(); });
