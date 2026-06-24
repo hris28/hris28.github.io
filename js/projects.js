@@ -15,6 +15,7 @@ const PROJECTS = [
     pi: "PI: Dr. Fei Yu · with Jaegoo Ha, Johanna Klara Lohmus",
     description: "Mixed methods between subjects study (target n = 20) comparing ChatGPT assisted search against unaided UNC Library Search (EBSCOhost / Articles+). Pairs Tobii Nano Pro eye tracking, fixation, saccade, and pupil dilation metrics across labeled interface regions, with think aloud protocols and post task instruments adapting Cognitive Load Theory (DCLQ) and the System Usability Scale. A needs assessment of 12 student interviews found 65% struggled with keyword expansion and 38% used ChatGPT without verifying sources; pilot sessions show reduced time to first relevant result with AI assistance. Findings translate into UX guidance for AI tools in educational interfaces, delivered as a slide deck, prompt handout, and screen recorded tutorial.",
     tags: ["HCI", "EYE TRACKING", "MIXED METHODS", "AI LITERACY", "UX RESEARCH"],
+    links: [{ label: "Write-up", url: "garden/projects/eye-tracking-ai-search.html" }],
   },
   {
     year: 2026, tag: "NOW",
@@ -30,7 +31,7 @@ const PROJECTS = [
     type: "ARCHIVES", date: "Dec 2025 to Present",
     title: "Archiving the Now, ILSSA Ad Hoc Archiving Committee",
     pi: "UNC University Archives · with the Information & Library Science Student Association",
-    description: "Co founded a student led committee to document UNC's October 2025 merger between the School of Information and Library Science (SILS) with the School for Data Science and Society (SDSS) as it unfolded, capturing student sentiment and experience that might otherwise go unrecorded. In roughly five months the committee grew from three students to a structured effort, formalized a partnership with the UNC University Archives, where the collection is housed, and built an oral history methodology after evaluating several documentation approaches. Received 35 digital survey responses, 15 paper survey responses, 9 SILS stories, and 11 oral histories so far. Presented the project's community driven, real time archival advocacy approach at the SNCA/SCAA 2026 Joint Annual conference.",
+    description: "Co founded a student led committee to document UNC's October 2025 merge between the School of Information and Library Science (SILS) with the School for Data Science and Society (SDSS) as it unfolded, capturing student sentiment and experience that might otherwise go unrecorded. In roughly five months the committee grew from three students to a structured effort, formalized a partnership with the UNC University Archives, where the collection is housed, and built an oral history methodology after evaluating several documentation approaches. Received 35 digital survey responses, 15 paper survey responses, 9 SILS stories, and 11 oral histories so far. Presented the project's community driven, real time archival advocacy approach at the SNCA/SCAA 2026 Joint Annual conference.",
     tags: ["DIGITAL PRESERVATION", "ORAL HISTORY", "ARCHIVES", "COMMUNITY ARCHIVING"],
     links: [
       { label: "Conference", url: "https://ncarchivists.org/conference-schedule/2026" },
@@ -53,27 +54,20 @@ const PROJECTS = [
     pi: "INLS 500: Human Information Interactions · Prof. Leslie Thomson",
     description: "Ran and analyzed a think aloud observation of a self directed session on web tracking and digital privacy, treating the screen recorded transcript as primary qualitative data. Mapped query formulation and source selection behavior onto four information behavior models (Taylor's levels of need, Kuhlthau's Information Search Process, Bates' berrypicking, Bawden & Robinson's information anxiety) and derived concrete design principles for an accessible security guide directly from observed user friction.",
     tags: ["UX RESEARCH", "QUALITATIVE", "THINK ALOUD", "PRIVACY"],
+    links: [{ label: "Write-up", url: "garden/projects/tracking-the-trackers.html" }],
   },
   {
-    year: 2026, tag: "NOW",
-    type: "CODE", date: "2025 to Present", title: "Avar Intelligence Compendium",
-    description: "Information visualization tool for a tabletop rpg system. Built with JavaScript, HTML, and CSS, Avar is a web based investigation map and encounter manager for a Dungeons & Dragons 5e mystery-themed campaign. The project emphasizes user friendly design and modular code architecture for easy expansion to other game systems.",
-    tags: ["DUNGEONS & DRAGONS", "IN PROGRESS"],
-    links: [
-      { label: "Code", url: "https://github.com/hris28/Avar" },
-      { label: "Live", url: "https://hris28.github.io/Avar/avar.html" },
-    ],
-  },
-
-  // ---------- 2025 ----------
-  {
-    year: 2025,
+    year: 2026,
     type: "RESEARCH", date: "Aug 2025 to Feb 2026",
     title: "LLM Driven Language Shift in Naturalistic Communication",
     pi: "PI: Dr. Fei Yu · Independent Study",
     description: "PRISMA guided systematic review across 6 databases and 4 preprint servers synthesizing evidence for LLM associated changes in human language. Developed a five lens conceptual extraction framework examining how studies operationalize LLM exposure and measure linguistic outcomes, surfacing methodological gaps in spoken language and secondhand diffusion research.",
     tags: ["SYSTEMATIC REVIEW", "PRISMA", "LLMS", "LINGUISTICS"],
+    links: [{ label: "Notes & draft", url: "garden-entry.html?slug=linguistic-effect-of-llms" }],
   },
+
+  // ---------- 2025 ----------
+  
   {
     year: 2025,
     type: "RESEARCH", date: "Jul 2025 to Dec 2025",
@@ -102,7 +96,21 @@ const PROJECTS = [
     pi: "PI: Dr. Alexandra Nowlan · 4 person design team",
     description: "Interactive physical model of the D3 dopamine receptor (GPCR) demonstrating conformational change triggered by the bitopic ligand FOB02 04A using cryo EM structures. Receptor processed in ChimeraX and Blender, binding pockets carved in TinkerCAD and Onshape, printed in PLA and PETG through multiple design iterations. Authored the model specification and prototype documentation, designed poster content, and presented at UNC BeAM Makerfest as a communication tool for medicinal chemists working on Parkinson's therapeutics.",
     tags: ["3D PRINTING", "CHIMERAX", "BLENDER", "CAD", "NEUROPHARMACOLOGY"],
-    image: "images/ligand-visualization-chimerax.jpeg",
+    images: [
+      { src: "images/ligand-visualization-chimerax.jpeg", caption: "D3 receptor + bitopic ligand, visualized in ChimeraX" },
+      { src: "images/ligand-visualization-3Dprint.jpg", caption: "The final 3D-printed model" },
+    ],
+    links: [{ label: "Write-up", url: "garden/projects/d3-receptor-model.html" }],
+  },
+  {
+    year: 2025, tag: "NOW",
+    type: "CODE", date: "Jun 2025 to Present", title: "Avar Intelligence Compendium",
+    description: "Information visualization tool for a tabletop rpg system. Built with JavaScript, HTML, and CSS, Avar is a web based investigation map and encounter manager for a Dungeons & Dragons 5e mystery-themed campaign. The project emphasizes user friendly design and modular code architecture for easy expansion to other game systems.",
+    tags: ["DUNGEONS & DRAGONS", "IN PROGRESS"],
+    links: [
+      { label: "Code", url: "https://github.com/hris28/Avar" },
+      { label: "Live", url: "https://hris28.github.io/Avar/avar.html" },
+    ],
   },
 
   // ---------- 2024 ----------
@@ -182,6 +190,9 @@ const PROJECTS = [
     description: "Multi year independent biomedical nanotechnology project. Synthesized and self assembled chitosan insulin nanoparticles for oral insulin delivery, evaluated stability and release efficiency. Performed alpha amylase inhibition assays on traditional medicinal herbs to assess hypoglycemic potential.",
     honor: "International BioGENEius Challenge Finalist and NC State Winner (2020)",
     tags: ["BIOMEDICAL", "NANOPARTICLES", "DRUG DELIVERY"],
+    links: [
+      { label: "Competition", url: "https://youtu.be/Aw31zX-d5mw?si=LDtB71TvFTKBEu-g"},
+    ]
   },
   {
     year: 2019,
@@ -190,7 +201,12 @@ const PROJECTS = [
     description: "Self directed environmental research on the role of algae in remediating nitrate and phosphate contaminants from wastewater. Designed experimental apparatus and conducted serial assays to measure nutrient reduction efficiency.",
     honor: "Intel ISEF Finalist (2019) · Published in the International Journal of High School Research (2020)",
     tags: ["ENVIRONMENTAL", "PUBLISHED", "ISEF"],
+    images: [
+      { src: "images/wastewater-poster.JPG", caption: "ISEF research poster" },
+      { src: "images/isef-name.jpg", caption: "At Intel ISEF, 2019" },
+    ],
     links: [
+      { label: "Write-up", url: "garden/projects/wastewater-bioremediation.html" },
       { label: "Abstract", url: "https://abstracts.societyforscience.org/Home/FullAbstract?Category=Any%20Category&AllAbstracts=True&FairCountry=Any%20Country&FairState=Any%20State&ProjectId=16993"},
     ],
   },
@@ -222,9 +238,18 @@ function renderProjects() {
 }
 
 function renderCard(p) {
-  // If the project has an image, add the modifier class and render the img
-  const hasImg = Boolean(p.image);
-  const imgEl = hasImg ? `<img class="project-image" src="${p.image}" alt="${p.title}" loading="lazy" />` : "";
+  // A project can carry a single `image`, or an `images: [{ src, caption }]`
+  // gallery that renders a small stack of captioned figures in the image column.
+  const gallery = Array.isArray(p.images) && p.images.length ? p.images : null;
+  const hasImg = gallery || Boolean(p.image);
+  let imgEl = "";
+  if (gallery) {
+    imgEl = `<div class="project-gallery">${gallery
+      .map((im) => `<figure><img src="${im.src}" alt="${im.caption || p.title}" loading="lazy" />${im.caption ? `<figcaption>${im.caption}</figcaption>` : ""}</figure>`)
+      .join("")}</div>`;
+  } else if (p.image) {
+    imgEl = `<img class="project-image" src="${p.image}" alt="${p.title}" loading="lazy" />`;
+  }
 
   const body = `
     <div>

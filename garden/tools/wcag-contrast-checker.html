@@ -83,7 +83,7 @@
 
         <h2>How it actually works</h2>
         <p>
-          Contrast here isn't about hue, but rather about <em>relative luminance</em>, the perceived brightness of
+          Contrast here isn't about hue, but rather about <em>relative luminance</em>: the perceived brightness of
           a color normalized so black is 0 and white is 1. For the sRGB colors screens use, luminance is a
           weighted sum that leans heavily on green (because our eyes do too):
           <code>L = 0.2126·R + 0.7152·G + 0.0722·B</code>, after each channel is "linearized" from its raw
@@ -97,8 +97,7 @@
 
         <h2>The thresholds</h2>
         <p>
-          First, the vocabulary, because the labels on the badges above (AA, AAA) are jargon until someone
-          explains them. <strong>WCAG</strong> stands for the Web Content Accessibility Guidelines, the
+          First, the vocabulary. <strong>WCAG</strong> stands for the Web Content Accessibility Guidelines, the
           international standard published by the W3C for making web content usable by people with
           disabilities. It defines three <em>conformance levels</em>, which are simply tiers of strictness:<sup class="cite"><a href="#src-3">[3]</a></sup>
         </p>
@@ -122,17 +121,14 @@
           Putting those together, here is what each badge in the checker is testing:
         </p>
         <ul>
-          <li><strong>AA normal: 4.5:1</strong> — the everyday default for body text.</li>
-          <li><strong>AA large: 3:1</strong> — headings and other large text passing the standard bar.</li>
-          <li><strong>AAA normal: 7:1</strong> — body text at the enhanced bar.</li>
-          <li><strong>AAA large: 4.5:1</strong> — large text at the enhanced bar.</li>
+          <li><strong>AA normal: 4.5:1</strong> - the everyday default for body text.</li>
+          <li><strong>AA large: 3:1</strong> - headings and other large text passing the standard bar.</li>
+          <li><strong>AAA normal: 7:1</strong> - body text at the enhanced bar.</li>
+          <li><strong>AAA large: 4.5:1</strong> - large text at the enhanced bar.</li>
         </ul>
         <p>
           Large, heavier letters stay legible at lower contrast, which is why every "large" bar is gentler
-          than its "normal" counterpart.<sup class="cite"><a href="#src-1">[1]</a></sup>
-        </p>
-        <p>
-          The thresholds are hard floors. A computed 4.499:1 does <em>not</em> pass 4.5:1, as
+          than its "normal" counterpart. The thresholds are hard floors. A computed 4.499:1 does <em>not</em> pass 4.5:1, as
           you do not round up.<sup class="cite"><a href="#src-1">[1]</a></sup>
         </p>
         <blockquote>

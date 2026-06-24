@@ -58,9 +58,6 @@ async function initGardenEntry() {
   if (e.audio) {
     body += `<audio class="audio-embed" controls preload="none" src="${e.audio}"></audio>`;
   }
-  if (e.pdf) {
-    body += `<iframe class="pdf-embed" src="${e.pdf}" title="${e.title} (PDF)" loading="lazy"></iframe>`;
-  }
   if (e.md) {
     try {
       const res = await fetch(e.md);
@@ -73,6 +70,10 @@ async function initGardenEntry() {
     }
   } else if (e.body) {
     body += e.body;
+  }
+  // Notes/body render first; an attached PDF draft sits below them.
+  if (e.pdf) {
+    body += `<iframe class="pdf-embed" src="${e.pdf}" title="${e.title} (PDF)" loading="lazy"></iframe>`;
   }
 
   root.innerHTML = head + `<div class="note-view">${body}</div>`;
