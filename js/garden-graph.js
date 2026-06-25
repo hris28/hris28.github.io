@@ -51,12 +51,16 @@ async function buildLinkGraph() {
     while ((m = re2.exec(text))) addEdge(from, m[1].toLowerCase());
   }
 
+  // Entry md paths are written relative to the site root (e.g. "garden/notes/x.md").
+  // On a standalone article page nested under /garden/<sub>/, prefix "../../" so the
+  // fetch still resolves; on the root index/viewer the prefix is empty.
+  const base = /\/garden\/[^/]+\//.test(location.pathname) ? "../../" : "";
   await Promise.all(
     GARDEN.map(async (e) => {
       if (Array.isArray(e.links)) e.links.forEach((s) => addEdge(e.slug, String(s).toLowerCase()));
       if (e.body) extract(e.body, e.slug);
       if (e.md) {
-        try { const r = await fetch(e.md); if (r.ok) extract(await r.text(), e.slug); } catch (_) {}
+        try { const r = await fetch(base + e.md); if (r.ok) extract(await r.text(), e.slug); } catch (_) {}
       }
     })
   );
@@ -380,7 +384,8 @@ async function initGardenGraph() {
   // connections section at the end of the article so it gets the same map.
   if (!globalCanvas && !connections && typeof entryFromHref === "function") {
     const e = entryFromHref(location.href);
-    const host = document.querySelector(".note-view") || document.querySelector(".wrap-narrow");
+    // Append after everything (including any .sources list), not inside .note-view.
+    const host = document.querySelector(".wrap-narrow") || document.querySelector(".note-view");
     if (e && host) {
       connections = document.createElement("div");
       connections.id = "garden-connections";
