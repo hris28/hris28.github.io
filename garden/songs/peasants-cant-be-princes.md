@@ -14,7 +14,7 @@ It’s ok to admit defeat.
 Give up, Give up, Give up,
 Your dreams are nothing much,
 Give up, Give up, Give up,
-Peasants can’t be Princes.
+Peasants can’t be Princes here.
 
 Give up, Give up, Give up,
 You know it’s way too tough,
@@ -37,7 +37,7 @@ So you should just stop while you’re at it.
 Give up, Give up, Give up,
 Your dreams are nothing much,
 Give up, Give up, Give up,
-Peasants can’t be Princes.
+Peasants can’t be Princes here.
 
 Give up, Give up, Give up,
 You know it’s way too tough,
@@ -46,7 +46,7 @@ Peasants can’t be Princes.
 
 But this little boy,
 Just couldn’t stop,
-Hoping,wishing, wanting something
+Hoping, wishing, wanting something
 
 Farther than what everyone else could see
 A big grand dream.
@@ -56,7 +56,7 @@ Get up,
 Don’t let them push you down
 
 Get up,
-Peasants can be princes.
+Peasants can be princes too.
 
 Get up,
 Stand straight reach for the crown.

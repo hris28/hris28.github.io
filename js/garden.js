@@ -63,6 +63,7 @@ const GARDEN = [
     excerpt: "An interactive look at everything a website can read from your browser (computed locally), and which settings change what each value reveals.",
     page: "garden/tools/browser-fingerprinting.html",
     tool: true,
+    links: ["privacy-basics", "vpn-explained", "isp-layer", "hardware-basics"],
   },
   {
     slug: "interacting-with-the-internet",
@@ -289,10 +290,9 @@ const GARDEN = [
     slug: "pcbp-an-original-song",
     image: "images/garden.png",
     type: "song",
-    title: "Peasants Can't Be Princes",
+    title: "Peasants and Princes",
     date: "2022-02-16",
     maturity: "evergreen",
-    featured: true,
     tags: ["original", "songwriting", "music"],
     excerpt: "A song I wrote and recorded.",
     // Replace VIDEO_ID with the id from a YouTube URL (the part after v=).
@@ -306,6 +306,7 @@ const GARDEN = [
     title: "Beautiful Blanket of Blue",
     date: "2022-06-03",
     maturity: "evergreen",
+    featured: true,
     tags: ["original", "songwriting", "music"],
     excerpt: "A song I wrote.",
     md: "garden/songs/beautiful-blanket-of-blue.md",
