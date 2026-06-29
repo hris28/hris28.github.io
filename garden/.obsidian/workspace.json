@@ -111,12 +111,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "songs/butterfly-effect.md",
+                "file": "thoughts/about-the-garden.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "butterfly-effect"
+              "title": "about-the-garden"
             }
           }
         ],
@@ -284,6 +284,9 @@
   },
   "active": "3c0d0de5df0742b1",
   "lastOpenFiles": [
+    "posts/garden-about.md",
+    "thoughts/about-the-garden.md",
+    "songs/butterfly-effect.md",
     "songs/peasants-cant-be-princes.md",
     "tools",
     "thoughts/tools",
@@ -299,7 +302,6 @@
     "songs/city-of-lies.md",
     "songs/what-love-is-like.md",
     "songs/closer.md",
-    "songs/power.md",
-    "songs/butterfly-effect.md"
+    "songs/power.md"
   ]
 }
