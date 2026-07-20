@@ -51,16 +51,42 @@
     </div>
   </header>
 
-  <!-- Timeline root. Populated by projects.js. -->
   <section style="padding-top: 2rem;">
     <div class="wrap">
-      <p class="lede" style="margin-bottom: 2rem;">
-        A running timeline of research, project, and hackathon work,
-        from eye tracking AI studies to published wastewater research, sorted reverse chronologically.
+      <p class="lede" style="margin-bottom: 1.25rem;">
+        A running timeline of research, code, hardware, and hackathon work, plus the roles I built things inside of. Filter by focus, or switch the layout on the right.
       </p>
-      <div id="projects-root" class="timeline"></div>
     </div>
   </section>
+
+  <!-- Filter + layout controls. Timeline / grid / list rendered by projects.js. -->
+  <div class="controls">
+    <div class="wrap controls-row">
+      <div class="filters" id="filters"></div>
+      <span class="count" id="count"></span>
+      <div class="seg" id="seg">
+        <button data-view="timeline" class="active">Timeline</button>
+        <button data-view="grid">Grid</button>
+        <button data-view="list">List</button>
+      </div>
+    </div>
+  </div>
+
+  <section style="padding-top: 0;">
+    <div class="wrap">
+      <div id="view" class="timeline"></div>
+    </div>
+  </section>
+
+  <!-- Hover link preview popover -->
+  <div id="linkpv" aria-hidden="true">
+    <div class="pv-ph" id="pv-media">◆</div>
+    <div class="pv-body">
+      <div class="pv-label" id="pv-label"></div>
+      <div class="pv-note" id="pv-note"></div>
+      <div class="pv-dest" id="pv-dest"></div>
+    </div>
+  </div>
 
   <section class="contact-strip">
     <h2>Have a project in mind?</h2>
