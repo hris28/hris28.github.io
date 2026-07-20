@@ -47,7 +47,7 @@
 
       <div class="note-view">
         <p>
-          A rabbit hole I keep falling back into: how much can a website learn about me, without any login or interaction, just from opening the page. The answer is "a startling amount,"
+          A rabbit hole I keep falling back into: how much can a website learn about me the moment I open a page? The answer is "a startling amount,"
           and the unsettling part is that these signals combine into a near-unique
           <em>fingerprint</em> that follows you even with cookies cleared.<sup class="cite"><a href="#src-1">[1]</a></sup>
           So I built something to read it all back to you, running entirely in your browser.
@@ -84,7 +84,7 @@
         <h2>What this is actually showing</h2>
         <p>
           None of this required permission. The browser hands it over to make pages work: your screen size so
-          layouts fit, your language so text localizes, your GPU so graphics render. Individually it's harmless.
+          layouts fit, your language so text localizes, your GPU so graphics render. Individually, most of these values seem harmless.
           Combined, the set of values is distinctive enough that researchers found most browsers are
           <em>uniquely identifiable</em> from these traits alone, a technique called
           <strong>browser fingerprinting</strong>.<sup class="cite"><a href="#src-2">[2]</a></sup> Unlike a cookie,
@@ -100,14 +100,14 @@
           <li><strong>Seen by the network no matter what JavaScript does.</strong> Your public IP is the headline example: local scripts cannot read it, which is why the lookup at the bottom needs an outside service, yet every server you connect to sees it automatically because it is part of the connection itself. The WebRTC row makes the same point, surfacing local and sometimes real IP addresses that ordinary scripts are not meant to expose.<sup class="cite"><a href="#src-1">[1]</a></sup></li>
           <li><strong>Inferred indirectly.</strong> Even when one signal is blocked, a tracker can often estimate the same thing another way: screen size hints at device class, request timing hints at connection speed. Blocking a vector raises the cost; it rarely deletes the fact.</li>
         </ul>
-        <p>So a blank in the panel means "this channel was closed," which is still informative, but it does not mean nothing about you is visible elsewhere, because the network layer and cross-method inference live outside what any in-page script can read.</p>
+        <p>So a blank in the panel means "this channel was closed," which is still informative, but it does not mean nothing about you is visible elsewhere, because the network layer and cross-method inference live outside what any in-page script can read. It's not necessarily that the information is unknowable, only that this page couldn't read it through JavaScript.</p>
 
         <h2>Why the same value shows in one browser and not another</h2>
         <p>
           None of these values is pulled from a hidden file. Each one exists only because a browser chose to implement a JavaScript interface that returns it, and browsers disagree about which interfaces to ship. That disagreement is exactly why "GPU renderer" or "device memory" appears in Chrome but is blank in Firefox or Tor. Three different mechanisms sit behind a blank:
         </p>
         <ul>
-          <li><strong>The browser never implemented the API.</strong> <code>navigator.deviceMemory</code> (the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Device_Memory_API" target="_blank" rel="noopener">Device Memory API</a>) and the connection group (<code>navigator.connection</code>, the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Network_Information_API" target="_blank" rel="noopener">Network Information API</a>) are Chromium-only. Chrome, Edge, and Brave ship them; Firefox and Safari never did, citing the added fingerprinting surface. Your RAM and your connection speed are perfectly real. The browser just offers no property for a script to read them, so the value is <code>undefined</code> and the tool prints "not exposed."<sup class="cite"><a href="#src-3">[3]</a></sup></li>
+          <li><strong>The browser never implemented the API.</strong> <code>navigator.deviceMemory</code> (the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Device_Memory_API" target="_blank" rel="noopener">Device Memory API</a>) and the connection group (<code>navigator.connection</code>, the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Network_Information_API" target="_blank" rel="noopener">Network Information API</a>) are Chromium-only. Chrome, Edge, and Brave ship them; Firefox and Safari never did, citing the added fingerprinting surface. Your RAM and connection speed still exist. Firefox and Safari simply never expose them to JavaScript as the browser offers no property for a script to read them, so the value is <code>undefined</code> and the tool prints "not exposed."<sup class="cite"><a href="#src-3">[3]</a></sup></li>
           <li><strong>The browser implemented it, then deliberately neutralized it.</strong> Your <strong>GPU vendor and renderer</strong> come from a WebGL extension called <a href="https://developer.mozilla.org/en-US/docs/Web/API/WEBGL_debug_renderer_info" target="_blank" rel="noopener">WEBGL_debug_renderer_info</a>. Standard Chrome returns the real string (for example "ANGLE (NVIDIA GeForce RTX...)") because games and graphics apps use it. Brave and the Tor Browser intercept that exact call and return a generic or empty value on purpose, because the precise GPU and driver is one of the most identifying things a page can learn. The difference you see is not your hardware changing; it is the browser deciding whether to answer. The Battery Status API is the end state of this approach: Firefox and Safari did not just blank it, they removed it entirely after it was shown to aid tracking.</li>
           <li><strong>It needs a secure context or a user action, or it simply does not apply.</strong> Some APIs only work over HTTPS or after you interact with the page. And some blanks are honest absences: <code>maxTouchPoints</code> is 0 on a non-touch laptop, there is no battery to report on a desktop, and screen orientation is often unset outside mobile.</li>
         </ul>

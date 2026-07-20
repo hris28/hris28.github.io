@@ -31,7 +31,7 @@ const GARDEN = [
     slug: "garden-about",
     image: "images/garden.png",
     type: "post",
-    title: "About the Garden",
+    title: "The Invisible Infrastructure of Information",
     date: "2026-04-04",
     maturity: "growing",
     featured: true,
