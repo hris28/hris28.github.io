@@ -5,6 +5,36 @@ stage: sprout
 tags: [information, archive, search, security]
 description: "Why I created this page."
 ---
+## The Invisible Infrastructure of Information
+
+Most of what makes modern life work is invisible.
+
+You open a browser and type a name into the address bar. Somewhere, a DNS resolver translates that name into an IP address. Routers choose a path across thousands of networks. TLS negotiates encryption. HTTP sends requests. The page renders. JavaScript runs. Dozens of APIs quietly expose information about your browser.
+
+All of this happens before you've read the first sentence on the page.
+
+Most people never notice.
+It's not necessarily hidden, but it works well enough to disappear.
+
+The same is true outside computing.
+
+Libraries look like buildings full of books, but underneath them are classification systems, catalogues, metadata standards, archives, preservation policies, and librarians who spend years learning how information should be described so that someone else can eventually find it.
+
+Scientific papers look like discoveries, but underneath them are peer review, statistical assumptions, replication, citation networks, funding decisions, and decades of accumulated work.
+
+Cities look like streets and buildings.
+Underneath are electrical grids, sewer systems, zoning laws, logistics networks, traffic engineering, and supply chains.
+
+Science fiction writer Arthur C. Clarke once wrote, 
+> "Any sufficiently advanced technology is indistinguishable from magic."
+
+The world is full of magic. But I don't think understanding these systems makes the world less magical. Rather, it allows us to discover and create even more magic.
+
+Knowledge itself has infrastructure.
+
+Most of it is invisible.
+
+This garden is my attempt to make some of it visible.
 
 ## Principles
 
@@ -34,6 +64,4 @@ Explain what the reader just saw. After the demo, explain each data point: what 
 
 ### Content roadmap
 
-The ordering logic is: foundational concepts first, then mechanisms, then actors, then tools, then edge cases and historical context. Each piece should be readable without assuming the previous ones, but should link to them where they would help.
-
-The questions below are written in the voice of a real reader, because that is who will search for them. Most of the articles do not map one-to-one to a question; they answer a cluster of related questions together.
+The ordering logic is: foundational concepts first, then mechanisms, then actors, then tools, then edge cases and historical context. Each piece should be readable without assuming the previous ones, but should link to them where they would help. Most of the articles do not map one-to-one to a question; they answer a cluster of related questions together.
