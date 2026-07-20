@@ -35,7 +35,7 @@ const GARDEN = [
     date: "2026-04-04",
     maturity: "growing",
     featured: true,
-    tags: ["meta", "archive"],
+    tags: ["meta", "archive", "principles", "philosophy", "security"],
     excerpt: "Why this archive exists, and the principles behind how it is written.",
     md: "garden/posts/garden-about.md",
   },
