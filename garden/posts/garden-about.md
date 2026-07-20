@@ -5,8 +5,6 @@ stage: sprout
 tags: [information, archive, search, security]
 description: "Why I created this page."
 ---
-## The Invisible Infrastructure of Information
-
 Most of what makes modern life work is invisible.
 
 You open a browser and type a name into the address bar. Somewhere, a DNS resolver translates that name into an IP address. Routers choose a path across thousands of networks. TLS negotiates encryption. HTTP sends requests. The page renders. JavaScript runs. Dozens of APIs quietly expose information about your browser.
