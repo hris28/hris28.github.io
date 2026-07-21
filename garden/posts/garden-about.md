@@ -36,7 +36,7 @@ This garden is my attempt to make some of it visible.
 
 ## Principles
 
-This started as an information security guide--a growing reference site for people who want to understand the systems they live inside online. 
+This started as an information security guide--a growing reference site for people who want to understand the systems they live inside online. Slowly it became a place to document anything I became curious enough to understand deeply.
 
 I kept running into the same problem: upon searching for an answer to something, I would find either a marketing page in disguise, a review article that assumed I already knew half the terminology, or a forum thread from 2016 that may or may not still be accurate. The information existed somewhere, but getting to it required trusting sources I had no real way to evaluate, following recommendation chains that turned out to have affiliate links buried in them, or digging through five subpages of a site clearly designed to funnel me toward a product. 
 
