@@ -121,7 +121,7 @@ const PROJECTS = [
 
   // ---------- 2025 ----------
   {
-    year: 2025, type: "RESEARCH", category: "Research",
+    year: 2025, type: "RESEARCH", category: "Research", also: ["Hardware"],
     date: "Sept 2025 to Present",
     title: "Eye-Tracking Engagement in AI-Assisted Academic Search",
     pi: "PI: Dr. Fei Yu · with Jaegoo Ha",
@@ -172,7 +172,7 @@ const PROJECTS = [
     ],
   },
   {
-    year: 2025, type: "RESEARCH", category: "Research", also: ["Hardware"],
+    year: 2025, type: "RESEARCH", category: "Research", also: ["Code", "Hardware"],
     date: "Jul 2025 to Dec 2025",
     title: "Brain-Computer Interface Model Card, DREAMS Framework Evaluation",
     pi: "PI: Dr. Raghavendra Pradyumna Pothukuchi · with Disha Kohal Math",
@@ -212,7 +212,7 @@ const PROJECTS = [
 
   // ---------- 2024 ----------
   {
-    year: 2024, type: "CODE", category: "Creative",
+    year: 2024, type: "CODE", category: "Creative", also: ["Code"],
     date: "2024",
     title: "Branching Visual Novel",
     pi: "COMM 150: Introduction to New Media · Prof. Joyce Rudinsky",
@@ -228,7 +228,7 @@ const PROJECTS = [
 
   // ---------- 2023 ----------
   {
-    year: 2023, type: "CODE", category: "Creative",
+    year: 2023, type: "CODE", category: "Creative", also: ["Code"],
     date: "Spring 2023",
     title: "Ackland Virtual 3D Art Gallery",
     pi: "ENGL 105: English Composition and Rhetoric · Ackland Art Museum",
@@ -293,11 +293,11 @@ const PROJECTS = [
     ],
   },
   {
-    year: 2019, type: "RESEARCH", category: "Research",
+    year: 2019, type: "RESEARCH", category: "Research", also: ["Code"],
     date: "Sept 2018 to Jul 2020",
     title: "Wastewater Bioremediation",
-    question: "Using algae as a low-cost way to pull nitrate and phosphate pollution out of wastewater.",
-    blurb: "Published high-school research on algae as a low-cost wastewater remediator.",
+    question: "Using algae as a low-cost wastewater remediator.",
+    blurb: "Published research on algae as a cost-effective method to pull nitrate and phosphate pollution out of wastewater.",
     description: "This self-directed project asked whether algae could cheaply strip nitrate and phosphate pollution from wastewater. I designed an experimental apparatus to measure how effectively algae remove the contaminants, then ran serial assays to quantify the reduction. It became an Intel ISEF Finalist project and my first peer-reviewed publication.",
     honor: [
       "Intel ISEF Finalist (2019)",
@@ -345,7 +345,7 @@ const EXPERIENCES = [
   {
     year: 2024, role: "Co-Founder and Chief Operating Officer", org: "SkyeLabs Innovation Inc.",
     date: "Sept 2020 to Aug 2024",
-    category: "Entrepreneurship", also: ["Code"],
+    category: "Entrepreneurship", also: ["Research", "Hardware"],
     summary: "I co-founded a sustainable-materials startup and ran its R&D, strategy, prototyping, and investor outreach. I filed a provisional patent, built the product website in HTML and CSS with SEO, and secured $2,000 from the Bowman-Brockman Endowment for Entrepreneurship and Advanced Research.",
     honor: [
       "Pete Conrad Scholar, Aerospace and Aviation (2021)",
@@ -367,7 +367,7 @@ const EXPERIENCES = [
   {
     year: 2024, role: "Facilitator and College Loop President", org: "Girls Who Code, UNC and NCSSM",
     date: "2020 to 2024",
-    category: "Leadership",
+    category: "Leadership", also: ["Code"],
     summary: "I taught Python to 50+ students a week using Turtle for visual learning, mentored semester-long app projects, and co-founded chapters at both NCSSM and UNC to widen CS access for students who rarely see it.",
     tags: ["TEACHING", "PYTHON", "MENTORSHIP", "CURRICULUM"],
     projects: [],
