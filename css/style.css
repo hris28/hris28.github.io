@@ -403,6 +403,16 @@ section { padding: 3rem 0; }
 .xp-proj { padding-left: 0.9rem; border-left: 2px solid var(--line); }
 .xp-proj h4 { font-size: 0.95rem; margin: 0 0 0.2rem; }
 .xp-proj p { font-size: 0.88rem; color: var(--ink-soft); margin: 0; }
+/* Role progression inside a single experience (multiple roles over the years) */
+.xp-roles { list-style: none; margin: 0.85rem 0 0; padding: 0.8rem 0 0; border-top: 1px dashed var(--line); display: grid; gap: 0.55rem; }
+.xp-roles li { display: grid; grid-template-columns: 108px 1fr; gap: 0.15rem 0.9rem; align-items: baseline; }
+.xr-date { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-faint); }
+.xr-role { font-size: 0.92rem; }
+.xr-org { color: var(--ink-soft); }
+.xr-note { display: block; color: var(--ink-soft); font-size: 0.85rem; margin-top: 0.15rem; }
+.xr-honor { display: block; font-size: 0.83rem; color: var(--ink); margin-top: 0.15rem; }
+.xr-honor::before { content: "\2605"; color: var(--accent); margin-right: 0.4rem; }
+@media (max-width: 640px) { .xp-roles li { grid-template-columns: 1fr; gap: 0.1rem; } }
 
 /* timeline view: dotted rail with node dots (no plain rail) */
 #view.timeline .yr { font-weight: 800; letter-spacing: -0.03em; font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 1.6rem 0 1.1rem; }

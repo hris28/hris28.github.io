@@ -293,7 +293,7 @@ const PROJECTS = [
     ],
   },
   {
-    year: 2019, type: "RESEARCH", category: "Research", also: ["Code"],
+    year: 2019, type: "RESEARCH", category: "Research", also: ["Hardware"],
     date: "Sept 2018 to Jul 2020",
     title: "Wastewater Bioremediation",
     question: "Using algae as a low-cost wastewater remediator.",
@@ -390,6 +390,22 @@ const EXPERIENCES = [
       },
     ],
   },
+  {
+    year: 2022, category: "Leadership",
+    role: "Technology Student Association (TSA)",
+    org: "Ardrey Kell HS, then NCSSM",
+    date: "2018 to 2022",
+    summary: "I stayed involved with TSA across two schools, rising from member to president, and directed 100+ students in state and national competitions and community service.",
+    roles: [
+      { date: "2021 to 2022", title: "President", org: "NCSSM chapter", note: "Directed 100+ students in state and national competitions; raised $5,000+ through service." },
+      { date: "2020 to 2021", title: "Officer", org: "NCSSM chapter" },
+      { date: "2019 to 2020", title: "Treasurer", org: "Ardrey Kell chapter" },
+      { date: "2018 to 2019", title: "Member", org: "Ardrey Kell chapter", honor: "National Finalist, 3D Animation" },
+    ],
+    honor: ["Clark Technology Scholarship (2022)"],
+    tags: ["LEADERSHIP", "COMPETITION", "3D ANIMATION", "COMMUNITY"],
+    projects: [],
+  },
 ];
 
 
@@ -472,10 +488,17 @@ const EXPERIENCES = [
       ? `<div class="xp-nested">${x.projects.map((pr) => `<div class="xp-proj">
           <h4>${pr.title}</h4><p>${pr.description}</p>${tagsRow(pr.tags)}${linksRow(pr.links, "")}</div>`).join("")}</div>`
       : "";
+    // Optional role progression: several roles/orgs over the years, newest first.
+    const rolesList = (x.roles && x.roles.length)
+      ? `<ol class="xp-roles">${x.roles.map((r) => `<li>
+          <span class="xr-date">${r.date}</span>
+          <span class="xr-role"><b>${r.title}</b>${r.org ? ` · <span class="xr-org">${r.org}</span>` : ""}${r.honor ? `<span class="xr-honor">${r.honor}</span>` : ""}${r.note ? `<span class="xr-note">${r.note}</span>` : ""}</span>
+        </li>`).join("")}</ol>`
+      : "";
     return `<article class="card xp-card">
       ${metaRow(x.category || "EXPERIENCE", x.date)}
-      <h3 class="p-title">${x.role}</h3><div class="xp-org">${x.org}</div>
-      <p class="p-blurb">${x.summary}</p>${honorsRow(x.honor)}
+      <h3 class="p-title">${x.role}</h3>${x.org ? `<div class="xp-org">${x.org}</div>` : ""}
+      <p class="p-blurb">${x.summary}</p>${rolesList}${honorsRow(x.honor)}
       ${linksRow(x.links, "")}${tagsRow(x.tags)}${nested}
     </article>`;
   }
