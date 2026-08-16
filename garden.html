@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Garden · Hrishika Roychoudhury</title>
+  <meta name="description" content="A digital garden: mini tools, songs, research notes, posts, and rabbit holes--growing in public." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="The Garden · Hrishika Roychoudhury" />
+  <meta property="og:description" content="A personal archive of mini-tools, research notes, posts, and songs, growing in public." />
+  <meta property="og:image" content="https://hris28.github.io/images/garden.png" />
+  <meta property="og:url" content="https://hris28.github.io/garden.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/main.js" defer></script>
+  <script src="js/garden.js" defer></script>
+  <script src="js/garden-graph.js" defer></script>
+</head>
+<body class="garden-page">
+
+  <nav class="nav">
+    <a href="index.html" class="nav-brand">Hrishika Roychoudhury<span class="dot">•</span></a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="resume.html">Résumé</a></li>
+      <li><a href="garden.html">Garden</a></li>
+      <li><a href="interests.html">Interests</a></li>
+      <li>
+        <button class="theme-btn" aria-label="Toggle theme" onclick="toggleTheme()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Terminal-flavored garden header -->
+  <header class="hero hero-small">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="eyebrow">My Living Archive</p>
+      <h1 class="display">The Garden</h1>
+      <p class="tagline">Tools, thoughts, songs, notes, posts, and rabbit holes<span class="dot">.</span></p>
+    </div>
+  </header>
+
+  <!-- Intro (expandable) -->
+  <section class="reveal" style="padding-bottom: 0;">
+    <div class="wrap">
+      <details class="garden-intro">
+        <summary>Entries are categorized by progress (<span class="stage-seedling">seedling</span> 🌱, <span class="stage-growing">growing</span> 🌿, and <span class="stage-evergreen">evergreen</span> 🌳). Filter by type, search, or wander the explorer. Markdown notes, hand-built posts, embedded mini-tools, and the occasional song--all in one place. For more on why this archive exists and how it is written, see <a href="garden-entry.html?slug=garden-about">The Invisible Infrastructure of Information</a>.</summary>
+        <p class="intro-more">A growing collection of notes, sketches, and working thoughts--written mostly for me, kept public in case they're useful to you. Obsidian-compatible markdown, wiki-linked into a graph. Entries follow rabbit holes: the opening explains the idea for anyone passing through, then it keeps going for whoever wants to know how the thing actually works, all the way down. Read as deep as you like and stop wherever you're satisfied. There's a strong OSINT and information-security thread, but really it goes wherever my curiosity does.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- Featured slider -->
+  <section class="reveal">
+    <div class="wrap">
+      <p class="eyebrow">Featured</p>
+      <div class="garden-slider">
+        <div id="garden-featured" class="garden-track" tabindex="0" role="list" aria-label="Featured entries"></div>
+        <div class="slider-nav">
+          <button class="slider-btn" id="slider-prev" type="button" aria-label="Previous featured">&lsaquo;</button>
+          <button class="slider-btn" id="slider-next" type="button" aria-label="Next featured">&rsaquo;</button>
+          <div class="slider-dots" id="slider-dots" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Controls + grid + archive -->
+  <section style="padding-top: 1rem;">
+    <div class="wrap">
+      <div class="garden-controls">
+        <input id="garden-search" class="search-input" type="search" placeholder="Search the garden…" aria-label="Search the garden" />
+        <div id="garden-filters" class="tag-filter" role="group" aria-label="Filter by type">
+          <button class="active" data-type="all" aria-pressed="true">All</button>
+          <button data-type="tool" aria-pressed="false">Tools</button>
+          <button data-type="song" aria-pressed="false">Songs</button>
+          <button data-type="note" aria-pressed="false">Notes</button>
+          <button data-type="post" aria-pressed="false">Posts</button>
+          <button data-type="thought" aria-pressed="false">Thoughts</button>
+        </div>
+        <button id="explorer-toggle" class="explorer-rail-toggle" type="button" aria-expanded="true" aria-controls="garden-explorer">☰ Explorer</button>
+      </div>
+
+      <div class="garden-layout" id="garden-layout">
+        <div class="garden-main">
+          <div id="garden-grid" class="garden-grid"></div>
+          <nav id="garden-pagination" class="garden-pagination" aria-label="Garden pages"></nav>
+        </div>
+        <aside class="garden-explorer" id="garden-explorer" aria-label="Explorer">
+          <div class="rail-graph">
+            <h3>Map</h3>
+            <div class="garden-graph-wrap"><canvas id="garden-graph" aria-label="Graph of how garden entries connect"></canvas></div>
+          </div>
+          <h3>Explorer</h3>
+          <div id="garden-explorer-list"></div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-row">
+      <span>Copyright &copy; Hrishika Roychoudhury 2021-<span id="copyright-year"></span> &nbsp;|&nbsp; Last Updated on <span id="page-updated">Monday, 20 July 2026</span></span>
+      <div class="socials">
+        <a href="mailto:hrishikarc@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a>
+        <a href="https://www.instagram.com/hrcdream" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://linkedin.com/in/hrishikarc" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.7 2.6 4.7 6V21h-4v-5.4c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V21h-4V9z"/></svg></a>
+        <a href="https://github.com/hris28" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.8 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2.9-.3 2-.4 3-.4 1 0 2 .1 3 .4 2.3-1.6 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.4 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.8-5.8 7.8-10.9C23.5 5.7 18.3.5 12 .5z"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

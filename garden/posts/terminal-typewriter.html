@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building the whoami terminal · Garden · Hrishika Roychoudhury</title>
+  <meta name="description" content="Why I added a little terminal to my homepage, and how I kept the typing animation accessible." />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <script src="../../js/main.js" defer></script>
+  <script src="../../js/garden.js" defer></script>
+  <script src="../../js/garden-graph.js" defer></script>
+</head>
+<body class="garden-page">
+
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <nav class="nav">
+    <a href="../../index.html" class="nav-brand">Hrishika Roychoudhury<span class="dot">•</span></a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <ul class="nav-links">
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../../about.html">About</a></li>
+      <li><a href="../../projects.html">Projects</a></li>
+      <li><a href="../../resume.html">Résumé</a></li>
+      <li><a href="../../garden.html">Garden</a></li>
+      <li><a href="../../interests.html">Interests</a></li>
+      <li>
+        <button class="theme-btn" aria-label="Toggle theme" onclick="toggleTheme()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <section>
+    <div class="wrap-narrow">
+      <a class="back-link" href="../../garden.html">← Back to the garden</a>
+      <p class="eyebrow">tool · 🌳 <span class="stage-evergreen">evergreen</span></p>
+      <h1 class="note-h1">Building the whoami terminal on my homepage</h1>
+      <p class="note-meta" style="margin: 0.4rem 0 1.75rem;">20 Nov 2025 · webdev, design, accessibility</p>
+
+      <div class="note-view">
+        <p>
+          This is a hand-built HTML post, and the terminal below is the real thing: it runs the exact
+          same code that sits at the top of my <a href="../../index.html">homepage</a>. Hover it, tap it,
+          or focus it with the keyboard to reveal the full list; move away and the cycle resumes.
+        </p>
+
+        <div class="terminal" id="terminal" tabindex="0" aria-label="Terminal: about Hrishika" style="margin: 1.5rem 0;">
+          <div class="terminal-bar">
+            <span class="dotgroup" aria-hidden="true"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span></span>
+            <span class="ttitle">hris@hrc: ~</span>
+            <span class="thint" aria-hidden="true">click to expand</span>
+          </div>
+          <div class="terminal-body">
+            <p class="line"><span class="prompt">hris@hrc:~$</span> <span class="cmd">whoami</span></p>
+            <p class="line out">hrishika roychoudhury. msis candidate, unc sils.</p>
+            <p class="line"><span class="prompt">hris@hrc:~$</span> <span class="cmd">cat focus.txt</span></p>
+            <p class="line out expertise" id="expertise" aria-hidden="true" data-terms="human-computer interaction|ai/ml evaluation|user experience|health informatics|neural networks|interdisciplinary research|data visualization|full-stack web development|accessible technology|osint|digital preservation|archiving the now"></p>
+            <span class="sr-only">Areas of expertise: human-computer interaction, ai/ml evaluation, user experience, health informatics, neural networks, interdisciplinary research, data visualization, full-stack web development, accessible technology, osint, digital preservation, and archiving the now.</span>
+          </div>
+        </div>
+
+        <h2>Why a terminal?</h2>
+        <p>
+          I wanted my homepage to say what I do without reading like a résumé bullet list. A little
+          terminal that types out <code>whoami</code> and <code>cat focus.txt</code> felt more like me, with a nod to the command line and some personality.
+        </p>
+
+        <h2>The markup</h2>
+        <p>
+          The whole thing is one box. The first command line is static text. The second command,
+          <code>cat focus.txt</code>, is followed by an <em>empty</em> paragraph whose
+          <code>data-terms</code> attribute holds every focus area, separated by a <code>|</code> pipe.
+          That empty paragraph is what the script types into. A hidden <code>sr-only</code> sentence
+          repeats the full list in plain prose so screen readers get everything at once.
+        </p>
+        <pre><code>&lt;div class="terminal" id="terminal" tabindex="0"&gt;
+  &lt;div class="terminal-body"&gt;
+    &lt;p class="line"&gt;&lt;span class="prompt"&gt;hris@hrc:~$&lt;/span&gt; whoami&lt;/p&gt;
+    &lt;p class="line out"&gt;hrishika roychoudhury. msis candidate, unc sils.&lt;/p&gt;
+    &lt;p class="line"&gt;&lt;span class="prompt"&gt;hris@hrc:~$&lt;/span&gt; cat focus.txt&lt;/p&gt;
+
+    &lt;!-- the empty line the script types into --&gt;
+    &lt;p class="out expertise" id="expertise" aria-hidden="true"
+       data-terms="human-computer interaction|ai/ml evaluation|user experience|..."&gt;&lt;/p&gt;
+
+    &lt;!-- the same list, in plain prose, for screen readers --&gt;
+    &lt;span class="sr-only"&gt;Areas of expertise: human-computer interaction, ...&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+        <h2>The script</h2>
+        <p>
+          On load the script reads <code>data-terms</code>, splits it on the <code>|</code>, and animates
+          one word at a time. The loop has two phases: <strong>typing</strong> adds a character and
+          schedules the next tick a few milliseconds later (with a little random jitter so it feels human);
+          once the word is complete it pauses, then <strong>deleting</strong> removes characters one by one
+          until the line is empty, advances to the next term, and starts again, forever. Here is the core
+          of it, lightly trimmed:
+        </p>
+        <pre><code>const terms = target.dataset.terms.split("|").map(t =&gt; t.trim());
+
+const TYPE = 55, DELETE = 28, HOLD = 1300, BETWEEN = 400; // milliseconds
+let i = 0, pos = 0, phase = "typing";
+
+function tick() {
+  const term = terms[i];
+  if (phase === "typing") {
+    word.textContent = term.slice(0, ++pos);
+    if (pos &gt;= term.length) { phase = "deleting"; setTimeout(tick, HOLD); }
+    else setTimeout(tick, TYPE + Math.random() * 45);   // jitter
+  } else {
+    word.textContent = term.slice(0, --pos);
+    if (pos === 0) { i = (i + 1) % terms.length; phase = "typing"; setTimeout(tick, BETWEEN); }
+    else setTimeout(tick, DELETE);
+  }
+}
+
+// Respect the OS "reduce motion" setting: skip the animation entirely
+// and just render the full list at once.
+if (matchMedia("(prefers-reduced-motion: reduce)").matches) showAll();
+else tick();</code></pre>
+
+        <h2>Keeping it accessible</h2>
+        <p>
+          The catch with typewriter effects is that they can be hostile to screen readers and to people
+          who get motion-sick. So the animated line carries <code>aria-hidden="true"</code> (assistive tech
+          ignores it), the full list of focus areas lives in that screen-reader-only sentence, and anyone
+          with <em>reduce motion</em> turned on skips the animation and just sees the complete list. Clicking
+          or focusing the terminal also pins the full list open, so nobody is forced to wait for the cycle.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-row">
+      <span>Copyright &copy; Hrishika Roychoudhury 2021-<span id="copyright-year"></span> &nbsp;|&nbsp; Last Updated on <span id="page-updated">Wednesday, 24 June 2026</span></span>
+      <div class="socials">
+        <a href="mailto:hrishikarc@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a>
+        <a href="https://www.instagram.com/hrcdream" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://linkedin.com/in/hrishikarc" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.7 2.6 4.7 6V21h-4v-5.4c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V21h-4V9z"/></svg></a>
+        <a href="https://github.com/hris28" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.8 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2.9-.3 2-.4 3-.4 1 0 2 .1 3 .4 2.3-1.6 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.4 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.8-5.8 7.8-10.9C23.5 5.7 18.3.5 12 .5z"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
