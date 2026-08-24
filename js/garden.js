@@ -79,6 +79,18 @@ const GARDEN = [
     tool: true,
   },
   {
+    slug: "cookie-black-box",
+    image: "images/garden.png",
+    type: "tool",
+    title: "A cookie is a black box",
+    date: "2026-08-23",
+    maturity: "seedling",
+    tags: ["food-science", "chemistry", "mechanisms", "tool"],
+    excerpt: "Opening up a chocolate chip cookie one component at a time, down to the molecules, and finding the same handful of levers underneath other foods.",
+    page: "garden/tools/cookie-black-box.html",
+    tool: true,
+  },
+  {
     slug: "interacting-with-the-internet",
     image: "images/garden.png",
     type: "post",
@@ -432,6 +444,19 @@ const GARDEN = [
   page: "garden/tools/wcag-contrast-checker.html",
   tool: true,
 },
+  {
+    slug: "cookie-ablation",
+    image: "images/garden.png",
+    type: "post",
+    title: "Ablating a cookie",
+    date: "2026-08-21",
+    maturity: "growing",
+    featured: true,
+    tags: ["food science", "chemistry", "mechanism", "interactive", "tool"],
+    excerpt: "A cookie is a black box. Remove one ingredient at a time and watch what breaks--seven interactive panels on the handful of levers behind every recipe.",
+    page: "garden/posts/cookie-ablation.html",
+    tool: true,   // also surfaces under the "tool" filter, like the fingerprinting page
+  },
 ];
 
 // shared lookups + helpers (used by index and viewer)
