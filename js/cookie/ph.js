@@ -110,9 +110,12 @@
       "Hydrogen atoms are omitted. This is how most glucose in a solution sits at any given " +
       "moment, and in this form there is nothing for an amino group to attack.",
     open:
-      "A small proportion of the glucose is in this open form at any moment, and the two forms " +
-      "keep swapping back and forth. The oxygen at the top left is joined to its carbon by a " +
-      "double bond, which makes that carbon electron-poor and open to attack."
+      "The ring closes when an oxygen partway along the chain reaches round and bonds to the " +
+      "carbon at the end. That bond is easy to make and just as easy to break, so in water it does " +
+      "both, over and over. Any given molecule spends its time flipping between the two forms, and " +
+      "at any instant a small proportion of them are open. The oxygen at the end is joined to its " +
+      "carbon by a double bond, which pulls electrons away from that carbon and leaves it open to " +
+      "attack."
   };
 
   var REDUCING_CONSEQUENCES = {
