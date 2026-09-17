@@ -132,14 +132,14 @@ $$ \left( \frac{x+1}{x-1} \right) $$
 
 Callouts are stylized blocks used to draw attention to notes, warnings, tips, or quotes. They start with `>[!TYPE]`.
 #### Example:
-- **Syntax:**
-- ```> [!info] Quick Info```
-  ```> You can collapse callouts by adding a minus sign like `> [!info]-`.```
+**Syntax:**
+```> [!info] Quick Info```
+```> You can collapse callouts by adding a minus sign like `> [!info]-`.```
 ##### Output: 
 > [!info] Quick Info
 > You can collapse callouts by adding a minus sign like `> [!info]-`.
 
-- **Common Callout Types:**
+**Common Callout Types:**
 
 | **Type**    | **Syntax**     | **Output** + **Best Used For**          |
 | ----------- | -------------- | --------------------------------------- |
@@ -174,7 +174,7 @@ def greet(name):
 
 You can link directly to other notes in your vault using double square brackets `[[Note Title]]`. If you want the link to display different text than the note name, use a pipe `|`.
 
-*   **Syntax:** `[[Actual Note Name|Display Text]]`
+**Syntax:** `[[Actual Note Name|Display Text]]`
 #### Example:
 ```markdown
 Check out my guide on [[obsidian-tips|Obsidian Formatting]] for more details.
@@ -189,7 +189,7 @@ Footnotes are great for adding extra context, citations, or side thoughts withou
 
 - **Syntax:** Place `[^1]` inline where you want the reference number, then define `[^1]:` at the bottom of your note.
 #### Example:
-```Markdown
+```markdown
 Quantization involves trade-offs between model accuracy and size[^1].
 
 [^1]: Smaller group sizes preserve weights better but require more metadata.

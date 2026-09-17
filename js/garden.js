@@ -813,6 +813,14 @@ function parseMarkdown(src) {
   // Escape the remaining prose.
   out = out.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
+  // Ensure headings and block placeholders always have blank lines around
+  // them, so the paragraph splitter later treats them as their own chunks.
+  // (Obsidian is forgiving about missing blank lines; we match that.)
+  out = out.replace(/([^\n])\r?\n(#{1,6} )/g, "$1\n\n$2");
+  out = out.replace(/(^#{1,6} [^\n]+)\r?\n(?!\r?\n)([^\r\n])/gm, "$1\n\n$2");
+  out = out.replace(/([^\n])\r?\n(§SB\d+§)/g, "$1\n\n$2");
+  out = out.replace(/(§SB\d+§)\r?\n(?!\r?\n)([^\r\n])/g, "$1\n\n$2");
+
   // Obsidian callouts: > [!type] optional title, then > body lines.
   // Must run before the plain blockquote rule below.
   out = out.replace(
