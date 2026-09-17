@@ -68,14 +68,14 @@ const GARDEN = [
   {
     slug: "obsidian-tips",
     image: "images/garden.png",
+    type: "note",
     title: "Obsidian Formatting Tips",
     date: "2026-08-13",
     maturity: "growing",
     featured: true,
     tags: ["reference", "writing", "markdown", "latex", "obsidian"],
     excerpt: "A reference page for using Obsidian.",
-    page: "garden/notes/obsidian-tips.md",
-    tool: true,
+    md: "garden/notes/obsidian-tips.md",
   },
   {
     slug: "cookie-black-box",
