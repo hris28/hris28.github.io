@@ -1,3 +1,11 @@
+---
+title: "Obsidian Tips"
+date: 2026-08-13
+stage: growing
+tags: [tool, reference, writing, markdown, latex, obsidian]
+description: "A reference page for using Obsidian."
+---
+
 I write most of my articles here in markdown files on the platform Obsidian. As a result, I've often had to search for how to get some of the formatting I want. So I made myself a reference page to easily come back to the formatting I like to use most.
 
 ---
