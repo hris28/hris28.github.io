@@ -519,6 +519,38 @@ section { padding: 3rem 0; }
   background: var(--tag-bg); padding: 0.1rem 0.4rem; border-radius: 3px;
   color: var(--accent); text-decoration: none;
 }
+.note-view mark {
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  color: inherit; padding: 0 0.15em; border-radius: 3px;
+}
+.note-view .math-block {
+  margin: 1.25rem 0; overflow-x: auto; text-align: center;
+}
+.note-view .md-table {
+  width: 100%; margin: 1.25rem 0; border-collapse: collapse; font-size: 0.95rem;
+}
+.note-view .md-table th, .note-view .md-table td {
+  padding: 0.55rem 0.75rem; border: 1px solid var(--line); text-align: left; vertical-align: top;
+}
+.note-view .md-table th { background: var(--bg-soft); font-weight: 700; }
+.note-view .md-table tr:nth-child(even) td { background: color-mix(in srgb, var(--bg-soft) 45%, transparent); }
+.note-view .callout {
+  border-left: 3px solid var(--accent); background: var(--bg-soft);
+  padding: 0.75rem 1rem; margin: 1.25rem 0; border-radius: var(--radius);
+  font-style: normal; color: var(--ink);
+}
+.note-view .callout .callout-title {
+  font-family: var(--font-sans); font-weight: 700; font-size: 0.85rem;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent);
+  margin-bottom: 0.3rem;
+}
+.note-view .callout .callout-body > * { margin-top: 0.4rem; }
+.note-view .callout-warning, .note-view .callout-caution { border-left-color: #b8873a; }
+.note-view .callout-warning .callout-title, .note-view .callout-caution .callout-title { color: #b8873a; }
+.note-view .callout-danger, .note-view .callout-failure, .note-view .callout-error { border-left-color: #b34a4a; }
+.note-view .callout-danger .callout-title, .note-view .callout-failure .callout-title, .note-view .callout-error .callout-title { color: #b34a4a; }
+.note-view .callout-success, .note-view .callout-check, .note-view .callout-done { border-left-color: #4a8f5c; }
+.note-view .callout-success .callout-title, .note-view .callout-check .callout-title, .note-view .callout-done .callout-title { color: #4a8f5c; }
 .back-link { display: inline-block; margin-bottom: 2rem; font-size: 0.85rem; }
 
 /* Contact + footer */

@@ -9,6 +9,23 @@
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
+  <script>
+    // MathJax v3: use $..$ inline and $$..$$ block delimiters (Obsidian style).
+    // Manual typeset — garden-entry.js triggers it once the article is in the DOM.
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+        enableMenu: false
+      },
+      startup: { typeset: false }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async id="mathjax-script"></script>
   <script src="js/main.js" defer></script>
   <script src="js/garden.js" defer></script>
   <script src="js/garden-entry.js" defer></script>

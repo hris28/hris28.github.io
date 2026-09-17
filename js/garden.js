@@ -788,8 +788,63 @@ function parseMarkdown(src) {
   out = out.replace(/^\s*<p[^>]*>[\s\S]*?<\/p>[ \t]*\r?\n?/, "");
   out = out.replace(/^\s*#\s+.*\r?\n?/, "");
   out = out.replace(/^\s+/, ""); // drop any leftover leading blank lines
+
+  // Stash content that must survive later regex passes: fenced code, inline
+  // code, and LaTeX math. Each becomes a placeholder we restore at the end.
+  // B = block placeholder (skip <p> wrap), I = inline (keep <p> wrap).
+  const stash = [];
+  const putB = (html) => "§SB" + (stash.push(html) - 1) + "§";
+  const putI = (html) => "§SI" + (stash.push(html) - 1) + "§";
+  const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+  // Fenced code first so nested $ or ** inside don't get mangled.
+  out = out.replace(/```([a-zA-Z0-9_+-]*)\r?\n([\s\S]*?)```/g, (_, lang, code) =>
+    putB("<pre><code" + (lang ? ' class="language-' + lang + '"' : "") + ">" + esc(code.replace(/\r?\n$/, "")) + "</code></pre>")
+  );
+  // Inline code before math, so $..$ inside `...` stays literal (MathJax
+  // skips <code> by default).
+  out = out.replace(/`([^`\n]+)`/g, (_, code) => putI("<code>" + esc(code) + "</code>"));
+  // Display math $$..$$ (may span lines). Wrap in <div> so it renders block.
+  out = out.replace(/\$\$([\s\S]+?)\$\$/g, (_, math) => putB('<div class="math-block">$$' + math + "$$</div>"));
+  // Inline math $..$ — reject currency-like cases (digit-adjacent $) and
+  // require non-whitespace immediately after opening and before closing $.
+  out = out.replace(/(?<![\w$])\$(?!\s)([^\n$]+?)(?<!\s)\$(?![\w$])/g, (_, math) => putI("$" + math + "$"));
+
+  // Escape the remaining prose.
   out = out.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  out = out.replace(/```([\s\S]*?)```/g, (_, code) => `<pre><code>${code.trim()}</code></pre>`);
+
+  // Obsidian callouts: > [!type] optional title, then > body lines.
+  // Must run before the plain blockquote rule below.
+  out = out.replace(
+    /(?:^&gt;\s*\[!([a-zA-Z]+)\][-+]?[ \t]*(.*)\r?\n)((?:^&gt;.*(?:\r?\n|$))*)/gm,
+    (_, type, title, body) => {
+      const kind = type.toLowerCase();
+      const label = title.trim() || (kind.charAt(0).toUpperCase() + kind.slice(1));
+      const inner = body
+        .split(/\r?\n/)
+        .map((l) => l.replace(/^&gt;\s?/, ""))
+        .filter((l) => l.length > 0)
+        .join("<br>");
+      return '<blockquote class="callout callout-' + kind + '"><div class="callout-title">' + label + '</div><div class="callout-body">' + inner + "</div></blockquote>";
+    }
+  );
+
+  // Pipe tables: header row, separator row (---|:--:|--- style), body rows.
+  out = out.replace(
+    /(?:^\|.+\|[ \t]*\r?\n)(?:^\|[\s\-:|]+\|[ \t]*\r?\n)(?:^\|.+\|[ \t]*(?:\r?\n|$))*/gm,
+    (block) => {
+      const rows = block.trim().split(/\r?\n/);
+      const splitRow = (r) => r.replace(/^\||\|$/g, "").split("|").map((c) => c.trim());
+      const header = splitRow(rows[0]);
+      const body = rows.slice(2).map(splitRow);
+      const thead = "<thead><tr>" + header.map((c) => "<th>" + c + "</th>").join("") + "</tr></thead>";
+      const tbody = body.length
+        ? "<tbody>" + body.map((r) => "<tr>" + r.map((c) => "<td>" + c + "</td>").join("") + "</tr>").join("") + "</tbody>"
+        : "";
+      return '<table class="md-table">' + thead + tbody + "</table>";
+    }
+  );
+
   out = out.replace(/^###### (.+)$/gm, "<h6>$1</h6>");
   out = out.replace(/^##### (.+)$/gm, "<h5>$1</h5>");
   out = out.replace(/^#### (.+)$/gm, "<h4>$1</h4>");
@@ -815,14 +870,21 @@ function parseMarkdown(src) {
     const ext = /^https?:/i.test(url) ? ' target="_blank" rel="noopener"' : "";
     return `<a href="${url}"${ext}>${text}</a>`;
   });
-  out = out.replace(/`([^`]+)`/g, "<code>$1</code>");
+  // Obsidian highlight ==text==
+  out = out.replace(/==([^=\n]+)==/g, "<mark>$1</mark>");
   out = out.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
   out = out.replace(/\*([^*]+)\*/g, "<em>$1</em>");
+
   out = out.split(/\n{2,}/).map((chunk) => {
-    if (/^\s*<(h[1-6]|ul|ol|pre|blockquote|hr)/.test(chunk)) return chunk;
+    if (/^\s*<(h[1-6]|ul|ol|pre|blockquote|hr|table|div)/.test(chunk)) return chunk;
+    // A chunk that is only a block-level placeholder shouldn't get <p> wrap.
+    if (/^\s*§SB\d+§\s*$/.test(chunk)) return chunk;
     // Blank lines = new paragraphs; single newlines = hard line breaks
     // (matches Obsidian's default reading view, important for song lyrics).
     return `<p>${chunk.replace(/\n/g, "<br>")}</p>`;
   }).join("\n");
+
+  // Restore stashed content last so nothing else touches it.
+  out = out.replace(/§S[BI](\d+)§/g, (_, i) => stash[parseInt(i, 10)]);
   return out;
 }

@@ -77,6 +77,21 @@ async function initGardenEntry() {
   }
 
   root.innerHTML = head + `<div class="note-view">${body}</div>`;
+
+  // If MathJax is loaded (garden-entry.html includes it), typeset any $..$
+  // and $$..$$ formulas in the freshly-rendered article. Safe no-op elsewhere.
+  if (window.MathJax && window.MathJax.typesetPromise) {
+    window.MathJax.typesetPromise([root]).catch(() => {});
+  } else if (window.MathJax) {
+    // Script still loading — retry once startup finishes.
+    const t = setInterval(() => {
+      if (window.MathJax.typesetPromise) {
+        clearInterval(t);
+        window.MathJax.typesetPromise([root]).catch(() => {});
+      }
+    }, 100);
+    setTimeout(() => clearInterval(t), 5000);
+  }
 }
 
 document.addEventListener("DOMContentLoaded", initGardenEntry);
