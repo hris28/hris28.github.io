@@ -797,6 +797,30 @@ function parseMarkdown(src) {
   const putI = (html) => "§SI" + (stash.push(html) - 1) + "§";
   const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
+  // Obsidian callouts BEFORE stashing/escaping: extract "> [!type] title" +
+  // "> body" lines, strip the "> " prefix, then recursively run the cleaned
+  // body through the full markdown pipeline so headings, fenced code, math,
+  // bold, tables — everything — actually renders inside the callout.
+  out = out.replace(
+    /(?:^>\s*\[!([a-zA-Z]+)\][-+]?[ \t]*(.*)\r?\n)((?:^>.*(?:\r?\n|$))*)/gm,
+    (_, type, title, body) => {
+      const kind = type.toLowerCase();
+      const label = title.trim() || (kind.charAt(0).toUpperCase() + kind.slice(1));
+      const clean = body
+        .split(/\r?\n/)
+        .map((l) => l.replace(/^>\s?/, ""))
+        .join("\n")
+        .replace(/\s+$/, "");
+      const bodyHtml = clean ? parseMarkdown(clean) : "";
+      return putB(
+        '<blockquote class="callout callout-' + kind + '">' +
+        '<div class="callout-title">' + esc(label) + '</div>' +
+        '<div class="callout-body">' + bodyHtml + '</div>' +
+        '</blockquote>'
+      );
+    }
+  );
+
   // Fenced code first so nested $ or ** inside don't get mangled.
   out = out.replace(/```([a-zA-Z0-9_+-]*)\r?\n([\s\S]*?)```/g, (_, lang, code) =>
     putB("<pre><code" + (lang ? ' class="language-' + lang + '"' : "") + ">" + esc(code.replace(/\r?\n$/, "")) + "</code></pre>")
@@ -820,22 +844,6 @@ function parseMarkdown(src) {
   out = out.replace(/(^#{1,6} [^\n]+)\r?\n(?!\r?\n)([^\r\n])/gm, "$1\n\n$2");
   out = out.replace(/([^\n])\r?\n(§SB\d+§)/g, "$1\n\n$2");
   out = out.replace(/(§SB\d+§)\r?\n(?!\r?\n)([^\r\n])/g, "$1\n\n$2");
-
-  // Obsidian callouts: > [!type] optional title, then > body lines.
-  // Must run before the plain blockquote rule below.
-  out = out.replace(
-    /(?:^&gt;\s*\[!([a-zA-Z]+)\][-+]?[ \t]*(.*)\r?\n)((?:^&gt;.*(?:\r?\n|$))*)/gm,
-    (_, type, title, body) => {
-      const kind = type.toLowerCase();
-      const label = title.trim() || (kind.charAt(0).toUpperCase() + kind.slice(1));
-      const inner = body
-        .split(/\r?\n/)
-        .map((l) => l.replace(/^&gt;\s?/, ""))
-        .filter((l) => l.length > 0)
-        .join("<br>");
-      return '<blockquote class="callout callout-' + kind + '"><div class="callout-title">' + label + '</div><div class="callout-body">' + inner + "</div></blockquote>";
-    }
-  );
 
   // Pipe tables: header row, separator row (---|:--:|--- style), body rows.
   out = out.replace(
