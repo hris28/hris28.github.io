@@ -1,0 +1,2384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Opening a Black Box: Cookie Chemistry · Garden · Hrishika Roychoudhury</title>
+  <meta name="description" content="Breaking a chocolate chip cookie down into its components, and what each one does at the scale of molecules." />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/cookie-lab.css" />
+  <script src="../../js/main.js" defer></script>
+  <script src="../../js/garden.js" defer></script>
+  <script src="../../js/garden-graph.js" defer></script>
+  <script src="../../js/cookie/mol3d.js" defer></script>
+  <script src="../../js/cookie/water.js" defer></script>
+  <script src="../../js/cookie/fat.js" defer></script>
+  <script src="../../js/cookie/butter.js" defer></script>
+  <script src="../../js/cookie/sugar.js" defer></script>
+  <script src="../../js/cookie/flour.js" defer></script>
+  <script src="../../js/cookie/egg.js" defer></script>
+  <script src="../../js/cookie/leavening.js" defer></script>
+  <script src="../../js/cookie/ph.js" defer></script>
+</head>
+<body class="garden-page">
+
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <nav class="nav">
+    <a href="../../index.html" class="nav-brand">Hrishika Roychoudhury<span class="dot">•</span></a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <ul class="nav-links">
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../../about.html">About</a></li>
+      <li><a href="../../projects.html">Projects</a></li>
+      <li><a href="../../resume.html">Résumé</a></li>
+      <li><a href="../../garden.html">Garden</a></li>
+      <li><a href="../../interests.html">Interests</a></li>
+      <li>
+        <button class="theme-btn" aria-label="Toggle theme" onclick="toggleTheme()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <section>
+    <div class="wrap-narrow">
+      <a class="back-link" href="../../garden.html">← Back to the garden</a>
+      <p class="eyebrow">tool · 🌱 <span class="stage-seedling">seedling</span></p>
+      <h1 class="note-h1">Opening a Black Box: Cookie Chemistry</h1>
+      <p class="note-meta" style="margin: 0.4rem 0 1.75rem;">August 2026 · food science, chemistry, mechanisms, tool</p>
+
+      <div class="note-view">
+
+        <p>
+          Here is a cookie. It was baked from a few simple ingredients, and putting them together
+          produced a fully formed cookie. This cookie is a black box. We can understand more about
+          the black box by breaking down its components.
+        </p>
+        <p>
+          Cookie texture is controlled by the interaction between ingredients, ratios, temperature,
+          and baking technique.
+        </p>
+
+        <nav class="ck-jump" aria-label="Jump to a section">
+          <ul>
+            <li><a href="#water">Water</a></li>
+            <li><a href="#fat">Fat</a></li>
+            <li><a href="#sugar">Sugar</a></li>
+            <li><a href="#flour">Flour</a></li>
+            <li><a href="#egg">Egg</a></li>
+            <li><a href="#ph">Baking soda</a></li>
+            </ul>
+        </nav>
+
+        <!-- ============================================================ -->
+        <!-- 1. WATER                                                      -->
+        <!-- ============================================================ -->
+
+        <section class="cl-section" id="water">
+          <h2><span class="cl-num">01</span> Water</h2>
+
+          <h3>Mechanism</h3>
+          <p>
+            A water molecule has an uneven charge distribution. The oxygen is relatively
+            electron-rich and the hydrogen atoms are relatively electron-poor. This
+            <strong>polarity</strong> lets water form <strong>hydrogen bonds</strong> with other
+            polar or charged groups. Water is therefore the molecule that allows ingredients to
+            find, hydrate, dissolve, swell, unfold, and react with one another.
+          </p>
+
+          <div class="cl-inline" id="cl-water-molecule">
+            <ul class="cl-legend">
+              <li><span class="cl-key" data-el="O"></span>oxygen</li>
+              <li><span class="cl-key" data-el="H"></span>hydrogen</li>
+              <li><span class="cl-key is-bond"></span>covalent bond</li>
+              <li><span class="cl-key is-hbond"></span>hydrogen bond</li>
+            </ul>
+            <div class="cl-fig is-3d"></div>
+            <div class="cl-presets" role="group" aria-label="Choose a view of water">
+              <button type="button" class="cl-preset" data-view="single" aria-pressed="true">one molecule</button>
+              <button type="button" class="cl-preset" data-view="pair" aria-pressed="false">a hydrogen bond</button>
+              <button type="button" class="cl-preset" data-view="network" aria-pressed="false">four neighbours</button>
+            </div>
+            <p class="cl-caption"></p>
+            <p class="cl-consequence"></p>
+          </div>
+
+          <div class="cl-ladder">
+            <details class="cl-rung">
+              <summary>What is a hydrogen bond?</summary>
+              <p>
+                An attraction between a hydrogen atom that is already bonded to an electron-hungry
+                atom such as oxygen, and a second electron-rich atom nearby. The hydrogen carries a
+                partial positive charge, the second atom carries a partial negative charge, and the
+                two are pulled together because opposite charges attract. It is far weaker than the bonds holding a molecule
+                together, which is why hydrogen bonds form and break constantly at room temperature.
+              </p>
+            </details>
+            <details class="cl-rung">
+              <summary>Why is the oxygen electron-rich and the hydrogen electron-poor?</summary>
+              <p>
+                Oxygen pulls harder on shared electrons than hydrogen does. In each O–H bond the
+                pair of shared electrons spends more of its time near the oxygen, which leaves the
+                oxygen with a partial negative charge and each hydrogen with a partial positive
+                charge. These are partial charges, written δ− and δ+, not full ionic charges. The
+                molecule as a whole is electrically neutral.
+              </p>
+            </details>
+            <details class="cl-rung">
+              <summary>What does polar mean?</summary>
+              <p>
+                A molecule is polar when its charge is distributed unevenly, so that one region is
+                slightly negative and another slightly positive. Polar molecules attract other polar
+                molecules and dissolve polar or charged substances. Sugar and salt dissolve in water
+                for this reason, and fat does not.
+              </p>
+            </details>
+          </div>
+
+          <h3>Outcome</h3>
+          <p>
+            Water hydrates flour proteins, enters starch granules, dissolves sugars and salts, and
+            moves as steam. Changing water availability changes almost every structural process in
+            dough.
+          </p>
+
+          <h3>Where the water sits</h3>
+          <p>
+            Total water and available water are two different quantities. When water is strongly
+            associated with dissolved sugar, salt, protein, or starch, that water is less available
+            to act like bulk liquid water. Each location below holds water in a different way, and
+            water held in each one can do different things.
+          </p>
+
+          <div class="cl-inline" id="cl-hydration">
+            <ul class="cl-legend">
+              <li><span class="cl-key" data-el="O"></span>oxygen</li>
+              <li><span class="cl-key" data-el="C"></span>carbon</li>
+              <li><span class="cl-key" data-el="H"></span>hydrogen</li>
+              <li><span class="cl-key" data-el="R"></span>rest of the molecule</li>
+              <li><span class="cl-key is-hbond"></span>hydrogen bond</li>
+            </ul>
+            <div class="cl-fig is-3d"></div>
+            <div class="cl-presets" role="group" aria-label="Choose what the water is gathering around">
+              <button type="button" class="cl-preset" data-view="sugar" aria-pressed="true">a sugar hydroxyl</button>
+              <button type="button" class="cl-preset" data-view="protein" aria-pressed="false">a protein's charged region</button>
+              <button type="button" class="cl-preset" data-view="starch" aria-pressed="false">a starch granule surface</button>
+            </div>
+            <p class="cl-caption"></p>
+            <p class="cl-consequence"></p>
+          </div>
+
+          <div class="cl-ladder">
+            <details class="cl-rung">
+              <summary>What is a hydroxyl group?</summary>
+              <p>
+                An oxygen bonded to a hydrogen, written –OH, hanging off a larger molecule. The
+                oxygen is electron-rich and the hydrogen electron-poor, so a hydroxyl group forms
+                hydrogen bonds with water the same way one water molecule does with another. A single
+                sucrose molecule carries eight of them, which is why sugar holds water so effectively.
+              </p>
+            </details>
+            <details class="cl-rung">
+              <summary>What does hydration actually mean?</summary>
+              <p>
+                Water molecules surrounding a dissolved or exposed group and forming hydrogen bonds
+                with it. The water arranges itself into a shell around that group. Water in such a
+                shell is oriented and held rather than moving freely, which is why hydration removes
+                water from the pool available for anything else.
+              </p>
+            </details>
+            <details class="cl-rung">
+              <summary>What is water activity?</summary>
+              <p>
+                A measure of how free the water in a food is, rather than how much of it there is. It
+                runs from 0 to 1, where pure water is 1. Water bound to sugar, salt, protein, or
+                starch lowers the value. Two foods with the same water content can have different
+                water activity, and it is water activity rather than water content that predicts
+                reaction rates, microbial growth, and how the food will exchange moisture with the
+                air around it.<sup class="cite"><a href="#src-pubmed-wa">[3]</a></sup>
+              </p>
+            </details>
+          </div>
+
+          <div class="cl-table">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Where the water is</th>
+                  <th scope="col">What holds it there</th>
+                  <th scope="col">What that water can still do</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Free in the dough</td>
+                  <td>Nothing. It moves as bulk liquid.</td>
+                  <td>
+                    Dissolves sugar, thins the liquid phase, carries dissolved material, and
+                    evaporates readily in the oven.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Held by dissolved sugar</td>
+                  <td>
+                    Hydrogen bonds to the many hydroxyl groups, written –OH, on each sugar molecule.
+                  </td>
+                  <td>
+                    Very little. It is held in a shell around the sugar rather than behaving as bulk
+                    liquid.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Held by dissolved salt</td>
+                  <td>Attraction to the sodium and chloride ions the salt separates into.</td>
+                  <td>Very little, for the same reason.</td>
+                </tr>
+                <tr>
+                  <td>Hydrating flour protein</td>
+                  <td>
+                    Hydrogen bonds to the polar and charged regions of the glutenin and gliadin
+                    chains.
+                  </td>
+                  <td>
+                    Lets those proteins unfold and connect to each other. It is doing structural work
+                    rather than acting as a solvent.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Inside starch granules</td>
+                  <td>Absorbed into the granule, which swells as it takes water up.</td>
+                  <td>
+                    Contributes to gelatinization where there is enough heat. It is inside the
+                    granule rather than in the surrounding liquid.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Two doughs, the same total water, different results</h3>
+          <p>
+            Two doughs can contain similar total water and still flow, brown, and stale differently,
+            because their water is distributed differently between the locations above. The three
+            outcomes come from three different properties of that distribution.
+          </p>
+
+          <figure class="cl-static">
+            <ul class="cl-legend">
+              <li><span class="cl-key" style="background: var(--cl-w-free);"></span>free 15%</li>
+              <li><span class="cl-key" style="background: var(--cl-w-sugar);"></span>held by sugar 45%</li>
+              <li><span class="cl-key" style="background: var(--cl-w-salt);"></span>salt 5%</li>
+              <li><span class="cl-key" style="background: var(--cl-w-protein);"></span>hydrating protein 15%</li>
+              <li><span class="cl-key" style="background: var(--cl-w-starch);"></span>inside starch 20%</li>
+            </ul>
+            <div class="cl-budget-bar">
+              <div class="cl-budget-seg" style="left: 0;   width: 15%; background: var(--cl-w-free);"></div>
+              <div class="cl-budget-seg" style="left: 15%; width: 45%; background: var(--cl-w-sugar);"></div>
+              <div class="cl-budget-seg" style="left: 60%; width: 5%;  background: var(--cl-w-salt);"></div>
+              <div class="cl-budget-seg" style="left: 65%; width: 15%; background: var(--cl-w-protein);"></div>
+              <div class="cl-budget-seg" style="left: 80%; width: 20%; background: var(--cl-w-starch);"></div>
+            </div>
+            <figcaption class="cl-caption">
+              Roughly how the water in a cookie dough divides up. Only the first band is free to
+              dissolve sugar, thin the dough, and evaporate quickly. The proportions are
+              illustrative rather than measured, and the point is that most of the water in a cookie
+              dough is already spoken for.
+            </figcaption>
+          </figure>
+
+          <h4>Flow</h4>
+          <p>
+            Flow depends on free water. Free water dissolves sugar, and the resulting solution is
+            what thins the liquid phase of the dough and lets it spread. Water bound in a sugar
+            hydration shell, locked to salt ions, hydrating protein, or absorbed inside a starch
+            granule is not doing this. A dough with more of its water held in those places behaves as
+            a stiffer dough than its total water content suggests, and spreads less.
+          </p>
+
+          <h4>Browning</h4>
+          <p>
+            Browning depends on how readily water leaves the surface. While water is evaporating from
+            a surface, the incoming heat is being spent on that evaporation rather than on raising
+            the temperature, so the surface stays near the boiling point of water. Browning reactions
+            run slowly there. Once the local water has gone, the surface temperature climbs and
+            browning accelerates. Free water evaporates readily, and water bound to sugar or held
+            inside starch granules does not, so a dough holding more of its water in bound form dries
+            its surface sooner and browns sooner.
+          </p>
+
+          <h4>Staling</h4>
+          <p>
+            Staling depends on how much water stays in the cookie after baking and how much it
+            exchanges with the air. This is covered below, because it is a property of the cooled
+            cookie rather than of the dough.
+          </p>
+
+          <h3>Moisture and softness</h3>
+          <p>
+            Moisture determines how long cookies stay soft after baking. Sources of moisture in a
+            cookie dough include brown sugar, eggs, butter, and additions such as honey or syrup. The
+            more moisture a dough holds, the softer and chewier the
+            cookie.<sup class="cite"><a href="#src-fw1">[1]</a></sup>
+          </p>
+          <p>
+            Cookies often feel underbaked when they come out of the oven and then set as they cool.
+            Pulling them slightly early is one of the simplest ways to keep them
+            soft.<sup class="cite"><a href="#src-fw1">[1]</a></sup>
+          </p>
+          <aside class="cl-tip">
+            <span class="cl-tip-label">Kitchen tip · storage</span>
+            <p>
+              Put a slice of white bread in the container with soft cookies. The bread provides
+              moisture, which creates a humid environment inside the container, and the cookies
+              absorb that excess moisture rather than drying out and going
+              hard.<sup class="cite"><a href="#src-ka-storage">[4]</a></sup> A soaked terra cotta
+              stone does the same job.<sup class="cite"><a href="#src-ka-storage">[4]</a></sup>
+            </p>
+
+            <div class="cl-ladder">
+            <details class="cl-rung">
+              <summary>Where does the bread's moisture come from?</summary>
+              <p>
+                From the crumb. A loaf of bread is baked at much higher hydration than a cookie, and
+                its interior never dries out the way a cookie's does, because water leaving the
+                crumb has to travel out through the crust. A fresh bread crumb is roughly a third to
+                two fifths water by weight, held in its starch and gluten and as liquid in the gas
+                cells. Sealed in a container, some of that water evaporates into the air until the
+                air is humid enough to stop the net loss, and the cookies take up water from that
+                humid air.
+              </p>
+            </details>
+            <details class="cl-rung">
+              <summary>Does the bread get hard in the process?</summary>
+              <p>
+                Yes. The container reaches a balance, and it reaches it by moving water from the
+                thing that has more available water to the thing that has less. The bread goes stale
+                because it is the one giving water up. This also runs in reverse, which is why a
+                crisp cookie stored beside a soft one goes limp.
+              </p>
+            </details>
+            </div>
+          </aside>
+
+          <h3>What moisture does after baking</h3>
+          <p>
+            A cookie is partly a food polymer system. A <strong>polymer</strong> is a large molecule
+            built from repeated smaller units. Starch is a polymer because it consists of many
+            glucose units joined together, and proteins are polymers because they consist of amino
+            acids joined together.
+          </p>
+
+          <figure class="cl-static">
+            <div class="cl-fig">
+              <svg viewBox="0 0 430 186" role="img" aria-label="Two polymer chains compared. Starch is a chain of identical glucose units. A protein is a chain drawn from twenty different amino acids arranged in a specific order.">
+                <text x="20" y="22" font-family="var(--font-mono)" font-size="12" letter-spacing="1.2" fill="var(--accent)">STARCH</text>
+                <text x="20" y="40" font-family="var(--font-sans)" font-size="13" fill="var(--ink-soft)">one unit, repeated: glucose</text>
+
+                <line x1="45" y1="76" x2="385" y2="76" stroke="var(--cl-bond)" stroke-width="4" />
+                <g fill="var(--cl-chain-starch)" stroke="var(--cl-atom-stroke)" stroke-width="1.5">
+                  <polygon points="60,76 52.5,89 37.5,89 30,76 37.5,63 52.5,63" />
+                  <polygon points="128,76 120.5,89 105.5,89 98,76 105.5,63 120.5,63" />
+                  <polygon points="196,76 188.5,89 173.5,89 166,76 173.5,63 188.5,63" />
+                  <polygon points="264,76 256.5,89 241.5,89 234,76 241.5,63 256.5,63" />
+                  <polygon points="332,76 324.5,89 309.5,89 302,76 309.5,63 324.5,63" />
+                  <polygon points="400,76 392.5,89 377.5,89 370,76 377.5,63 392.5,63" />
+                </g>
+
+                <text x="20" y="128" font-family="var(--font-mono)" font-size="12" letter-spacing="1.2" fill="var(--accent)">PROTEIN</text>
+                <text x="20" y="146" font-family="var(--font-sans)" font-size="13" fill="var(--ink-soft)">twenty different units, in a set order</text>
+
+                <line x1="45" y1="172" x2="385" y2="172" stroke="var(--cl-bond)" stroke-width="4" />
+                <g stroke="var(--cl-atom-stroke)" stroke-width="1.5">
+                  <circle cx="45" cy="172" r="13" fill="var(--cl-w-sugar)" />
+                  <circle cx="113" cy="172" r="13" fill="var(--cl-w-protein)" />
+                  <circle cx="181" cy="172" r="13" fill="var(--cl-atom-n)" />
+                  <circle cx="249" cy="172" r="13" fill="var(--cl-w-protein)" />
+                  <circle cx="317" cy="172" r="13" fill="var(--cl-atom-o)" />
+                  <circle cx="385" cy="172" r="13" fill="var(--cl-w-salt)" />
+                </g>
+                <g font-family="var(--font-mono)" font-size="12" text-anchor="middle" fill="var(--cl-atom-ink)">
+                  <text x="45" y="177">A</text>
+                  <text x="113" y="177">G</text>
+                  <text x="181" y="177">S</text>
+                  <text x="249" y="177">G</text>
+                  <text x="317" y="177">E</text>
+                  <text x="385" y="177">L</text>
+                </g>
+              </svg>
+            </div>
+            <figcaption class="cl-caption">
+              Both are long chains of repeating units, which is what makes them polymers. The
+              difference is that every link in a starch chain is the same molecule, while a protein
+              chain is drawn from twenty different amino acids in an order that is fixed for that
+              protein. Starch therefore does bulk work such as absorbing water and thickening, and
+              protein does specific work such as folding into a shape and linking to other chains at
+              particular points. The hexagons are the same glucose rings shown in the starch granule
+              view above.
+            </figcaption>
+          </figure>
+
+          <p>
+            After baking and cooling, a low-moisture cookie can be in a <strong>glassy</strong>
+            state. Glassy does not mean that it is literally window glass. It means the molecules are
+            in a rigid, low-mobility arrangement, and the material breaks rather than slowly
+            reshaping.
+          </p>
+
+          <div class="cl-ladder">
+            <details class="cl-rung">
+              <summary>What is the glass transition?</summary>
+              <p>
+                The temperature at which a material changes between a rigid, low-mobility state and a
+                softer, higher-mobility state. It is not melting, because nothing becomes liquid and
+                there is no sharp point at which it happens. The molecules simply gain enough freedom
+                to move past one another slowly instead of holding fixed positions.
+              </p>
+            </details>
+            <details class="cl-rung">
+              <summary>Why does adding water lower the temperature at which this happens?</summary>
+              <p>
+                The polymer chains in the cookie, meaning the starch and the protein, are held in
+                place partly by hydrogen bonds to each other. Water molecules are small enough to fit
+                between them and bond to each chain separately. Those chains are then bonded to water
+                rather than directly to one another, and they can slide more easily. Less heat is
+                needed to reach the same mobility, so the transition happens at a lower temperature.
+              </p>
+            </details>
+          </div>
+
+          <p>
+            Water acts as a <strong>plasticizer</strong>, meaning a small molecule that increases
+            molecular mobility in a material. When a crisp cookie absorbs water from humid air, water
+            molecules enter the sugar, starch, and protein matrix and allow molecular segments to
+            move more easily. The cookie passes toward a softer, rubberier
+            state.<sup class="cite"><a href="#src-pmc-pectin">[5]</a></sup>
+          </p>
+
+          <div class="kit" id="cl-glass">
+            <p class="kit-title">⚙ moisture, mobility, and texture</p>
+            <ul class="cl-legend">
+              <li><span class="cl-key" style="background: var(--cl-chain-starch);"></span>starch chain</li>
+              <li><span class="cl-key" style="background: var(--cl-chain-protein);"></span>protein chain</li>
+              <li><span class="cl-key" style="background: var(--cl-atom-o);"></span>water molecule</li>
+            </ul>
+            <div class="cl-fig">
+              <svg viewBox="0 0 480 220" role="img" aria-label="Starch and protein chains in a cooled cookie, with water molecules between them. Raising the moisture pushes the chains apart and lets them move."></svg>
+            </div>
+            <div class="cl-control">
+              <label for="gl-moisture">
+                Moisture in the cooled cookie
+                <span class="cl-value" data-value="moisture"></span>
+              </label>
+              <input type="range" id="gl-moisture" data-slider="moisture" min="0" max="100" value="16" />
+            </div>
+            <div class="cl-readout" aria-live="polite"></div>
+            <p class="cl-caption">
+              Individual hydrogen bonds are not drawn here, because at this scale there are far too
+              many of them to show.
+            </p>
+          </div>
+
+          <div class="cl-table">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Condition</th>
+                  <th scope="col">Molecular mobility</th>
+                  <th scope="col">Macroscopic texture</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Low moisture, below the glass transition</td>
+                  <td>Low</td>
+                  <td>Crisp, brittle, snapping</td>
+                </tr>
+                <tr>
+                  <td>More moisture, above the glass transition</td>
+                  <td>Higher</td>
+                  <td>Soft, flexible, chewy</td>
+                </tr>
+                <tr>
+                  <td>Very high moisture</td>
+                  <td>Much higher</td>
+                  <td>Sticky, cake-like, or stale-feeling depending on structure</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            One condition produces three different complaints, depending on what the cookie was
+            built to be.
+          </p>
+          <p>
+            <strong>Sticky</strong> is a surface effect. Sugar at the surface takes up water from the
+            air and dissolves into it, leaving a syrupy layer that clings to fingers and to other
+            cookies. Nothing about the interior has to change for this to happen.
+          </p>
+          <p>
+            <strong>Cake-like</strong> describes the interior of a cookie that set with gas cells in
+            it. At high mobility the walls around those cells stay soft and yielding, so the cookie
+            compresses under the teeth rather than fracturing.
+          </p>
+          <p>
+            <strong>Stale-feeling</strong> is the confusing one, because staleness runs in opposite
+            directions for different products. A cookie built to be crisp has gone stale when it has
+            taken on water and turned limp. A cookie built to be soft has gone stale when it has lost
+            water and turned hard. Both are the same complaint, which is that the cookie no longer
+            has the texture it was made to have, and the same moisture level produces one or the
+            other depending on which side of it the cookie started.
+          </p>
+
+          <p>
+            This is why a crisp cookie stored in humid air softens even though it has not been
+            reheated. Food-polymer research connects moisture content and water activity to glass
+            transition and texture changes.<sup class="cite"><a href="#src-pmc-glass">[2]</a></sup>
+          </p>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- 2. FAT                                                        -->
+        <!-- ============================================================ -->
+
+        <section class="cl-section" id="fat">
+          <h2><span class="cl-num">02</span> Fat</h2>
+
+          <h3>In the kitchen</h3>
+          <ul class="cl-rules">
+            <li>
+              <strong>Want a thicker cookie?</strong> Start with colder dough and a fat that stays
+              solid for longer. <a class="cl-why" href="#cl-crystals">why</a>
+            </li>
+            <li>
+              <strong>Want more spread and a chewier cookie?</strong> Melt the butter, and chill the
+              dough before baking so that it does not spread too far.
+              <a class="cl-why" href="#cl-crystals">why</a>
+            </li>
+            <li>
+              <strong>Want a more tender cookie?</strong> Use more fat.
+              <a class="cl-why" href="#fat-lubrication">why</a>
+            </li>
+            <li>
+              <strong>Want flaky layers instead of a cookie?</strong> Leave the fat in visible cold
+              pieces rather than mixing it through.
+              <a class="cl-why" href="#fat-rules">why</a><sup class="cite"><a href="#src-fw1">[1]</a></sup>
+            </li>
+          </ul>
+
+          <h3>In the dough</h3>
+          <p>
+            Cold or room-temperature butter contains solid fat crystals embedded in liquid fat. Those
+            crystals contribute rigidity. When heated, enough crystals melt that the fat phase becomes
+            much less structurally supportive, and the dough's resistance to flow falls. Gravity and
+            the dough's own weight can then flatten it, before proteins and starch set a rigid
+            network.
+          </p>
+          <p>
+            Step by step, from the tray to the oven:
+          </p>
+          <ol>
+            <li>At room temperature, butter is partly solid because some triglycerides are packed
+              into fat crystals.</li>
+            <li>Those crystals form a weak solid-fat network that helps the dough hold its initial
+              shape.</li>
+            <li>As temperature rises, a growing fraction of triglycerides becomes liquid.</li>
+            <li>The crystal network loses connectivity, so it can no longer resist deformation as
+              effectively.</li>
+            <li>At the same time, the liquid fat occupies interfaces between flour, sugar, and other
+              particles.</li>
+            <li>The dough's viscosity and <strong>yield stress</strong> decrease, so less force is
+              needed for it to flow.</li>
+            <li>Before flour proteins, egg proteins, and starch create a heat-set structure, gravity
+              flattens the dough.</li>
+            <li>The cookie spreads.</li>
+          </ol>
+          <p>
+            Melting reduces resistance. Gravity and internal gas expansion then reshape the dough.
+          </p>
+
+          <div class="cl-ladder">
+            <details class="cl-rung">
+              <summary>What is a yield stress?</summary>
+              <p>
+                The minimum force a material needs before it will flow at all. Below that force it
+                behaves as a solid, and above it, as a thick liquid. Ketchup is the everyday case. It
+                sits in the bottle refusing to move until a shake pushes it past its yield stress.
+                Cookie dough sitting on a tray without spreading is doing the same thing.
+              </p>
+            </details>
+            <details class="cl-rung">
+              <summary>Why does losing connectivity matter more than losing crystals?</summary>
+              <p>
+                A scattering of separate crystals cannot resist a force, while a connected scaffold
+                can. Force is carried through a material by being passed from one part to the next,
+                so an unbroken path from one side to the other is what a load travels along. Once
+                enough crystals have melted that no such path remains, the rest are simply floating
+                in liquid fat, and the fat stops behaving as a solid even though a good deal of
+                crystal is still there.
+              </p>
+            </details>
+          </div>
+
+          <div class="kit" id="cl-crystals">
+            <p class="kit-title">⚙ butter's solid fat network</p>
+            <ul class="cl-legend">
+              <li><span class="cl-key" style="background: var(--cl-crystal);"></span>solid fat crystal</li>
+              <li><span class="cl-key" style="background: var(--cl-fat-wash); border-color: var(--cl-fat);"></span>liquid fat</li>
+              <li><span class="cl-key is-bond" style="border-top-color: var(--cl-crystal-link);"></span>crystals touching</li>
+            </ul>
+            <div class="cl-fig">
+              <svg viewBox="0 0 460 160" data-crystals role="img" aria-label="Fat crystals inside butter. Crystals close enough to touch are joined by lines. As the temperature rises, crystals disappear and the connections between them break."></svg>
+            </div>
+            <div class="cl-fig">
+              <svg viewBox="0 0 460 130" data-dough role="img" aria-label="The dough on the baking tray, seen from the side. It holds a domed shape while the fat network is connected and flattens once the network breaks."></svg>
+            </div>
+            <div class="cl-control">
+              <label for="fat-temp">
+                Temperature of the butter
+                <span class="cl-value" data-value="temp"></span>
+              </label>
+              <input type="range" id="fat-temp" data-slider="temp" min="4" max="38" value="20" />
+            </div>
+            <div class="cl-readout" aria-live="polite"></div>
+            <p class="cl-caption">
+              The crystals are drawn far larger and far fewer than they are. What is real is the
+              test being run on them: crystals near enough to touch are joined, and the network
+              counts as intact only when one connected group reaches all the way across. Solid fat
+              content falls with temperature along roughly the curve measured for butter, from about
+              half solid near refrigerator temperature to none by the time it has fully melted.
+            </p>
+          </div>
+
+          <h3>In the molecules</h3>
+          <p>
+            Most edible fats are <strong>triglycerides</strong>, meaning a glycerol backbone joined to
+            three long hydrocarbon-rich fatty acid chains.
+          </p>
+
+          <div class="cl-inline" id="cl-triglyceride">
+            <ul class="cl-legend">
+              <li><span class="cl-key" data-el="C"></span>carbon</li>
+              <li><span class="cl-key" data-el="O"></span>oxygen</li>
+              <li><span class="cl-key is-bond"></span>covalent bond</li>
+            </ul>
+            <div class="cl-fig is-3d"></div>
+            <div class="cl-presets" role="group" aria-label="Choose a view">
+              <button type="button" class="cl-preset" data-view="molecule" aria-pressed="true">a triglyceride</button>
+              <button type="button" class="cl-preset" data-view="chains" aria-pressed="false">straight and bent chains</button>
+            </div>
+            <p class="cl-caption"></p>
+            <p class="cl-consequence"></p>
+          </div>
+
+          <p>
+            Butter's fat is not one molecule but a mixture of many triglycerides, and their chains
+            differ in length and in whether they carry double bonds. That mixture is why butter is
+            partly solid and partly liquid at the same temperature, and why it softens across a range
+            rather than melting all at once at a single point.
+          </p>
+
+          <div class="cl-ladder">
+            <details class="cl-rung">
+              <summary>Why does chain shape decide the melting point?</summary>
+              <p>
+                Melting means giving molecules enough energy to break away from their neighbours. A
+                straight chain lies flush against the chains beside it along its entire length, so it
+                is held by a great many small attractions at once and more energy is needed to pull
+                it free. A chain with a permanent bend cannot lie flush however it is arranged, so
+                fewer attractions hold it and less energy frees it. Contact area sets how much heat
+                it takes.
+              </p>
+            </details>
+            <details class="cl-rung">
+              <summary>What does saturated mean?</summary>
+              <p>
+                That every carbon in the chain is holding as many hydrogen atoms as it can, with only
+                single bonds between the carbons. A double bond between two carbons means each of
+                them is holding one hydrogen fewer, which is what unsaturated describes. The reason
+                the distinction matters here is geometric rather than nutritional: a single bond can
+                rotate freely, so the chain can straighten out, while a cis double bond cannot
+                rotate and locks a bend in place.
+              </p>
+            </details>
+          </div>
+
+          <h3>Why water and fat pull apart</h3>
+          <p>
+            The chains on a triglyceride are mostly nonpolar carbon and hydrogen bonds. They cannot
+            form favourable hydrogen bonds with water comparable to water's own interactions with
+            itself, because they have fewer favourable arrangements available.
+          </p>
+
+          <figure class="cl-static" id="cl-separation">
+            <div class="cl-fig">
+              <svg viewBox="0 0 460 210" role="img" aria-label="Two panels. On the left, water molecules among other water molecules, pointing in many directions and bonded to each other. On the right, water molecules against a fatty chain, all forced into the same orientation because the chain offers nothing to bond to."></svg>
+            </div>
+            <figcaption class="cl-caption">
+              A water molecule surrounded by other water molecules can point in almost any direction
+              and still find a partner for each of its hydrogens. A water molecule pressed against a
+              fatty chain cannot bond to the chain at all, so it has to turn its hydrogens away and
+              keep bonding to the water behind it. Far fewer orientations work.
+            </figcaption>
+          </figure>
+
+          <p class="cl-consequence">
+            Because so few arrangements work at that boundary, the system reduces the number of water
+            molecules forced into one by making the shared surface as small as it can. That is what
+            drives fat into droplets. The fat is not pushing the water away, and the water is not
+            repelled by the fat. Water is protecting its own arrangement, and squeezing the fat into
+            droplets is the result.
+          </p>
+
+          <p>
+            Water and oil therefore minimize their contact area. In dough, fat tends to exist as
+            droplets or a separate continuous phase rather than dissolving into the water phase. Oil
+            droplets merge unless something stabilizes them. In food, this drives the need for
+            emulsifiers in mayonnaise, hollandaise, cake batter, and some doughs.
+          </p>
+
+          <h3>What an emulsifier does</h3>
+          <p>
+            An <strong>emulsifier</strong> has both a water-compatible region and a fat-compatible
+            region. In egg yolk, phospholipids can settle at the boundary between oil and water, with
+            their fat-compatible portions pointing toward the fat and their water-compatible portions
+            toward the water. This lowers the tension at that boundary and helps keep small fat
+            droplets dispersed instead of rapidly merging back together.
+          </p>
+
+          <figure class="cl-static" id="cl-emulsifier">
+            <ul class="cl-legend">
+              <li><span class="cl-key" style="background: var(--cl-emul-head);"></span>head, attracted to water</li>
+              <li><span class="cl-key is-bond" style="border-top-color: var(--cl-emul-tail);"></span>tails, attracted to fat</li>
+              <li><span class="cl-key" style="background: var(--cl-fat-wash); border-color: var(--cl-fat);"></span>fat</li>
+              <li><span class="cl-key" style="background: var(--cl-water-wash);"></span>water</li>
+            </ul>
+            <div class="cl-fig">
+              <svg viewBox="0 0 460 250" role="img" aria-label="On the left, a droplet of fat suspended in water, with emulsifier molecules lining the boundary. On the right, one of those molecules enlarged at a flat boundary between water above and fat below, its round head up in the water and its two zigzag tails reaching down into the fat."></svg>
+            </div>
+            <figcaption class="cl-caption">
+              On the right, one molecule from the boundary is drawn enlarged. Each emulsifier sits
+              astride the boundary rather than in either phase, because its head is attracted to
+              water and its tails to fat, and that is the only position where both ends get what
+              they want at once. The tails are drawn as zigzags because they are the same kind of
+              hydrocarbon chain shown in the triglyceride above.
+            </figcaption>
+          </figure>
+
+          <p class="cl-consequence">
+            The droplets stay small and evenly spread instead of merging into pools. In a dough, that
+            more uniform mixture means fat is distributed through the whole mass rather than
+            concentrated in patches, so it interrupts the flour network evenly and the finished
+            texture is consistent from one bite to the next. It is also why mayonnaise stays creamy
+            rather than separating into oil and water.
+          </p>
+
+          <h3 id="fat-lubrication">Does fat only lubricate the flour?</h3>
+          <p>
+            Lubrication is a useful shorthand, but an incomplete one. Fat occupies the interfaces
+            between solid particles, reduces direct particle-to-particle friction, alters how water
+            reaches proteins and starch, and changes the continuity of the dough's solid network.
+            Flour particles and protein strands move past one another more easily when the continuous
+            structural network is interrupted, and the dough becomes more tender and less elastic.
+          </p>
+
+          <h3 id="fat-rules">The fat rules across other foods</h3>
+          <p>
+            Fat does not have one effect. It changes a food differently depending on whether it is
+            solid or liquid, whether it is dispersed or layered, whether water is present, and
+            whether the food's structure depends on protein or starch networks.
+          </p>
+
+          <div class="cl-table">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">If you change the fat</th>
+                  <th scope="col">What happens locally</th>
+                  <th scope="col">Why it changes the food</th>
+                  <th scope="col">Example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Use solid, cold fat</td>
+                  <td>Fat crystals remain intact for longer.</td>
+                  <td>
+                    Solid pieces create discrete regions that resist mixing with water-based dough,
+                    and when they melt they can leave layers or voids.
+                  </td>
+                  <td>
+                    Pie crust becomes flaky, because cold butter pieces create separated layers
+                    during rolling and baking.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Use melted fat</td>
+                  <td>Fat is already liquid and dispersed.</td>
+                  <td>It coats particles more evenly and does not create large solid layers.</td>
+                  <td>
+                    Melted butter in brownies gives a denser, chewier texture than cold butter in a
+                    flaky pastry.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Increase fat in a flour system</td>
+                  <td>
+                    More fat occupies interfaces among flour particles and reduces direct hydration
+                    and contact.
+                  </td>
+                  <td>A strong gluten network is less likely to dominate.</td>
+                  <td>
+                    Cookies and shortbread become tender. Bread becomes softer but may rise less if
+                    the fat is excessive.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Replace butter with oil</td>
+                  <td>You remove butter's solid fat crystals, its water, and its milk solids.</td>
+                  <td>
+                    Oil is liquid at room temperature, so the dough is generally softer and may
+                    spread more. Flavour and browning also change.
+                  </td>
+                  <td>
+                    Oil-based cakes remain soft at cool temperatures, because their fat does not
+                    re-solidify the way butter does.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Brown the butter</td>
+                  <td>Milk solids are heated until browning reactions occur.</td>
+                  <td>
+                    New aroma compounds form from milk proteins and sugars, and water is also lost.
+                  </td>
+                  <td>
+                    Cookies gain a nutty flavour but may spread differently unless the lost water is
+                    accounted for.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Add fat to an emulsion</td>
+                  <td>Fat droplets need stabilization in water.</td>
+                  <td>Emulsifiers or proteins prevent droplets from merging rapidly.</td>
+                  <td>
+                    Mayonnaise stays creamy because egg-yolk components stabilize oil droplets in
+                    water.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Choosing between fats</h3>
+          <div class="cl-table">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Fat</th>
+                  <th scope="col">What is in it</th>
+                  <th scope="col">What it does to the cookie</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Butter</td>
+                  <td>About 80 percent fat, with 15 to 18 percent water and some milk solids.</td>
+                  <td>
+                    Melted butter increases spread and chewiness. Cold or creamed butter traps air
+                    and makes thicker cookies. The milk solids promote
+                    browning.<sup class="cite"><a href="#src-fw1">[1]</a></sup>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Oil</td>
+                  <td>100 percent fat, with no water to evaporate.</td>
+                  <td>
+                    Creates very soft cookies, reduces structure, and browns less than butter.
+                    Cookies made with oil stay soft longer but lack crisp
+                    edges.<sup class="cite"><a href="#src-fw1">[1]</a></sup>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Shortening</td>
+                  <td>Solid fat with no water.</td>
+                  <td>
+                    Minimal spread, a very tender and cakier texture, and less flavour. Often used in
+                    commercial soft cookies for shelf
+                    stability.<sup class="cite"><a href="#src-fw1">[1]</a></sup>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Ghee</td>
+                  <td>Clarified butter, with all the water removed.</td>
+                  <td>
+                    Deep buttery flavour and increased crispness compared with butter. Good for chewy
+                    centres with crisp edges.<sup class="cite"><a href="#src-fw1">[1]</a></sup>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            Studies comparing doughs made with different fats find that fat type changes dough
+            rheology, meaning how a material deforms and flows, and changes the texture and
+            dimensions of the finished
+            biscuit.<sup class="cite"><a href="#src-mamat">[6]</a></sup> Studies changing only the fat
+            in an otherwise fixed cookie formula find that the choice alters the finished cookie's
+            physical dimensions.<sup class="cite"><a href="#src-palm">[7]</a></sup> The exact outcome
+            depends on the entire formula rather than on the fat alone.
+          </p>
+
+          <aside class="cl-tip">
+            <span class="cl-tip-label">Kitchen tip · butter temperature</span>
+            <p>
+              When cookies come out greasy or flat, the butter was usually too warm before mixing.
+              Butter that feels oily rather than soft almost always leads to excess
+              spreading.<sup class="cite"><a href="#src-fw2">[8]</a></sup> On the slider above, that
+              is the region past about 30 °C, where the network has already broken before the tray
+              reaches the oven. Butter that has gone that far cannot be brought back by chilling it
+              again to the same texture, because the crystals reform differently from the way they
+              were churned.
+            </p>
+          </aside>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- 3. BUTTER                                                     -->
+        <!-- ============================================================ -->
+
+        <section class="cl-section" id="butter">
+          <h2><span class="cl-num">03</span> Butter</h2>
+
+          <h3>In the kitchen</h3>
+          <ul class="cl-rules">
+            <li>
+              <strong>Want a fluffier, taller cookie?</strong> Cream softened butter with the sugar
+              until it lightens. <a class="cl-why" href="#cl-creaming">why</a>
+            </li>
+            <li>
+              <strong>Want a chewier, denser cookie?</strong> Melt the butter instead, and chill the
+              dough before baking so that it does not spread too far.
+              <a class="cl-why" href="#butter-melted">why</a>
+            </li>
+            <li>
+              <strong>Want a crumbly, shortbread-like cookie?</strong> Keep the butter cold.
+              <a class="cl-why" href="#butter-states">why</a><sup class="cite"><a href="#src-hc">[9]</a></sup>
+            </li>
+          </ul>
+
+          <h3>In the dough</h3>
+          <p>
+            Butter is legally required in the United States to contain at least 80 percent milkfat.<sup class="cite"><a href="#src-usda">[10]</a></sup>
+            The rest is mostly water plus small amounts of milk
+            solids. Butter therefore contributes
+            three things at once, and each of them does something different.
+          </p>
+
+          <figure class="cl-static">
+            <ul class="cl-legend">
+              <li><span class="cl-key" style="background: var(--cl-milkfat);"></span>milkfat, at least 80%</li>
+              <li><span class="cl-key" style="background: var(--cl-butterwater);"></span>water, about 16 to 17%</li>
+              <li><span class="cl-key" style="background: var(--cl-milksolids);"></span>milk solids, 1 to 2%</li>
+            </ul>
+            <div class="cl-budget-bar">
+              <div class="cl-budget-seg" style="left: 0;   width: 81%; background: var(--cl-milkfat);"></div>
+              <div class="cl-budget-seg" style="left: 81%; width: 17%; background: var(--cl-butterwater);"></div>
+              <div class="cl-budget-seg" style="left: 98%; width: 2%;  background: var(--cl-milksolids);"></div>
+            </div>
+            <figcaption class="cl-caption">
+              The 80 percent figure is a legal floor rather than a typical value. European-style
+              butters run higher, often around 82 to 84 percent, and the water comes down to match.
+            </figcaption>
+          </figure>
+
+          <div class="cl-table">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Part of the butter</th>
+                  <th scope="col">What it does in the cookie</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Milkfat</td>
+                  <td>
+                    Sets how the dough resists flowing, through the crystal network described in the
+                    <a href="#fat">Fat</a> section, and coats flour particles so that less gluten
+                    forms.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Water</td>
+                  <td>
+                    Turns to steam in the oven, which helps cookies rise slightly, then evaporates
+                    and lets the structure set.<sup class="cite"><a href="#src-hc">[9]</a></sup>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Milk solids</td>
+                  <td>
+                    Supply protein and sugar that take part in browning, which is why butter browns
+                    more strongly than plain fat
+                    does.<sup class="cite"><a href="#src-fw1">[1]</a></sup>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>What leavening means</h3>
+          <p>
+            <strong>Leavening</strong> is anything that puts gas into a dough so that the finished
+            food is lighter and more open than the raw mixture was. A cookie gets gas from three
+            separate places, and they do not depend on each other.
+          </p>
+          <ul>
+            <li>
+              <strong>Steam.</strong> Water in the dough, mostly from the eggs and from butter's own
+              water, turns to vapour once the cookie passes the boiling point of water. Vapour takes
+              up far more room than the liquid it came from.
+            </li>
+            <li>
+              <strong>Carbon dioxide.</strong> Baking soda or baking powder reacts and releases it.
+              This is <strong>chemical leavening</strong>, covered further down in its own section.
+            </li>
+            <li>
+              <strong>Air.</strong> Beaten into the mixture before it ever reaches the oven. This is
+              <strong>mechanical leavening</strong>, meaning leavening produced by physical action
+              rather than by a chemical reaction or a living organism.
+            </li>
+          </ul>
+          <p>
+            The first two make new gas. The third does not. The air was already in the room, and
+            beating simply traps it somewhere it can be put to use.
+          </p>
+
+          <h3>What creaming actually does</h3>
+          <p>
+            When softened butter is creamed with sugar, this does more than combine the two. Sugar
+            crystals cut and press tiny air pockets into the semi-solid fat, and those pockets later
+            become the starting points for expansion in the
+            oven.<sup class="cite"><a href="#src-ice-butter">[11]</a></sup>
+          </p>
+          <p>
+            Those starting points are the reason creaming matters more than the volume of air it
+            adds. Gas does not find it easy to carve a new bubble out of a thick dough from nothing.
+            It moves instead into gas cells that are already there and makes them bigger. Creaming
+            supplies a large number of small cells for the steam and the carbon dioxide to expand
+            into, spread evenly through the dough.
+          </p>
+
+          <div class="cl-ladder">
+            <details class="cl-rung">
+              <summary>Why can't gas just make its own bubble?</summary>
+              <p>
+                Starting a brand new bubble means pushing the surrounding material apart and building
+                a new surface, and both cost energy. In a stiff, viscous dough that cost is high
+                enough that gas dissolved in the mixture will travel a considerable distance to reach
+                an existing cell rather than open a new one. This is why the number of cells a
+                cookie ends up with is largely decided before it goes in the oven, and why beating
+                for longer gives more and smaller cells rather than the same cells made bigger.
+              </p>
+            </details>
+          </div>
+
+          <div class="kit" id="cl-creaming">
+            <p class="kit-title">⚙ creaming</p>
+            <ul class="cl-legend">
+              <li><span class="cl-key" style="background: var(--cl-sugar);"></span>sugar crystal</li>
+              <li><span class="cl-key" style="background: var(--cl-air);"></span>air cell</li>
+              <li><span class="cl-key" style="background: var(--cl-fat-wash); border-color: var(--cl-fat);"></span>butter</li>
+            </ul>
+            <div class="cl-fig">
+              <svg viewBox="0 0 460 160" data-butter role="img" aria-label="A patch of butter seen close up, with sugar crystals in it and air cells opened by those crystals as the mixture is beaten."></svg>
+            </div>
+            <div class="cl-fig">
+              <svg viewBox="0 0 460 132" data-cookie role="img" aria-label="A cross-section of the cookie this dough bakes into, rising higher and becoming more open as more air is beaten in."></svg>
+            </div>
+            <div class="cl-presets" role="group" aria-label="Choose the state of the butter">
+              <button type="button" class="cl-preset" data-state="cold" aria-pressed="false">cold butter</button>
+              <button type="button" class="cl-preset" data-state="soft" aria-pressed="true">softened butter</button>
+              <button type="button" class="cl-preset" data-state="melted" aria-pressed="false">melted butter</button>
+            </div>
+            <div class="cl-control">
+              <label for="cream-beat">
+                How long it is beaten
+                <span class="cl-value" data-value="beat"></span>
+              </label>
+              <input type="range" id="cream-beat" data-slider="beat" min="0" max="100" value="42" />
+            </div>
+            <div class="cl-readout" aria-live="polite"></div>
+            <p class="cl-caption">
+              The crystals and cells are drawn far larger than they are. What the figure is for is
+              the interaction between the two controls: beating time only matters at all when the
+              butter is in a state that can hold what the beating opens up. The cookie below shows
+              only what creaming changes. It never flattens completely, because steam and the
+              leavening agent lift it whatever the butter was doing.
+            </p>
+          </div>
+
+          <p id="butter-melted">
+            This is why melted butter produces a fudgier, denser texture. Melting removed the
+            structure that would hold an air cell open, so the creaming step cannot do its job. The
+            cookie still rises on steam and carbon dioxide, but it does so with fewer and larger gas
+            cells rather than many small ones, and it bakes denser as a result. Brownies almost
+            always call for melted butter for exactly this
+            reason.<sup class="cite"><a href="#src-ice-cookies">[12]</a></sup>
+          </p>
+
+          <h3>Fat covering the flour</h3>
+          <p>
+            At the molecular scale, fat also coats some flour particles. That limits how easily water
+            can hydrate the flour proteins and build a strong gluten network. In a cookie, less
+            continuous gluten generally means a more tender, less bread-like
+            texture.<sup class="cite"><a href="#src-hc">[9]</a></sup>
+          </p>
+
+          <div class="kit" id="cl-coating">
+            <p class="kit-title">⚙ fat covering the flour</p>
+            <ul class="cl-legend">
+              <li><span class="cl-key" style="background: var(--cl-flour);"></span>flour particle</li>
+              <li><span class="cl-key" style="background: var(--cl-chain-protein);"></span>protein water can reach</li>
+              <li><span class="cl-key" style="background: var(--cl-protein-blocked);"></span>protein sealed under fat</li>
+              <li><span class="cl-key" style="background: var(--cl-atom-o);"></span>water</li>
+            </ul>
+            <div class="cl-fig">
+              <svg viewBox="0 0 460 170" role="img" aria-label="Flour particles with protein sites around their edges. A film of fat covers part of each particle, and water reaches only the sites left uncovered."></svg>
+            </div>
+            <div class="cl-control">
+              <label for="coat-fat">
+                How much fat is in the dough
+                <span class="cl-value" data-value="fat"></span>
+              </label>
+              <input type="range" id="coat-fat" data-slider="fat" min="0" max="100" value="55" />
+            </div>
+            <div class="cl-readout" aria-live="polite"></div>
+            <p class="cl-caption">
+              Flour particles are drawn as smooth spheres with protein sites around the edge. Real
+              flour particles are irregular and their protein runs through them rather than sitting
+              on the surface, which is part of why some protein always stays reachable however much
+              fat is present.
+            </p>
+          </div>
+
+          <h3 id="butter-states">The three states of butter</h3>
+          <div class="cl-table">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">State</th>
+                  <th scope="col">What it does</th>
+                  <th scope="col">The cookie you get</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Cold</td>
+                  <td>
+                    Does not mix as evenly, and spreads more slowly in the oven because it takes
+                    longer to melt.
+                  </td>
+                  <td>
+                    Crumbly, like shortbread, and thicker because it held its shape for
+                    longer.<sup class="cite"><a href="#src-hc">[9]</a></sup>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Softened, then creamed</td>
+                  <td>Traps air when beaten with sugar.</td>
+                  <td>
+                    Fluffier and lighter, and taller than the same dough made any other
+                    way.<sup class="cite"><a href="#src-hc">[9]</a></sup>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Melted</td>
+                  <td>
+                    Reduces air incorporation to almost nothing and coats the flour more completely.
+                  </td>
+                  <td>
+                    Denser and chewier.<sup class="cite"><a href="#src-hc">[9]</a></sup>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>What removing the butter can and cannot tell you</h3>
+          <p>
+            Baking a batch without butter gives a cookie that is less rich, less tender, and less
+            able to spread normally. But this is not a clean intervention. Removing the butter
+            removed fat, water, and milk solids at the same time, so the result shows that butter
+            matters without showing which of those three was responsible for what.
+          </p>
+          <p>
+            Comparisons that separate them more effectively:
+          </p>
+
+          <div class="cl-table">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Comparison</th>
+                  <th scope="col">What it isolates more effectively</th>
+                  <th scope="col">What you could infer</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Butter against clarified butter</td>
+                  <td>Clarified butter has much less water and far fewer milk solids.</td>
+                  <td>
+                    If the spread changes, butter's water and milk solids matter in addition to its
+                    fat.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Butter against neutral oil, matched by fat mass</td>
+                  <td>Compares a partly solid fat with a fully liquid one.</td>
+                  <td>
+                    If the oil cookies spread more, the solid-fat structure was helping the original
+                    dough resist flowing before it baked.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Butter against shortening, matched by fat mass</td>
+                  <td>Compares fats with different melting profiles and water contents.</td>
+                  <td>
+                    Differences can be attributed partly to the physical behaviour of the fat phase.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Butter against butter plus added water</td>
+                  <td>Separates some of the effect of butter's water from its fat.</td>
+                  <td>
+                    If adding water changes texture or spread, hydration is part of the mechanism.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Softened against melted butter, same formula</td>
+                  <td>Changes the starting fat-crystal structure and the creaming process.</td>
+                  <td>
+                    Differences test whether solid fat and trapped air before baking matter.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <aside class="cl-tip">
+            <span class="cl-tip-label">Kitchen tip · creaming</span>
+            <p>
+              Cream the butter and sugar as long as you like, but stop treating the rest of the
+              mixing the same way. Once the eggs and flour go in, mix only until the ingredients come
+              together.<sup class="cite"><a href="#src-ice-cookies">[12]</a></sup> Eggs beaten full
+              of air before they go in give big cakey cookies rather than chewy
+              ones.<sup class="cite"><a href="#src-ice-cookies">[12]</a></sup>
+            </p>
+          </aside>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- 4. SUGAR                                                      -->
+        <!-- ============================================================ -->
+
+        <section class="cl-section" id="sugar">
+          <h2><span class="cl-num">04</span> Sugar</h2>
+
+          <h3>In the kitchen</h3>
+          <ul class="cl-rules">
+            <li>
+              <strong>Want crisper cookies?</strong> Use more white sugar.
+              <a class="cl-why" href="#cl-recrystallize">why</a>
+            </li>
+            <li>
+              <strong>Want chewier cookies?</strong> Increase the proportion of brown sugar.
+              <a class="cl-why" href="#sugar-brown">why</a>
+            </li>
+            <li>
+              <strong>Want a more tender cookie?</strong> Add more sugar of any kind.
+              <a class="cl-why" href="#sugar-competition">why</a>
+            </li>
+            <li>
+              <strong>Want a melt-in-the-mouth cookie?</strong> Use powdered sugar.
+              <a class="cl-why" href="#sugar-types">why</a><sup class="cite"><a href="#src-hc">[9]</a></sup>
+            </li>
+          </ul>
+
+          <h3>In the dough</h3>
+          <p>
+            Sugar does much more than make a cookie sweet. It has three separate jobs.
+          </p>
+          <p id="sugar-competition">
+            The first is that dissolved sugar lowers the availability of <a href="#water">water</a>. Sugar interacts
+            strongly with water molecules, and that changes how the dough flows and what texture it
+            finishes with.<sup class="cite"><a href="#src-pubmed-wa">[3]</a></sup>
+          </p>
+          <p>
+            The second is that sugar competes with flour for that water. Gluten-forming proteins need
+            water to hydrate and connect, so a dough with more sugar in it produces a more tender
+            cookie than an otherwise similar low-sugar dough. This is a large part of why cookies are
+            not simply small breads. Cookie dough has high sugar and fat and relatively little free
+            water, and those conditions limit both gluten development and starch
+            gelatinization.<sup class="cite"><a href="#src-leiva">[13]</a></sup>
+          </p>
+          <p>
+            The third is that sugar sets the texture as the cookie cools. A low-moisture cookie
+            becomes crisp because its sugar, starch, and protein matrix is glassier and more brittle.
+            More retained moisture pushes the texture toward soft or chewy.
+          </p>
+
+          <h3>In the molecules</h3>
+          <p>
+            A sugar molecule carries many oxygen-containing hydroxyl groups, written –OH. Those
+            groups interact with water through hydrogen bonding. In plain language, sugar ties up
+            water molecules and reduces the amount that behaves as freely available liquid.
+          </p>
+
+          <div class="cl-inline" id="cl-sucrose">
+            <ul class="cl-legend">
+              <li><span class="cl-key" data-el="C"></span>carbon</li>
+              <li><span class="cl-key" data-el="O"></span>oxygen, each one a hydroxyl</li>
+              <li><span class="cl-key is-bond"></span>covalent bond</li>
+            </ul>
+            <div class="cl-fig is-3d"></div>
+            <div class="cl-presets" role="group" aria-label="Choose a view of sugar">
+              <button type="button" class="cl-preset" data-view="whole" aria-pressed="true">sucrose</button>
+              <button type="button" class="cl-preset" data-view="split" aria-pressed="false">split into invert sugar</button>
+            </div>
+            <p class="cl-caption"></p>
+            <p class="cl-consequence"></p>
+          </div>
+
+          <div class="cl-ladder">
+            <details class="cl-rung">
+              <summary>What is invert sugar?</summary>
+              <p>
+                Sucrose is one molecule built from two smaller ones, glucose and fructose, joined
+                through an oxygen. Break that link and you get the two halves separately, and that
+                pair is invert sugar. Molasses in brown sugar already contains it, and more forms
+                during baking. Compared with sucrose, invert sugars absorb and hold more moisture,
+                and fructose is especially good at it.
+              </p>
+            </details>
+            <details class="cl-rung">
+              <summary>Why does sugar make dough less bread-like?</summary>
+              <p>
+                Sucrose has many hydroxyl groups that hydrogen-bond with water, so it competes with
+                flour proteins and starch for what water there is. If less water reaches the
+                gluten-forming proteins and the starch, their networks develop differently. Studies
+                of baked systems show that high sugar and fat levels restrict starch gelatinization,
+                partly by limiting available water and partly by altering how starch and water
+                interact.<sup class="cite"><a href="#src-leiva">[13]</a></sup>
+              </p>
+            </details>
+            <details class="cl-rung">
+              <summary>Why can sugar affect how far a cookie spreads?</summary>
+              <p>
+                Dissolved sugar lowers the <strong>viscosity</strong> of the watery part of the
+                dough, meaning its resistance to flowing. Thick honey has a high viscosity and water
+                has a low one. Granulated sugar also changes the physical structure the dough starts
+                with, through creaming, and different sugars dissolve at different rates. The final
+                spread is not controlled by sugar alone. It comes out of the interaction between
+                sugar, the state of the fat, flour, water, mixing, and oven heat, which is what
+                <a href="#cl-crystals">the fat network figure</a> shows from the other side.
+              </p>
+            </details>
+          </div>
+
+          <h3>What happens as the cookie cools</h3>
+          <p>
+            A cookie is not crisp when it comes out of the oven. It becomes crisp while it cools. One
+            accepted explanation is that molten sugar returns to a crystalline arrangement as the
+            temperature falls and solidifies, so the more sugar there is available to recrystallize,
+            the more snap the cookie has.<sup class="cite"><a href="#src-ka-cookie">[14]</a></sup>
+          </p>
+
+          <div class="kit" id="cl-recrystallize">
+            <p class="kit-title">⚙ sugar recrystallizing as the cookie cools</p>
+            <ul class="cl-legend">
+              <li><span class="cl-key" style="background: var(--cl-crystal);"></span>sucrose</li>
+              <li><span class="cl-key" style="background: var(--cl-invert);"></span>glucose or fructose</li>
+              <li><span class="cl-key is-bond" style="border-top-color: var(--cl-crystal-link);"></span>ordered arrangement</li>
+            </ul>
+            <div class="cl-fig">
+              <svg viewBox="0 0 460 180" data-lattice role="img" aria-label="Sugar molecules in a cooling cookie. Sucrose molecules settle into a regular grid joined by lines. Glucose and fructose molecules are a different shape and cannot join the grid, breaking it up."></svg>
+            </div>
+            <div class="cl-fig">
+              <svg viewBox="0 0 460 118" data-bend role="img" aria-label="The cookie when you try to bend it. With little invert sugar it snaps in two. With more, it bends without breaking."></svg>
+            </div>
+            <div class="cl-control">
+              <label for="sugar-invert">
+                How much of the sugar is invert sugar
+                <span class="cl-value" data-value="invert"></span>
+              </label>
+              <input type="range" id="sugar-invert" data-slider="invert" min="0" max="70" value="8" />
+            </div>
+            <div class="cl-readout" aria-live="polite"></div>
+            <p class="cl-caption">
+              A real crystal is three-dimensional and its units are far more numerous than this. The
+              part that is real is the reason the arrangement fails: glucose and fructose are
+              different shapes from sucrose, so a growing sucrose crystal cannot fit them in. They
+              sit in the way, and the ordered regions stay small and disconnected.
+            </p>
+          </div>
+
+          <h3 id="sugar-brown">White sugar against brown sugar</h3>
+          <p>
+            White sugar is mostly sucrose. Brown sugar is sucrose plus molasses, and the molasses
+            adds flavour compounds, acids, and smaller sugars that hold water especially
+            effectively. Increasing the brown sugar commonly produces a darker, moister, chewier
+            cookie, while a higher proportion of white sugar favours more spread and a crisper
+            texture.<sup class="cite"><a href="#src-ucsd">[15]</a></sup>
+          </p>
+          <p>
+            The two invert sugars in molasses are glucose and fructose, and they hold onto water far
+            better than sucrose does. There are two reasons for that. The first is arithmetic:
+            splitting one sucrose molecule gives two separate molecules, so the same weight of sugar
+            now presents twice as many individual particles, each carrying its own set of hydroxyl
+            groups for water to attach to. The second is that these two sugars are reluctant to
+            crystallize, and fructose especially so. A sugar that has packed itself into a crystal
+            has turned its hydroxyl groups inward toward its neighbours, where water cannot reach
+            them. A sugar that stays dissolved keeps them facing outward and available. Fructose
+            largely refuses to crystallize at all, so it keeps holding water when sucrose has long
+            since given it up.
+          </p>
+          <p>
+            Those same two sugars also caramelize at a lower temperature than sucrose, and they get
+            in the way when sucrose tries to crystallize as the cookie cools. Holding extra moisture
+            and delaying that crystallization is what gives brown sugar its moist, bendy, chewy
+            result.<sup class="cite"><a href="#src-ka-cookie">[14]</a></sup>
+          </p>
+
+          <h3 id="sugar-types">Choosing between sugars</h3>
+          <div class="cl-table">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Sugar</th>
+                  <th scope="col">What is in it</th>
+                  <th scope="col">What it does to the cookie</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>White, granulated</td>
+                  <td>Almost entirely sucrose, dry and crystalline.</td>
+                  <td>
+                    Encourages spread, promotes crispness, and gives thinner cookies. It melts
+                    quickly in the oven and lets moisture escape
+                    faster.<sup class="cite"><a href="#src-fw1">[1]</a></sup>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Brown</td>
+                  <td>Sucrose plus molasses, which carries water, acids, and invert sugars.</td>
+                  <td>
+                    Adds chewiness and softness and deepens the flavour. The more brown sugar, the
+                    chewier and softer the cookie.<sup class="cite"><a href="#src-fw1">[1]</a></sup>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Powdered</td>
+                  <td>Very finely ground sucrose with a little cornstarch mixed in.</td>
+                  <td>
+                    Gives an ultra-tender, almost melt-in-the-mouth crumb. Standard in shortbread and
+                    Mexican wedding cookies, and a poor substitute in a normal drop cookie
+                    recipe.<sup class="cite"><a href="#src-cd">[17]</a></sup>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            The cornstarch in powdered sugar works by dilution. It is not wheat protein, so every
+            spoonful of it that goes into a recipe is a spoonful that brings no gluten-forming
+            protein with it, and it takes up some of the water on top of that. Less protein and less
+            water available to it means less gluten, and less gluten means a cookie that gives way
+            easily under the teeth. Cornstarch added on its own to soften a cookie is doing the same
+            thing.
+          </p>
+
+          <p>
+            The browning that white sugar contributes to comes from two different reactions, and it
+            is worth keeping them apart. <strong>Caramelization</strong> is sugar breaking down under
+            heat all by itself, with nothing else needed. The <strong>Maillard reaction</strong> is a
+            sugar and a protein reacting with each other, and it needs both. A cookie contains a
+            great deal of protein, from its flour and its egg, so most of its colour comes from the
+            second. Sucrose only takes part in the Maillard reaction after it has split into glucose
+            and fructose, which is one reason brown sugar, which already contains those two, browns
+            sooner than white sugar does.
+          </p>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- 5. FLOUR                                                      -->
+        <!-- ============================================================ -->
+
+        <section class="cl-section" id="flour">
+          <h2><span class="cl-num">05</span> Flour</h2>
+
+          <h3>In the kitchen</h3>
+          <ul class="cl-rules">
+            <li>
+              <strong>Want a thicker cookie that spreads less?</strong> Use more flour.
+              <a class="cl-why" href="#flour-amount">why</a>
+            </li>
+            <li>
+              <strong>Want a chewier cookie?</strong> Replace some all-purpose flour with bread
+              flour. <a class="cl-why" href="#cl-gluten">why</a>
+            </li>
+            <li>
+              <strong>Want a softer, more delicate cookie?</strong> Use cake flour, or add a little
+              cornstarch. <a class="cl-why" href="#flour-types">why</a>
+            </li>
+            <li>
+              <strong>Want the same result twice?</strong> Weigh the flour instead of scooping it.
+              <a class="cl-why" href="#flour-weighing">why</a><sup class="cite"><a href="#src-hc">[9]</a></sup>
+            </li>
+          </ul>
+
+          <h3>In the dough</h3>
+          <p>
+            Flour is the main structural material, and it contains two separate structural systems:
+            starch granules and wheat proteins. Flour is the delayed scaffold that stops the cookie
+            from spreading forever.
+          </p>
+          <p id="flour-amount">
+            Extra flour changes the ratio of solids to water and fat. It gives the dough more
+            material capable of forming structure and makes it more resistant to flowing, so a dough
+            with extra flour is thicker and spreads less. Less flour means more spreading, thinner
+            cookies, and crispier edges.<sup class="cite"><a href="#src-fw1">[1]</a></sup>
+          </p>
+
+          <h3>The protein: gluten</h3>
+          <p>
+            Wheat flour contains two major gluten-forming protein families, glutenins and gliadins.
+            When flour meets water and is mixed, these proteins can form a
+            <strong>viscoelastic</strong> network, meaning one that can stretch and also resist
+            being stretched. Glutenins contribute the elastic behaviour, which is the resistance and
+            the spring back. Gliadins contribute the viscous behaviour, which is the ability to flow
+            and extend rather than tear.
+          </p>
+          <p>
+            But cookies are not bread. Cookie dough contains relatively little free water and
+            relatively high amounts of sugar and fat. Sugar competes for water and fat interrupts
+            hydration, so the gluten network is limited compared with a bread dough. That limitation
+            is the point. Too much flour, too much mixing, or too little fat makes a cookie more
+            rigid, cakey, dry, or bread-like.
+          </p>
+
+          <div class="kit" id="cl-gluten">
+            <p class="kit-title">⚙ building a gluten network</p>
+            <ul class="cl-legend">
+              <li><span class="cl-key" style="background: var(--cl-chain-protein);"></span>hydrated, unfolded chain</li>
+              <li><span class="cl-key" style="background: var(--cl-protein-blocked);"></span>dry, still folded</li>
+              <li><span class="cl-key is-bond" style="border-top-color: var(--cl-gluten-link);"></span>link between chains</li>
+            </ul>
+            <div class="cl-fig">
+              <svg viewBox="0 0 460 170" role="img" aria-label="Wheat protein chains in a dough. Hydrated chains are drawn unfolded and can link to their neighbours. Dry chains stay folded and link to nothing."></svg>
+            </div>
+            <div class="cl-presets" role="group" aria-label="Choose a dough">
+              <button type="button" class="cl-preset" data-preset="cookie" aria-pressed="true">cookie dough</button>
+              <button type="button" class="cl-preset" data-preset="bread" aria-pressed="false">bread dough</button>
+              <button type="button" class="cl-preset" data-preset="pancake" aria-pressed="false">pancake batter</button>
+            </div>
+            <div class="cl-control">
+              <label for="gl-water">
+                Water available to the protein <span class="cl-value" data-value="water"></span>
+              </label>
+              <input type="range" id="gl-water" data-slider="water" min="0" max="100" value="34" />
+            </div>
+            <div class="cl-control">
+              <label for="gl-mixing">
+                Mixing <span class="cl-value" data-value="mixing"></span>
+              </label>
+              <input type="range" id="gl-mixing" data-slider="mixing" min="0" max="100" value="40" />
+            </div>
+            <div class="cl-control">
+              <label for="gl-protein">
+                Flour protein content <span class="cl-value" data-value="protein"></span>
+              </label>
+              <input type="range" id="gl-protein" data-slider="protein" min="0" max="100" value="45" />
+            </div>
+            <div class="cl-readout" aria-live="polite"></div>
+            <p class="cl-caption">
+              All three controls have to be turned up before anything forms, and the three presets
+              are the same flour under three different sets of conditions. Whether the network
+              reaches across the dough is tested the same way as <a href="#cl-crystals">fat crystals</a>.
+            </p>
+          </div>
+
+          <div class="cl-ladder">
+            <details class="cl-rung">
+              <summary>Why does mixing matter?</summary>
+              <p>
+                Mixing distributes water, unfolds and to some degree aligns the proteins, and
+                increases the opportunities for one protein to meet another. Some glutenin chains
+                then form or exchange disulfide bonds, which are covalent links between
+                sulfur-containing groups and much stronger than the weak attractions holding a
+                folded protein together. More mixing strengthens a bread dough's network. In a
+                cookie, excessive mixing creates unwanted toughness, because the product wants
+                limited network development.
+              </p>
+            </details>
+            <details class="cl-rung">
+              <summary>What does viscoelastic mean?</summary>
+              <p>
+                That a material behaves partly like a thick liquid and partly like a rubber band.
+                The viscous half means it can flow and stay in its new shape. The elastic half means
+                it stores energy when stretched and springs back. Bread dough needs both: enough
+                stretch to expand around growing gas bubbles without tearing, and enough resistance
+                to hold the gas rather than letting it escape.
+              </p>
+            </details>
+          </div>
+
+          <h3>The starch</h3>
+          <p>
+            Starch is made from long chains of glucose molecules packed into granules. When enough
+            heat and water are available, water enters the granules, they swell, and their internal
+            order partly breaks down. That is <strong>gelatinization</strong>, and it is what
+            thickens a sauce and sets the crumb of a loaf.
+          </p>
+          <p>
+            In cookies it is limited. Cookie dough has relatively little water, and dissolved sugar
+            raises the temperature at which starch gelatinizes at
+            all.<sup class="cite"><a href="#src-allan">[18]</a></sup> Cookies therefore set through a
+            combination of partial starch change, protein setting, moisture loss, and cooling into a
+            glassy matrix, rather than through the extensive starch gel found in bread or
+            pudding.<sup class="cite"><a href="#src-leiva">[13]</a></sup>
+          </p>
+
+          <div class="kit" id="cl-starch">
+            <p class="kit-title">⚙ starch granules taking up water</p>
+            <ul class="cl-legend">
+              <li><span class="cl-key" style="background: var(--cl-flour);"></span>starch granule</li>
+              <li><span class="cl-key is-bond" style="border-top-color: var(--cl-starch-order);"></span>ordered internal structure</li>
+            </ul>
+            <div class="cl-fig">
+              <svg viewBox="0 0 460 170" role="img" aria-label="Starch granules. Below the onset temperature they stay small and ordered. Above it they swell, their internal rings fade, and starch leaks out into the surrounding liquid."></svg>
+            </div>
+            <div class="cl-control">
+              <label for="st-temp">
+                Temperature <span class="cl-value" data-value="temp"></span>
+              </label>
+              <input type="range" id="st-temp" data-slider="temp" min="40" max="100" value="72" />
+            </div>
+            <div class="cl-control">
+              <label for="st-sugar">
+                Dissolved sugar <span class="cl-value" data-value="sugar"></span>
+              </label>
+              <input type="range" id="st-sugar" data-slider="sugar" min="0" max="100" value="0" />
+            </div>
+            <div class="cl-readout" aria-live="polite"></div>
+            <p class="cl-caption">
+              The onset temperatures here are measured values for wheat starch: about 60.8 °C in
+              plain water, rising roughly 3.5 °C at 0.5 molar sucrose and roughly 28.9 °C at 2.0
+              molar.<sup class="cite"><a href="#src-allan">[18]</a></sup> Turn the sugar up and the
+              granules stop changing even though the temperature has not moved.
+            </p>
+          </div>
+
+          <h3 id="flour-types">Choosing between flours</h3>
+          <p>
+            The protein content of a flour decides how much gluten can form, and that directly
+            affects chewiness against tenderness.
+          </p>
+
+          <div class="cl-table">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Flour</th>
+                  <th scope="col">Protein</th>
+                  <th scope="col">What it does to the cookie</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Cake flour</td>
+                  <td>About 7 to 9 percent</td>
+                  <td>
+                    Very tender, cakey, minimal chew. Cookies may be soft but often too tender, and
+                    can fall apart when lifted off the
+                    sheet.<sup class="cite"><a href="#src-fw1">[1]</a></sup>
+                  </td>
+                </tr>
+                <tr>
+                  <td>All-purpose flour</td>
+                  <td>About 10 to 12 percent</td>
+                  <td>
+                    Balanced chew and the standard cookie texture. Holds up better than cake flour
+                    without turning tough.<sup class="cite"><a href="#src-cd">[17]</a></sup>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Bread flour</td>
+                  <td>About 12 to 14 percent</td>
+                  <td>
+                    More gluten and extra chewiness. Good for thick, bakery-style cookies, though it
+                    can push them toward tough.<sup class="cite"><a href="#src-cd">[17]</a></sup>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <aside class="cl-tip" id="flour-weighing">
+            <span class="cl-tip-label">Kitchen tip · measuring</span>
+            <p>
+              Measure flour by weight rather than by volume. A cup of flour can weigh anywhere from
+              120 to 165 grams depending on how it was scooped, and a 45 gram swing is enough to
+              change the texture completely. A kitchen scale removes an entire category of
+              inconsistency.<sup class="cite"><a href="#src-cd">[17]</a></sup>
+            </p>
+            <p>
+              When cookies spread too much, the butter usually gets the blame. Slightly
+              under-measured flour is at least as common a cause, and even two tablespoons less can
+              change the result.<sup class="cite"><a href="#src-fw1">[1]</a></sup>
+            </p>
+          </aside>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- 6. EGG                                                        -->
+        <!-- ============================================================ -->
+
+        <section class="cl-section" id="egg">
+          <h2><span class="cl-num">06</span> Egg</h2>
+
+          <h3>In the kitchen</h3>
+          <ul class="cl-rules">
+            <li>
+              <strong>Want a denser, chewier cookie?</strong> Add an extra yolk. A classic chewy
+              chocolate chip cookie uses one whole egg plus one extra yolk.
+              <a class="cl-why" href="#egg-parts">why</a>
+            </li>
+            <li>
+              <strong>Want a lighter, airier cookie?</strong> Whip the whites separately before
+              adding them. <a class="cl-why" href="#egg-parts">why</a>
+            </li>
+            <li>
+              <strong>Cookie coming out dry?</strong> Add one extra yolk and change nothing else.
+              <a class="cl-why" href="#egg-parts">why</a>
+            </li>
+            <li>
+              <strong>Batter looking curdled when the eggs go in?</strong> Use eggs at room
+              temperature. <a class="cl-why" href="#egg-temperature">why</a><sup class="cite"><a href="#src-fw1">[1]</a></sup>
+            </li>
+          </ul>
+
+          <h3>In the dough</h3>
+          <p>
+            Egg explains how a cookie changes from soft dough into a cohesive solid. It is doing at
+            least three jobs at once, and they are easy to confuse with each other.
+          </p>
+          <ol>
+            <li>It adds water.</li>
+            <li>It adds proteins that set with heat.</li>
+            <li>It adds yolk compounds that help manage the boundary between fat and water.</li>
+          </ol>
+          <p>
+            The second is the one that stops a cookie spreading. Egg proteins build a heat-set
+            internal structure after the dough has already spread.
+          </p>
+
+          <h3>In the molecules</h3>
+          <p>
+            A protein is a long chain of amino acids. Each amino acid shares a common backbone but
+            carries a different side group, and those side groups can be electrically charged,
+            polar, nonpolar, sulfur-containing, or able to form hydrogen bonds. In a raw egg, many
+            of these chains are folded into compact shapes, held that way because their own side
+            groups interact with one another in energetically favourable ways.
+          </p>
+          <p>
+            Heating makes those weak stabilizing interactions easier to disrupt, and the chain
+            unfolds. This is <strong>denaturation</strong>. It does not mean the protein has been
+            destroyed or turned into a different molecule. It means it has lost much of its original
+            folded shape. Once unfolded, regions that were previously hidden inside can contact
+            regions on other molecules. They aggregate, meaning they form clusters, and at
+            sufficient concentration those clusters become a connected network that immobilizes
+            water.<sup class="cite"><a href="#src-ovalbumin">[19]</a></sup>
+          </p>
+
+          <div class="kit" id="cl-denature">
+            <p class="kit-title">⚙ from raw to set</p>
+            <ul class="cl-legend">
+              <li><span class="cl-key" style="background: var(--cl-protein-folded);"></span>folded protein</li>
+              <li><span class="cl-key" style="background: var(--cl-chain-protein);"></span>unfolded protein</li>
+              <li><span class="cl-key is-bond" style="border-top-color: var(--cl-gluten-link);"></span>connection between chains</li>
+              <li><span class="cl-key" style="background: var(--cl-atom-o);"></span>water squeezed out</li>
+            </ul>
+            <div class="cl-fig">
+              <svg viewBox="0 0 460 176" role="img" aria-label="Egg proteins. Below about sixty degrees they are folded into compact shapes and connected to nothing. As the temperature rises they unfold and link into a network. Heated too fast, they clump together and squeeze water out into the gaps."></svg>
+            </div>
+            <div class="cl-control">
+              <label for="egg-temp">
+                Temperature <span class="cl-value" data-value="temp"></span>
+              </label>
+              <input type="range" id="egg-temp" data-slider="temp" min="20" max="100" value="45" />
+            </div>
+            <div class="cl-control">
+              <label for="egg-rate">
+                How fast it is heated <span class="cl-value" data-value="rate"></span>
+              </label>
+              <input type="range" id="egg-rate" data-slider="rate" min="0" max="100" value="20" />
+            </div>
+            <div class="cl-readout" aria-live="polite"></div>
+            <p class="cl-caption">
+              Egg white is a mixture of proteins that do not all unfold at the same point, so it
+              firms over a range rather than at one temperature. Two have been measured directly in
+              water: lysozyme at about 77 °C and ovalbumin at about 80
+              °C.<sup class="cite"><a href="#src-ovalbumin">[19]</a></sup> Others go earlier, which
+              is why a white begins to set well below either figure.
+            </p>
+          </div>
+
+          <div class="cl-ladder">
+            <details class="cl-rung">
+              <summary>Does sugar change when egg sets, the way it changes when starch swells?</summary>
+              <p>
+                Yes, and in the same direction. Dissolved sugars stabilize egg proteins and push
+                their unfolding temperature higher, with sucrose being more protective than
+                glucose and the effect growing with
+                concentration.<sup class="cite"><a href="#src-ovalbumin">[19]</a></sup> So a sweet
+                custard sets later than an unsweetened one, exactly as sweetened starch gelatinizes
+                later. Sugar delays nearly every heat-driven structural change in the dough, which
+                is a large part of why a cookie has time to spread before anything stops it.
+              </p>
+            </details>
+            <details class="cl-rung">
+              <summary>What does an emulsifier have to do with egg?</summary>
+              <p>
+                Egg yolk contains phospholipids, which are molecules with a water-compatible head
+                and <a href="#cl-emulsifier">fat-compatible tails</a>. They sit at the boundary between fat and
+                water and keep the two more evenly distributed through the dough rather than letting
+                them separate into patches.<sup class="cite"><a href="#src-yolk">[20]</a></sup>
+              </p>
+            </details>
+          </div>
+
+          <h3 id="egg-parts">White against yolk</h3>
+          <div class="cl-table">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Part</th>
+                  <th scope="col">What is in it</th>
+                  <th scope="col">What it does to the cookie</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>White</td>
+                  <td>Mostly protein and water.</td>
+                  <td>
+                    Creates structure and increases crispness, and can make the cookie drier and
+                    slightly cakier. Adding more whites tends to give taller
+                    cookies.<sup class="cite"><a href="#src-fw1">[1]</a></sup>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Yolk</td>
+                  <td>Fat, protein, and the phospholipids that act as emulsifiers.</td>
+                  <td>
+                    Adds richness and moisture, increases chewiness, and gives softer cookies.
+                    Using extra yolks and fewer whites is one of the fastest routes to a chewy
+                    cookie.<sup class="cite"><a href="#src-fw1">[1]</a></sup>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Whole egg</td>
+                  <td>Both, plus a substantial amount of water.</td>
+                  <td>
+                    Adds moisture and structure together. Too much egg makes a cookie cakey rather
+                    than chewy, so the ratio of egg to flour matters more than the count
+                    does.<sup class="cite"><a href="#src-cd">[17]</a></sup>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <aside class="cl-tip" id="egg-temperature">
+            <span class="cl-tip-label">Kitchen tip · egg temperature</span>
+            <p>
+              Cold eggs do not emulsify as well into creamed butter and sugar. The batter can look
+              curdled, and the final texture suffers. Dropping cold eggs into warm water for ten
+              minutes first fixes it.<sup class="cite"><a href="#src-cd">[17]</a></sup> This is because cold butter is a firmer solid, and a cold
+              liquid dropped into it chills the fat back below the point where it can accept the
+              water at all.
+            </p>
+          </aside>
+
+          <div class="cl-note is-caution">
+            <span class="cl-note-label">What the no-egg batch cannot tell you</span>
+            <p>
+              Removing the egg gives less cohesion and a more fragile cookie, and it may spread
+              differently as well. But one egg carries water, setting protein, and emulsifier
+              together, so taking it out changes several mechanisms at once. Comparing a yolk-only
+              batch against a white-only batch separates them far better.
+            </p>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- 7. LEAVENING AGENTS                                           -->
+        <!-- ============================================================ -->
+
+        <section class="cl-section" id="leavening">
+          <h2><span class="cl-num">07</span> Leavening agents</h2>
+
+          <h3>In the kitchen</h3>
+          <ul class="cl-rules">
+            <li>
+              <strong>Want thinner, chewier cookies with browner edges?</strong> Use baking soda.
+              <a class="cl-why" href="#leavening-choice">why</a>
+            </li>
+            <li>
+              <strong>Want thicker, softer, puffier cookies?</strong> Use baking powder.
+              <a class="cl-why" href="#cl-powder">why</a>
+            </li>
+            <li>
+              <strong>Cookies tasting soapy or metallic?</strong> There is more baking soda in the
+              recipe than there is acid to react with it.
+              <a class="cl-why" href="#leavening-too-much">why</a><sup class="cite"><a href="#src-fw1">[1]</a></sup>
+            </li>
+          </ul>
+
+          <h3>In the dough</h3>
+          <p>
+            A leavening agent produces or expands gas bubbles, creating a more open structure. In a
+            cookie the effect is usually less dramatic than in a cake or a loaf, because cookie dough
+            is comparatively stiff, low in water, and designed to spread rather than to rise high.
+          </p>
+
+          <h3>In the molecules</h3>
+          <p>
+            Baking soda is sodium bicarbonate, NaHCO₃. When bicarbonate meets an acid in water, the
+            bicarbonate ion accepts a hydrogen ion from the acid. That produces carbonic acid,
+            H₂CO₃, which readily breaks apart into water and carbon dioxide gas.
+          </p>
+          <p class="cl-equation">HCO₃⁻ + H⁺ → H₂CO₃ → H₂O + CO₂↑</p>
+          <p>
+            The upward arrow means the carbon dioxide leaves as a gas. Baking soda can also release
+            carbon dioxide under heating alone, though what actually happens in a real dough depends
+            on the moisture, the acids present, the temperature, and everything else in the
+            bowl.<sup class="cite"><a href="#src-vandersman">[21]</a></sup>
+          </p>
+          <p>
+            Baking powder is not baking soda in a different form. It usually contains sodium
+            bicarbonate, one or more dry acids, and starch, and the starch is there to keep the acid
+            and the base dry and separated during storage. Many baking powders are described as
+            double acting, meaning one acid reacts at a lower temperature once hydrated while
+            another reacts more substantially during heating.
+          </p>
+
+          <div class="kit" id="cl-powder">
+            <p class="kit-title">⚙ baking powder, three stages</p>
+            <ul class="cl-legend">
+              <li><span class="cl-key" style="background: var(--cl-base);"></span>sodium bicarbonate</li>
+              <li><span class="cl-key" style="background: var(--cl-acid);"></span>dry acid</li>
+              <li><span class="cl-key" style="background: var(--cl-flour);"></span>starch</li>
+              <li><span class="cl-key" style="background: var(--cl-air);"></span>carbon dioxide</li>
+            </ul>
+            <div class="cl-fig">
+              <svg viewBox="0 0 460 168" role="img" aria-label="Baking powder. Dry in the tin, the starch holds the acid and the bicarbonate apart. When water arrives they react and carbon dioxide bubbles form. In the oven those bubbles expand."></svg>
+            </div>
+            <div class="cl-presets" role="group" aria-label="Choose a stage">
+              <button type="button" class="cl-preset" data-stage="dry" aria-pressed="true">dry, in the tin</button>
+              <button type="button" class="cl-preset" data-stage="wet" aria-pressed="false">water arrives</button>
+              <button type="button" class="cl-preset" data-stage="hot" aria-pressed="false">in the oven</button>
+            </div>
+            <div class="cl-readout" aria-live="polite"></div>
+            <p class="cl-caption"></p>
+          </div>
+
+          <h3>Gas alone does not make anything rise</h3>
+          <p>
+            A food rises only when gas is produced or
+            expands while the surrounding network is strong enough to trap the bubbles and still
+            flexible enough to let them grow. Producing more gas does not help if nothing is holding
+            it.
+          </p>
+
+          <div class="kit" id="cl-net">
+            <p class="kit-title">⚙ gas needs a net</p>
+            <ul class="cl-legend">
+              <li><span class="cl-key" style="background: var(--cl-air);"></span>gas cell</li>
+              <li><span class="cl-key" style="background: var(--cl-dough);"></span>the material around it</li>
+            </ul>
+            <div class="cl-fig">
+              <svg viewBox="0 0 460 164" role="img" aria-label="Gas cells in a food. How large they grow depends on how fast gas arrives and how soon the surrounding structure firms up around them."></svg>
+            </div>
+            <div class="cl-presets" role="group" aria-label="Choose a food">
+              <button type="button" class="cl-preset" data-preset="bread" aria-pressed="false">bread</button>
+              <button type="button" class="cl-preset" data-preset="pancake" aria-pressed="false">pancake</button>
+              <button type="button" class="cl-preset" data-preset="cookie" aria-pressed="true">cookie</button>
+              <button type="button" class="cl-preset" data-preset="souffle" aria-pressed="false">collapsed soufflé</button>
+            </div>
+            <div class="cl-control">
+              <label for="net-gas">
+                How fast the gas arrives <span class="cl-value" data-value="gas"></span>
+              </label>
+              <input type="range" id="net-gas" data-slider="gas" min="0" max="100" value="34" />
+            </div>
+            <div class="cl-control">
+              <label for="net-set">
+                When the structure sets <span class="cl-value" data-value="set"></span>
+              </label>
+              <input type="range" id="net-set" data-slider="set" min="0" max="100" value="30" />
+            </div>
+            <div class="cl-readout" aria-live="polite"></div>
+            <p class="cl-caption">
+              One rule, four foods. Bread rises on yeast carbon dioxide trapped by gluten. A pancake
+              rises on chemical leavening caught by egg and starch. A cookie spreads more than it
+              rises because its structure is deliberately weak and its butter melts early. A soufflé
+              collapses because nothing set around the gas in time.
+            </p>
+          </div>
+
+          <h3 id="leavening-choice">Soda against powder</h3>
+          <div class="cl-table">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Change</th>
+                  <th scope="col">Local mechanism</th>
+                  <th scope="col">Why the visible change happens</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Add baking soda</td>
+                  <td>More gas can be generated, and existing air cells can expand.</td>
+                  <td>
+                    Gas pushes against the surrounding structure, producing more internal pores, if
+                    the dough sets slowly enough to retain them.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Omit baking soda</td>
+                  <td>
+                    Fewer chemically generated gas bubbles, and the dough's pH stays lower.
+                  </td>
+                  <td>
+                    The cookie is often denser and paler, although the exact difference depends on
+                    whether the recipe contains another leavener such as baking powder.
+                  </td>
+                </tr>
+                <tr id="leavening-too-much">
+                  <td>Add too much baking soda</td>
+                  <td>
+                    Excess bicarbonate remains after the available acid has been used up, and the
+                    dough becomes more alkaline.
+                  </td>
+                  <td>
+                    The cookie may brown excessively and develop an unpleasant alkaline, bitter, or
+                    soapy character.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Add acid without changing the soda</td>
+                  <td>
+                    Lower pH changes flavour and reaction rates, and the acid can also react with
+                    available bicarbonate.
+                  </td>
+                  <td>
+                    The result may be tangier, may brown differently, and may produce gas earlier or
+                    more rapidly.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="cl-note is-caution">
+            <span class="cl-note-label">What the no-soda batch cannot tell you</span>
+            <p>
+              Removing the baking soda removes two things at once: the carbon dioxide it would have
+              produced, and the alkalinity it would have contributed. Since alkalinity drives
+              browning independently of gas, a paler cookie could be down to either. Swapping in
+              baking powder instead, which brings its own acid and so shifts the pH far less, holds
+              the gas roughly constant while changing the acidity, and separates the two.
+            </p>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- 8. pH                                                         -->
+        <!-- ============================================================ -->
+
+        <section class="cl-section" id="ph">
+          <h2><span class="cl-num">08</span> pH</h2>
+
+          <h3>In the kitchen</h3>
+          <ul class="cl-rules">
+            <li>
+              <strong>Want a darker cookie without baking it longer?</strong> Raise the alkalinity,
+              which usually means a little more baking soda.
+              <a class="cl-why" href="#cl-browning">why</a>
+            </li>
+            <li>
+              <strong>Want a paler, tangier cookie?</strong> Add an acidic ingredient, or reduce the
+              soda. <a class="cl-why" href="#cl-browning">why</a>
+            </li>
+          </ul>
+
+          <h3>In the dough</h3>
+          <p>
+            <strong>pH</strong> is a measure related to the concentration and activity of hydrogen
+            ions in water. A lower pH means a more acidic environment, and a higher pH means a more
+            alkaline, or basic, one. Written out, it is the negative logarithm of hydrogen-ion
+            activity.
+          </p>
+          <p class="cl-equation">pH = −log₁₀(a<sub>H⁺</sub>)</p>
+
+          <div class="cl-ladder">
+            <details class="cl-rung">
+              <summary>What does activity mean, as opposed to concentration?</summary>
+              <p>
+                Concentration is how many hydrogen ions are present. Activity is how many of them
+                are actually free to act. In a crowded solution, ions get in each other's way and
+                are partly screened by everything else dissolved around them, so a portion of them
+                behave as though they were not there. Activity is the effective figure, and it is
+                the one that predicts how fast reactions go. It is the same distinction as the one
+                between water content and
+                <a href="#water">water activity</a>, applied to ions instead of
+                water.
+              </p>
+            </details>
+            <details class="cl-rung">
+              <summary>Why is the scale logarithmic, and why does that matter?</summary>
+              <p>
+                Because hydrogen-ion activity in foods spans an enormous range, and a scale that
+                counted directly would need many digits to cover it. Each whole step on the pH scale
+                is a tenfold change. That is worth knowing because it makes small-sounding numbers
+                large: a dough at pH 8 has one tenth the hydrogen-ion activity of a dough at pH 7,
+                not a little less. A change that looks minor on the scale is a substantial change in
+                the chemistry.
+              </p>
+            </details>
+          </div>
+
+          <h3>In the molecules</h3>
+          <p>
+            Cookies brown mainly through the <strong>Maillard reaction</strong>, which is a large
+            family of reactions rather than a single one. It begins when an amino group, usually
+            from an amino acid or a protein, attacks a carbonyl group, usually from a reducing
+            sugar. A carbonyl group is a carbon double-bonded to an oxygen, written C=O. An amino
+            group contains nitrogen, written –NH₂, or –NH₃⁺ once it has picked up a spare hydrogen
+            ion.
+          </p>
+
+          <div class="cl-inline" id="cl-reducing">
+            <ul class="cl-legend">
+              <li><span class="cl-key" data-el="C"></span>carbon</li>
+              <li><span class="cl-key" data-el="O"></span>oxygen</li>
+              <li><span class="cl-key is-bond"></span>covalent bond</li>
+            </ul>
+            <div class="cl-fig is-3d"></div>
+            <div class="cl-presets" role="group" aria-label="Choose a form of glucose">
+              <button type="button" class="cl-preset" data-view="ring" aria-pressed="true">closed ring</button>
+              <button type="button" class="cl-preset" data-view="open" aria-pressed="false">open chain</button>
+            </div>
+            <p class="cl-caption"></p>
+            <p class="cl-consequence"></p>
+          </div>
+
+          <p>
+            Alkaline conditions make amino groups more chemically available for that first step, so
+            Maillard browning tends to run faster at higher pH. It remains a network of many
+            reactions rather than one neat equation, and its rate also depends on temperature, time,
+            moisture, and how much of each reactant is
+            present.<sup class="cite"><a href="#src-maillard">[22]</a></sup>
+          </p>
+
+          <div class="kit" id="cl-browning">
+            <p class="kit-title">⚙ acidity and browning</p>
+            <ul class="cl-legend">
+              <li><span class="cl-key" style="background: var(--cl-amino-free);"></span>–NH₂, free to react</li>
+              <li><span class="cl-key" style="background: var(--cl-amino-blocked);"></span>–NH₃⁺, blocked</li>
+            </ul>
+            <div class="cl-fig">
+              <svg viewBox="0 0 460 196" role="img" aria-label="Amino groups on the proteins in a dough. In acidic conditions most have picked up a hydrogen ion and carry a positive charge, which stops them reacting. As the pH rises more of them are freed, and the colour strip below darkens."></svg>
+            </div>
+            <div class="cl-control">
+              <label for="ph-value">
+                Dough pH <span class="cl-value" data-value="ph"></span>
+              </label>
+              <input type="range" id="ph-value" data-slider="ph" min="40" max="100" value="72" />
+            </div>
+            <div class="cl-readout" aria-live="polite"></div>
+            <p class="cl-caption">
+              The proportion shown is calculated from a typical amino-group pKa of about 9.3, then
+              scaled so that the visible field changes usefully across the range a dough actually
+              reaches. The direction and the mechanism are what matter here rather than the exact
+              count.
+            </p>
+          </div>
+
+          <h3>The vocabulary</h3>
+          <div class="cl-table">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Term</th>
+                  <th scope="col">Meaning</th>
+                  <th scope="col">Why it matters in cookies</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Acid</td>
+                  <td>A substance that can donate a hydrogen ion under the relevant conditions.</td>
+                  <td>Acids react with baking soda and lower the dough's pH.</td>
+                </tr>
+                <tr>
+                  <td>Base</td>
+                  <td>
+                    A substance that can accept a hydrogen ion. Bicarbonate behaves as a base in
+                    common baking reactions.
+                  </td>
+                  <td>It neutralizes acids and raises pH.</td>
+                </tr>
+                <tr>
+                  <td>Reducing sugar</td>
+                  <td>
+                    A sugar that can form a reactive carbonyl-containing form in solution. Glucose
+                    and fructose are common examples. Sucrose becomes reactive only after it splits
+                    into the two of them.
+                  </td>
+                  <td>These sugars can take part in Maillard reactions directly.</td>
+                </tr>
+                <tr>
+                  <td>Maillard reaction</td>
+                  <td>
+                    A collection of heat-driven reactions between reducing sugars and amino
+                    compounds.
+                  </td>
+                  <td>
+                    Produces brown pigments called melanoidins along with many roasted, toasted,
+                    nutty, and caramel-like aroma
+                    molecules.<sup class="cite"><a href="#src-maillard">[22]</a></sup>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Caramelization</td>
+                  <td>
+                    Heat-driven sugar decomposition and rearrangement. Distinct from Maillard
+                    chemistry, because it does not require amino compounds at all.
+                  </td>
+                  <td>
+                    Contributes under sufficiently hot, dry conditions, but it should not be used as
+                    a catch-all name for all cookie browning.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </section>
+
+        <h2 id="sources-heading">Sources</h2>
+      </div>
+
+      <div class="sources">
+        <ol>
+          <li id="src-fw1">
+            <a href="https://www.fatandweirdcookie.com/blogs/news/the-science-of-a-perfect-cookie-what-actually-makes-a-cookie-soft-chewy-or-crispy" target="_blank" rel="noopener">The Science of a Perfect Cookie: What Actually Makes a Cookie Soft, Chewy, or Crispy?</a> Fat &amp; Weird Cookie.
+          </li>
+          <li id="src-pmc-glass">
+            Gong, Y., Xiao, S., Yao, Z., Deng, H., Chen, X., &amp; Yang, T. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11650135/" target="_blank" rel="noopener">Factors and modification techniques enhancing starch gel structure and their applications in foods: A review</a>. <i>Food Chemistry: X</i>, 2024.
+          </li>
+          <li id="src-pubmed-wa">
+            Starzak, M., Peacock, S. D., &amp; Mathlouthi, M. <a href="https://pubmed.ncbi.nlm.nih.gov/10943593/" target="_blank" rel="noopener">Hydration number and water activity models for the sucrose-water system: a critical review</a>. <i>Critical Reviews in Food Science and Nutrition</i>, 40(4), 327–367, 2000.
+          </li>
+          <li id="src-ka-storage">
+            Anastopoulo, R. <a href="https://www.kingarthurbaking.com/blog/2024/12/03/cookie-storage-containers" target="_blank" rel="noopener">Things bakers know: The #1 rule of cookie storage</a>. King Arthur Baking, 3 December 2024.
+          </li>
+          <li id="src-pmc-pectin">
+            Basu, S., Shivhare, U. S., &amp; Muley, S. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3602573/" target="_blank" rel="noopener">Moisture adsorption isotherms and glass transition temperature of pectin</a>. <i>Journal of Food Science and Technology</i>, 2011.
+          </li>
+          <li id="src-mamat">
+            Mamat, H., &amp; Hill, S. E. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4152542/" target="_blank" rel="noopener">Effect of fat types on the structural and textural properties of dough and semi-sweet biscuit</a>. <i>Journal of Food Science and Technology</i>, 2012.
+          </li>
+          <li id="src-palm">
+            Perez-Santana, M., Cagampang, G. B., Nieves, C., Cedeño, V., &amp; MacIntosh, A. J. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9497844/" target="_blank" rel="noopener">Use of High Oleic Palm Oils in Fluid Shortenings and Effect on Physical Properties of Cookies</a>. <i>Foods</i>, 2022.
+          </li>
+          <li id="src-fw2">
+            <a href="https://www.fatandweirdcookie.com/blogs/news/the-science-of-a-perfect-cookie-what-actually-makes-a-cookie-soft-chewy-or-crispy-1" target="_blank" rel="noopener">The Science of a Perfect Cookie: What Actually Makes a Cookie Soft, Chewy, or Crispy? (part two)</a> Fat &amp; Weird Cookie.
+          </li>
+          <li id="src-hc">
+            <a href="https://www.hercampus.com/school/yale/cookie-science-what-every-ingredient-does-and-how-to-bake-the-perfect-cookie/" target="_blank" rel="noopener">Cookie Science: What Every Ingredient Does and How to Bake the Perfect Cookie</a>. Her Campus, Yale.
+          </li>
+          <li id="src-usda">
+            <a href="https://www.ams.usda.gov/sites/default/files/media/Butter_Standard%5B1%5D.pdf" target="_blank" rel="noopener">United States Standards for Grades of Butter</a>. United States Department of Agriculture, Agricultural Marketing Service, Dairy Programs, effective 31 August 1989.
+          </li>
+          <li id="src-ice-butter">
+            <a href="https://www.ice.edu/blog/beyond-flavor-science-butter" target="_blank" rel="noopener">Beyond Flavor: The Science of Butter</a>. Institute of Culinary Education.
+          </li>
+          <li id="src-ice-cookies">
+            <a href="https://www.ice.edu/blog/understanding-science-cookies" target="_blank" rel="noopener">Understanding the Science of Cookies</a>. Institute of Culinary Education.
+          </li>
+          <li id="src-leiva">
+            Leiva-Valenzuela, G. A., Quilaqueo, M., Lagos, D., Estay, D., &amp; Pedreschi, F. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5876191/" target="_blank" rel="noopener">Effect of formulation and baking conditions on the structure and development of non-enzymatic browning in biscuit models using images</a>. <i>Journal of Food Science and Technology</i>, 2018.
+          </li>
+          <li id="src-ka-cookie">
+            Adams, G. <a href="https://www.kingarthurbaking.com/blog/2016/12/21/cookie-science" target="_blank" rel="noopener">Cookie science: How to achieve your perfect chocolate chip cookie</a>. King Arthur Baking.
+          </li>
+          <li id="src-ucsd">
+            Saha, S. <a href="https://graphite.ucsd.edu/2026/05/20/the-chemistry-of-baking-cookies/" target="_blank" rel="noopener">The Chemistry of Baking Cookies</a>. GRAPHITE.
+          </li>
+          <li id="src-acrylamide">
+            Hu, H., Wang, Y., Shen, M., Huang, Y., Li, C., Nie, S., &amp; Xie, M. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9168048/" target="_blank" rel="noopener">Effects of baking factors and recipes on the quality of butter cookies and the formation of advanced glycation end products (AGEs) and 5-hydroxymethylfurfural (HMF)</a>. <i>Current Research in Food Science</i>, 2022.
+          </li>
+          <li id="src-cd">
+            <a href="https://cookiediary.com/the-science-of-perfect-cookies-everything-i-learned-from-500-batches/" target="_blank" rel="noopener">The Science of Perfect Cookies — Everything I Learned From 500 Batches</a>. Cookie Diary.
+          </li>
+          <li id="src-allan">
+            Allan, M. C., Chamberlain, M., &amp; Mauer, L. J. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7353504/" target="_blank" rel="noopener">Effects of Sugars and Sugar Alcohols on the Gelatinization Temperatures of Wheat, Potato, and Corn Starches</a>. <i>Foods</i>, 2020.
+          </li>
+          <li id="src-ovalbumin">
+            Wang, L., Li, R., Lv, S., Liu, Y., Fang, S., Zang, J., Qing, M., &amp; Chi, Y. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12191903/" target="_blank" rel="noopener">The Thermodynamic and Gelation Properties of Ovalbumin and Lysozyme</a>. <i>Gels</i>, 2025.
+          </li>
+          <li id="src-yolk">
+            Abeyrathne, E. D. N. S., Nam, K.-C., Huang, X., &amp; Ahn, D. U. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9385935/" target="_blank" rel="noopener">Egg yolk lipids: separation, characterization, and utilization</a>. <i>Food Science and Biotechnology</i>, 2022.
+          </li>
+          <li id="src-vandersman">
+            van der Sman, R. G. M. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8056436/" target="_blank" rel="noopener">Thermodynamic description of the chemical leavening in biscuits</a>. <i>Current Research in Food Science</i>, 2021.
+          </li>
+          <li id="src-maillard">
+            El Hosry, L., Elias, V., Chamoun, V., Halawi, M., Cayot, P., Nehme, A., &amp; Bou-Maroun, E. <a href="https://www.mdpi.com/2304-8158/14/11/1881" target="_blank" rel="noopener">Maillard Reaction: Mechanism, Influencing Parameters, Advantages, Disadvantages, and Food Industrial Applications: A Review</a>. <i>Foods</i>, 2025.
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-row">
+      <span>Copyright &copy; Hrishika Roychoudhury 2021-<span id="copyright-year"></span> &nbsp;|&nbsp; Last Updated on <span id="page-updated">Thursday, 17 September 2026</span></span>
+      <div class="socials">
+        <a href="mailto:hrishikarc@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a>
+        <a href="https://www.instagram.com/hrcdream" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://linkedin.com/in/hrishikarc" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.7 2.6 4.7 6V21h-4v-5.4c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V21h-4V9z"/></svg></a>
+        <a href="https://github.com/hris28" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.8 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2.9-.3 2-.4 3-.4 1 0 2 .1 3 .4 2.3-1.6 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.4 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.8-5.8 7.8-10.9C23.5 5.7 18.3.5 12 .5z"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
