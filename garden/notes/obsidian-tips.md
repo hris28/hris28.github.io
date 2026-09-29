@@ -133,8 +133,10 @@ $$ \left( \frac{x+1}{x-1} \right) $$
 Callouts are stylized blocks used to draw attention to notes, warnings, tips, or quotes. They start with `>[!TYPE]`.
 #### Example:
 **Syntax:**
-```> [!info] Quick Info```
-```> You can collapse callouts by adding a minus sign like `> [!info]-`.```
+````markdown
+> [!info] Quick Info
+> You can collapse callouts by adding a minus sign like `> [!info]-`.
+````
 ##### Output: 
 > [!info] Quick Info
 > You can collapse callouts by adding a minus sign like `> [!info]-`.

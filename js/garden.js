@@ -821,13 +821,31 @@ function parseMarkdown(src) {
     }
   );
 
-  // Fenced code first so nested $ or ** inside don't get mangled.
-  out = out.replace(/```([a-zA-Z0-9_+-]*)\r?\n([\s\S]*?)```/g, (_, lang, code) =>
-    putB("<pre><code" + (lang ? ' class="language-' + lang + '"' : "") + ">" + esc(code.replace(/\r?\n$/, "")) + "</code></pre>")
+  // Fenced code — CommonMark-ish. Opener MUST be at line start (up to 3
+  // spaces of indent), N backticks (N >= 3), optional info string that has
+  // no backticks, then newline. Closer must be same-or-more backticks at
+  // line start with only whitespace after. This correctly handles four-
+  // backtick fences that contain a three-backtick fence (```` around ```)
+  // and refuses to match malformed inline patterns like ```> [!info]```
+  // that used to eat everything until the next ```.
+  out = out.replace(
+    /^([ \t]{0,3})(`{3,})([^`\r\n]*)\r?\n([\s\S]*?)(?:^\1?\2`*[ \t]*(?=\r?\n|$))/gm,
+    (_, indent, fence, info, code) => {
+      const lang = (info.match(/^[a-zA-Z0-9_+.-]+/) || [""])[0];
+      return putB(
+        "<pre><code" + (lang ? ' class="language-' + lang + '"' : "") + ">" +
+        esc(code.replace(/\r?\n$/, "")) + "</code></pre>"
+      );
+    }
   );
-  // Inline code before math, so $..$ inside `...` stays literal (MathJax
-  // skips <code> by default).
-  out = out.replace(/`([^`\n]+)`/g, (_, code) => putI("<code>" + esc(code) + "</code>"));
+  // Inline code — CommonMark N-backtick delimiters. Use the same number of
+  // backticks to open and close, e.g. `foo`, ``foo``, ```foo```. Content
+  // itself must not contain backticks or newlines (common case; matches
+  // what the user's notes actually use). MathJax skips <code> by default,
+  // so any $..$ inside code stays literal.
+  out = out.replace(/(`+)([^`\r\n]+?)\1(?!`)/g, (_, ticks, code) =>
+    putI("<code>" + esc(code) + "</code>")
+  );
   // Display math $$..$$ (may span lines). Wrap in <div> so it renders block.
   out = out.replace(/\$\$([\s\S]+?)\$\$/g, (_, math) => putB('<div class="math-block">$$' + math + "$$</div>"));
   // Inline math $..$ — reject currency-like cases (digit-adjacent $) and
@@ -900,7 +918,14 @@ function parseMarkdown(src) {
     return `<p>${chunk.replace(/\n/g, "<br>")}</p>`;
   }).join("\n");
 
-  // Restore stashed content last so nothing else touches it.
-  out = out.replace(/§S[BI](\d+)§/g, (_, i) => stash[parseInt(i, 10)]);
+  // Restore stashed content last so nothing else touches it. Loop until no
+  // more placeholders remain, in case a stashed block itself contains one
+  // (e.g. a callout body that was rendered recursively and its output was
+  // then stashed inside another block placeholder).
+  let prev;
+  do {
+    prev = out;
+    out = out.replace(/§S[BI](\d+)§/g, (_, i) => stash[parseInt(i, 10)]);
+  } while (out !== prev);
   return out;
 }
