@@ -310,7 +310,8 @@ const PROJECTS = [
     ],
     links: [
       { label: "Write-up", url: "garden/projects/wastewater-bioremediation.html", kind: "writeup" },
-      { label: "Report", url: "assets/papers/bioremediation-report.pdf", kind: "paper" },
+      { label: "Journal", url: "https://ijhsr.terrajournals.org/vol-2-issue2.html", kind: "media" },
+      { label: "Full Article", url: "https://terra-docs.s3.us-east-2.amazonaws.com/IJHSR/Articles/volume2-issue2/2020_V2I2_p1_Roychoudhury.pdf", kind: "paper" },
       { label: "Abstract", url: "https://abstracts.societyforscience.org/Home/FullAbstract?Category=Any%20Category&AllAbstracts=True&FairCountry=Any%20Country&FairState=Any%20State&ProjectId=16993", kind: "media" },
     ],
   },
@@ -347,9 +348,10 @@ const EXPERIENCES = [
     date: "Sept 2020 to Aug 2024",
     category: "Entrepreneurship", also: ["Research", "Hardware"],
     summary: "I co-founded a sustainable-materials startup and ran its R&D, strategy, prototyping, and investor outreach. I filed a provisional patent, built the product website in HTML and CSS with SEO, and secured $2,000 from the Bowman-Brockman Endowment for Entrepreneurship and Advanced Research.",
+    // <iframe src="https://www.linkedin.com/video/embed/live/urn:li:ugcPost:6894297241339973632" height="NaN" width="710" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
     honor: [
       "Pete Conrad Scholar, Aerospace and Aviation (2021)",
-      "NASA iTech Top 10 Finalist and sole Honorable Mention (2021)",
+      "NASA iTech Initiative Top 10 Finalist and sole Honorable Mention (2021)",
     ],
     tags: ["ENTREPRENEURSHIP", "MATERIALS SCIENCE", "R&D", "AEROSPACE"],
     projects: [
@@ -358,8 +360,10 @@ const EXPERIENCES = [
         description: "Our flagship product: a flexible carbon biopolymer aerogel aimed at high-performance apparel, aerospace, and space exploration. I helped carry it from lab prototype to a NASA iTech pitch.",
         tags: ["MATERIALS SCIENCE", "AEROSPACE", "PATENT"],
         links: [
-          { label: "Competition", url: "https://www.youtube.com/live/xC5uKDG7gAk?si=QQqyKCo9caM4c9Ts", kind: "competition" },
-          { label: "Press", url: "https://static1.squarespace.com/static/53cd080fe4b006756b7288ea/t/60a564d925c8aa6d5b4fe6f6/1621451994142/International+Student+Innovators+Awarded+Top+Honors+in.pdf", kind: "media" },
+          { label: "Conrad Challenge", url: "https://conrad.spacecenter.org/2021-conrad-challenge-innovation-summit-awards/", kind: "competition" },
+          { label: "NASA iTech", url: "https://www.youtube.com/live/xC5uKDG7gAk?si=QQqyKCo9caM4c9Ts", kind: "competition" },
+          { label: "Press", url: "https://lnkd.in/p/ecaiwNCR", kind: "media" },
+          // { label: "Press", url: "https://static1.squarespace.com/static/53cd080fe4b006756b7288ea/t/60a564d925c8aa6d5b4fe6f6/1621451994142/International+Student+Innovators+Awarded+Top+Honors+in.pdf", kind: "media" },
         ],
       },
     ],
