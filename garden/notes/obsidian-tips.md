@@ -16,9 +16,13 @@ Standard markdown doesn't include a simple highlighter, but Obsidian natively su
 - **Syntax:** `==highlighted text==`
 - **Output:** ==highlighted text==
 ---
-## Preserving Formatting in Formulas
 
 In Obsidian, math formulas are powered by **LaTeX (MathJax)** syntax.
+
+To begin a math notation, all you have to do is enclose your formula in dollar signs (`$`). Using double dollar signs (`$$`) dedicates an entire line ([Bohlooli 2023](https://www.makeuseof.com/write-mathematical-notation-obsidian/)).
+
+MathJax uses specific codes for inputting symbols. To type special characters, you can enter the code for a symbol after a backslash (**`\`**). When writing math notations, the circumflex (**`^`**) indicates a superscript, and the underscore (**`_`**) indicates a subscript.
+## Preserving Formatting in Formulas
 
 In LaTeX, regular whitespace is ignored in math mode, and letters are rendered as italicized math variables--resulting in words to be $squished together like this$.
 
@@ -126,6 +130,19 @@ $$ \left( \frac{x+1}{x-1} \right) $$
 ```
 ##### Output: 
 $$ \left( \frac{x+1}{x-1} \right) $$
+---
+## Other Common Math Syntax
+
+| Input           | Output        |
+| --------------- | ------------- |
+| `$x^y$`         | $x^y$         |
+| `$\hat{x}$`     | $\hat{x}$     |
+| `$\rightarrow$` | $\rightarrow$ |
+
+
+https://obsidian.md/help/advanced-syntax
+
+
 
 ---
 ## Callouts & Admonitions
