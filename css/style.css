@@ -893,6 +893,25 @@ html[data-theme="dark"] .stage-evergreen { color: #2f955f; }
 html[data-theme="dark"] .garden-page::before {
   background-image: url("../images/garden-vines-cream.png");
 }
+/* Article pages (garden-entry.html) dim the pattern so it reads as texture
+   behind the reading card below. Garden index keeps the vines at full
+   strength. */
+.garden-page.garden-article::before { opacity: 0.4; }
+
+/* Reading card: translucent backdrop behind the article so text sits on a
+   clean surface while vines still show in the gutters. Scoped to article
+   pages only via .garden-article. */
+.garden-article .note-view {
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 2rem 2.5rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+@media (max-width: 640px) {
+  .garden-article .note-view { padding: 1.5rem 1.25rem; }
+}
 
 /* Collapsible intro card */
 .garden-intro {
