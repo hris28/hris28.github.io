@@ -1,0 +1,643 @@
+/*
+   cookie-lab.css
+   Styling for garden/tools/cookie-black-box.html.
+
+   Built entirely on the design tokens in the :root block of css/style.css
+   (--ink, --bg-soft, --line, --accent, --dot-accent, --font-mono and so on),
+   so both themes work without any extra rules. Nothing below hardcodes a color.
+   To restyle the page, change the tokens in style.css rather than the values here.
+*/
+
+/* ------------------------------------------------------------------ */
+/* Diagram palette                                                     */
+/* ------------------------------------------------------------------ */
+/*
+   Element identity in a molecular diagram needs colors that the general site
+   tokens do not provide, so they are defined here instead, in one place, with a
+   dark-theme override below. Everything else on the page still uses the tokens
+   from style.css.
+
+   Element colors follow the convention most chemistry software uses, so that a
+   reader who has seen a molecule elsewhere recognises these: oxygen red, carbon
+   grey, nitrogen blue, hydrogen pale.
+*/
+:root {
+  --cl-atom-o: #c2564e;
+  --cl-atom-h: #ddd6c4;
+  --cl-atom-c: #5b6675;
+  --cl-atom-n: #3f74ab;
+  --cl-atom-r: #a49c88;
+  --cl-atom-stroke: rgba(31, 58, 92, 0.45);
+  --cl-atom-ink: #ffffff;
+  --cl-note-ink: #1f3a5c;
+  --cl-bond: #8d8878;
+  --cl-hbond: #2f6cab;
+
+  /* Water budget segments, ordered from free water through to the most tightly
+     held. They run light to dark so the bar reads as a gradient of availability
+     even without the legend. */
+  --cl-w-free: #6ba3d6;
+  --cl-w-sugar: #c98a3e;
+  --cl-w-salt: #9d9384;
+  --cl-w-protein: #7a9e4f;
+  --cl-w-starch: #a2683f;
+
+  --cl-chain-starch: #a2683f;
+  --cl-chain-protein: #7a9e4f;
+
+  /* Fat section. The washes are the pale fills behind a phase, and need to stay
+     light enough for text and molecules drawn on top to remain readable. */
+  --cl-fat: #c9a227;
+  --cl-fat-wash: #f2e6bd;
+  --cl-water-wash: #dfeaf4;
+  --cl-crystal: #8a7cc4;
+  --cl-crystal-link: #6a5aae;
+  --cl-dough: #e6d3ac;
+
+  /* Emulsifier. The head reads as water-coloured and the tails as fat-coloured,
+     but the tail tone is deepened well past --cl-fat so that it stays legible
+     against the pale fat wash it is drawn on top of. */
+  --cl-emul-head: #2f6cab;
+  --cl-emul-tail: #9a6413;
+
+  /* Butter section. */
+  --cl-air: #ffffff;
+  --cl-sugar: #f4f1e6;
+  --cl-flour: #ddd2bb;
+  --cl-protein-blocked: #b3ac9c;
+
+  /* Milk components, used in the butter composition bar. */
+  --cl-milkfat: #e0c05a;
+  --cl-butterwater: #6ba3d6;
+  --cl-milksolids: #b58a5e;
+
+  /* Sugar and flour sections. Invert sugar is deliberately unlike the sucrose
+     colour, because the whole point of that figure is that it does not fit. */
+  --cl-invert: #c86f2e;
+  --cl-gluten-link: #4c7a2a;
+  --cl-starch-order: #8d6a3f;
+
+  /* Egg, leavening, and pH sections. */
+  --cl-protein-folded: #9aa87f;
+  --cl-powder-dry: #efe9da;
+  --cl-base: #7d8fb5;
+  --cl-acid: #c9797a;
+  --cl-amino-free: #4c7a2a;
+  --cl-amino-blocked: #a09884;
+  --cl-browned: #7a4a1c;
+}
+
+html[data-theme="dark"] {
+  --cl-atom-o: #e0776d;
+  --cl-atom-h: #b9b2a0;
+  --cl-atom-c: #7c8899;
+  --cl-atom-n: #6fa3dc;
+  --cl-atom-r: #6d6656;
+  --cl-atom-stroke: rgba(246, 239, 224, 0.35);
+  --cl-atom-ink: #10192333;
+  --cl-note-ink: #f6efe0;
+  --cl-bond: #6f6a5c;
+  --cl-hbond: #8ab4dc;
+
+  --cl-w-free: #8ab4dc;
+  --cl-w-sugar: #d9a35c;
+  --cl-w-salt: #8e8676;
+  --cl-w-protein: #9bc06d;
+  --cl-w-starch: #b87c4e;
+
+  --cl-chain-starch: #b87c4e;
+  --cl-chain-protein: #9bc06d;
+
+  --cl-fat: #d9b64a;
+  --cl-fat-wash: #2c2717;
+  --cl-water-wash: #17222f;
+  --cl-crystal: #9d90d6;
+  --cl-crystal-link: #b3a6e6;
+  --cl-dough: #3a3222;
+
+  --cl-emul-head: #6fa3dc;
+  --cl-emul-tail: #e0a94e;
+
+  --cl-air: #e8e2d0;
+  --cl-sugar: #cfc9b6;
+  --cl-flour: #4a4334;
+  --cl-protein-blocked: #5f5847;
+
+  --cl-milkfat: #d9b64a;
+  --cl-butterwater: #8ab4dc;
+  --cl-milksolids: #b58a5e;
+
+  --cl-invert: #e0904d;
+  --cl-gluten-link: #86bd5c;
+  --cl-starch-order: #c0996a;
+
+  --cl-protein-folded: #6f7d55;
+  --cl-powder-dry: #262218;
+  --cl-base: #5f719a;
+  --cl-acid: #a85e5f;
+  --cl-amino-free: #86bd5c;
+  --cl-amino-blocked: #5c5648;
+  --cl-browned: #c98a4a;
+}
+
+/* The element letter needs to sit on top of its own circle in both themes. The
+   dark palette uses lighter atoms, so the letter goes dark rather than light. */
+html[data-theme="dark"] { --cl-atom-ink: #16202d; }
+
+/* ------------------------------------------------------------------ */
+/* Section headers                                                     */
+/* ------------------------------------------------------------------ */
+
+.cl-section { margin: 3.5rem 0 0; scroll-margin-top: calc(var(--nav-h) + 1rem); }
+.cl-section > h2 { display: flex; align-items: baseline; gap: 0.7rem; }
+
+/* The component number, matching the source document's own numbering. */
+.cl-num {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+  flex: none;
+}
+
+/*
+   The practical rules at the top of a section, in the "Want X? Do Y." form the
+   source document uses. Set apart from ordinary prose so that a reader who only
+   wants the decision can find it and stop there.
+*/
+.cl-rules {
+  list-style: none;
+  margin: 0.6rem 0 0.8rem;
+  padding: 0;
+}
+.cl-rules li {
+  position: relative;
+  margin: 0 0 0.55rem;
+  padding-left: 1.1rem;
+}
+.cl-rules li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--dot-accent);
+}
+.cl-rules li strong { color: var(--ink); }
+
+/* A chemical equation set on its own line. */
+.cl-equation {
+  font-family: var(--font-mono);
+  font-size: 1.02rem;
+  text-align: center;
+  color: var(--ink);
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.85rem 1rem;
+  margin: 1.2rem 0;
+  overflow-x: auto;
+}
+
+/*
+   The jump from a practical rule down to the part of the page that explains it.
+   A reader who only wants the decision can take it and leave; a reader who wants
+   the reason has one click to it.
+*/
+.cl-why {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding: 0.1rem 0.4rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  color: var(--ink-faint);
+  transition: color var(--transition), border-color var(--transition);
+}
+.cl-why::after { content: " \2193"; }
+.cl-why:hover { color: var(--link-hover); border-color: var(--dot-accent); }
+.cl-why:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/*
+   Anything a "why" link can land on needs to clear the fixed navigation bar,
+   or the heading it jumps to ends up hidden underneath it.
+*/
+.kit[id], .cl-inline[id], .cl-static[id],
+.note-view h3[id], .note-view p[id] {
+  scroll-margin-top: calc(var(--nav-h) + 1.2rem);
+}
+
+/* Briefly mark whatever was jumped to, so the reader can see where they landed. */
+.kit:target, .cl-inline:target, .cl-static:target,
+.note-view h3:target, .note-view p:target {
+  animation: cl-landed 1.6s ease-out;
+}
+@keyframes cl-landed {
+  from { background: var(--bg-soft); box-shadow: -0.6rem 0 0 var(--bg-soft), 0.6rem 0 0 var(--bg-soft); }
+  to { background: transparent; box-shadow: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kit:target, .cl-inline:target, .cl-static:target,
+  .note-view h3:target, .note-view p:target { animation: none; }
+}
+
+/* h4 is used for the separated outcomes inside a component section.
+   style.css stops at h3, so it is defined here. */
+.note-view h4 {
+  font-size: 1.02rem;
+  font-weight: var(--w-bold);
+  margin: 1.6rem 0 0.5rem;
+  letter-spacing: -0.005em;
+}
+
+/* ------------------------------------------------------------------ */
+/* Depth ladders                                                       */
+/* ------------------------------------------------------------------ */
+/*
+   A chain of nested <details>. Each level answers a question raised by the
+   level above it.
+
+     <div class="cl-ladder">
+       <details class="cl-rung">
+         <summary>What is a hydrogen bond?</summary>
+         <p>...</p>
+         <details class="cl-rung"> ...deeper... </details>
+       </details>
+     </div>
+
+   Nesting depth is unlimited. Each level indents and picks up a left rule.
+*/
+
+.cl-ladder { margin: 0.2rem 0 1.4rem; }
+
+.cl-rung { margin: 0.45rem 0 0; }
+
+.cl-rung > summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--link);
+  padding: 0.15rem 0;
+  transition: color var(--transition);
+}
+.cl-rung > summary:hover { color: var(--link-hover); }
+.cl-rung > summary::-webkit-details-marker { display: none; }
+.cl-rung > summary::before {
+  content: "▸";
+  font-size: 0.7rem;
+  flex: none;
+  transition: transform var(--transition);
+}
+.cl-rung[open] > summary::before { transform: rotate(90deg); }
+
+.cl-rung > summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius);
+}
+
+.cl-rung > *:not(summary) {
+  margin-left: 0.36rem;
+  padding-left: 1rem;
+  border-left: 1px solid var(--line);
+}
+.cl-rung > p {
+  margin: 0.5rem 0 0.6rem;
+  padding-top: 0.1rem;
+  font-size: 0.97rem;
+  color: var(--ink-soft);
+}
+.cl-rung .cl-rung { margin-top: 0.4rem; }
+
+/*
+   Indentation shrinks on narrow screens. A ladder can run several levels deep,
+   and at the full desktop indent the innermost rung drops to about
+   twenty-five characters per line on a phone. The left rules still show depth
+   at a much smaller step, so the step is what gets reduced.
+*/
+@media (max-width: 700px) {
+  .cl-rung > *:not(summary) { margin-left: 0.1rem; padding-left: 0.6rem; }
+}
+@media (max-width: 430px) {
+  .cl-rung > *:not(summary) { margin-left: 0; padding-left: 0.45rem; }
+  .cl-rung > summary { gap: 0.35rem; }
+}
+
+/* ------------------------------------------------------------------ */
+/* Kitchen tips                                                        */
+/* ------------------------------------------------------------------ */
+/*
+   A small aside carrying something you would actually do at the counter, as
+   against the mechanism explaining why it works. The source document marks these
+   as "real kitchen tip" throughout, and they are set apart so a reader skimming
+   for practical advice can find them.
+*/
+
+.cl-tip {
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--dot-accent);
+  border-radius: var(--radius);
+  padding: 0.9rem 1.1rem;
+  margin: 1.4rem 0;
+  font-size: 0.94rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+.cl-tip .cl-tip-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+}
+.cl-tip p { margin: 0 0 0.6rem; }
+.cl-tip p:last-child { margin-bottom: 0; }
+.cl-tip .cl-ladder { margin-bottom: 0; }
+
+/* ------------------------------------------------------------------ */
+/* Tables                                                              */
+/* ------------------------------------------------------------------ */
+/*
+   Wide tables scroll inside their own container rather than pushing the page
+   sideways. Wrap every table in <div class="cl-table">.
+*/
+
+.cl-table {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.cl-table table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 34rem;
+  font-size: 0.9rem;
+}
+.cl-table th, .cl-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.7rem 0.9rem;
+  border-bottom: 1px solid var(--line);
+}
+.cl-table th {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 500;
+  background: var(--bg-soft);
+}
+.cl-table tbody tr:last-child td { border-bottom: none; }
+.cl-table td:first-child { color: var(--ink); }
+
+/* ------------------------------------------------------------------ */
+/* Widget shell                                                        */
+/* ------------------------------------------------------------------ */
+/*
+   Widgets reuse the .kit container from style.css. These add the parts .kit
+   does not cover: figures, sliders, state readouts, and preset buttons.
+*/
+
+.cl-fig {
+  margin: 0 0 1rem;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.cl-fig svg { display: block; width: 100%; height: auto; }
+
+.cl-caption {
+  font-size: 0.83rem;
+  color: var(--ink-faint);
+  margin: 0.5rem 0 0;
+  line-height: 1.55;
+}
+
+/* Labels inside a diagram must not become a text selection when the reader drags
+   to rotate, which otherwise happens on the very first drag. */
+.cl-fig svg text { -webkit-user-select: none; user-select: none; }
+
+/* A 3D view can be rotated by mouse or by keyboard. */
+.cl-fig.is-3d svg { cursor: grab; touch-action: none; -webkit-user-select: none; user-select: none; }
+.cl-fig.is-3d svg:active { cursor: grabbing; }
+.cl-fig.is-3d svg:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+.cl-control { margin: 0.9rem 0 0; }
+.cl-control > label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-bottom: 0.35rem;
+}
+.cl-control .cl-value {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--ink);
+}
+.cl-control input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+.cl-control input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* Every widget carries a text readout, wired to aria-live, so the diagram is
+   never the only channel. Matches how .kit-ratio works in the contrast checker. */
+.cl-readout {
+  margin: 1.1rem 0 0;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg);
+  font-size: 0.93rem;
+  line-height: 1.6;
+}
+.cl-readout strong { color: var(--ink); }
+
+.cl-presets { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.1rem; }
+.cl-preset {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  padding: 0.45rem 0.8rem;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.cl-preset:hover { border-color: var(--dot-accent); color: var(--ink); }
+.cl-preset[aria-pressed="true"] {
+  border-color: var(--accent);
+  color: var(--ink);
+  background: var(--bg);
+}
+
+/* ------------------------------------------------------------------ */
+/* Inline figures                                                      */
+/* ------------------------------------------------------------------ */
+/*
+   A figure sits directly under the sentence it illustrates rather than at the end
+   of the section, so that the description and the picture are read together.
+   .cl-inline is the lighter-weight container used for that, as against .kit,
+   which is reserved for the larger widgets with several controls.
+*/
+
+.cl-inline { margin: 1.4rem 0 1.8rem; }
+.cl-inline .cl-fig { background: var(--bg-soft); }
+
+/* A static figure, meaning one with nothing to interact with. */
+.cl-static { margin: 1.4rem 0 1.8rem; padding: 0; }
+.cl-static .cl-fig { background: var(--bg-soft); }
+
+/*
+   Legend naming what each colour in a diagram stands for. Without one, a diagram
+   with several kinds of atom in it is a puzzle rather than an explanation.
+
+   It sits above its figure, so that the reader knows what they are looking at
+   before they look rather than after.
+*/
+.cl-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  list-style: none;
+  margin: 0 0 0.55rem;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+}
+.cl-legend li { display: inline-flex; align-items: center; gap: 0.4rem; }
+
+.cl-key {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid var(--cl-atom-stroke);
+  flex: none;
+}
+.cl-key[data-el="O"] { background: var(--cl-atom-o); }
+.cl-key[data-el="H"] { background: var(--cl-atom-h); }
+.cl-key[data-el="C"] { background: var(--cl-atom-c); }
+.cl-key[data-el="N"] { background: var(--cl-atom-n); }
+.cl-key[data-el="R"] { background: var(--cl-atom-r); }
+
+/* Bond keys are lines rather than dots, matching how they are drawn. */
+.cl-key.is-bond,
+.cl-key.is-hbond {
+  width: 18px;
+  height: 0;
+  border-radius: 0;
+  border: none;
+  border-top: 3px solid var(--cl-bond);
+}
+.cl-key.is-hbond { border-top: 2px dashed var(--cl-hbond); }
+
+/* Legend keys in the proportion bar and the polymer figure are squares, since
+   they stand for regions rather than atoms. */
+.cl-static .cl-legend .cl-key,
+.kit .cl-legend .cl-key { border-radius: 2px; border: 1px solid var(--line); }
+
+/*
+   The line tying a molecular diagram back to the cookie. Every 3D figure carries
+   one, because a picture of three water molecules means nothing on its own.
+*/
+.cl-consequence {
+  margin: 0.7rem 0 0;
+  padding-left: 0.9rem;
+  border-left: 2px solid var(--dot-accent);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+/* Water budget: a stacked proportion bar. */
+.cl-budget-bar {
+  position: relative;
+  height: 46px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg);
+  margin: 0.4rem 0 0.8rem;
+}
+.cl-budget-seg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  transition: left var(--transition), width var(--transition);
+}
+.cl-budget-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+}
+.cl-budget-key { display: inline-flex; align-items: center; gap: 0.4rem; }
+.cl-budget-swatch {
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  border: 1px solid var(--line);
+  flex: none;
+}
+
+/* The readouts carry several short paragraphs rather than one line. */
+.cl-readout p { margin: 0 0 0.55rem; }
+.cl-readout p:last-child { margin-bottom: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cl-budget-seg { transition: none; }
+}
+
+/* Placeholder marking where a widget will go. Delete each as its widget lands. */
+.cl-todo {
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  text-align: center;
+  color: var(--ink-faint);
+}
+.cl-todo .cl-todo-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.cl-todo p { margin: 0; font-size: 0.9rem; }
+
+/* ------------------------------------------------------------------ */
+/* Motion                                                              */
+/* ------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  .cl-rung > summary::before,
+  .cl-preset,
+  .cl-fig.is-3d svg { transition: none; }
+}
